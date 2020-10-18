@@ -113,10 +113,10 @@ class Paystack
     {
         if ( $data == null ) {
 
-            $quantity = intval(request()->quantity);
+            $quantity = intval(request()->quantity ?? 1);
 
             $data = [
-                "amount" => intval(request()->amount) * 100 * $quantity,
+                "amount" => intval(request()->amount) * $quantity,
                 "reference" => request()->reference,
                 "email" => request()->email,
                 "plan" => request()->plan,

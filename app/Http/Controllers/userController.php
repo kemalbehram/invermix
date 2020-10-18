@@ -473,7 +473,7 @@ class userController extends Controller
       if($this->st->investment != 1 )
       {
         Session::put('msgType', "err");
-        Session::put('status', 'Investment disabled! You will be notified when it is available.');
+        Session::put('status', 'Inversión no disponible! Serás notificado cuando esté disponible.');
         return back();
       }
 

@@ -501,33 +501,34 @@ class userController extends Controller
           $capital = $req->input('capital');
           $pack = packages::find($req->input('p_id'));
 
-          if($user->wallet < $capital)
-          {
-            Session::put('status', 'Your wallet balance is lower than capital.');
-            Session::put('msgType', "err");
-            return back();
-          }
+        //   if($user->wallet < $capital)
+        //  if($user->wallet = $capital)
+        //   {
+        //     Session::put('status', 'Your wallet balance is lower than capital.');
+        //     Session::put('msgType', "err");
+        //     return back();
+        //   }
 
-          if($user->wallet < $pack->min)
-          {
-            Session::put('status', 'Wallet balance is lower than minimum investment.');
-            Session::put('msgType', "err");
-            return back();
-          }
+        //   if($user->wallet < $pack->min)
+        //   {
+        //     Session::put('status', 'Wallet balance is lower than minimum investment.');
+        //     Session::put('msgType', "err");
+        //     return back();
+        //   }
 
-          if($capital > $pack->max)
-          {
-            Session::put('status', 'Input Capital is greater than maximum investment.');
-            Session::put('msgType', "err");
-            return back();
-          }
+        //   if($capital > $pack->max)
+        //   {
+        //     Session::put('status', 'Input Capital is greater than maximum investment.');
+        //     Session::put('msgType', "err");
+        //     return back();
+        //   }
 
-          if($capital < $pack->min)
-          {
-            Session::put('status', 'Input Capital is less than minimum investment.');
-            Session::put('msgType', "err");
-            return back();
-          }
+        //   if($capital < $pack->min)
+        //   {
+        //     Session::put('status', 'Input Capital is less than minimum investment.');
+        //     Session::put('msgType', "err");
+        //     return back();
+        //   }
 
           if($capital >= $pack->min && $capital <= $pack->max)
           {

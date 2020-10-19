@@ -10,12 +10,12 @@
                     <div id="prnt"></div>
                     <div class="row">
                        <div class="col-sm-12 card">
-                        
+
                           <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
                             <li class="nav-item">
                               <a class="nav-link active" id="profile-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Perfil</a>
                             </li>
-                            <!-- <li class="nav-item">
+                          <li class="nav-item">
                               <a class="nav-link" id="bank-tab" data-toggle="pill" href="#bank" role="tab" aria-controls="bank" aria-selected="false">Banks</a>
                             </li>
                             <li class="nav-item">
@@ -23,11 +23,11 @@
                             </li>
                             <li class="nav-item">
                               <a class="nav-link" id="kyc-tab" data-toggle="pill" href="#kyc" role="tab" aria-controls="kyc" aria-selected="false">KYC</a>
-                            </li> -->
+                            </li>
                             <li class="nav-item">
                               <a class="nav-link" id="sec-tab" data-toggle="pill" href="#sec" role="tab" aria-controls="sec" aria-selected="false">Seguridad</a>
                             </li>
-                                                        
+
                           </ul>
 
                           <div class="tab-content" id="pills-tabContent">
@@ -35,14 +35,14 @@
                             <!-- profile panel -->
 
                             <div class="p-5 tab-pane fade show active" id="profile" role="tabpanel" >
-                              <div class=" row form-group">                                            
-                                                                                                                             
+                              <div class=" row form-group">
+
                                 <div class="col-md-4">
                                   <div class="card">
                                       <div class="card-header">
                                           <div class="card-head-row">
                                               <div class="card-title text-center">{{ __('Avatar') }}</div>
-                                              <div class="card-tools">                                            
+                                              <div class="card-tools">
                                               </div>
                                           </div>
                                       </div>
@@ -56,7 +56,7 @@
                                                           @else
                                                               <img class="avatar_img" src="/img/profile/{{ $user->img }}">
                                                           @endif
-                                                      </a> 
+                                                      </a>
 
                                                       <form id="form_profilepic" action="/user/upload/profile_pic" method="post" enctype="multipart/form-data">
                                                           <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -64,10 +64,10 @@
                                                       </form>
                                                   </div>
                                                   <br>
-                                                  
+
                                               </div>
                                               <div class="admin-comment-month" align="left" style="font-size: 16px;">
-                                                  
+
                                                   <div align="center"><b> {{ucfirst($user->firstname).' '.ucfirst($user->lastname)}} </b></div>
                                                   <hr>
 
@@ -81,21 +81,21 @@
                                                       <div style="color: #c60; font-size: 13px; word-wrap: break-word;">
                                                           {{env('APP_URL').__('/register/').$user->username}}
                                                       </div>
-                                                      <br>                                               
+                                                      <br>
                                                   </div>
-                                                                                 
+
                                               </div>
-                                          </div>                                    
+                                          </div>
                                       </div>
-                                  </div>                                  
+                                  </div>
                                 </div>
 
-                                <div class="col-md-8">                            
+                                <div class="col-md-8">
                                   <div class="card">
                                       <div class="card-header">
                                           <div class="card-head-row">
                                               <div class="card-title">{{ __('Profile Settings') }}</div>
-                                              <div class="card-tools">                                            
+                                              <div class="card-tools">
                                               </div>
                                           </div>
                                       </div>
@@ -110,48 +110,48 @@
                                                           <label>{{ __('First Name') }}</label>
                                                           <input id="adr" type="text" value="{{ucfirst($user->firstname)}}" class="form-control" name="fname" readonly>
                                                       </div>
-                                                  </div>  
+                                                  </div>
                                                   <div class="col-lg-6">
                                                       <div class="form-group">
                                                           <label>{{ __('Last Name') }}</label>
                                                           <input id="adr" type="text" value="{{ucfirst($user->lastname)}}" class="form-control" name="lname" readonly>
                                                       </div>
-                                                  </div>                               
-                                                  
+                                                  </div>
+
                                               </div>
 
                                               <div class="row">
                                                   <div class="col-lg-6">
                                                       <div class="form-group">
                                                           <label>{{ __('Email Address') }}</label>
-                                                          <div class="input-group">                                                       
+                                                          <div class="input-group">
                                                               <input id="email" type="email" value="{{$user->email}}" class="form-control" name="email" readonly>
                                                           </div>
-                                                          
+
                                                       </div>
-                                                  </div>     
+                                                  </div>
 
                                                   <div class="col-lg-6">
                                                       <div class="form-group">
                                                           <label>{{ __('Username') }}</label>
-                                                          <div class="input-group">                                                       
+                                                          <div class="input-group">
                                                               <input id="usn" type="text" value="{{$user->username}}" class="form-control" name="usn" readonly>
                                                           </div>
-                                                          
+
                                                       </div>
-                                                  </div>                                             
-                                                  
-                                              </div>   
+                                                  </div>
+
+                                              </div>
 
                                               <form class="" method="post" action="/user/update/profile">
-                                                  
+
                                                   <div class="row">
                                                       <div class="col-lg-6">
                                                           <div class="form-group">
                                                               <input type="hidden" name="_token" value="{{csrf_token()}}">
                                                               <label>{{ __('Country') }}</label>
                                                               <select id="country" class="form-control" name="country" >
-                                                                  <?php 
+                                                                  <?php
                                                                       $country = App\country::orderby('name', 'asc')->get();
                                                                       $phn_code = "";
                                                                   ?>
@@ -177,7 +177,7 @@
                                                               <label>{{ __('State/Province') }}</label>
                                                               <select  id="states" class="form-control" name="state" required>
                                                                   @if(isset($cs))
-                                                                       <?php 
+                                                                       <?php
                                                                           $st = App\states::where('id', $user->state)->get();
                                                                       ?>
                                                                       @if(count($st) > 0)
@@ -185,11 +185,11 @@
                                                                       @else
                                                                           <option selected disabled>{{ __('Select State') }}</option>
                                                                       @endif
-                                                                      
+
                                                                   @else
                                                                      <option selected disabled>{{ __('Select State') }}</option>
-                                                                  @endif                                                           
-                                                              </select>                                                        
+                                                                  @endif
+                                                              </select>
                                                           </div>
                                                       </div>
 
@@ -200,7 +200,7 @@
                                                               <label>{{ __('Address') }}</label>
                                                               <input id="adr" type="text" class="form-control" value="{{$user->address}}" name="adr" required>
                                                           </div>
-                                                      </div>  
+                                                      </div>
 
                                                       <div class="col-lg-6">
                                                           <div class="form-group">
@@ -211,27 +211,27 @@
                                                                           @if(isset($phn_code))
                                                                               {{'+'.$phn_code}}
                                                                           @else
-                                                                              
+
                                                                           @endif
                                                                       </span>
-                                                                  </div>                                                            
+                                                                  </div>
                                                                   <input id="cCode" type="hidden" class="form-control" name="cCode" required>
                                                                   <input id="phone" type="text" class="form-control" value="{{str_replace('+'.$phn_code,'',$user->phone)}}" name="phone" required>
                                                               </div>
-                                                              
+
                                                           </div>
-                                                      </div>  
-                                                  </div>   
+                                                      </div>
+                                                  </div>
                                                   <div class="row">
                                                       <div class="col-lg-12">
                                                           <div class="form-group">
                                                               <button class="collcc btn btn-info">{{ __('Update Profile') }}</button>
                                                           </div>
-                                                      </div>                                                
-                                                      
+                                                      </div>
+
                                                   </div>
                                               </form>
-                                          </div>                                
+                                          </div>
                                       </div>
                                   </div>
                                 </div>
@@ -274,8 +274,8 @@
                                                         <label>{{ __('Account Name') }}</label>
                                                         <input type="text" class="form-control" name="act_name" required placeholder="Account Name">
                                                     </div>
-                                                </div>                                             
-                                                
+                                                </div>
+
                                             </div>
 
                                             <div class="row">
@@ -283,8 +283,8 @@
                                                     <div class="form-group">
                                                         <button class="collcc btn btn-info">{{ __('Add Bank') }}</button>
                                                     </div>
-                                                </div>                                                
-                                                
+                                                </div>
+
                                             </div>
                                         </form>
                                     </div>
@@ -298,7 +298,7 @@
                                     <div class="card-body pb-0 table-responsive" >
                                        <table id="basic-datatables" class="display table table-striped table-hover" >
                                             <thead>
-                                                <tr>                                                
+                                                <tr>
                                                     <th data-field="status" data-editable="true">{{ __('Bank Name') }}</th>
                                                     <th data-field="phone" data-editable="true">{{ __('Acount Name') }}</th>
                                                     <th data-field="date" data-editable="true">{{ __('Acount Number') }}</th>
@@ -373,7 +373,7 @@
                                     <div class="card-body pb-0 table-responsive" >
                                        <table id="basic-datatables" class="display table table-striped table-hover" >
                                             <thead>
-                                                <tr>                                                
+                                                <tr>
                                                     <th>{{ __('Coin') }}</th>
                                                     <th>{{ __('Coin Host') }}</th>
                                                     <th>{{ __('Wallet Address') }}</th>
@@ -403,9 +403,9 @@
                                 </div>
                               </div>
                             </div>
-                            
+
                             <!-- End of wallets -->
-                            
+
                             <!-- KYC -->
                             <div class="p-5 tab-pane fade " id="kyc" role="tabpanel" >
                               @if(count($kyc) > 0 && $kyc[0]->status == 0)
@@ -414,14 +414,14 @@
                                     <div class="card-header">
                                         <div class="card-head-row">
                                             <div class="card-title">{{ __('Verification status') }}</div>
-                                            <div class="card-tools">                                            
+                                            <div class="card-tools">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-body">
                                         <div class="alert alert-warning">
                                           {{ _('Your verification is under review. You will be notified shortly') }}
-                                        </div>                                  
+                                        </div>
                                     </div>
                                   </div>
                                 </div>
@@ -431,14 +431,14 @@
                                     <div class="card-header">
                                         <div class="card-head-row">
                                             <div class="card-title">{{ __('Verification status') }}</div>
-                                            <div class="card-tools">                                            
+                                            <div class="card-tools">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-body">
                                         <div class="alert alert-success">
                                           {{ _('You are fully verified') }}
-                                        </div>                                  
+                                        </div>
                                     </div>
                                   </div>
                                 </div>
@@ -455,8 +455,8 @@
                                           <div class="row">
                                             <div class="col-lg-12">
                                                 <div id="selfie" class="">
-                                                  <div class="form-group" align="center">                                              
-                                                    <h3>Upload Selfie</h3> 
+                                                  <div class="form-group" align="center">
+                                                    <h3>Upload Selfie</h3>
                                                     <hr>
                                                     <p class="text-warning " align="left">
                                                      Take a selfie of yourself holding your ID with your full face clearly shown
@@ -466,17 +466,17 @@
                                                     <!--</p>-->
                                                     <img src="/img/any.png" class="" align="center">
                                                     <input type="file" class="form-control upload_inp mt-2" name="selfie" required>
-                                                  </div>                                                
+                                                  </div>
                                                 </div>
                                                 <hr>
                                                 <div class="form-group">
-                                                  <h3>{{ __('Identity verification') }}</h3> 
+                                                  <h3>{{ __('Identity verification') }}</h3>
                                                   <p>
                                                     {{ __('Valid documents are: Country ID Card, Internattional Passport and Drivers Licence') }}
-                                                  </p> 
+                                                  </p>
                                                 </div>
-                                                <div class="form-group mt-4">                                              
-                                                  <label>Card Type</label>                                                  
+                                                <div class="form-group mt-4">
+                                                  <label>Card Type</label>
                                                   <select id="card_select" name="cardtype" class="form-control" required="required">
                                                     <option selected disabled >Select ID type</option>
                                                     <option value="idcard_op">Country/State ID</option>
@@ -486,37 +486,37 @@
                                                 </div>
                                                 <hr>
                                                 <div id="card_cont" class="cont_display_none">
-                                                  <div class="form-group mt-3">                                              
-                                                    <label>Card Front</label> 
+                                                  <div class="form-group mt-3">
+                                                    <label>Card Front</label>
                                                     <br>
-                                                    <img src="/img/id_temp_front.png" class="img_card_temp" width="100%">                                                 
+                                                    <img src="/img/id_temp_front.png" class="img_card_temp" width="100%">
                                                     <input type="file" class="form-control upload_inp mt-2" name="id_front" >
                                                   </div>
 
                                                   <hr>
-                                                  <div class="form-group mt-3">                                              
+                                                  <div class="form-group mt-3">
                                                     <label>Card Back</label>
                                                     <br>
-                                                    <img src="/img/id_tem_bac.png" class="img_card_temp" width="100%">                                                   
+                                                    <img src="/img/id_tem_bac.png" class="img_card_temp" width="100%">
                                                     <input type="file" class="form-control mt-2" name="id_back" >
                                                   </div>
                                                 </div>
-                                                
+
                                                 <div id="pass_cont" class="cont_display_none">
-                                                  <div class="form-group">                                              
-                                                    <label>Passport Front</label> 
+                                                  <div class="form-group">
+                                                    <label>Passport Front</label>
                                                     <br>
-                                                    <img src="/img/id_temp_front.png" class="img_card_temp" width="100%">                                                  
+                                                    <img src="/img/id_temp_front.png" class="img_card_temp" width="100%">
                                                     <input type="file" class="form-control upload_inp mt-2" name="pas_id_front" >
-                                                  </div>                                                
+                                                  </div>
                                                 </div>
-                                              
+
                                             </div>
                                           </div>
 
                                         </div>
                                       </div>
-                                    </div> 
+                                    </div>
 
                                     <div class="col-sm-6">
                                       <div class="card">
@@ -527,12 +527,12 @@
                                           <div class="row">
                                             <div class="row">
                                               <div class="col-lg-12">
-                                                
+
                                                   <div class="form-group">
-                                                    <h3></h3> 
+                                                    <h3></h3>
                                                     <p>
                                                       {{ __('Valid documents are: Utility bill and Bank statement') }}
-                                                    </p>                                                   
+                                                    </p>
                                                     <input type="file" class="form-control" name="utility_doc" required >
                                                   </div>
 
@@ -542,8 +542,8 @@
 
                                         </div>
                                       </div>
-                                          
-                                    </div> 
+
+                                    </div>
 
                                     <div class="col-sm-12 mt-5">
                                       <div class="form-group">
@@ -568,18 +568,18 @@
                                         <div class="card-title">{{ __('2FA Security') }}</div>
                                     </div>
                                     <div class="card-body">
-                                        
+
                                       <div class="row">
                                           <div id="sec_enable_div" class="col-lg-12">
                                             <div class="form-group ">
                                               <div>
                                                 <label>{{ __('Enable/Disable') }}</label>
                                               </div>
-                                                
+
                                               <div class="btn-group btn-group-toggle btn-lg p-0 ">
                                                 <label class="btn @if($user->sec_2fa_status == 1){{__('btn-success text-white')}}@else{{__('btn_grey')}}@endif" onclick="s_2fa('enable')">
                                                   <input type="radio" name="options" autocomplete="off" > Enable
-                                                </label>                                                    
+                                                </label>
                                                 <label class="btn @if($user->sec_2fa_status == 1){{__('btn_grey')}}@else{{__('btn-success text-white')}}@endif" onclick="s_2fa('disable')">
                                                   <input type="radio" name="options" autocomplete="off" > Disable
                                                 </label>
@@ -589,7 +589,7 @@
                                                   {{__('Estado actual: ')}} @if($user->sec_2fa_status == 1){{__('Habilitado')}}@else{{__('Deshabilitado')}}@endif
                                                 </small>
                                               </div>
-                                                  
+
                                             </div>
                                           </div>
 
@@ -606,7 +606,7 @@
                                                   <p>
                                                   Escanee el CÓDIGO QR con la aplicación Google Authenticator e ingrese el código que se muestra en el cuadro a continuación.
                                                   </p>
-                                                </div> 
+                                                </div>
                                                 <form action="{{ route('user2fa.verify_2fa') }}" method="post">
                                                   <div class="form-group">
                                                     <input type="text" class="form-control" name="fa_code" required placeholder="6-digit OTP">
@@ -615,7 +615,7 @@
                                                   <div class="form-group">
                                                     <button class="collcc btn btn-info">{{ __('Activar') }}</button>
                                                   </div>
-                                                </form>                                        
+                                                </form>
                                                 <br>
                                               </div>
                                             </div>
@@ -631,7 +631,7 @@
                                                   <p>
                                                     Pleaae enter Google Authenticator OTP.
                                                   </p>
-                                                </div> 
+                                                </div>
                                                 <form action="{{ route('user2fa.disable_2fa') }}" method="post">
                                                   <div class="form-group">
                                                     <input type="text" class="form-control" name="fa_otp" required placeholder="6-digit OTP">
@@ -639,14 +639,14 @@
                                                   <div class="form-group">
                                                     <button class="collcc btn btn-info">{{ __('Disable') }}</button>
                                                   </div>
-                                                </form>                                        
+                                                </form>
                                                 <br>
                                               </div>
                                             </div>
                                           </div>
-                                         
+
                                       </div>
-                                        
+
                                     </div>
                                   </div>
                                 </div>
@@ -656,7 +656,7 @@
                                     <div class="card-header">
                                         <div class="card-head-row">
                                             <div class="card-title">{{ __('Cambiar Contraseña') }}</div>
-                                            <div class="card-tools">                                            
+                                            <div class="card-tools">
                                             </div>
                                         </div>
                                     </div>
@@ -678,7 +678,7 @@
                                             <div class="form-group" align="">
                                                <button class="collcc btn btn-info">{{ __('Actualizar') }}</button>
                                             </div>
-                                        </form>                                    
+                                        </form>
                                     </div>
                                   </div>
                                 </div>

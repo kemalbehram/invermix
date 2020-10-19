@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
-// use Illuminate\Support\Facades\File; 
+// use Illuminate\Support\Facades\File;
 
 use DotenvEditor;
 
@@ -39,7 +39,7 @@ class adminController extends Controller
 
   public function __construct()
   {
-      // parent::__construct(); 
+      // parent::__construct();
       $this->settings = site_settings::find(1);
   }
 
@@ -51,14 +51,14 @@ class adminController extends Controller
     $wd = withdrawal::orderby('id', 'desc')->get();
     $today_wd = withdrawal::where('created_at','like','%'.date('Y-m-d').'%')->orderby('id', 'desc')->get();
     $today_dep = deposits::where('created_at','like','%'.date('Y-m-d').'%')->orderby('id', 'desc')->get();
-    $today_inv = investment::where('date_invested', date('Y-m-d'))->orderby('id', 'desc')->get();      
-    $logs =  adminLog::orderby('id', 'desc')->get(); 
-    $settings = site_settings::find(1); 
+    $today_inv = investment::where('date_invested', date('Y-m-d'))->orderby('id', 'desc')->get();
+    $logs =  adminLog::orderby('id', 'desc')->get();
+    $settings = site_settings::find(1);
     $this->data_files = [$adm, $inv, $deposits, $users, $wd, $today_wd, $today_dep, $today_inv, $logs, $settings];
     return $this->data_files;
   }
   public function index()
-  {        
+  {
       //return view('user.');
   }
   public function backLogin()
@@ -67,12 +67,12 @@ class adminController extends Controller
   }
 
   public function states($id)
-  {        
+  {
       $state = states::where('country_id', $id)->get();
       return json_encode($state);
   }
   public function countryCode($id)
-  {        
+  {
       $code = country::where('id', $id)->get();
       return $code[0]->phonecode;
   }
@@ -90,12 +90,12 @@ class adminController extends Controller
       if(Hash::check($req->input('password'), $adm[0]->pwd))
       {
         $adm = admin::find($adm[0]->id);
-        Session::put('adm', $adm); 
+        Session::put('adm', $adm);
         Auth::logout();
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Logged in to the system";
-        $act->save();    
+        $act->save();
 
         return redirect()->route('adm_dash');
         // return 's';
@@ -105,7 +105,7 @@ class adminController extends Controller
         Session::put('err2', "Login password not correct!");
         return back();
       }
-      
+
     }
     else
     {
@@ -114,14 +114,14 @@ class adminController extends Controller
     }
   }
 
-  
+
   public function getMonthlyIvCart()
-  { 
+  {
     $cap = 0;
     $nm;
     $sm = array();
     for ($i = 1; $i <= 12; $i++)
-    { 
+    {
       $cap = 0;
       if(strlen($i) == 1)
       {
@@ -143,37 +143,37 @@ class adminController extends Controller
       {
         $cap = 0;
       }
-      
+
       array_push($sm, intval($cap));
     }
 
     return json_encode($sm);
-          
+
   }
 
   public function updateUserProfile(Request $req)
-  {                
+  {
         if(Session::has('adm') && !empty(Session::get('adm')))
-        { 
+        {
 
-          $adm = Session::get('adm');           
-            
+          $adm = Session::get('adm');
+
           try
           {
             $validate = $req->validate([
-                 'phone' => 'required|digits_between:10,15',            
+                 'phone' => 'required|digits_between:10,15',
               ]);
 
-            //$country = country::find($req->input('country'))            
-              $usr = User::find($req->input('uid'));                 
+            //$country = country::find($req->input('country'))
+              $usr = User::find($req->input('uid'));
               $usr->country = $req->input('country');
               $usr->state = $req->input('state');
               $usr->address = $req->input('adr');
-              $usr->phone = $req->input('cCode').$req->input('phone');              
+              $usr->phone = $req->input('cCode').$req->input('phone');
               $usr->currency = $this->settings->currency;
-             
 
-              $usr->save(); 
+
+              $usr->save();
 
               $act = new adminLog;
               $act->admin = $adm->email;
@@ -183,30 +183,30 @@ class adminController extends Controller
               Session::put('status', "Successful");
               Session::put('msgType', "suc");
               return back();
-                                  
+
           }
           catch(\Exception $e)
           {
             Session::put('status', "Error saving your data! Please make sure your number is valid");
             Session::put('msgType', "err");
             return back();
-          }                 
-            
+          }
+
         }
         else
         {
           return redirect('/');
         }
-            
+
   }
 
   public function changeUserPwd(Request $req)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {            
-      
+    {
+
       if($req->input('newpwd') != $req->input('cpwd'))
-      {                                 
+      {
         Session::put('status', "Password do not match!");
         Session::put('msgType', "err");
         return back();
@@ -215,20 +215,20 @@ class adminController extends Controller
       try
       {
         $usr = User::find($req->input('uid'));
-          
+
         $usr->pwd = Hash::make($req->input('newpwd'));
         $usr->save();
 
-        $adm = Session::get('adm'); 
+        $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Changed User Password. User_id: ".$req->input('uid');
         $act->save();
-        
+
         Session::put('status', "Successful");
         Session::put('msgType', "suc");
         return back();
-                   
+
       }
       catch(\Exception $e)
       {
@@ -236,38 +236,38 @@ class adminController extends Controller
         Session::put('msgType', "err");
         return back();
       }
-             
-        
+
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
-  
+
   public function blockUser($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {       
+    {
 
       try
       {
-        $usr = User::find($id);          
+        $usr = User::find($id);
         $usr->status = 2;
         $usr->save();
 
-        $adm = Session::get('adm'); 
+        $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Blocked User Account. User_id: ".$id;
         $act->save();
-        
+
         Session::put('status', "Successful");
         Session::put('msgType', "suc");
         return back();
-                   
+
       }
       catch(\Exception $e)
       {
@@ -275,37 +275,37 @@ class adminController extends Controller
         Session::put('msgType', "err");
         return back();
       }
-             
-        
+
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
   public function activateUser($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {       
+    {
 
       try
       {
-        $usr = User::find($id);          
+        $usr = User::find($id);
         $usr->status = 1;
         $usr->save();
 
-        $adm = Session::get('adm'); 
+        $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Activate User account. User_id: ".$id;
         $act->save();
-        
+
         Session::put('status', "Successful");
         Session::put('msgType', "suc");
         return back();
-                   
+
       }
       catch(\Exception $e)
       {
@@ -313,35 +313,35 @@ class adminController extends Controller
         Session::put('msgType', "err");
         return back();
       }
-             
-        
+
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
   public function deleteUser($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {       
+    {
 
       try
       {
-        $usr = User::where('id',$id)->delete();          
-       
-        $adm = Session::get('adm'); 
+        $usr = User::where('id',$id)->delete();
+
+        $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Delete User account. User_id: ".$id;
         $act->save();
-        
+
         Session::put('status', "Successful");
         Session::put('msgType', "suc");
         return redirect('/admin/manage/users'); //
-                   
+
       }
       catch(\Exception $e)
       {
@@ -349,21 +349,21 @@ class adminController extends Controller
         Session::put('msgType', "err");
         return back();
       }
-             
-        
+
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
-  
+
   public function searchInv(Request $req)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {  
+    {
       Session::put('val', $req->input('search_val'));
       return back();
     }
@@ -371,13 +371,13 @@ class adminController extends Controller
     {
       return redirect('/');
     }
-            
+
   }
-  
+
   public function searchXInv(Request $req)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {  
+    {
       Session::put('val', $req->input('search_val'));
       return back();
     }
@@ -385,31 +385,31 @@ class adminController extends Controller
     {
       return redirect('/');
     }
-            
+
   }
 
 
   public function pauseInv($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {       
+    {
 
       try
       {
-        $usr = investment::find($id);          
+        $usr = investment::find($id);
         $usr->status = 'Paused';
         $usr->save();
 
-        $adm = Session::get('adm'); 
+        $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Paused User Investment. Investment id: ".$id;
         $act->save();
-        
+
         Session::put('status', "Successful");
         Session::put('msgType', "suc");
         return back(); //
-                   
+
       }
       catch(\Exception $e)
       {
@@ -417,37 +417,37 @@ class adminController extends Controller
         Session::put('msgType', "err");
         return back();
       }
-             
-        
+
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
   public function activateInv($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {       
+    {
 
       try
       {
-        $usr = investment::find($id);          
+        $usr = investment::find($id);
         $usr->status = 'Active';
         $usr->save();
 
-        $adm = Session::get('adm'); 
+        $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Activated User Investment. Investment id: ".$id;
         $act->save();
-        
+
         Session::put('status', "Successful");
         Session::put('msgType', "suc");
         return back(); //
-                   
+
       }
       catch(\Exception $e)
       {
@@ -455,46 +455,46 @@ class adminController extends Controller
         Session::put('msgType', "err");
         return back();
       }
-             
-        
+
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
   public function deleteInv($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {       
+    {
 
       try
       {
         $inv = investment::find($id);
-        
-        $inv_user = User::find($inv->user_id); 
-        $amt = $inv->capital;  
-        
+
+        $inv_user = User::find($inv->user_id);
+        $amt = $inv->capital;
+
         if($inv->w_amt == 0)
         {
             $inv_user->wallet += $amt;
             $inv_user->save();
         }
-        
-        investment::where('id',$id)->delete();             
-        
-        $adm = Session::get('adm'); 
+
+        investment::where('id',$id)->delete();
+
+        $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Deleted User Investment. Investment id: ".$id;
         $act->save();
-        
+
         Session::put('status', "Successful");
         Session::put('msgType', "suc");
         return back();
-                   
+
       }
       catch(\Exception $e)
       {
@@ -502,37 +502,37 @@ class adminController extends Controller
         Session::put('msgType', "err");
         return back();
       }
-             
-        
+
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
-  
+
   public function xpauseInv($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {       
+    {
 
       try
       {
-        $usr = xpack_inv::find($id);          
+        $usr = xpack_inv::find($id);
         $usr->status = 'Paused';
         $usr->save();
 
-        $adm = Session::get('adm'); 
+        $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Paused User Investment. Investment id: ".$id;
         $act->save();
-        
+
         Session::put('status', "Successful");
         Session::put('msgType', "suc");
         return back(); //
-                   
+
       }
       catch(\Exception $e)
       {
@@ -540,37 +540,37 @@ class adminController extends Controller
         Session::put('msgType', "err");
         return back();
       }
-             
-        
+
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
   public function xactivateInv($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {       
+    {
 
       try
       {
-        $usr = xpack_inv::find($id);          
+        $usr = xpack_inv::find($id);
         $usr->status = 'Active';
         $usr->save();
 
-        $adm = Session::get('adm'); 
+        $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Activated User Investment. Investment id: ".$id;
         $act->save();
-        
+
         Session::put('status', "Successful");
         Session::put('msgType', "suc");
         return back(); //
-                   
+
       }
       catch(\Exception $e)
       {
@@ -578,46 +578,46 @@ class adminController extends Controller
         Session::put('msgType', "err");
         return back();
       }
-             
-        
+
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
   public function xdeleteInv($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {       
+    {
 
       try
       {
         $inv = xpack_inv::find($id);
-        
-        $inv_user = User::find($inv->user_id); 
-        $amt = $inv->capital;  
-        
+
+        $inv_user = User::find($inv->user_id);
+        $amt = $inv->capital;
+
         if($inv->w_amt == 0)
         {
             $inv_user->wallet += $amt;
             $inv_user->save();
         }
-        
-        xpack_inv::where('id',$id)->delete();             
-        
-        $adm = Session::get('adm'); 
+
+        xpack_inv::where('id',$id)->delete();
+
+        $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Deleted User Investment. Investment id: ".$id;
         $act->save();
-        
+
         Session::put('status', "Successful");
         Session::put('msgType', "suc");
         return back();
-                   
+
       }
       catch(\Exception $e)
       {
@@ -625,20 +625,20 @@ class adminController extends Controller
         Session::put('msgType', "err");
         return back();
       }
-             
-        
+
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
   public function searchDep(Request $req)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {  
+    {
       Session::put('val', $req->input('search_val'));
       return back();
     }
@@ -646,13 +646,13 @@ class adminController extends Controller
     {
       return redirect('/');
     }
-            
+
   }
 
   public function searchWD(Request $req)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {  
+    {
       Session::put('val', $req->input('search_val'));
       return back();
     }
@@ -660,14 +660,14 @@ class adminController extends Controller
     {
       return redirect('/');
     }
-            
+
   }
 
-  
+
   public function searchadminUser(Request $req)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {  
+    {
       Session::put('val', $req->input('search_val'));
       return back();
     }
@@ -675,15 +675,15 @@ class adminController extends Controller
     {
       return redirect('/');
     }
-            
+
   }
 
-  
+
 
   public function admSearch(Request $req)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {  
+    {
       Session::put('val', $req->input('search_val'));
       return back();
     }
@@ -691,42 +691,42 @@ class adminController extends Controller
     {
       return redirect('/');
     }
-            
+
   }
-  
+
 
   public function rejectDep($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {       
+    {
 
       try
       {
         $usr = deposits::find($id);
-        
-        $dep_user = User::find($usr->user_id); 
-        $amt = $usr->amount;  
-        
+
+        $dep_user = User::find($usr->user_id);
+        $amt = $usr->amount;
+
         if($usr->on_apr == 1)
         {
             $dep_user->wallet -= $amt;
             $dep_user->save();
         }
-        
+
         $usr->on_apr = 0;
         $usr->status = 2;
         $usr->save();
 
-        $adm = Session::get('adm'); 
+        $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Rejected user deposit. Deposit id: ".$id;
         $act->save();
-        
+
         Session::put('status', "Successful");
         Session::put('msgType', "suc");
         return back(); //
-                   
+
       }
       catch(\Exception $e)
       {
@@ -734,24 +734,24 @@ class adminController extends Controller
         Session::put('msgType', "err");
         return back();
       }
-             
-        
+
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
   public function approveDep($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {       
+    {
 
       try
       {
-        $usr = deposits::find($id);         
+        $usr = deposits::find($id);
         if($usr->status == 1)
         {
           return back()->with([
@@ -759,10 +759,10 @@ class adminController extends Controller
             'toast_type' => 'err'
           ]);
         }
-        
-        $dep_user = User::find($usr->user_id); 
-        $amt = $usr->amount;  
-        
+
+        $dep_user = User::find($usr->user_id);
+        $amt = $usr->amount;
+
         if($usr->on_apr == 0)
         {
             $dep_user->wallet += $amt;
@@ -771,8 +771,8 @@ class adminController extends Controller
         $usr->status = 1;
         $usr->on_apr = 1;
         $usr->save();
-        
-        $adm = Session::get('adm'); 
+
+        $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Approved user deposit. Deposit id: ".$id;
@@ -782,7 +782,7 @@ class adminController extends Controller
           'toast_msg' => 'Deposit approved successfully!',
           'toast_type' => 'suc'
         ]);
-                           
+
       }
       catch(\Exception $e)
       {
@@ -791,48 +791,48 @@ class adminController extends Controller
           'toast_type' => 'err'
         ]);
         return back();
-      }    
-        
+      }
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
   public function deleteDep($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {       
+    {
 
       try
       {
-          
+
         $usr = deposits::find($id);
-        
-        $dep_user = User::find($usr->user_id); 
-        $amt = $usr->amount;  
-        
+
+        $dep_user = User::find($usr->user_id);
+        $amt = $usr->amount;
+
         if($usr->on_apr == 1)
         {
             $dep_user->wallet -= $amt;
             $dep_user->save();
         }
-        
-        deposits::where('id',$id)->delete(); 
-        
 
-        $adm = Session::get('adm'); 
+        deposits::where('id',$id)->delete();
+
+
+        $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Deleted ".$dep_user->username." deposit. Amount: ".$amt;
         $act->save();
-        
+
         Session::put('status', "Successful");
         Session::put('msgType', "suc");
         return back();
-                   
+
       }
       catch(\Exception $e)
       {
@@ -840,25 +840,25 @@ class adminController extends Controller
         Session::put('msgType', "err");
         return back();
       }
-             
-        
+
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
   public function rejectWD($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {       
+    {
 
       try
       {
-        $usr = withdrawal::find($id);   
-        
+        $usr = withdrawal::find($id);
+
         if($usr->status == 'Rejected')
         {
           return back()->with([
@@ -866,26 +866,26 @@ class adminController extends Controller
             'toast_type' => 'err'
           ]);
         }
-        
+
         $usr->status = 'Rejected';
 
         $user = User::find($usr->user_id);
         $user->wallet += $usr->amount;
         $user->save();
-        
+
         $usr->save();
-        
-        $adm = Session::get('adm'); 
+
+        $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Rejected user withdrawal. withdrawal id: ".$id;
         $act->save();
-    
+
         return back()->with([
             'toast_msg' => 'Withdrawal Rejected Successfully and Funds Added Back to User Wallet!',
             'toast_type' => 'suc'
         ]);
-                   
+
       }
       catch(\Exception $e)
       {
@@ -894,20 +894,20 @@ class adminController extends Controller
           'toast_type' => 'err'
         ]);
       }
-             
-        
+
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
   public function approveWD($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {       
+    {
 
       try
       {
@@ -919,7 +919,7 @@ class adminController extends Controller
             'toast_type' => 'err'
           ]);
         }
-        
+
         if($usr->status == 'Rejected')
         {
           return back()->with([
@@ -927,23 +927,23 @@ class adminController extends Controller
             'toast_type' => 'err'
           ]);
         }
-        
+
         $userID = $usr->user_id;
         $wd_id = $usr->id;
-        $wd_act = $usr->account; 
+        $wd_act = $usr->account;
         $wd_amt = $usr->amount;
         $wd_currency = $usr->currency;
         $usr->status = 'Approved';
         $usr->save();
 
-        $adm = Session::get('adm'); 
+        $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Approved user withdrawal. withdrawal id: ".$id;
         $act->save();
-        
+
         $user_act = User::find($userID);
-        
+
         $maildata = ['email' => $user_act->email, 'wd_id' => $wd_id, 'act' => $wd_act, 'amt' => $wd_amt, 'currency' =>$wd_currency ];
         Mail::send('mail.admin_approve_wd', ['md' => $maildata], function($msg) use ($maildata){
             $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
@@ -954,7 +954,7 @@ class adminController extends Controller
         'toast_msg' => 'Approved successfully!',
         'toast_type' => 'suc'
       ]);
-                   
+
       }
       catch(\Exception $e)
       {
@@ -962,36 +962,36 @@ class adminController extends Controller
           'toast_msg' => 'Error updating record! Try again!',
           'toast_type' => 'err'
         ]);
-      }   
-        
+      }
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
   public function deleteWD($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {       
+    {
 
       try
       {
-        withdrawal::where('id',$id)->delete(); 
+        withdrawal::where('id',$id)->delete();
 
-        $adm = Session::get('adm'); 
+        $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Deleted user withdrawal. withdrawal id: ".$id;
         $act->save();
-        
+
         return back()->with([
           'toast_msg' => 'Successful',
           'toast_type' => 'suc'
         ]);
-                   
+
       }
       catch(\Exception $e)
       {
@@ -1000,20 +1000,20 @@ class adminController extends Controller
           'toast_type' => 'err'
         ]);
       }
-             
-        
+
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
   ///////////////////////////////////////////  pack edit//////////////////////////////////////////////////
-  
+
   public function editPack(Request $req)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
       try
@@ -1026,7 +1026,7 @@ class adminController extends Controller
         // $pack->withdrwal_fee = ($req->input('fee'))/100;
         $pack->save();
 
-        $adm = Session::get('adm'); 
+        $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Edited investment package. Package id: ".$req->input('p_id');
@@ -1044,20 +1044,20 @@ class adminController extends Controller
           'toast_type' => 'err'
         ]);
       }
-      
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
 
   public function admin_ban_user($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {       
+    {
 
       $adm = Session::get('adm');
       try
@@ -1068,30 +1068,30 @@ class adminController extends Controller
           Session::put('status', "You cannot perform this action on yourself! Try again");
           Session::put('msgType', "err");
           return back();
-        }  
+        }
 
         if($usr->role >= $adm->role && $adm->id != 1)
         {
           Session::put('status', "Error updating record! Try again");
           Session::put('msgType', "err");
           return back();
-        }  
+        }
         else
         {
           $usr->status = '0';
           $usr->save();
-        }       
-        
-        
+        }
+
+
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Blocked admin user. user id: ".$id;
         $act->save();
-        
+
         Session::put('status', "Successful");
         Session::put('msgType', "suc");
         return back(); //
-                   
+
       }
       catch(\Exception $e)
       {
@@ -1099,20 +1099,20 @@ class adminController extends Controller
         Session::put('msgType', "err");
         return back();
       }
-             
-        
+
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
   public function admin_activate_user($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {       
+    {
       $adm = Session::get('adm');
       try
       {
@@ -1123,21 +1123,21 @@ class adminController extends Controller
           Session::put('msgType', "err");
           // return $usr->id.' '.$adm->id;
           return back();
-        }  
+        }
 
         if($usr->role >= $adm->role && $adm->id != 1)
         {
           Session::put('status', "Error updating record! Try again");
           Session::put('msgType', "err");
           return back();
-        }  
+        }
         else
         {
           $usr->status = '1';
           $usr->save();
-        }       
-        
-         
+        }
+
+
         $act = new adminLog;
         $act->admin = $adm->email;
         $act->action = "Activated admin user. user id: ".$id;
@@ -1146,7 +1146,7 @@ class adminController extends Controller
         Session::put('status', "Successful");
         Session::put('msgType', "suc");
         return back(); //
-                   
+
       }
       catch(\Exception $e)
       {
@@ -1154,20 +1154,20 @@ class adminController extends Controller
         Session::put('msgType', "err");
         return back();
       }
-             
-        
+
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
   public function dadmin_delete_user($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    { 
+    {
 
       $adm = Session::get('adm');
       try
@@ -1178,14 +1178,14 @@ class adminController extends Controller
           Session::put('status', "You cannot delete yourself! Try again");
           Session::put('msgType', "err");
           return back();
-        }  
+        }
 
         if($usr->role >= $adm->role && $adm->author != 0 && $usr->author != $adm->id)
         {
           Session::put('status', "Error updating record! Try again");
           Session::put('msgType', "err");
           return back();
-        }  
+        }
         else
         {
           admin::where('id',$id)->delete();
@@ -1198,9 +1198,9 @@ class adminController extends Controller
           Session::put('status', "Successful");
           Session::put('msgType', "suc");
           return back(); //
-        }       
-        
-                   
+        }
+
+
       }
       catch(\Exception $e)
       {
@@ -1208,19 +1208,19 @@ class adminController extends Controller
         Session::put('msgType', "err");
         return back();
       }
-             
-        
+
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
 
 public function admAddnew(Request $req)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
       try
@@ -1232,14 +1232,14 @@ public function admAddnew(Request $req)
           Session::put('status', "You cannot perform this operation! Try again");
           Session::put('msgType', "err");
           return back();
-        }  
-        
+        }
+
         if($adm->role == 1)
         {
           Session::put('status', "You cannot perform this operation! Try again");
           Session::put('msgType', "err");
           return back();
-        }  
+        }
 
 
         $pack = new admin;
@@ -1266,13 +1266,13 @@ public function admAddnew(Request $req)
         Session::put('msgType', "err");
         return back();
       }
-      
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
   function editMsg($id){
@@ -1288,13 +1288,13 @@ public function admAddnew(Request $req)
   }
 
   public function admSendMsg(Request $req)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
       $adm = Session::get('adm');
       $validator = Validator::make($req->all(), [
-        'subject' => 'required|min:5|max:50|string', 
-        'msg' => 'required|string'        
+        'subject' => 'required|min:5|max:50|string',
+        'msg' => 'required|string'
       ]);
 
       if($validator->fails())
@@ -1314,9 +1314,9 @@ public function admAddnew(Request $req)
           $msg->subject = $req->input('subject');
           if(!empty($req->input('msg_users')))
           {
-            $msg->users = $req->input('msg_users').';'; 
-          } 
-                
+            $msg->users = $req->input('msg_users').';';
+          }
+
           $msg->save();
 
           $act = new adminLog;
@@ -1328,16 +1328,16 @@ public function admAddnew(Request $req)
         {
           $msg = msg::find($req->input('msg_state'));
           $msg->message = $req->input('msg');
-          $msg->subject = $req->input('subject'); 
+          $msg->subject = $req->input('subject');
           $msg->readers = '';
           if(!empty($req->input('msg_users')))
           {
-            $msg->users = $req->input('msg_users'); 
+            $msg->users = $req->input('msg_users');
           }
           else
           {
-            $msg->users = NULL; 
-          } 
+            $msg->users = NULL;
+          }
           $msg->save();
 
           $act = new adminLog;
@@ -1348,26 +1348,26 @@ public function admAddnew(Request $req)
         return back()->With([
           'toast_msg' => 'Sent Successfully',
           'toast_type' => 'suc'
-        ]);        
+        ]);
       }
       catch(\Exception $e)
       {
         return back()->With([
           'toast_msg' => 'Error saving message! Try again '.$e->getMessage(),
           'toast_type' => 'err'
-        ]);        
+        ]);
       }
-      
+
     }
     else
     {
       return redirect('/login');
     }
-            
+
   }
 
   public function admChangePwd(Request $req)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
       try
@@ -1384,7 +1384,7 @@ public function admAddnew(Request $req)
         if(Hash::check($req->input('oldpwd'),  $adm->pwd))
         {
           $ad = admin::find($adm->id);
-          $ad->pwd = Hash::make($req->input('newpwd'));        
+          $ad->pwd = Hash::make($req->input('newpwd'));
           $ad->save();
 
           $act = new adminLog;
@@ -1398,7 +1398,7 @@ public function admAddnew(Request $req)
         }
 
 
-        
+
       }
       catch(\Exception $e)
       {
@@ -1406,20 +1406,20 @@ public function admAddnew(Request $req)
         Session::put('msgType', "err");
         return back();
       }
-      
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
 
 
   public function admSearchByMonth(Request $req)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    {       
+    {
       $val = $req->input('search_val');
       $musers = User::where('created_at', 'like', '%'.$val.'%')->where('status', 1)->orderby('created_at', 'asc')->get();
       $mInv = investment::where('date_invested', 'like', '%'.$val.'%')->where('status', 'active')->orderby('date_invested', 'asc')->get();
@@ -1428,7 +1428,7 @@ public function admAddnew(Request $req)
 
 
       $musersDate = $mInvDate = $mDepDate = $mWdDate = [];
-      $musersVal = $mInvVal = $mDepVal = $mWdVal = [];  
+      $musersVal = $mInvVal = $mDepVal = $mWdVal = [];
       $iCount = $dCount = $wCount = 0;
       $pt = "";
       $cnt = 0;
@@ -1436,11 +1436,11 @@ public function admAddnew(Request $req)
 
       foreach ($musers as $in) {
           if($pt != date('Y-m-d', strtotime($in->created_at)))
-          {           $sum_cap = 0;    
+          {           $sum_cap = 0;
               $pt = date('Y-m-d', strtotime($in->created_at));
               $musersDate[$cnt] = date('d/m/y', strtotime($in->created_at));
               $m_count = withdrawal::where('created_at', 'like','%'.$pt.'%')->get();
-              // foreach ($m_count as $n) 
+              // foreach ($m_count as $n)
               // {
               //     $sum_cap += $n->amount;
               // }
@@ -1449,17 +1449,17 @@ public function admAddnew(Request $req)
               $cnt += 1;
           }
 
-      } 
+      }
       $pt = "";
       $cnt = 0;
       $sum_cap = 0;
       foreach ($mInv as $in) {
           if($pt != date('Y-m-d', strtotime($in->created_at)))
-          {               
+          {
               $pt = date('Y-m-d', strtotime($in->created_at));
               $mInvDate[$cnt] = date('d/m/y', strtotime($in->created_at));
               $m_count = withdrawal::where('created_at', 'like','%'.$pt.'%')->get();
-              foreach ($m_count as $n) 
+              foreach ($m_count as $n)
               {
                   $sum_cap += $n->amount;
               }
@@ -1468,17 +1468,17 @@ public function admAddnew(Request $req)
               $cnt += 1;
           }
           $iCount += $in->capital;
-      } 
+      }
       $pt = "";
       $cnt = 0;
       $sum_cap = 0;
       foreach ($mDep as $in) {
           if($pt != date('Y-m-d', strtotime($in->created_at)))
-          {               
+          {
               $pt = date('Y-m-d', strtotime($in->created_at));
               $mDepDate[$cnt] = date('d/m/y', strtotime($in->created_at));
               $m_count = withdrawal::where('created_at', 'like','%'.$pt.'%')->get();
-              foreach ($m_count as $n) 
+              foreach ($m_count as $n)
               {
                   $sum_cap += $n->amount;
               }
@@ -1493,11 +1493,11 @@ public function admAddnew(Request $req)
       $sum_cap = 0;
       foreach ($mWd as $in) {
           if($pt != date('Y-m-d', strtotime($in->created_at)))
-          {               
+          {
               $pt = date('Y-m-d', strtotime($in->created_at));
               $mWdDate[$cnt] = date('d/m/y', strtotime($in->created_at));
               $m_count = withdrawal::where('created_at', 'like','%'.$pt.'%')->get();
-              foreach ($m_count as $n) 
+              foreach ($m_count as $n)
               {
                   $sum_cap += $n->amount;
               }
@@ -1506,7 +1506,7 @@ public function admAddnew(Request $req)
               $sum_cap = 0;
           }
           $wCount += $in->amount;
-      }            
+      }
       $search_mt = date("M-Y", strtotime(trim($req->input('search_val'))));
       $rst = [$musersDate, $mInvDate, $mDepDate, $mWdDate, $musersVal, $mInvVal, $mDepVal, $mWdVal, count($musers), $iCount, $dCount, $wCount, $search_mt];
       return json_encode($rst);
@@ -1515,11 +1515,11 @@ public function admAddnew(Request $req)
     {
       return redirect('/');
     }
-            
+
   }
 
   public function switch_pack($id)
-  {        
+  {
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
         $adm = Session::get('adm');
@@ -1544,15 +1544,15 @@ public function admAddnew(Request $req)
         {
             return('User cannot update this function');
         }
-          
+
     }
     else
     {
       return redirect('/');
     }
-            
+
   }
-  
+
   function editMsgDel($id){
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
@@ -1567,7 +1567,7 @@ public function admAddnew(Request $req)
 
   function site_settings(){
     if(Session::has('adm') && !empty(Session::get('adm')))
-    { 
+    {
       $data = $this->load_data();
       return view('admin.settings', [
         'settings' => $data[9], 'adm' => $data[0], 'logs' => $data[8], 'users' => $data[3], 'inv' => $data[1],
@@ -1583,7 +1583,7 @@ public function admAddnew(Request $req)
   function adminViewProfileSettings()
   {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    { 
+    {
       $data = $this->load_data();
       return view('admin.profile', [
         'settings' => $data[9], 'adm' => $data[0], 'logs' => $data[8], 'users' => $data[3], 'inv' => $data[1],
@@ -1599,9 +1599,9 @@ public function admAddnew(Request $req)
   function adminUpdatSettings(Request $req)
   {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    { 
+    {
       ref_set::truncate();
-      
+
       if($req->has('1'))
       {
         for($i = 1; $i <= $req['referal_levels']; $i++)
@@ -1614,9 +1614,9 @@ public function admAddnew(Request $req)
         }
       }
 
-      $val = validator::make($req->all(), [        
+      $val = validator::make($req->all(), [
         'siteTitle' => 'required|max:20',
-        'siteDescr' => 'required|max:70',
+        'siteDescr' => 'required|max:100',
         'hcolor' => 'required|min:7|max:7',
         'fcolor' => 'required|min:7|max:7',
         'cur' => 'required|string',
@@ -1624,7 +1624,7 @@ public function admAddnew(Request $req)
       ]);
       if($val->fails())
       {
-        $toast_msg = ['msg' => $val->errors()->first(), 'type' => 'err'];        
+        $toast_msg = ['msg' => $val->errors()->first(), 'type' => 'err'];
         return json_encode($toast_msg);
       }
       try
@@ -1650,25 +1650,25 @@ public function admAddnew(Request $req)
         if($req->hasFile('siteLogo'))
         {
           $val = validator::make($req->all(), [
-            'siteLogo' => 'image|mimes:png|max:500',            
+            'siteLogo' => 'image|mimes:png|max:500',
           ]);
           if($val->fails())
           {
-            $toast_msg = ['msg' => $val->errors()->first(), 'type' => 'err'];            
+            $toast_msg = ['msg' => $val->errors()->first(), 'type' => 'err'];
             return json_encode($toast_msg);
           }
           $file = $req->file('siteLogo');
           $path = "logo.png"; //$req->file('u_file')->store('public/post_img');
           $file->move('img/', $path);
           $settings->site_logo = $path;
-        } 
+        }
 
-        
 
-        
+
+
         ///// Environment ////////////////////////////////////////////////////////////////
-       
-       
+
+
         $file = DotenvEditor::setKeys([
           //// paypal ///////////////////////////////////////////////////////////////
           [
@@ -1682,11 +1682,11 @@ public function admAddnew(Request $req)
           [
               'key'     => 'PAYPAL_MODE',
               'value'   => $req->input('paypal_mode')
-          ], 
+          ],
           [
               'key'     => 'SWITCH_PAYPAL',
               'value'   => is_null($req->input('switch_paypal')) ? 0 : $req->input('switch_paypal')
-          ], 
+          ],
 
           //// Stripe ///////////////////////////////////////////////////////////////
           [
@@ -1700,7 +1700,7 @@ public function admAddnew(Request $req)
           [
               'key'     => 'SWITCH_STRIPE',
               'value'   => is_null($req->input('switch_stripe')) ? 0 : $req->input('switch_stripe')
-          ], 
+          ],
 
           //// Coinpayment BTC ///////////////////////////////////////////////////////////////
           [
@@ -1714,7 +1714,7 @@ public function admAddnew(Request $req)
           [
               'key'     => 'COINPAYMENTS_PUBLIC_KEY',
               'value'   => $req->input('cp_p_key')
-          ], 
+          ],
           [
               'key'     => 'COINPAYMENTS_PRIVATE_KEY',
               'value'   => $req->input('cp_pr_key')
@@ -1726,15 +1726,15 @@ public function admAddnew(Request $req)
           [
               'key'     => 'COINPAYMENTS_IPN_URL',
               'value'   => $req->input('cp_ipn_url')
-          ], 
+          ],
           [
               'key'     => 'SWITCH_BTC',
               'value'   => is_null($req->input('switch_BTC')) ? 0 : $req->input('switch_BTC')
-          ], 
+          ],
           [
               'key'     => 'SWITCH_ETH',
               'value'   => is_null($req->input('switch_ETH')) ? 0 : $req->input('switch_ETH')
-          ], 
+          ],
 
           //// Bank deposit switch ////////////////////////////////////////////////////////////
           [
@@ -1756,7 +1756,7 @@ public function admAddnew(Request $req)
           [
               'key'     => 'BANK_DEPOSIT_SWITCH',
               'value'   => is_null($req->input('switch_bank_deposit')) ? 0 : $req->input('switch_bank_deposit')
-          ], 
+          ],
 
           //// Min deposit ////////////////////////////////////////////////////////////
           [
@@ -1769,7 +1769,7 @@ public function admAddnew(Request $req)
           ],
 
           //// Referal bonus ////////////////////////////////////////////////////////////
-          
+
           [
               'key'     => 'REF_TYPE',
               'value'   => $req->input('referal_type')
@@ -1781,7 +1781,7 @@ public function admAddnew(Request $req)
           [
               'key'     => 'REF_LEVEL_CNT',
               'value'   => intval($req->input('referal_levels'))
-          ], 
+          ],
 
 
           //// Mail Settings ////////////////////////////////////////////////////////////
@@ -1903,7 +1903,7 @@ public function admAddnew(Request $req)
 
         ]);
 
-        $file = DotenvEditor::save();    
+        $file = DotenvEditor::save();
         $settings->save();
         $toast_msg = ['msg' => 'Settings was saved successfully <br> Reload to view changes', 'type' => 'suc'];
         return json_encode($toast_msg);
@@ -1919,11 +1919,11 @@ public function admAddnew(Request $req)
       return redirect('/');
     }
   }
-  
+
   public function create_package()
   {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    { 
+    {
         return view('admin.add_package');
     }
     else
@@ -1931,20 +1931,20 @@ public function admAddnew(Request $req)
         return redirect('/');
     }
   }
-  
+
   public function create_package_post(Request $req)
   {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    { 
+    {
         $val = Validator::make($req->all(),[
             'package_name' => 'required|string|max:15',
             'min' => 'required|numeric',
             'max' => 'required|numeric',
-            'interest' => 'required|numeric',            
+            'interest' => 'required|numeric',
             'period' => 'required|numeric',
             'interval' => 'required|numeric',
         ]);
-        
+
         if($val->fails())
         {
             $toast_msg = ['msg' => $val->errors()->first(), 'type' => 'err'];
@@ -1976,7 +1976,7 @@ public function admAddnew(Request $req)
             $toast_msg = ['msg' => $e->getMessage(), 'type' => 'err'];
             return json_encode($toast_msg);
         }
-        
+
         $toast_msg = ['msg' => '¡Paquete añadido satisfactoriamente!', 'type' => 'suc'];
         return json_encode($toast_msg);
     }
@@ -1988,14 +1988,14 @@ public function admAddnew(Request $req)
 
   public function adminDeletePack($id){
     if(Session::has('adm') && !empty(Session::get('adm')))
-    { 
+    {
       try{
         packages::where('id', $id)->delete();
         return json_encode('["rst" => "suc"]');
       }
       catch (\Exception $ex){
         return json_encode('["rst" => "err"]');
-      }     
+      }
     }
     else
     {
@@ -2007,7 +2007,7 @@ public function admAddnew(Request $req)
   {
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
-      $tickets = ticket::orderby('status', 'desc')->orderby('updated_at', 'desc')->paginate(30);      
+      $tickets = ticket::orderby('status', 'desc')->orderby('updated_at', 'desc')->paginate(30);
       return view('admin.ticket_view', ['tickets' => $tickets]);
     }
     else
@@ -2015,12 +2015,12 @@ public function admAddnew(Request $req)
       return redirect('/login');
     }
   }
-  
+
   public function delete_ticket($id)
   {
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
-      ticket::with('comments')->where('id', $id)->delete(10);      
+      ticket::with('comments')->where('id', $id)->delete(10);
       return back()->with([
         'toast_msg' => 'Ticket deleted successfully!',
         'toast_type' => 'suc'
@@ -2037,8 +2037,8 @@ public function admAddnew(Request $req)
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
 
-      $ticket_view = ticket::With('comments')->find($id);  
-      $comments = comments::where('ticket_id', $id)->orderby('id', 'asc')->get();    
+      $ticket_view = ticket::With('comments')->find($id);
+      $comments = comments::where('ticket_id', $id)->orderby('id', 'asc')->get();
       $user = User::find($ticket_view->user_id);
       $ticket_view->state = 0;
       $ticket_view->save();
@@ -2054,8 +2054,8 @@ public function admAddnew(Request $req)
   {
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
-      $comments = comments::with('user')->where('ticket_id', $id)->where('sender', 'user')->where('state', 1)->orderby('id', 'asc')->get(); 
-      // $user = User::find($ticket_view->user_id);   
+      $comments = comments::with('user')->where('ticket_id', $id)->where('sender', 'user')->where('state', 1)->orderby('id', 'asc')->get();
+      // $user = User::find($ticket_view->user_id);
       comments::where('ticket_id', $id)->where('sender', 'user')->update(['state' => 0]);
       return json_encode($comments);
     }
@@ -2067,23 +2067,23 @@ public function admAddnew(Request $req)
   public function close_ticket($id)
   {
     if(Session::has('adm') && !empty(Session::get('adm')))
-    { 
-      try 
+    {
+      try
       {
         ticket::where('id', $id)->update(['status' => 0]);
         return back()->with([
           'toast_msg' => 'Ticket closed successfully!',
           'toast_type' => 'suc'
         ]);
-      } 
-      catch (\Exception $e) 
+      }
+      catch (\Exception $e)
       {
         return back()->with([
           'toast_msg' => 'Error occured!',
           'toast_type' => 'err'
         ]);
-      } 
-      
+      }
+
     }
     else
     {
@@ -2118,12 +2118,12 @@ public function admAddnew(Request $req)
       }
 
       try
-      {        
+      {
         $comment = new comments([
           'ticket_id' =>$req->input('ticket_id'),
           'sender' => 'support',
-          'sender_id' => $user->id,       
-          'message' => $req->input('msg'), 
+          'sender_id' => $user->id,
+          'message' => $req->input('msg'),
         ]);
         $comment->save();
 
@@ -2134,16 +2134,16 @@ public function admAddnew(Request $req)
             $msg->to($maildata['email']);
             $msg->subject('Ticket Message');
         });
-        
+
         return json_encode([
           'toast_msg' => 'Successful! ',
-          'toast_type' => 'suc',          
+          'toast_type' => 'suc',
           'comment_msg' => $req->input('msg'),
           'comment_time' => date('Y-m-d H:i:s'),
         ]);
       }
       catch(\Exception $e)
-      {        
+      {
         return json_encode([
           'toast_msg' => 'Message not sent! Error'.$e->getMessage(),
           'toast_type' => 'err'
@@ -2167,7 +2167,7 @@ public function admAddnew(Request $req)
       return redirect('/login');
     }
   }
-  
+
   public function approve_kyc(Request $req)
   {
     if(Session::has('adm') && !empty(Session::get('adm')))

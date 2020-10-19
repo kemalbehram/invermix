@@ -48,7 +48,7 @@
     <div class="col-md-4 ploading_img_cont" align="Center">
       <img src="/img/loader.gif" class="ploading_img">
       <br>
-      Loading....
+      Cargando....
     </div>
   </div>
 </div>
@@ -96,21 +96,21 @@
 <!-- <script src="/atlantis/js/demo.js"></script>    -->
 <script src="/atlantis/js/moment.js"></script>
 <script src="/atlantis/main.js"></script>
-    
+
 </body>
 
 </html>
 
 @include('user.inc.alert')
 
-@if(Session::has('status')  && Session::get('msgType') == 'suc')         
+@if(Session::has('status')  && Session::get('msgType') == 'suc')
     <script type="text/javascript">
         $('#succ_msg').html('{{Session::get('status')}}');
         $('#succ').show();
     </script>
     {{Session::forget('status')}}
-    {{Session::forget('msgType')}}         
-@elseif(Session::has('status')  && Session::get('msgType') == 'err')        
+    {{Session::forget('msgType')}}
+@elseif(Session::has('status')  && Session::get('msgType') == 'err')
     <script type="text/javascript">
         $('#errr_msg').html('{{Session::get('status')}}');
         $('#errr').show();

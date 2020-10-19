@@ -215,40 +215,47 @@
 						<li class="nav-item">
 							<a href="/{{$user->username}}/profile">
 								<i class="fas fa-user"></i>
-								<p>My Profile</p>								
+								<p>Mi Perfil</p>								
 							</a>							
 						</li>
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a  href="/{{$user->username}}/wallet">
 								<i class="fas fa-wallet"></i>
 								<p>Wallet Deposit</p>
 							</a>							
-						</li>
-						<li class="nav-item">
+						</li> -->
+						<!-- <li class="nav-item">
 							<a href="/{{$user->username}}/send_money">
 								<i class="fas fa-paper-plane"></i>
 								<p>Transfer Fund</p>
 							</a>
-						</li>
+						</li> -->
 						<li class="nav-item">
 							<a href="/{{$user->username}}/investments">
 								<i class="fas fa-folder"></i>
-								<p>My Investments</p>
+								<p>Mis Inversiones</p>
+							</a>							
+						</li>
+
+						<li class="nav-item">
+							<a href="/{{$user->username}}/downlines">
+							<i class="fas fa-hand-holding-usd"></i>
+								<p>Inyecciones</p>
 							</a>							
 						</li>
 						
 						<li class="nav-item">
 							<a href="/{{$user->username}}/withdrawal">
 								<i class="fas fa-download"></i>
-								<p>Withdrawal</p>
+								<p>Retiros</p>
 							</a>
 						</li>
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a href="/{{$user->username}}/downlines">
 								<i class="fas fa-users"></i>
 								<p>Downlines</p>
 							</a>							
-						</li>
+						</li> -->
 						<li class="nav-item">
 							<a href="{{route('ticket.index')}}">
 								<i class="fab fa-teamspeak"></i>

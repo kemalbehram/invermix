@@ -13,9 +13,9 @@
                         
                           <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
                             <li class="nav-item">
-                              <a class="nav-link active" id="profile-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Profile</a>
+                              <a class="nav-link active" id="profile-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Perfil</a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                               <a class="nav-link" id="bank-tab" data-toggle="pill" href="#bank" role="tab" aria-controls="bank" aria-selected="false">Banks</a>
                             </li>
                             <li class="nav-item">
@@ -23,9 +23,9 @@
                             </li>
                             <li class="nav-item">
                               <a class="nav-link" id="kyc-tab" data-toggle="pill" href="#kyc" role="tab" aria-controls="kyc" aria-selected="false">KYC</a>
-                            </li>
+                            </li> -->
                             <li class="nav-item">
-                              <a class="nav-link" id="sec-tab" data-toggle="pill" href="#sec" role="tab" aria-controls="sec" aria-selected="false">Security</a>
+                              <a class="nav-link" id="sec-tab" data-toggle="pill" href="#sec" role="tab" aria-controls="sec" aria-selected="false">Seguridad</a>
                             </li>
                                                         
                           </ul>
@@ -593,7 +593,7 @@
                                               </div>
                                               <div class="width_100per float-right">
                                                 <small class="float-right mt-4">
-                                                  <?php echo e(__('Current status: ')); ?> <?php if($user->sec_2fa_status == 1): ?><?php echo e(__('Enable')); ?><?php else: ?><?php echo e(__('Disable')); ?><?php endif; ?>
+                                                  <?php echo e(__('Estado actual: ')); ?> <?php if($user->sec_2fa_status == 1): ?><?php echo e(__('Habilitado')); ?><?php else: ?><?php echo e(__('Deshabilitado')); ?><?php endif; ?>
                                                 </small>
                                               </div>
                                                   
@@ -611,7 +611,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                   <p>
-                                                    Scan the QR CODE with Google Authenticator and enter the coe dispayed in the box below.
+                                                  Escanee el CÓDIGO QR con la aplicación Google Authenticator e ingrese el código que se muestra en el cuadro a continuación.
                                                   </p>
                                                 </div> 
                                                 <form action="<?php echo e(route('user2fa.verify_2fa')); ?>" method="post">
@@ -620,7 +620,7 @@
                                                     <input id="seccode" type="hidden" class="form-control" value="" name="seccode" required placeholder="">
                                                   </div>
                                                   <div class="form-group">
-                                                    <button class="collcc btn btn-info"><?php echo e(__('Activate')); ?></button>
+                                                    <button class="collcc btn btn-info"><?php echo e(__('Activar')); ?></button>
                                                   </div>
                                                 </form>                                        
                                                 <br>
@@ -662,7 +662,7 @@
                                   <div class="card">
                                     <div class="card-header">
                                         <div class="card-head-row">
-                                            <div class="card-title"><?php echo e(__('Change Password')); ?></div>
+                                            <div class="card-title"><?php echo e(__('Cambiar Contraseña')); ?></div>
                                             <div class="card-tools">                                            
                                             </div>
                                         </div>
@@ -671,19 +671,19 @@
                                         <form class="" method="post" action="/user/change/pwd">
                                             <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                             <div class="form-group">
-                                                <label><?php echo e(__('Old Password')); ?></label>
-                                                <input type="password" class="form-control" name="oldpwd" placeholder="Your current password" required>
+                                                <label><?php echo e(__('Antigua Contraseña')); ?></label>
+                                                <input type="password" class="form-control" name="oldpwd" placeholder="Su actual contraseña" required>
                                             </div>
                                             <div class="form-group">
-                                                <label><?php echo e(__('New Password')); ?></label>
-                                                <input type="password" class="form-control" name="newpwd" placeholder="New Password" required>
+                                                <label><?php echo e(__('Nueva Contraseña')); ?></label>
+                                                <input type="password" class="form-control" name="newpwd" placeholder="Nueva contraseña" required>
                                             </div>
                                             <div class="form-group">
-                                                <label><?php echo e(__('Confirm Password')); ?></label>
-                                                <input type="password" class="form-control" name="cpwd" placeholder="Confirm Password" required>
+                                                <label><?php echo e(__('Confirmar Contraseña')); ?></label>
+                                                <input type="password" class="form-control" name="cpwd" placeholder="Confirmar contraseña" required>
                                             </div>
                                             <div class="form-group" align="">
-                                               <button class="collcc btn btn-info"><?php echo e(__('Update')); ?></button>
+                                               <button class="collcc btn btn-info"><?php echo e(__('Actualizar')); ?></button>
                                             </div>
                                         </form>                                    
                                     </div>

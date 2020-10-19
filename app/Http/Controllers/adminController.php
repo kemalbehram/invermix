@@ -1977,7 +1977,7 @@ public function admAddnew(Request $req)
             return json_encode($toast_msg);
         }
         
-        $toast_msg = ['msg' => 'Package added successfuly!', 'type' => 'suc'];
+        $toast_msg = ['msg' => '¡Paquete añadido satisfactoriamente!', 'type' => 'suc'];
         return json_encode($toast_msg);
     }
     else

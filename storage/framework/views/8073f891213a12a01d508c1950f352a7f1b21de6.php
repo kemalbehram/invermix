@@ -30,20 +30,20 @@
 	<div class="col-md-6">
 		<div class="card full-height">
 			<div class="card-body">
-				<div class="card-title">{{ __('Estadísticas generales') }}</div>
+				<div class="card-title"><?php echo e(__('Estadísticas generales')); ?></div>
 				<div class="card-category"></div>
 				<div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
 					<div class="px-2 pb-2 pb-md-0 text-center">
 						<div id="circles-1"></div>
-						<h6 class="fw-bold mt-3 mb-0">{{ __('Inversiones') }}</h6>
+						<h6 class="fw-bold mt-3 mb-0"><?php echo e(__('Inversiones')); ?></h6>
 					</div>
 					<div class="px-2 pb-2 pb-md-0 text-center">
 						<div id="circles-2"></div>
-						<h6 class="fw-bold mt-3 mb-0">{{ __('Retiros') }}</h6>
+						<h6 class="fw-bold mt-3 mb-0"><?php echo e(__('Retiros')); ?></h6>
 					</div>
 					<div class="px-2 pb-2 pb-md-0 text-center">
 						<div id="circles-3"></div>
-						<h6 class="fw-bold mt-3 mb-0">{{ __('Inyecciones') }}</h6>
+						<h6 class="fw-bold mt-3 mb-0"><?php echo e(__('Inyecciones')); ?></h6>
 					</div>
 				</div>
 			</div>
@@ -53,33 +53,25 @@
 	<div class="col-md-6">
 		<div class="card full-height">
 			<div class="card-body">
-				<div class="card-title"><h2>{{ __('Balance') }}</h2></div>
+				<div class="card-title"><h2><?php echo e(__('Balance')); ?></h2></div>
 				<div class="row py-3">
 					<div class="col-md-6 d-flex flex-column justify-content-around">
 						<a id="wd_bal" title="Click to withdraw" href="javascript:void(0)" >
 							<div class="border_btm">
-								<h4 class="fw-bold text-uppercase text-success op-8">{{ __('Inyecciones') }}</h4>
-								<h3 class="fw-bold">{{$settings->currency}} {{ round($user->wallet, 2) }}</h3>
-								<div class="colhd margin_n10">{{ __('Click para inyectar al capital') }}</div>
+								<h4 class="fw-bold text-uppercase text-success op-8"><?php echo e(__('Inyecciones')); ?></h4>
+								<h3 class="fw-bold"><?php echo e($settings->currency); ?> <?php echo e(round($user->wallet, 2)); ?></h3>
+								<div class="colhd margin_n10"><?php echo e(__('Click para inyectar al capital')); ?></div>
 								<br>
 							</div>
 						</a>
-						{{-- <div class="clearfix"><br></div>
-						<a id="wd_ref_bal" title="Click to withdraw" href="javascript:void(0)">
-							<div>
-								<h4 class="fw-bold text-uppercase text-success op-8">{{ __('Referral Bonus') }}</h4>
-								<h3 class="fw-bold">{{$settings->currency}} {{ round($user->ref_bal, 2) }}</h3>
-								<div class="colhd margin_n10" >{{ __('Click to Withdraw Fund') }}</div>
-								<br>
-							</div>
-						</a> --}}
+						
 					</div>
 
 					<div class="col-md-6">
             <a href="#">
   						<div class="border_btm">
-  							<h4 class="fw-bold text-uppercase text-success op-8">{{ __('Ganancia total') }}</h4>
-  							<h3 class="fw-bold">{{$settings->currency}} {{ round($currentEarning, 2) }}</h3>
+  							<h4 class="fw-bold text-uppercase text-success op-8"><?php echo e(__('Ganancia total')); ?></h4>
+  							<h3 class="fw-bold"><?php echo e($settings->currency); ?> <?php echo e(round($currentEarning, 2)); ?></h3>
   							<div class="colhd margin_n10" >&emsp;</div>
   							<br>
   						</div>
@@ -97,22 +89,23 @@
       <div class="col-md-4 popmsg-mobile card" align="Center">
         <div class="card-title">
           <br>
-          <h3><b>{{ __('Wallet Withdrawal') }}</b></h3>
-          <h5 class="text-danger"><b>{{ __('Available Balance:') }}</b></h5>
-          			<h3 class="fw-bold">{{$settings->currency}} {{ round($user->wallet, 2) }}</h3>
+          <h3><b><?php echo e(__('Wallet Withdrawal')); ?></b></h3>
+          <h5 class="text-danger"><b><?php echo e(__('Available Balance:')); ?></b></h5>
+          			<h3 class="fw-bold"><?php echo e($settings->currency); ?> <?php echo e(round($user->wallet, 2)); ?></h3>
 
           <hr>
         </div>
         <div class="card-body">
-            {{ __('Enter amount and select bank/wallet below') }}
+            <?php echo e(__('Enter amount and select bank/wallet below')); ?>
+
             <form id="wd_formssss" action="/user/wallet/wd" method="post">
                 <div class="form-group" align="left">
-                    <input type="hidden" class="form-control" name="_token" value="{{csrf_token()}}">
+                    <input type="hidden" class="form-control" name="_token" value="<?php echo e(csrf_token()); ?>">
                 </div>
                 <div class="form-group">
                   <div class="input-group">
                     <div class="input-group-prepend " >
-                      <span class="input-group-text span_bg">{{$settings->currency}}</span>
+                      <span class="input-group-text span_bg"><?php echo e($settings->currency); ?></span>
                     </div>
                     <input id="wd_amt" type="text" class="form-control" name="amt"  required placeholder="Enter Amount to withdraw" >
                   </div>
@@ -126,20 +119,20 @@
                         <?php
                           $banks = App\banks::where('user_id', $user->id)->get();
                         ?>
-                          @if(count($banks) > 0)
-                              @foreach($banks as $bank)
-                                  <option>{{$bank->Account_name.' '.$bank->Account_number.' '.$bank->Bank_Name}}</option>
-                              @endforeach
-                          @endif
+                          <?php if(count($banks) > 0): ?>
+                              <?php $__currentLoopData = $banks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bank): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                  <option><?php echo e($bank->Account_name.' '.$bank->Account_number.' '.$bank->Bank_Name); ?></option>
+                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                          <?php endif; ?>
 
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <br><br>
-                    <button class="collb btn btn-info">{{ __('Withdraw') }}</button>
+                    <button class="collb btn btn-info"><?php echo e(__('Withdraw')); ?></button>
                     <span style="">
-                      <a id="wallet_wd_close" href="javascript:void(0)" class="collcc btn btn-danger">{{ __('Cancel') }}</a>
+                      <a id="wallet_wd_close" href="javascript:void(0)" class="collcc btn btn-danger"><?php echo e(__('Cancel')); ?></a>
                     </span>
                     <br>
                 </div>
@@ -163,20 +156,21 @@
       <div class="col-md-4 popmsg-mobile card" align="Center">
         <div class="panel-heading" style="">
           <br>
-          <h3><b>{{ __('Referral Withdrawal') }}</b></h3>
-          <h5 class="text-danger"><b>{{ __('Total Earning:') }}</b> {{$settings->currency.' '.$user->ref_bal}}</h5>
+          <h3><b><?php echo e(__('Referral Withdrawal')); ?></b></h3>
+          <h5 class="text-danger"><b><?php echo e(__('Total Earning:')); ?></b> <?php echo e($settings->currency.' '.$user->ref_bal); ?></h5>
           <hr>
         </div>
         <div id="" >
-              {{ __('Enter amount to withdraw and select bank below') }}
+              <?php echo e(__('Enter amount to withdraw and select bank below')); ?>
+
              <form id="wd_formssss" action="/user/ref/wd" method="post">
                 <div class="form-group" align="left">
-                    <input type="hidden" class="form-control" name="_token" value="{{csrf_token()}}">
+                    <input type="hidden" class="form-control" name="_token" value="<?php echo e(csrf_token()); ?>">
                 </div>
                 <div class="form-group">
                   <div class="input-group">
                     <div class="input-group-prepend " >
-                      <span class="input-group-text span_bg">{{$settings->currency}}</span>
+                      <span class="input-group-text span_bg"><?php echo e($settings->currency); ?></span>
                     </div>
                     <input id="ref_amt" type="text" class="form-control" name="amt"  required placeholder="Enter Amount to withdraw" >
                   </div>
@@ -190,20 +184,20 @@
                         <?php
                           $banks = App\banks::where('user_id', $user->id)->get();
                         ?>
-                          @if(count($banks) > 0)
-                              @foreach($banks as $bank)
-                                  <option>{{$bank->Account_name.' '.$bank->Account_number.' '.$bank->Bank_Name}}</option>
-                              @endforeach
-                          @endif
+                          <?php if(count($banks) > 0): ?>
+                              <?php $__currentLoopData = $banks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bank): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                  <option><?php echo e($bank->Account_name.' '.$bank->Account_number.' '.$bank->Bank_Name); ?></option>
+                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                          <?php endif; ?>
 
                     </select>
                   </div>
                 </div> -->
                 <div class="form-group">
                   <br><br>
-                    <button class="collb btn btn-info">{{ __('Withdraw') }}</button>
+                    <button class="collb btn btn-info"><?php echo e(__('Withdraw')); ?></button>
                     <span style="">
-                      <a id="ref_wd_close" href="javascript:void(0)" class="collcc btn btn-danger">{{ __('Cancel') }}</a>
+                      <a id="ref_wd_close" href="javascript:void(0)" class="collcc btn btn-danger"><?php echo e(__('Cancel')); ?></a>
                     </span>
                     <br>
                 </div>
@@ -221,3 +215,4 @@
 
     </div>
   </div>
+<?php /**PATH C:\xampp\htdocs\invermix\invermix\resources\views/user/atlantis/overview.blade.php ENDPATH**/ ?>

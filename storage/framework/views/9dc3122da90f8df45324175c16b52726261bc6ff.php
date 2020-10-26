@@ -1,19 +1,19 @@
-@include('user.inc.fetch')
-@extends('layouts.atlantis.layout')
-@Section('content')
+<?php echo $__env->make('user.inc.fetch', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+<?php $__env->startSection('content'); ?>
         <div class="main-panel">
             <div class="content">
-                @php($breadcome = 'My Investments')
-                @include('user.atlantis.main_bar')
+                <?php ($breadcome = 'My Investments'); ?>
+                <?php echo $__env->make('user.atlantis.main_bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 <div class="page-inner mt--5">
-                    @include('user.atlantis.overview')
+                    <?php echo $__env->make('user.atlantis.overview', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     <div id="prnt"></div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="card-head-row">
-                                        <div class="card-title">{{ __('Mis Inversiones') }}</div>
+                                        <div class="card-title"><?php echo e(__('Mis Inversiones')); ?></div>
                                     </div>
                                 </div>
                                 <div class="card-body ">
@@ -21,19 +21,19 @@
                                         <table id="basic-datatables" class="display table table-hover" >
                                             <thead>
                                                 <tr>
-                                                    <th>{{ __('Plan') }}</th>
-                                                    <th>{{ __('Capital') }}</th>
-                                                    <th>{{ __('Fecha de inversión') }}</th>
-                                                    <th>{{ __('Hasta') }}</th>
-                                                    <th>{{ __('Días transcurridos') }}</th>
-                                                    <th>{{ __('Status') }}</th>
-                                                    <th>{{ __('Ganancias') }}</th>
-                                                    <th>{{ __('Acción') }}</th>
+                                                    <th><?php echo e(__('Plan')); ?></th>
+                                                    <th><?php echo e(__('Capital')); ?></th>
+                                                    <th><?php echo e(__('Fecha de inversión')); ?></th>
+                                                    <th><?php echo e(__('Hasta')); ?></th>
+                                                    <th><?php echo e(__('Días transcurridos')); ?></th>
+                                                    <th><?php echo e(__('Status')); ?></th>
+                                                    <th><?php echo e(__('Ganancias')); ?></th>
+                                                    <th><?php echo e(__('Acción')); ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody class="web-table">
-                                                @if(count($actInv) > 0 )
-                                                    @foreach($actInv as $in)
+                                                <?php if(count($actInv) > 0 ): ?>
+                                                    <?php $__currentLoopData = $actInv; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $in): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <?php
 
                                                             $totalElapse = getDays(date('Y-m-d'), $in->end_date);
@@ -64,31 +64,31 @@
                                                             }
                                                         ?>
                                                         <tr class="">
-                                                            <td>{{$in->package}}</td>
-                                                            <td>{{($settings->currency)}} {{$in->capital}}</td>
-                                                            <td>{{$in->date_invested}}</td>
-                                                            <td>{{$in->end_date}}</td>
-                                                            <td>{{$totalDays}}</td>
-                                                            <td>{{$in->status}}</td>
-                                                            <td>{{$settings->currency}} {{$ern}} </td>
+                                                            <td><?php echo e($in->package); ?></td>
+                                                            <td><?php echo e(($settings->currency)); ?> <?php echo e($in->capital); ?></td>
+                                                            <td><?php echo e($in->date_invested); ?></td>
+                                                            <td><?php echo e($in->end_date); ?></td>
+                                                            <td><?php echo e($totalDays); ?></td>
+                                                            <td><?php echo e($in->status); ?></td>
+                                                            <td><?php echo e($settings->currency); ?> <?php echo e($ern); ?> </td>
                                                             <td>
-                                                                <a title="Withdraw" href="javascript:void(0)" class="btn btn-info" onclick="wd('pack', '{{$in->id}}', '{{$ern}}', '{{ $withdrawable }}', '{{$Edays}}', '{{$ended}}')">
+                                                                <a title="Withdraw" href="javascript:void(0)" class="btn btn-info" onclick="wd('pack', '<?php echo e($in->id); ?>', '<?php echo e($ern); ?>', '<?php echo e($withdrawable); ?>', '<?php echo e($Edays); ?>', '<?php echo e($ended); ?>')">
                                                                     <i class="fas fa-arrow-down"></i>
                                                                 </a>
                                                             </td>
                                                         </tr>
-                                                    @endforeach
-                                                @else
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                <?php else: ?>
 
-                                                @endif
+                                                <?php endif; ?>
                                             </tbody>
                                         </table>
                                     </div>
 
                                     <div class="mobile_table container messages-scrollbar" >
 
-                                        @if(count($actInv) > 0 )
-                                            @foreach($actInv as $in)
+                                        <?php if(count($actInv) > 0 ): ?>
+                                            <?php $__currentLoopData = $actInv; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $in): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <?php
 
                                                     $totalElapse = getDays(date('y-m-d'), $in->end_date);
@@ -122,12 +122,12 @@
 
                                                 ?>
 
-                                                @include('user.inc.mob_inv')
+                                                <?php echo $__env->make('user.inc.mob_inv', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-                                            @endforeach
-                                        @else
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php else: ?>
 
-                                        @endif
+                                        <?php endif; ?>
                                     </div>
 
                                 </div>
@@ -143,7 +143,7 @@
                                     <div class="card-title"> Planes Disponibles</div>
                                 </div>
                                 <div class="card-body pb-0">
-                                    @include('user.inc.packages')
+                                    <?php echo $__env->make('user.inc.packages', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                 </div>
                             </div>
                         </div>
@@ -154,7 +154,9 @@
                 </div>
             </div>
 
-    @include('user.inc.confirm_inv')
-    @include('user.inc.withdrawal')
+    <?php echo $__env->make('user.inc.confirm_inv', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('user.inc.withdrawal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-@endSection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.atlantis.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\invermix\invermix\resources\views/user/my_investment.blade.php ENDPATH**/ ?>

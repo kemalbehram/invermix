@@ -13,19 +13,19 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="card-head-row">
-                                        <div class="card-title">{{ __('Withdrawal History') }}</div>
+                                        <div class="card-title">{{ __('Historial de Retiro') }}</div>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive">                                        
+                                    <div class="table-responsive">
                                         <table id="basic-datatables" class="display table table-striped table-hover" >
                                             <thead>
-                                                <tr>                                                   
-                                                    <th>{{ __('Date') }}</th> 
-                                                    <th>{{ __('Package') }}</th>
-                                                    <th>{{ __('Account') }}</th>
-                                                    <th>{{ __('Amount') }}</th>                                                   
-                                                    <th>{{ __('Status') }}</th>                                  
+                                                <tr>
+                                                    <th>{{ __('Fecha') }}</th>
+                                                    <th>{{ __('Plan') }}</th>
+                                                    <th>{{ __('Cuenta') }}</th>
+                                                    <th>{{ __('Monto') }}</th>
+                                                    <th>{{ __('Status') }}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -40,11 +40,11 @@
                                                             <td>{{$activity->account}}</td>
                                                             <td>{{$settings->currency.' '.$activity->amount}}</td>
                                                             <td>{{$activity->status}}</td>
-                                                                                 
+
                                                         </tr>
                                                     @endforeach
                                                 @else
-                                                    
+
                                                 @endif
                                             </tbody>
                                         </table>
@@ -52,13 +52,12 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
-                    
+
                 </div>
             </div>
 
             @include('user.inc.confirm_inv')
 
 @endSection
-            

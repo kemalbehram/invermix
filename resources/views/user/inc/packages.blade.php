@@ -55,7 +55,7 @@
                                     <h4 class="u_case">
                                        <strong> Intervalo de Retiro</strong>
                                     </h4>
-                                    <span class="pk_num">{{$inv->days_interval}} Days</span>
+                                    <span class="pk_num">{{$inv->days_interval}} Días</span>
                                 </div>
                                 <br>
                                 <div class="" align="center">

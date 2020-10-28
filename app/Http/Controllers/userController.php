@@ -537,7 +537,7 @@ class userController extends Controller
             $inv->user_id = $user->id;
             $inv->usn = $user->username;
             $inv->package = $pack->package_name;
-            $inv->date_invested = date("Y-m-d");
+            $inv->date_invested = date("d-m-Y");
             $inv->period = $pack->period;
             $inv->days_interval = $pack->days_interval;
             $inv->i_return = (round($capital*$pack->daily_interest*$pack->period,2));
@@ -557,7 +557,7 @@ class userController extends Controller
             $inv->currency = $this->st->currency;
             $inv->end_date = $actualDate;
             $inv->last_wd = date("Y-m-d");
-            $inv->status = 'Active';
+            $inv->status = 'Pendiente';
 
             $user->wallet -= $capital;
             $user->save();
@@ -647,13 +647,13 @@ class userController extends Controller
             $act->user_id = $user->id;
             $act->save();
 
-            Session::put('status', "Investment Successful");
+            Session::put('status', "Inversión enviada, será validada para su aprobación.");
             Session::put('msgType', "suc");
             return back() ;
           }
           else
           {
-            Session::put('status', "Invalid amount! Try again.");
+            Session::put('status', "¡Monto invalido! Intenta nuevamente.");
             Session::put('msgType', "err");
             return back();
           }
@@ -661,7 +661,7 @@ class userController extends Controller
         }
         catch(\Exception $e)
         {
-            Session::put('status', "Error creating investment! Please Try again.".$e->getMessage());
+            Session::put('status', "¡Error creando inversión! Por favor intentar nuevamente.".$e->getMessage());
             Session::put('msgType', "err");
             return back();
         }

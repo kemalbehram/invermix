@@ -397,7 +397,7 @@ class adminController extends Controller
       try
       {
         $usr = investment::find($id);
-        $usr->status = 'Paused';
+        $usr->status = 'Pausada';
         $usr->save();
 
         $adm = Session::get('adm');
@@ -435,7 +435,7 @@ class adminController extends Controller
       try
       {
         $usr = investment::find($id);
-        $usr->status = 'Active';
+        $usr->status = 'Activa';
         $usr->save();
 
         $adm = Session::get('adm');
@@ -488,17 +488,17 @@ class adminController extends Controller
         $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
-        $act->action = "Deleted User Investment. Investment id: ".$id;
+        $act->action = "Inversión de usuario eliminado. Inversión id: ".$id;
         $act->save();
 
-        Session::put('status', "Successful");
+        Session::put('status', "Exitoso");
         Session::put('msgType', "suc");
         return back();
 
       }
       catch(\Exception $e)
       {
-        Session::put('status', "Error updating record! Try again");
+        Session::put('status', "¡Error actualizando registro! Try again");
         Session::put('msgType', "err");
         return back();
       }

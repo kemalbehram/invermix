@@ -15,15 +15,15 @@
                             <li class="nav-item">
                               <a class="nav-link active" id="profile-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Perfil</a>
                             </li>
-                          <li class="nav-item">
+                          <!-- <li class="nav-item">
                               <a class="nav-link" id="bank-tab" data-toggle="pill" href="#bank" role="tab" aria-controls="bank" aria-selected="false">Banks</a>
-                            </li>
-                            <li class="nav-item">
+                            </li> -->
+                            <!-- <li class="nav-item">
                               <a class="nav-link" id="wallet-tab" data-toggle="pill" href="#wallet" role="tab" aria-controls="wallet" aria-selected="false">Wallets</a>
-                            </li>
-                            <li class="nav-item">
+                            </li> -->
+                            <!-- <li class="nav-item">
                               <a class="nav-link" id="kyc-tab" data-toggle="pill" href="#kyc" role="tab" aria-controls="kyc" aria-selected="false">KYC</a>
-                            </li>
+                            </li> -->
                             <li class="nav-item">
                               <a class="nav-link" id="sec-tab" data-toggle="pill" href="#sec" role="tab" aria-controls="sec" aria-selected="false">Seguridad</a>
                             </li>
@@ -76,13 +76,13 @@
                                                       $state = App\states::find($user->state);
                                                   ?>
 
-                                                  <div align="center" style="">
+                                                  <!-- <div align="center" style="">
                                                       <b>Referral link:</b><br>
                                                       <div style="color: #c60; font-size: 13px; word-wrap: break-word;">
                                                           {{env('APP_URL').__('/register/').$user->username}}
                                                       </div>
                                                       <br>
-                                                  </div>
+                                                  </div> -->
 
                                               </div>
                                           </div>
@@ -94,26 +94,24 @@
                                   <div class="card">
                                       <div class="card-header">
                                           <div class="card-head-row">
-                                              <div class="card-title">{{ __('Profile Settings') }}</div>
+                                              <div class="card-title">{{ __('Información Perfil') }}</div>
                                               <div class="card-tools">
                                               </div>
                                           </div>
                                       </div>
                                       <div class="card-body pb-0">
                                           <div class="datatable-dashv1-list custom-datatable-overright dashtwo-project-list-data">
-                                              <p class="text-danger">
-                                                  Please note: Updating your country for the first time will permanently set currency for your profile.
-                                              </p>
+
                                               <div class="row">
                                                   <div class="col-lg-6">
                                                       <div class="form-group">
-                                                          <label>{{ __('First Name') }}</label>
+                                                          <label>{{ __('Nombres') }}</label>
                                                           <input id="adr" type="text" value="{{ucfirst($user->firstname)}}" class="form-control" name="fname" readonly>
                                                       </div>
                                                   </div>
                                                   <div class="col-lg-6">
                                                       <div class="form-group">
-                                                          <label>{{ __('Last Name') }}</label>
+                                                          <label>{{ __('Apellidos') }}</label>
                                                           <input id="adr" type="text" value="{{ucfirst($user->lastname)}}" class="form-control" name="lname" readonly>
                                                       </div>
                                                   </div>
@@ -123,7 +121,7 @@
                                               <div class="row">
                                                   <div class="col-lg-6">
                                                       <div class="form-group">
-                                                          <label>{{ __('Email Address') }}</label>
+                                                          <label>{{ __('Correo') }}</label>
                                                           <div class="input-group">
                                                               <input id="email" type="email" value="{{$user->email}}" class="form-control" name="email" readonly>
                                                           </div>
@@ -133,7 +131,7 @@
 
                                                   <div class="col-lg-6">
                                                       <div class="form-group">
-                                                          <label>{{ __('Username') }}</label>
+                                                          <label>{{ __('Nombre de Usuario') }}</label>
                                                           <div class="input-group">
                                                               <input id="usn" type="text" value="{{$user->username}}" class="form-control" name="usn" readonly>
                                                           </div>
@@ -149,8 +147,8 @@
                                                       <div class="col-lg-6">
                                                           <div class="form-group">
                                                               <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                                              <label>{{ __('Country') }}</label>
-                                                              <select id="country" class="form-control" name="country" >
+                                                              <label>{{ __('País') }}</label>
+                                                              <select id="country" class="form-control" name="country" readonly>
                                                                   <?php
                                                                       $country = App\country::orderby('name', 'asc')->get();
                                                                       $phn_code = "";
@@ -174,8 +172,8 @@
                                                       </div>
                                                       <div class="col-lg-6">
                                                            <div class="form-group">
-                                                              <label>{{ __('State/Province') }}</label>
-                                                              <select  id="states" class="form-control" name="state" required>
+                                                              <label>{{ __('Estado/Provincia') }}</label>
+                                                              <select  id="states" class="form-control" name="state" readonly required>
                                                                   @if(isset($cs))
                                                                        <?php
                                                                           $st = App\states::where('id', $user->state)->get();
@@ -197,14 +195,14 @@
                                                   <div class="row">
                                                       <div class="col-lg-6">
                                                           <div class="form-group">
-                                                              <label>{{ __('Address') }}</label>
-                                                              <input id="adr" type="text" class="form-control" value="{{$user->address}}" name="adr" required>
+                                                              <label>{{ __('Dirección') }}</label>
+                                                              <input id="adr" type="text" class="form-control" value="{{$user->address}}" name="adr" readonly required>
                                                           </div>
                                                       </div>
 
                                                       <div class="col-lg-6">
-                                                          <div class="form-group">
-                                                              <label>{{ __('Phone') }}</label>
+                                                          <div class="form-group" >
+                                                              <label>{{ __('Teléfono') }}</label>
                                                               <div class="input-group">
                                                                   <div class="input-group-prepend">
                                                                       <span id="countryCode" class="input-group-text">
@@ -216,20 +214,20 @@
                                                                       </span>
                                                                   </div>
                                                                   <input id="cCode" type="hidden" class="form-control" name="cCode" required>
-                                                                  <input id="phone" type="text" class="form-control" value="{{str_replace('+'.$phn_code,'',$user->phone)}}" name="phone" required>
+                                                                  <input id="phone" type="text" class="form-control" value="{{str_replace('+'.$phn_code,'',$user->phone)}}" name="phone" required readonly>
                                                               </div>
 
                                                           </div>
                                                       </div>
                                                   </div>
-                                                  <div class="row">
+                                                  <!-- <div class="row">
                                                       <div class="col-lg-12">
                                                           <div class="form-group">
-                                                              <button class="collcc btn btn-info">{{ __('Update Profile') }}</button>
+                                                              <button class="collcc btn btn-info">{{ __('Actualizar Perfil') }}</button>
                                                           </div>
                                                       </div>
 
-                                                  </div>
+                                                  </div> -->
                                               </form>
                                           </div>
                                       </div>
@@ -565,7 +563,7 @@
                                 <div class="col-sm-6">
                                   <div class="card">
                                     <div class="card-header">
-                                        <div class="card-title">{{ __('2FA Security') }}</div>
+                                        <div class="card-title">{{ __('Seguridad Doble Factor') }}</div>
                                     </div>
                                     <div class="card-body">
 
@@ -573,15 +571,15 @@
                                           <div id="sec_enable_div" class="col-lg-12">
                                             <div class="form-group ">
                                               <div>
-                                                <label>{{ __('Enable/Disable') }}</label>
+                                                <label>{{ __('Habilitar/Deshabilitar') }}</label>
                                               </div>
 
                                               <div class="btn-group btn-group-toggle btn-lg p-0 ">
                                                 <label class="btn @if($user->sec_2fa_status == 1){{__('btn-success text-white')}}@else{{__('btn_grey')}}@endif" onclick="s_2fa('enable')">
-                                                  <input type="radio" name="options" autocomplete="off" > Enable
+                                                  <input type="radio" name="options" autocomplete="off" > Habilitar
                                                 </label>
                                                 <label class="btn @if($user->sec_2fa_status == 1){{__('btn_grey')}}@else{{__('btn-success text-white')}}@endif" onclick="s_2fa('disable')">
-                                                  <input type="radio" name="options" autocomplete="off" > Disable
+                                                  <input type="radio" name="options" autocomplete="off" > Deshabilitar
                                                 </label>
                                               </div>
                                               <div class="width_100per float-right">
@@ -624,7 +622,7 @@
                                           <div class="col-sm-12">
                                             <div id="google_2fa_disable" class="cont_display_none ">
                                               <div class="card-header">
-                                                  <div class="card-title">{{ __('Verify OTP') }}</div>
+                                                  <div class="card-title">{{ __('Verificar SDF') }}</div>
                                               </div>
                                               <div id="qrcode_2fa_div" class="card-body pb-0 table-responsive text-center" >
                                                 <div class="form-group">

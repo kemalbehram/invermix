@@ -63,7 +63,7 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title"><?php echo e(__('Planes de Inversión')); ?> </div>
+									<div class="card-title"><?php echo e(__('Modalidades de Inversión')); ?> </div>
 								</div>
 								<div class="card-body pb-0">
 									<?php echo $__env->make('user.inc.packages', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

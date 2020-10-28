@@ -9,7 +9,7 @@
 	<title>{{$settings->site_title}} - {{$settings->site_descr}}</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon"  href="/img/{{$settings->site_logo}}" type="image/x-icon"/>
-	
+
 	<script src="/atlantis/js/plugin/webfont/webfont.min.js"></script>
 	<script>
 		WebFont.load({
@@ -94,7 +94,8 @@
 				</button>
 				 <a href="/admin/home" style="color: #FFF;">
                     <img src="/img/{{$settings->site_logo}}" alt="{{$settings->site_title}}" style="height: 30px; width: 30px; z-index: 1; border-radius:50%;" />
-                    MaxProfit
+                    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;   Invermix
                 </a>
 				<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
 				<!-- <div class="nav-toggle">
@@ -107,94 +108,94 @@
 
 			<!-- Navbar Header -->
 			<nav class="navbar navbar-header navbar-expand-lg" style="background-color: {{$settings->header_color}}">
-				
+
 				<div class="container-fluid">
 					<div class="collapse" id="search-nav">
 					</div>
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 						<li class="nav-item dropdown hidden-caret">
 							<a class="nav-link dropdown-toggle" href="{{ route('support.index')}}" role="button" style="color:#fff">
-								<?php                                  
+								<?php
 	                                $msgs = App\ticket::With('comments')->orderby('id', 'desc')->get();
 	                                $rd = 0;
-	                            ?>								
+	                            ?>
 								<i class="fab fa-teamspeak not_cont">
-									@foreach($msgs as $msg) 
-                                        @if($msg->state == 1)                        
-                                            @php($rd = 1)                                  
+									@foreach($msgs as $msg)
+                                        @if($msg->state == 1)
+                                            @php($rd = 1)
                                         @endif
                                         @foreach($msg->comments as $comment)
                                         	@if($comment->state == 1 && $comment->sender == 'user')
                                         		@php($rd = 1)
                                         	@endif
-                                        @endforeach                                   
+                                        @endforeach
                                     @endforeach
-                                    @if($rd == 1)   
+                                    @if($rd == 1)
                                     	<i class="fa fa-circle new_not"></i>
-                                    @endif									
+                                    @endif
 								</i> Support Center
-							</a>							
+							</a>
 						</li>
-						
-						
+
+
 						<li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
 									@if($adm->img == "")
 										<img src="/img/any.png" alt="avatar" class="avatar-img rounded-circle" align="center" />
-									@else							
+									@else
 										<img src="/img/profile/{{ $adm->img }}" alt="avatar" class="avatar-img rounded-circle" align="center" />
-									@endif	
-								</div>								
+									@endif
+								</div>
 							</a>
 							<ul class="dropdown-menu dropdown-adm animated fadeIn">
 								<div class="dropdown-adm-scroll scrollbar-outer">
-									
-									<li>																			
+
+									<li>
 										<a class="dropdown-item" href="/admin/manage/users">
-											<span class="fa fa-users"></span> &nbsp;Manage Users
+											<span class="fa fa-users"></span> &nbsp;Manejo de Usuarios
 										</a>
 										@php($role = Session::get('adm'))
                                         @if($role->role == 3)
 											<a class="dropdown-item" href="/admin/manage/adminUsers">
-												<span class="fa fa-users"></span>&nbsp; Manage Admin Users
+												<span class="fa fa-users"></span>&nbsp; Manejar Administradores
 											</a>
 											<a class="dropdown-item" href="/admin/manage/investments">
-												<span class="fa fa-paper-plane"></span>&nbsp; Manage Investments
+												<span class="fa fa-paper-plane"></span>&nbsp; Manejar Inversiones
 											</a>
 											<a class="dropdown-item" href="/admin/manage/deposits">
-												<span class="fas fa-donate"></span>&nbsp; User Deposits
+												<span class="fas fa-donate"></span>&nbsp; Depósitos de Usuario
 											</a>
 											<a class="dropdown-item" href="/admin/manage/withdrawals">
-												<span class="fa fa-file"></span>&nbsp; User Withdrawal 
+												<span class="fa fa-file"></span>&nbsp; Retiro de Usuario
 											</a>
 										@endif
 
 										<a class="dropdown-item" href="/admin/manage/packages">
-											<span class="fa fa-briefcase"></span>&nbsp; Packages
+											<span class="fa fa-briefcase"></span>&nbsp; Modalidades
 										</a>
 										<a class="dropdown-item" href="/admin/send/msg">
-											<span class="fa fa-bell"></span>&nbsp; Send Notification
+											<span class="fa fa-bell"></span>&nbsp; Enviar Notificación
 										</a>
 										<a class="dropdown-item" href="/admin/change/pwd">
-											<span class="fa fa-key"></span>&nbsp; Change Password
-										</a>	
+											<span class="fa fa-key"></span>&nbsp; Cambiar Contraseña
+										</a>
 										<a class="dropdown-item" href="{{route('support.index')}}">
-											<span class="fab fa-teamspeak"></span>&nbsp; Support Center
-										</a>	
+											<span class="fab fa-teamspeak"></span>&nbsp; Centro de Soporte
+										</a>
 
 										@php($role = Session::get('adm'))
-                                        @if($role->role == 3)		
+                                        @if($role->role == 3)
                                         	<a class="dropdown-item" href="/admin/viewlogs">
-												<span class="fa fa-list"></span>&nbsp; View User Activities
+												<span class="fa fa-list"></span>&nbsp; Ver Actividades de Usuarios
 											</a>
 											<a class="dropdown-item" href="/admin/view/settings">
-												<span class="fa fa-gears"></span>&nbsp; Settings
+												<span class="fa fa-wrench"></span>&nbsp; Ajustes
 											</a>
-										@endif								
-										
-										
-										<a class="dropdown-item" href="/logout"><span class="fa fa-arrow-right"></span> &nbsp;Logout</a>
+										@endif
+
+
+										<a class="dropdown-item" href="/logout"><span class="fa fa-arrow-right"></span> &nbsp;Salir</a>
 
 									</li>
 								</div>
@@ -207,7 +208,7 @@
 		</div>
 
 		<!-- Sidebar -->
-		<div class="sidebar sidebar-style-2">			
+		<div class="sidebar sidebar-style-2">
 			<div class="sidebar-wrapper scrollbar scrollbar-inner">
 				<div class="sidebar-content">
 					<div class="user-plus" style="background-color: {{$settings->header_color}}">
@@ -215,15 +216,15 @@
 							<div class="" align="center">
 							@if($adm->img == "")
 								<img src="/img/any.png" alt="avatar" class="avatar-img rounded-circle" align="center" style="height: 50px; width: 50px; border-radius: 50%;" />
-							@else							
+							@else
 								<img src="/img/profile/{{ $adm->img }}" alt="avatar" class="avatar-img rounded-circle" align="center" />
 							@endif
 							</div>
-							<div class="info" align="center">							
+							<div class="info" align="center">
 									<span>
-										{{ ucfirst($adm->name) }}									
+										{{ ucfirst($adm->name) }}
 									</span>
-								<div class="clearfix"></div>							
+								<div class="clearfix"></div>
 							</div>
 						</a>
 					</div>
@@ -234,7 +235,7 @@
 								<p> Dashboard</p>
 							</a>
 						</li>
-						
+
 						@php($role = Session::get('adm'))
                         @if($role->role == 3)
                         	<li class="nav-item">
@@ -250,7 +251,7 @@
 												<span class="sub-item"> Users </span>
 											</a>
 										</li>
-										
+
 										<li class="">
 											<a href="/admin/manage/adminUsers">
 												<span class="sub-item"> Admin </span>
@@ -259,104 +260,104 @@
 									</ul>
 								</div>
 							</li>
-							
+
 							<li class="nav-item">
 						    	<a href="/admin/manage/investments">
 									<i class="fas fa-hand-holding-usd"></i>
-									<p> Manage Investments</p>
+									<p> Manejar Inversiones</p>
 								</a>
 							</li>
-							
+
 							<li class="nav-item">
 						    	<a href="/admin/manage/deposits">
 									<i class="fas fa-donate"></i>
-									<p> Users Deposits </p>
+									<p> Depósitos de Usuarios </p>
 								</a>
 							</li>
-							
+
 							<li class="nav-item">
 						    	<a href="/admin/manage/withdrawals">
 									<i class="fas fa-arrow-circle-down"></i>
-									<p> User Withdrawal </p>
+									<p> Retiros de Usuarios </p>
 								</a>
 							</li>
 						@endif
-						
+
 						<li class="nav-item">
 					    	<a href="/admin/manage/packages">
 								<i class="fa fa-briefcase"></i>
-								<p> Packages </p>
+								<p> Modalidades de Inversión </p>
 							</a>
 						</li>
-						
+
 						<li class="nav-item">
 					    	<a href="/admin/send/msg">
 								<i class="fa fa-bell"></i>
-								<p> Send Notification </p>
+								<p> Enviar Notificación </p>
 							</a>
 						</li>
-						
+
 						<li class="nav-item">
 					    	<a href="/admin/change/pwd">
 								<i class="fa fa-key"></i>
-								<p> Change Password </p>
+								<p> Cambiar Contraseña </p>
 							</a>
 						</li>
-						
+
 						<li class="nav-item">
 					    	<a href="{{route('support.index')}}">
 								<i class="fab fa-teamspeak"></i>
-								<p> Support Center </p>
+								<p> Centro de Soporte </p>
 							</a>
-						</li>			
+						</li>
 
-												
+
                         @if($role->role == 3)
 							<li class="nav-item">
 								<a data-toggle="collapse" href="#base">
 									<i class="fas fa-wrench"></i>
-									<p>Settings</p>
+									<p>Ajustes</p>
 									<span class="caret"></span>
 								</a>
 								<div class="collapse" id="base">
 									<ul class="nav nav-collapse">
 										<li >
 				                        	<a href="/admin/viewlogs">
-												<span class="sub-item">View User Activities</span>
+												<span class="sub-item">Ver Actividades de Usuarios</span>
 											</a>
 										</li>
-										
+
 										<li class="">
 											<a href="/admin/view/settings">
-												<span class="sub-item">Settings</span>
+												<span class="sub-item">Configuraciones</span>
 											</a>
 										</li>
 										<li class="">
 											<a href="/admin/profile/settings">
-												<span class="sub-item">Profile</span>
+												<span class="sub-item">Perfil</span>
 											</a>
 										</li>
 
 										<li class="">
 											<a href="/admin/profile/kyc">
-												<span class="sub-item">KYC</span>
+												<span class="sub-item">Documentos</span>
 											</a>
 										</li>
 
 									</ul>
 								</div>
 							</li>
-						@endif	
+						@endif
 
-						
+
 						<li class="nav-item">
 							<a href="/logout">
 								<i class="fas fa-arrow-left"></i>
 								<p>Logout</p>
 								<!-- <span class="caret"></span> -->
-							</a>							
+							</a>
 						</li>
-						
+
 					</ul>
 				</div>
 			</div>

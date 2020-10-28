@@ -63,7 +63,7 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title">{{ __('Planes de Inversión') }} </div>
+									<div class="card-title">{{ __('Modalidades de Inversión') }} </div>
 								</div>
 								<div class="card-body pb-0">
 									@include('user.inc.packages')

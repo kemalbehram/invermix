@@ -52,7 +52,7 @@ return array(
     'App\\jobs\\cp_DepositComplete' => $baseDir . '/app/jobs/cp_listener.php',
     'App\\kyc' => $baseDir . '/app/kyc.php',
     'App\\msg' => $baseDir . '/app/msg.php',
-    'App\\packages' => $baseDir . '/app/packages.php',
+    'App\\packages' => $baseDir . '/app/companies.php',
     'App\\ref' => $baseDir . '/app/ref.php',
     'App\\ref_set' => $baseDir . '/app/ref_set.php',
     'App\\site_settings' => $baseDir . '/app/site_settings.php',

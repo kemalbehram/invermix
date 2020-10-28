@@ -650,7 +650,7 @@ class ComposerStaticInitd577c731766441a5a9232999b0324668
         'App\\jobs\\cp_DepositComplete' => __DIR__ . '/../..' . '/app/jobs/cp_listener.php',
         'App\\kyc' => __DIR__ . '/../..' . '/app/kyc.php',
         'App\\msg' => __DIR__ . '/../..' . '/app/msg.php',
-        'App\\packages' => __DIR__ . '/../..' . '/app/packages.php',
+        'App\\packages' => __DIR__ . '/../..' . '/app/companies.php',
         'App\\ref' => __DIR__ . '/../..' . '/app/ref.php',
         'App\\ref_set' => __DIR__ . '/../..' . '/app/ref_set.php',
         'App\\site_settings' => __DIR__ . '/../..' . '/app/site_settings.php',

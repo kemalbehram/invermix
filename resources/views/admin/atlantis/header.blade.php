@@ -173,7 +173,10 @@
 
 										<a class="dropdown-item" href="/admin/manage/packages">
 											<span class="fa fa-briefcase"></span>&nbsp; Modalidades
-										</a>
+                                        </a>
+                                        <!-- <a class="dropdown-item" href="/admin/manage/packages">
+											<span class="fa fa-briefcase"></span>&nbsp; Compañías
+										</a> -->
 										<a class="dropdown-item" href="/admin/send/msg">
 											<span class="fa fa-bell"></span>&nbsp; Enviar Notificación
 										</a>
@@ -287,6 +290,13 @@
 					    	<a href="/admin/manage/packages">
 								<i class="fa fa-briefcase"></i>
 								<p> Modalidades de Inversión </p>
+							</a>
+                        </li>
+
+                        <li class="nav-item">
+					    	<a href="/admin/companies">
+								<i class="fa fa-building"></i>
+								<p> Manejar Compañías </p>
 							</a>
 						</li>
 

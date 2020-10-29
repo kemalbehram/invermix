@@ -1,9 +1,10 @@
 <?php
 
 namespace App;
+
 use Illuminate\Database\Eloquent\Model;
 
-class packages extends Model
+class companies extends Model
 {
-    // protected $table="companies";
+    protected $table="companies";
 }

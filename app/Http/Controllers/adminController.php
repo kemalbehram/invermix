@@ -2225,4 +2225,93 @@ public function admAddnew(Request $req)
     }
   }
 
+
+
+
+  //Companies
+
+
+  public function create_company()
+  {
+    if(Session::has('adm') && !empty(Session::get('adm')))
+    {
+        return view('admin.companies.form');
+    }
+    else
+    {
+        return redirect('/');
+    }
+  }
+
+  public function create_company_post(Request $req)
+  {
+    if(Session::has('adm') && !empty(Session::get('adm')))
+    {
+        $val = Validator::make($req->all(),[
+            'package_name' => 'required|string|max:15',
+            'min' => 'required|numeric',
+            'max' => 'required|numeric',
+            'interest' => 'required|numeric',
+            'period' => 'required|numeric',
+            'interval' => 'required|numeric',
+        ]);
+
+        if($val->fails())
+        {
+            $toast_msg = ['msg' => $val->errors()->first(), 'type' => 'err'];
+            return json_encode($toast_msg);
+        }
+        if((INT)$req->input('period') % (INT)$req->input('interval') != 0)
+        {
+            $toast_msg = ['msg' => "Period must be completely divisible by interval", 'type' => 'err'];
+            return json_encode($toast_msg);
+        }
+        try
+        {
+            $interest_calc = ($req->input('interest')/100)/$req->input('period');
+            $pack = new packages;
+            $pack->package_name = $req->input('package_name');
+            $pack->currency = $this->settings->currency;
+            $pack->min = $req->input('min');
+            $pack->max = $req->input('max');
+            $pack->daily_interest = $interest_calc;
+            $pack->withdrwal_fee = env('WD_FEE');
+            $pack->period = $req->input('period');
+            $pack->days_interval = $req->input('interval');
+            $pack->ref_bonus = 0;
+            $pack->status = 1;
+            $pack->save();
+        }
+        catch(\Exception $e)
+        {
+            $toast_msg = ['msg' => $e->getMessage(), 'type' => 'err'];
+            return json_encode($toast_msg);
+        }
+
+        $toast_msg = ['msg' => '¡Paquete añadido satisfactoriamente!', 'type' => 'suc'];
+        return json_encode($toast_msg);
+    }
+    else
+    {
+        return redirect('/');
+    }
+  }
+
+  public function adminDeleteCompanyk($id){
+    if(Session::has('adm') && !empty(Session::get('adm')))
+    {
+      try{
+        packages::where('id', $id)->delete();
+        return json_encode('["rst" => "suc"]');
+      }
+      catch (\Exception $ex){
+        return json_encode('["rst" => "err"]');
+      }
+    }
+    else
+    {
+        return redirect('/');
+    }
+  }
+
 }

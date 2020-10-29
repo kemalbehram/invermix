@@ -276,6 +276,31 @@ Route::get('/admin/change/pwd', function () {
 
 });
 
+
+
+
+Route::get('/admin/companies', function () {
+	if(Session::has('adm'))
+	{
+		return view('admin.companies.index');
+	}
+	else
+	{
+		return redirect('/back-end');
+	}
+
+});
+
+
+Route::get('/admin/delete/company/{id}', 'adminController@adminDeleteCompany');
+Route::get('/admin/create/company', 'adminController@create_company');
+Route::post('/admin/create/company', 'adminController@create_company_post');
+
+Route::get('/admin/act_deact/company/{id}', 'adminController@switch_pack');
+
+
+
+
 Route::get('/admin/delete/pack/{id}', 'adminController@adminDeletePack');
 Route::get('/admin/create/package', 'adminController@create_package');
 Route::post('/admin/create/package', 'adminController@create_package_post');

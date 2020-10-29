@@ -628,26 +628,26 @@ class userController extends Controller
               }
             }
 
-            $maildata = ['email' => $user->email, 'username' => $user->username];
-            Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-                $msg->to($maildata['email']);
-                $msg->subject('User Investment');
-            });
+            // $maildata = ['email' => $user->email, 'username' => $user->username];
+            // Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            //     $msg->to($maildata['email']);
+            //     $msg->subject('User Investment');
+            // });
 
-            $maildata = ['email' => $user->email, 'username' => $user->username];
-            Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-                $msg->to(env('SUPPORT_EMAIL'));
-                $msg->subject('User Investment');
-            });
+            // $maildata = ['email' => $user->email, 'username' => $user->username];
+            // Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            //     $msg->to(env('SUPPORT_EMAIL'));
+            //     $msg->subject('User Investment');
+            // });
 
             $act = new activities;
             $act->action = "User Invested ".$capital." in ".$pack->package_name." package";
             $act->user_id = $user->id;
             $act->save();
 
-            Session::put('status', "Inversión enviada, será validada para su aprobación.");
+            Session::put('status', "Inversión enviada para su aprobación.");
             Session::put('msgType', "suc");
             return back() ;
           }

@@ -66,7 +66,7 @@ class AppServiceProvider extends ServiceProvider
                 $adm = null;
 
                 $myInv = investment::where('user_id', $user->id)->orderby('id', 'asc')->get();
-                $actInv = investment::where('user_id', $user->id)->where('status', 'Active')->orderby('id', 'desc')->get();
+                $actInv = investment::where('user_id', $user->id)->orderby('id', 'desc')->get();
                 $refs = User::where('referal', $user->username)->orderby('id', 'DESC')->get();
                 $wd = withdrawal::where('user_id', $user->id)->orderby('id', 'asc')->get();
                 $logs = activities::where('user_id', $user->id)->orderby('id', 'DESC')->take(20)->paginate(5);

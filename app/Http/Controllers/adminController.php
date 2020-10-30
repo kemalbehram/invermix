@@ -2229,7 +2229,7 @@ public function admAddnew(Request $req)
 
 
 
-  //Companies
+  //Companies Controllers
 
 
   public function create_company()
@@ -2299,6 +2299,41 @@ public function admAddnew(Request $req)
     }
   }
 
+  public function switch_company($id)
+  {
+    if(Session::has('adm') && !empty(Session::get('adm')))
+    {
+        $adm = Session::get('adm');
+        if($adm->role == 3 || $adm->role == 2)
+        {
+            $comp = companies::find($id);
+            if(!empty($comp))
+            {
+              if($comp->status == 0)
+              {
+                  $comp->status = 1;
+              }
+              else
+              {
+                  $comp->status = 0;
+              }
+              $comp->save();
+              return 's';
+            }
+        }
+        else
+        {
+            return('No puedes realizar esta acción');
+        }
+
+    }
+    else
+    {
+      return redirect('/');
+    }
+
+  }
+
   public function adminDeleteCompany($id){
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
@@ -2316,7 +2351,66 @@ public function admAddnew(Request $req)
     }
   }
 
+
+
+
+
+    ///////////////////////////////////////////  Pack Company//////////////////////////////////////////////////
+
+    public function editCompany(Request $req)
+    {
+        // dd($req);
+        // die();
+      if(Session::has('adm') && !empty(Session::get('adm')))
+      {
+        try
+        {
+          $comp = companies::find($req->input('id'));
+          $comp ->name_comp = $req->input('name_comp');
+          $comp ->rnc = $req->input('rnc');
+          $comp ->email = $req->input('email');
+          $comp ->o_capital = $req->input('o_capital');
+          $comp ->a_capital = $req->input('a_capital');
+          $comp ->bonus_open = $req->input('bonus_open');
+          $comp ->sold_bonus = $req->input('sold_bonus');
+          $comp ->a_bonus = $req->input('a_bonus');
+          $comp ->bonus_cost = $req->input('bonus_cost');
+          $comp ->currency = $req->input('currency');
+          // $pack->withdrwal_fee = ($req->input('fee'))/100;
+          $comp->save();
+
+          $adm = Session::get('adm');
+          $act = new adminLog;
+          $act->admin = $adm->email;
+          $act->action = "Editó compañía. Compañía id: ".$req->input('id');
+          $act->save();
+
+          return back()->with([
+            'toast_msg' => '¡Exitosa!',
+            'toast_type' => 'suc'
+          ]);
+        }
+        catch(\Exception $e)
+        {
+          return back()->with([
+            'toast_msg' => '¡Error guardando récord! ¡Intente otra vez!',
+            'toast_type' => 'err'
+          ]);
+        }
+
+      }
+      else
+      {
+        return redirect('/');
+      }
+
+    }
+
 }
+
+
+
+
 
 
 // companies::where('id', $id)->update(array('status' => '0'));

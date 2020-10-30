@@ -299,8 +299,8 @@ Route::get('/admin/delete/company/{id}', 'adminController@adminDeleteCompany');
 Route::get('/admin/create/company', 'adminController@create_company');
 Route::post('/admin/create/company', 'adminController@create_company_post');
 
-Route::get('/admin/act_deact/company/{id}', 'adminController@switch_pack');
-
+Route::get('/admin/act_deact/company/{id}', 'adminController@switch_company');
+Route::post('/admin/edit/company', 'adminController@editCompany');
 
 
 

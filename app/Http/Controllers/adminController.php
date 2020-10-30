@@ -2266,7 +2266,7 @@ public function admAddnew(Request $req)
             $toast_msg = ['msg' => $val->errors()->first(), 'type' => 'err'];
             return json_encode($toast_msg);
         }
-       
+
         try
         {
             // $interest_calc = ($req->input('interest')/100)/$req->input('period');
@@ -2276,6 +2276,7 @@ public function admAddnew(Request $req)
             $comp ->email = $req->input('email');
             $comp ->o_capital = $req->input('o_capital');
             $comp ->a_capital = $req->input('a_capital');
+            $comp ->bonus_open = $req->input('bonus_open');
             $comp ->sold_bonus = $req->input('sold_bonus');
             $comp ->a_bonus = $req->input('a_bonus');
             $comp ->bonus_cost = $req->input('bonus_cost');
@@ -2302,7 +2303,7 @@ public function admAddnew(Request $req)
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
       try{
-        packages::where('id', $id)->delete();
+        companies::where('id', $id)->update(array('deleted_at' => date('Y-m-d H:i:s')));
         return json_encode('["rst" => "suc"]');
       }
       catch (\Exception $ex){
@@ -2316,3 +2317,7 @@ public function admAddnew(Request $req)
   }
 
 }
+
+
+// companies::where('id', $id)->update(array('status' => '0'));
+//         return json_encode('["rst" => "suc"]');

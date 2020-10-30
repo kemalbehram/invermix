@@ -1,55 +1,55 @@
 <?php
-   
+
     function getWorkingDays($startDate, $endDate)
-    {        
+    {
         $begin = strtotime($startDate)+86400;
         $end   = strtotime($endDate);
-        if ($begin > $end) 
+        if ($begin > $end)
         {
             // echo "startdate is in the future! <br />";
             return 0;
-        } 
-        else 
+        }
+        else
         {
             $no_days  = 0;
             $weekends = 0;
-            while ($begin <= $end) 
+            while ($begin <= $end)
             {
-                $no_days++; // no of days in the given interval      
+                $no_days++; // no of days in the given interval
                 $what_day = date("N", $begin);
                 if ($what_day > 5) { // 6 and 7 are weekend days
                    $weekends++;
                    // echo $what_day;
-                };               
-                $begin += 86400;   // +1 day                 
+                };
+                $begin += 86400;   // +1 day
             };
             $working_days = $no_days - $weekends;
             return $working_days;
         }
     }
-    
+
     function getDays($startDate, $endDate)
-    {        
+    {
         $begin = strtotime($startDate)+86400;
         $end   = strtotime($endDate);
-        if ($begin > $end) 
+        if ($begin > $end)
         {
             // echo "startdate is in the future! <br />";
             return 0;
-        } 
-        else 
+        }
+        else
         {
             $no_days  = 0;
             $weekends = 0;
-            while ($begin <= $end) 
+            while ($begin <= $end)
             {
-                $no_days++; // no of days in the given interval      
+                $no_days++; // no of days in the given interval
                 $what_day = date("N", $begin);
                 if ($what_day > 5) { // 6 and 7 are weekend days
                    $weekends++;
                    // echo $what_day;
-                };               
-                $begin += 86400;   // +1 day                 
+                };
+                $begin += 86400;   // +1 day
             };
             // $working_days = $no_days - $weekends;
             return $no_days;
@@ -63,7 +63,7 @@
         $users_table = App\kyc::where('username', 'like', '%'.$v.'%')->orderby('id', 'desc')->paginate(100);
         Session::forget('val');
         return $users_table;
-        
+
     }
 
     function search_deposit()
@@ -80,7 +80,7 @@
             $deps = App\deposits::orderby('id', 'desc')->paginate(50);
         }
         return $deps;
-        
+
     }
 
     function search_pack()
@@ -97,7 +97,7 @@
             $packs = App\packages::orderby('id', 'asc')->paginate(100);
         }
         return $packs;
-        
+
     }
 
     function search_adm()
@@ -114,7 +114,7 @@
             $adm_users = App\admin::orderby('id', 'asc')->paginate(100);
         }
         return $adm_users;
-        
+
     }
 
     function search_users()
@@ -131,7 +131,7 @@
             $users_table = App\User::orderby('id', 'desc')->paginate(100);
         }
         return $users_table;
-        
+
     }
 
     function search_withdrawal()
@@ -148,16 +148,16 @@
             $wd = App\withdrawal::orderby('id', 'desc')->paginate(100);
         }
         return $wd;
-        
+
     }
-        
+
 
     function user_details_data($id)
     {
 
         $adm = Session::get('adm');
         $adm = App\admin::find($adm->id);
-        Session::put('adm', $adm);  
+        Session::put('adm', $adm);
 
         // $users = App\User::orderby('id', 'desc')->get();
         $user = App\User::find($id);
@@ -168,12 +168,12 @@
         $today_wd = App\withdrawal::where('created_at','like','%'.date('Y-m-d').'%')->orderby('id', 'desc')->get();
         $today_dep = App\deposits::where('created_at','like','%'.date('Y-m-d').'%')->orderby('id', 'desc')->get();
         $today_inv = App\investment::where('date_invested', date('Y-m-d'))->orderby('id', 'desc')->get();
-         
+
         $logs =  App\adminLog::orderby('id', 'desc')->get();
         $dt=$user->created_at;
 
         return ['user' => $user, 'dt' => $dt];
-        
+
     }
 
     function get_ref_set()
@@ -181,4 +181,3 @@
         $ref_set =  App\ref_set::all();
         return $ref_set;
     }
-    

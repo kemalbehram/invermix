@@ -50,18 +50,18 @@
                                         <div class="form-group row">
                                             <div class="col-sm-6">
                                                 <label for="min">{{ __('Bonos Aperturados') }}</label>
-                                                <input id="min" type="number" class="regTxtBox" name="sold_bonus" value="" required autocomplete="sold_bonus" autofocus placeholder="Bonos Aperturados">
+                                                <input id="min" type="number" class="regTxtBox" name="bonus_open" value="" required autocomplete="bonus_open" autofocus placeholder="Bonos Aperturados">
                                             </div>
 
                                                 <div class="col-sm-6">
                                                     <label for="min">{{ __('Bonos Vendidos') }}</label>
-                                                    <input id="min" type="number" class="regTxtBox" name="a_bonus" value="" required autocomplete="a_bonus" autofocus placeholder="Bonos Vendidos">
+                                                    <input id="min" type="number" class="regTxtBox" name="sold_bonus" value="" required autocomplete="sold_bonus" autofocus placeholder="Bonos Vendidos">
                                                 </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-6">
                                                 <label for="min">{{ __('Bonos Disponible') }}</label>
-                                                <input id="min" type="number" class="regTxtBox" name="bonus_cost" value="" required autocomplete="bonus_cost" autofocus placeholder="Bonos Disponible">
+                                                <input id="min" type="number" class="regTxtBox" name="a_bonus" value="" required autocomplete="a_bonus" autofocus placeholder="Bonos Disponible">
                                             </div>
 
                                                 <div class="col-sm-6">

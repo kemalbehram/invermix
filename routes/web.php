@@ -1,5 +1,6 @@
 <?php
 
+use App\companies;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -282,7 +283,9 @@ Route::get('/admin/change/pwd', function () {
 Route::get('/admin/companies', function () {
 	if(Session::has('adm'))
 	{
-		return view('admin.companies.index');
+        $comps = Companies::Orderby('created_at')->where('deleted_at', '=', NULL)->paginate(9);
+
+		return view('admin.companies.index', compact('comps'));
 	}
 	else
 	{

@@ -1670,7 +1670,7 @@ public function admAddnew(Request $req)
 
         if ($settings->currency != NULL){
 
-            $currency = new currencies;
+            $currency = currencies::find(2);
             $currency->currency = $req->input('cur');
             $currency->currency_conversion = $req->input('cur_conv');
         }

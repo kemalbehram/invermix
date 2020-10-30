@@ -146,20 +146,20 @@
                                       </div>
                                   </div>
                             </div>
-                            <!-- <div class="row">
+                            <div class="row">
                                  <div   class="col-md-6 ">
                                       <div class="card pad_20" >
                                           <h5> {{ __('Mondeda símbolo/Código') }} </h5>
-                                          <input type="text" name="cur" value="{{$settings->currency}}" class="form-control" placeholder="currency symbol or code" required >
+                                          <input type="text" name="cur" value="{{$curr->currency}}" class="form-control" placeholder="currency symbol or code" required >
                                       </div>
                                   </div>
                                   <div   class="col-md-6">
                                       <div class="card form-group pad_20" >
                                           <h5> {{ __('Currency Rate to US Dollar') }} </h5>
-                                          <input type="text" name="cur_conv" value="{{$settings->currency_conversion}}" class="form-control" placeholder="Currency conversion rate to dollar" required >
+                                          <input type="text" name="cur_conv" value="{{$curr->currency_conversion}}" class="form-control" placeholder="Currency conversion rate to dollar" required >
                                       </div>
                                   </div>
-                            </div> -->
+                            </div>
                           </div>
                           @endforeach
 

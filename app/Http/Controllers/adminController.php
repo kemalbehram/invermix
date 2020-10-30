@@ -32,6 +32,7 @@ use App\ref_set;
 use App\ticket;
 use App\comments;
 use App\companies;
+use App\currencies;
 
 class adminController extends Controller
 {
@@ -55,6 +56,8 @@ class adminController extends Controller
     $today_inv = investment::where('date_invested', date('Y-m-d'))->orderby('id', 'desc')->get();
     $logs =  adminLog::orderby('id', 'desc')->get();
     $settings = site_settings::find(1);
+
+
     $this->data_files = [$adm, $inv, $deposits, $users, $wd, $today_wd, $today_dep, $today_inv, $logs, $settings];
     return $this->data_files;
   }
@@ -1569,10 +1572,11 @@ public function admAddnew(Request $req)
   function site_settings(){
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
+      $currencies = currencies::orderby('id')->get();
       $data = $this->load_data();
       return view('admin.settings', [
         'settings' => $data[9], 'adm' => $data[0], 'logs' => $data[8], 'users' => $data[3], 'inv' => $data[1],
-         'deposits' => $data[2],
+         'deposits' => $data[2], 'currencies' => $currencies
       ]);
     }
     else
@@ -1645,8 +1649,8 @@ public function admAddnew(Request $req)
         $settings->stripe_key = $req->input('stripe_key');
         $settings->stripe_secret = $req->input('stripe_secret');
         // $settings->stripe_mode = $req->input('stripe_mode');
-        $settings->currency = $req->input('cur');
-        $settings->currency_conversion = $req->input('cur_conv');
+        // $settings->currency = $req->input('cur');
+        // $settings->currency_conversion = $req->input('cur_conv');
 
         if($req->hasFile('siteLogo'))
         {
@@ -1663,6 +1667,15 @@ public function admAddnew(Request $req)
           $file->move('img/', $path);
           $settings->site_logo = $path;
         }
+
+        if ($settings->currency != NULL){
+
+            $currency = new currencies;
+            $currency->currency = $req->input('cur');
+            $currency->currency_conversion = $req->input('cur_conv');
+        }
+
+
 
 
 
@@ -1908,6 +1921,7 @@ public function admAddnew(Request $req)
         $settings->save();
         $toast_msg = ['msg' => 'Settings was saved successfully <br> Reload to view changes', 'type' => 'suc'];
         return json_encode($toast_msg);
+
       }
       catch(\Exception $e)
       {

@@ -21,12 +21,12 @@
                     <td>{{$dep->name_comp}}</td>
                     <td>{{$dep->rnc}}</td>
                     <td>{{$dep->email}}</td>
-                    <td>{{$dep->o_capital}}</td>
-                    <td>{{$dep->a_capital}}</td>
-                    <td>{{$dep->bonus_open}}</td>
-                    <td>{{$dep->sold_bonus}}</td>
-                    <td>{{$dep->a_bonus}}</td>
-                    <td>{{$dep->bonus_cost}}</td>
+                    <td>{{number_format($dep->o_capital), 2}}</td>
+                    <td>{{number_format($dep->a_capital), 2}}</td>
+                    <td>{{number_format($dep->bonus_open)}}</td>
+                    <td>{{number_format($dep->sold_bonus)}}</td>
+                    <td>{{number_format($dep->a_bonus)}}</td>
+                    <td>{{number_format($dep->bonus_cost)}}</td>
                     <td>{{$dep->currency}}</td>
                     <td>
                       <label class="switch" >

@@ -44,9 +44,9 @@
               <br>
               <div class="form-group">
                 <br>
-                  <button class="collb btn btn-info">Update</button>
+                  <button class="collb btn btn-info">Actualizar</button>
                   <span style="">            
-                    <a id="pack_edit_close" href="javascript:void(0)" class="btn btn-danger">Cancel</a>        
+                    <a id="pack_edit_close" href="javascript:void(0)" class="btn btn-danger">Cancelar</a>        
                   </span>
                   <br>
               </div>            

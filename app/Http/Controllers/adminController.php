@@ -31,6 +31,7 @@ use App\kyc;
 use App\ref_set;
 use App\ticket;
 use App\comments;
+use App\companies;
 
 class adminController extends Controller
 {
@@ -2248,12 +2249,16 @@ public function admAddnew(Request $req)
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
         $val = Validator::make($req->all(),[
-            'package_name' => 'required|string|max:15',
-            'min' => 'required|numeric',
-            'max' => 'required|numeric',
-            'interest' => 'required|numeric',
-            'period' => 'required|numeric',
-            'interval' => 'required|numeric',
+            'name_comp' => 'required|string|max:60',
+            'rnc' => 'required|numeric',
+            'email' => 'required|email|unique:companies',
+            'o_capital' => 'required|numeric',
+            'a_capital' => 'required|numeric',
+            'sold_bonus' => 'required|numeric',
+            'a_bonus' => 'required|numeric',
+            'bonus_cost' => 'required|numeric',
+            'currency_id' => 'required|numeric',
+            'status' => 'numeric',
         ]);
 
         if($val->fails())
@@ -2261,26 +2266,22 @@ public function admAddnew(Request $req)
             $toast_msg = ['msg' => $val->errors()->first(), 'type' => 'err'];
             return json_encode($toast_msg);
         }
-        if((INT)$req->input('period') % (INT)$req->input('interval') != 0)
-        {
-            $toast_msg = ['msg' => "Period must be completely divisible by interval", 'type' => 'err'];
-            return json_encode($toast_msg);
-        }
+       
         try
         {
-            $interest_calc = ($req->input('interest')/100)/$req->input('period');
-            $pack = new packages;
-            $pack->package_name = $req->input('package_name');
-            $pack->currency = $this->settings->currency;
-            $pack->min = $req->input('min');
-            $pack->max = $req->input('max');
-            $pack->daily_interest = $interest_calc;
-            $pack->withdrwal_fee = env('WD_FEE');
-            $pack->period = $req->input('period');
-            $pack->days_interval = $req->input('interval');
-            $pack->ref_bonus = 0;
-            $pack->status = 1;
-            $pack->save();
+            // $interest_calc = ($req->input('interest')/100)/$req->input('period');
+            $comp = new companies;
+            $comp ->name_comp = $req->input('name_comp');
+            $comp ->rnc = $req->input('rnc');
+            $comp ->email = $req->input('email');
+            $comp ->o_capital = $req->input('o_capital');
+            $comp ->a_capital = $req->input('a_capital');
+            $comp ->sold_bonus = $req->input('sold_bonus');
+            $comp ->a_bonus = $req->input('a_bonus');
+            $comp ->bonus_cost = $req->input('bonus_cost');
+            $comp ->currency = $req->input('currency_id');
+            $comp ->status = 1;
+            $comp ->save();
         }
         catch(\Exception $e)
         {
@@ -2288,7 +2289,7 @@ public function admAddnew(Request $req)
             return json_encode($toast_msg);
         }
 
-        $toast_msg = ['msg' => '¡Paquete añadido satisfactoriamente!', 'type' => 'suc'];
+        $toast_msg = ['msg' => '¡Compañía añadida satisfactoriamente!', 'type' => 'suc'];
         return json_encode($toast_msg);
     }
     else
@@ -2297,7 +2298,7 @@ public function admAddnew(Request $req)
     }
   }
 
-  public function adminDeleteCompanyk($id){
+  public function adminDeleteCompany($id){
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
       try{

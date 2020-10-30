@@ -28,6 +28,6 @@
                 </div>
             </div>
 
-            @include('admin.inc.edit_pack')
+            @include('admin.companies.edit')
 
 @endSection

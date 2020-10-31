@@ -338,6 +338,8 @@ Route::get('/admin/message/edit/{id}', 'adminController@editMsg');
 Route::get('/admin/message/delete/{id}', 'adminController@editMsgDel');
 Route::get('/admin/view/settings', 'adminController@site_settings');
 
+
+
 Route::get('/admin/getMonthlyIvCart', 'adminController@getMonthlyIvCart');
 Route::get('/admin/profile/settings', 'adminController@adminViewProfileSettings');
 Route::get('/admin/profile/kyc', 'adminController@kyc');

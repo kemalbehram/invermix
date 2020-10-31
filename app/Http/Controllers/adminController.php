@@ -1546,7 +1546,7 @@ public function admAddnew(Request $req)
         }
         else
         {
-            return('User cannot update this function');
+            return('El usuario no puede actualizar esta función.');
         }
 
     }
@@ -1561,7 +1561,7 @@ public function admAddnew(Request $req)
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
       $msg = msg::where('id', $id)->delete();
-      return json_encode('["rst" => "Successful"]');
+      return json_encode('["rst" => "Satisfactorio"]');
     }
     else
     {
@@ -1584,6 +1584,8 @@ public function admAddnew(Request $req)
       return redirect('/');
     }
   }
+
+
 
   function adminViewProfileSettings()
   {
@@ -1624,8 +1626,10 @@ public function admAddnew(Request $req)
         'siteDescr' => 'required|max:100',
         'hcolor' => 'required|min:7|max:7',
         'fcolor' => 'required|min:7|max:7',
-        'cur' => 'required|string',
-        'cur_conv' => 'required|numeric',
+        'cur_rd' => 'required|string',
+        'cur_conv_rd' => 'required|numeric',
+        'cur_us' => 'required|string',
+        'cur_conv_us' => 'required|numeric',
       ]);
       if($val->fails())
       {
@@ -1649,7 +1653,7 @@ public function admAddnew(Request $req)
         $settings->stripe_key = $req->input('stripe_key');
         $settings->stripe_secret = $req->input('stripe_secret');
         // $settings->stripe_mode = $req->input('stripe_mode');
-        // $settings->currency = $req->input('cur');
+        // $settings->currency_rd  = $settings->currency_rd; 
         // $settings->currency_conversion = $req->input('cur_conv');
 
         if($req->hasFile('siteLogo'))
@@ -1668,11 +1672,16 @@ public function admAddnew(Request $req)
           $settings->site_logo = $path;
         }
 
-        if ($settings->currency != NULL){
+        if ($req->input('cur_rd') != NULL){
+            // dd($settings);
+            // dd();
 
-            $currency = currencies::find(2);
-            $currency->currency = $req->input('cur');
-            $currency->currency_conversion = $req->input('cur_conv');
+            $currency = currencies::find(1);
+            $currency->currency_rd = $req->input('cur_rd');
+            $currency->currency_conversion_rd = $req->input('cur_conv_rd');
+            $currency->currency_us = $req->input('cur_us');
+            $currency->currency_conversion_us = $req->input('cur_conv_us');
+            $currency->save();
         }
 
 

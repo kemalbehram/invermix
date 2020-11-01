@@ -108,7 +108,10 @@
                 <div class="input-group-prepend " >
                   <span class="input-group-text "><i class=""></i>Moneda</span>
                 </div>
-                  <input id="currency" type="text" class="form-control" name="currency" placeholder="Moneda de la inversión de la compañía" required>
+                <select class="form-control" id="currency" name="currency">
+                                        <option value="RD$" name="currency">RD$</option>
+                                        <option value="US$" name="currency">US$</option>
+                                        </select>
                 <div class="input-group-append " >
                   <span class="input-group-text " ><i class=""></i></span>
                 </div>

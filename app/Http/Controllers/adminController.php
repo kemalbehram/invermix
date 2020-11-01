@@ -2046,7 +2046,7 @@ public function admAddnew(Request $req)
     {
       ticket::with('comments')->where('id', $id)->delete(10);
       return back()->with([
-        'toast_msg' => 'Ticket deleted successfully!',
+        'toast_msg' => '¡Ticket se ha borrado satisfactoriamente!',
         'toast_type' => 'suc'
       ]);
     }
@@ -2231,7 +2231,7 @@ public function admAddnew(Request $req)
         File::delete($files);
         $kyc->delete();
         return back()->with([
-            'toast_msg' => 'KYC Deleted successful!',
+            'toast_msg' => 'KYC borrado satisfactoriamente!!',
             'toast_type' => 'suc'
           ]);
       }
@@ -2280,7 +2280,7 @@ public function admAddnew(Request $req)
             'sold_bonus' => 'required|numeric',
             'a_bonus' => 'required|numeric',
             'bonus_cost' => 'required|numeric',
-            'currency_id' => 'required|numeric',
+            'currency' => 'required|string|max:3',
             'status' => 'numeric',
         ]);
 
@@ -2303,7 +2303,7 @@ public function admAddnew(Request $req)
             $comp ->sold_bonus = $req->input('sold_bonus');
             $comp ->a_bonus = $req->input('a_bonus');
             $comp ->bonus_cost = $req->input('bonus_cost');
-            $comp ->currency = $req->input('currency_id');
+            $comp ->currency = $req->input('currency');
             $comp ->status = 1;
             $comp ->save();
         }
@@ -2409,7 +2409,7 @@ public function admAddnew(Request $req)
           $act->save();
 
           return back()->with([
-            'toast_msg' => '¡Exitosa!',
+            'toast_msg' => '¡Actualización Exitosa!',
             'toast_type' => 'suc'
           ]);
         }

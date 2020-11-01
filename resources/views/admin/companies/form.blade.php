@@ -71,10 +71,13 @@
                                         </div>
 
                                         <div class="form-group row">
-                                             <div class="col-sm-6">
-                                                <label for="interval" class="">{{ __('Moneda') }}</label>
-                                                <input id="currency" type="currency" class="regTxtBox" name="currency_id" value="" required autocomplete="currency_id" autofocus placeholder="Moneda de la compañía">
-                                            </div>
+                                        <div class="col-sm-6">
+                                        <label for="interval" class="">{{ __('Moneda') }}</label>
+                                        <select class="form-control" id="currency" name="currency">
+                                        <option value="RD$" name="currency">RD$</option>
+                                        <option value="US$" name="currency">US$</option>
+                                        </select>
+                                        </div>
                                         </div>
                                    </form>
                                    <div class="form-group row">
@@ -94,3 +97,5 @@
             </div>
 
 @endSection
+
+

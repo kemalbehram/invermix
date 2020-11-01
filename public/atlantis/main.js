@@ -224,24 +224,24 @@ function edit_pack(id, min, max, interest, wd_fee, token, cur)
 
 }
 
+function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+  }
 
-function edit_comp(id, name_comp, rnc, email, o_capital, a_capital, bonus_open, sold_bonus, a_bonus, bonus_cost, currency, token, cur)
+function edit_comp(id, name_comp, rnc, email, o_capital, a_capital, bonus_open, sold_bonus, a_bonus, bonus_cost, currency, token)
 {
 	$('#id').val(id);
 	$('#name_comp').val(name_comp);
     $('#rnc').val(rnc);
     $('#email').val(email);
-	$('#o_capital').val(o_capital);
-    $('#a_capital').val(a_capital);
-    $('#o_capital').val(o_capital);
-    $('#bonus_open').val(bonus_open);
-    $('#sold_bonus').val(sold_bonus);
-    $('#a_bonus').val(a_bonus);
-    $('#bonus_cost').val(bonus_cost);
+	$('#o_capital').val(formatNumber(o_capital));
+    $('#a_capital').val(formatNumber(a_capital));
+    $('#bonus_open').val(formatNumber(bonus_open));
+    $('#sold_bonus').val(formatNumber(sold_bonus));
+    $('#a_bonus').val(formatNumber(a_bonus));
+    $('#bonus_cost').val(formatNumber(bonus_cost));
     $('#currency').val(currency);
 	$('#token').val(token);
-	$('.pack_edit_cur').text(cur);
-
 	$('#packEdit').show();
 
 }

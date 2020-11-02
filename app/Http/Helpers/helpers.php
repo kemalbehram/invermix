@@ -94,7 +94,7 @@
         }
         else
         {
-            $packs = App\packages::orderby('id', 'asc')->paginate(100);
+            $packs = App\packages::where('deleted_at', NULL)->orderby('id', 'asc')->paginate(100);
         }
         return $packs;
 

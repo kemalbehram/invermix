@@ -234,12 +234,12 @@ function edit_comp(id, name_comp, rnc, email, o_capital, a_capital, bonus_open, 
 	$('#name_comp').val(name_comp);
     $('#rnc').val(rnc);
     $('#email').val(email);
-	$('#o_capital').val(formatNumber(o_capital));
-    $('#a_capital').val(formatNumber(a_capital));
-    $('#bonus_open').val(formatNumber(bonus_open));
-    $('#sold_bonus').val(formatNumber(sold_bonus));
-    $('#a_bonus').val(formatNumber(a_bonus));
-    $('#bonus_cost').val(formatNumber(bonus_cost));
+	$('#o_capital').val(o_capital);
+    $('#a_capital').val(a_capital);
+    $('#bonus_open').val(bonus_open);
+    $('#sold_bonus').val(sold_bonus);
+    $('#a_bonus').val(a_bonus);
+    $('#bonus_cost').val(bonus_cost);
     $('#currency').val(currency);
 	$('#token').val(token);
 	$('#packEdit').show();
@@ -323,7 +323,7 @@ function act_deact_pack(id)
         {
             if(result == 's')
             {
-	            $('#suc').html('Package updated');
+	            $('#suc').html('Modalidad actualizada.');
 	            $('#suc').show().animate({ width: "30%" }, "1000").delay(2000).animate({ width: "-50px" }, "1000").fadeOut(50);
             }
             else

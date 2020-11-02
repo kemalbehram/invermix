@@ -18,7 +18,7 @@
                 </div>
                 <input id="name_comp" type="text" class="form-control" name="name_comp" placeholder="Nombre compañía" required>
                 <div class="input-group-append " >
-                  <span class="input-group-text pack_edit_cur" ><i class="fa fa-percent"></i></span>
+                  <span class="input-group-text pack_edit_cur" ><i class=""></i></span>
                 </div>
               </div>
               <br>

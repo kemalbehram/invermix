@@ -1037,7 +1037,7 @@ class adminController extends Controller
         $act->save();
 
         return back()->with([
-          'toast_msg' => 'Successful!',
+          'toast_msg' => '¡Actualizado!',
           'toast_type' => 'suc'
         ]);
       }
@@ -1653,7 +1653,7 @@ public function admAddnew(Request $req)
         $settings->stripe_key = $req->input('stripe_key');
         $settings->stripe_secret = $req->input('stripe_secret');
         // $settings->stripe_mode = $req->input('stripe_mode');
-        // $settings->currency_rd  = $settings->currency_rd; 
+        // $settings->currency_rd  = $settings->currency_rd;
         // $settings->currency_conversion = $req->input('cur_conv');
 
         if($req->hasFile('siteLogo'))
@@ -2014,7 +2014,7 @@ public function admAddnew(Request $req)
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
       try{
-        packages::where('id', $id)->delete();
+        packages::where('id', $id)->update(array('deleted_at' => date('Y-m-d H:i:s')));
         return json_encode('["rst" => "suc"]');
       }
       catch (\Exception $ex){
@@ -2160,7 +2160,7 @@ public function admAddnew(Request $req)
         });
 
         return json_encode([
-          'toast_msg' => 'Successful! ',
+          'toast_msg' => '¡Enviado! ',
           'toast_type' => 'suc',
           'comment_msg' => $req->input('msg'),
           'comment_time' => date('Y-m-d H:i:s'),

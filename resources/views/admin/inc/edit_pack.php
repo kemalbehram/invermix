@@ -2,67 +2,67 @@
   <div class="row wd_row_pad">
     <div class="col-md-4">&emps;</div>
     <div class="col-md-4" align="Center">
-      <div class="card mt50">      
+      <div class="card mt50">
         <div class="card-header card_header_bg_blue">
-          <h2 class="text-white">Update Package</h2>           
+          <h2 class="text-white">Actualizar Modalidad</h2>
         </div>
         <div id="" class="edit_pack_pad_n30_5 card-body">
           <form action="/admin/edit/packages" method="post">
               <input id="token" type="hidden" class="form-control" name="_token" value="">
               <div class="form-group">
-                  <input id="p_id" type="hidden" class="form-control" name="p_id" value="">                        
+                  <input id="p_id" type="hidden" class="form-control" name="p_id" value="">
               </div>
               <div class="input-group">
                 <div class="input-group-prepend " >
-                  <span class="input-group-text " ><i class=""></i>Min</span>
-                </div>                      
+                  <span class="input-group-text " ><i class=""></i>Min.</span>
+                </div>
                 <input id="min" type="text" class="form-control" name="min" placeholder="Enter Min amount to invest" required>
                 <div class="input-group-append " >
                   <span class="input-group-text pack_edit_cur" ><i class=""></i></span>
-                </div> 
+                </div>
               </div>
               <br>
               <div class="input-group">
                 <div class="input-group-prepend " >
-                  <span class="input-group-text "><i class=""></i>Max</span>
+                  <span class="input-group-text "><i class=""></i>Max.</span>
                 </div>
                 <input id="max" type="text" class="form-control" name="max" placeholder="Enter Max amount to invest" required>
                 <div class="input-group-append " >
                   <span class="input-group-text pack_edit_cur" ><i class=""></i></span>
-                </div> 
+                </div>
               </div>
               <br>
               <div class="input-group">
                 <div class="input-group-prepend " >
-                  <span class="input-group-text "><i class=""></i>Interest</span>
+                  <span class="input-group-text "><i class=""></i>Interés</span>
                 </div>
                   <input id="interest" type="text" class="form-control" name="interest" placeholder="Interest for the period of investment" required>
                 <div class="input-group-append " >
                   <span class="input-group-text " ><i class="fa fa-percent"></i></span>
-                </div> 
+                </div>
               </div>
               <br>
               <div class="form-group">
                 <br>
                   <button class="collb btn btn-info">Actualizar</button>
-                  <span style="">            
-                    <a id="pack_edit_close" href="javascript:void(0)" class="btn btn-danger">Cancelar</a>        
+                  <span style="">
+                    <a id="pack_edit_close" href="javascript:void(0)" class="btn btn-danger">Cancelar</a>
                   </span>
                   <br>
-              </div>            
+              </div>
           </form>
         </div>
-      </div> 
+      </div>
       <!-- close btn -->
       <script type="text/javascript">
         $('#pack_edit_close').click( function(){
           $('#packEdit').hide();
-        });        
+        });
       </script>
       <!-- end close btn -->
 
     </div>
 
   </div>
-  
+
 </div>

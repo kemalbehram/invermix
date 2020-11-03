@@ -244,14 +244,20 @@
                         	<li class="nav-item">
 								<a data-toggle="collapse" href="#user_drp">
 									<i class="fa fa-users"></i>
-									<p> Manage Users</p>
+									<p> Manejar Clientes</p>
 									<span class="caret"></span>
 								</a>
 								<div class="collapse" id="user_drp" >
 									<ul class="nav nav-collapse">
 										<li >
 				                        	<a href="/admin/manage/users">
-												<span class="sub-item"> Users </span>
+												<span class="sub-item"> Clientes </span>
+											</a>
+                                        </li>
+
+                                        <li >
+				                        	<a href="/admin/users/register">
+												<span class="sub-item"> Registrar Clientes </span>
 											</a>
 										</li>
 
@@ -363,7 +369,7 @@
 						<li class="nav-item">
 							<a href="/logout">
 								<i class="fas fa-arrow-left"></i>
-								<p>Logout</p>
+								<p>Salir</p>
 								<!-- <span class="caret"></span> -->
 							</a>
 						</li>

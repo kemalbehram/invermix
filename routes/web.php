@@ -60,10 +60,10 @@ Route::get('/{username}/downlines', function () {
     return view('user.downlines');
 })->middleware('auth');
 
-Route::get('/register/{usn}', function ($username) {
-	Session::put('ref', $username);
-    return redirect('/register');
-});
+// Route::get('/register/{usn}', function ($username) {
+// 	Session::put('ref', $username);
+//     return redirect('/register');
+// });
 
 
 
@@ -149,6 +149,19 @@ Route::get('/admin/manage/users', function () {
 	if(Session::has('adm'))
 	{
 		return view('admin.manage_users');
+	}
+	else
+	{
+		return redirect('/back-end');
+	}
+
+});
+
+
+Route::get('/admin/users/register', function () {
+	if(Session::has('adm'))
+	{
+		return view('admin.register');
 	}
 	else
 	{

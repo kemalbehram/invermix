@@ -2,24 +2,24 @@
 @section('content')
 <body>
     <div style="">
-        <img src="/img/inv_bg2.jpg" class="fixedOverlayIMG">         
+        <img src="/img/inv_bg2.jpg" class="fixedOverlayIMG">
         <div class="fixedOeverlayBG"></div>
         <div class="">
             <div class="row login_row_cont">
                 <div class="col-md-6 position_relative" >
                     <div class="logo_cont" align="center">
                         <img src="/img/{{$settings->site_logo}}" alt="{{$settings->site_title}}" class="login_logo">
-                        <h1>{{$settings->site_title}}</h1> 
-                        <p>                                                       
+                        <h1>{{$settings->site_title}}</h1>
+                        <p>
                             <h4>{{$settings->site_descr}}</h4>
                         </p>
-                    </div>                    
+                    </div>
                 </div>
                 <div class="col-md-6 bg_white">
                     <div class="login_fixed_panel">
                         <div class="row">
                             <div class="col-md-12" >
-                                <div>                        
+                                <div>
                                     <div class="">
                                         <div class="">
                                             <div align="center">
@@ -31,9 +31,9 @@
                                         </div>
 
                                         <div class="reg_form_scroll scroll">
-                                            <form method="POST" action="{{ route('register') }}">                                                
+                                            <form method="POST" action="{{ route('register') }}">
                                                 <input id="csrf" type="hidden"  name="_token" value="{{ csrf_token() }}" >
-                                                <div class="form-group row">                                                    
+                                                <div class="form-group row">
                                                     <div class="col-sm-6">
                                                         <label for="Fname" class=" col-form-label text-md-right">{{ __('First Name') }}</label>
                                                         <input id="Fname" type="text" class="form-control @error('Fname') is-invalid @enderror regTxtBox" name="Fname" value="{{ old('Fname') }}" required autocomplete="Fname" autofocus placeholder="First name">
@@ -55,10 +55,10 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                
 
-                                                <div class="form-group row"> 
-                                                    
+
+                                                <div class="form-group row">
+
                                                     <div class="col-sm-12">
                                                         <label for="email" class=" col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
                                                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror regTxtBox" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
@@ -132,12 +132,12 @@
                                                     <div class="" align="center">
                                                        <p>
                                                           <strong>Already have an account? <a href="/login">Login</a></strong>
-                                                       </p>                            
+                                                       </p>
                                                     </div>
-                                                </div>                                      
-                                        
+                                                </div>
+
                                             </form>
-                                            
+
                                         </div>
                                     </div>
                                 </div>

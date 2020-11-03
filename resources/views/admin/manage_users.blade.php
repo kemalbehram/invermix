@@ -11,7 +11,7 @@
                         <div class="card">
                             <div class="card-header card_header_bg_blue" >
                                 <div class="card-head-row card-tools-still-right">
-                                    <h4 class="card-title text-white" > {{ __('All Users') }} </h4>
+                                    <h4 class="card-title text-white" > {{ __('Clientes') }} </h4>
                                     <div class="card-tools">
                                        <form action="/admin/search/user" method="post">
                                             <div class="input-group">
@@ -25,22 +25,22 @@
                                                 </div>
                                             </div>
                                         </form>
-                                    </div>                                                                             
+                                    </div>
                                 </div>
-                                @php($users_table = search_users())                               
-                                <p class="card-category text-white" > {{ __('All registered users.') }} </p>
+                                @php($users_table = search_users())
+                                <p class="card-category text-white" > {{ __('Todos los clientes registrados.') }} </p>
                             </div>
                             <div class="card-body">
-                                
+
                                 <div class="table-responsive">
                                     <table id="" class="table  table-hover" >
                                         <thead>
                                             <tr>
                                                 <th><i class="fa fa-eye"></i></th>
-                                                <th>{{ __('Name') }}</th>
+                                                <th>{{ __('Nombre de usuario') }}</th>
                                                 <th>{{ __('Username') }}</th>
-                                                <th>{{ __('Email') }}</th>
-                                                <th>{{ __('Phone') }}</th>
+                                                <th>{{ __('Correo') }}</th>
+                                                <th>{{ __('Teléfono') }}</th>
                                                 <th>{{ __('Status') }}</th>
                                             </tr>
                                         </thead>
@@ -48,14 +48,14 @@
                                             <tr>
                                                 <th><i class="fa fa-eye"></i></th>
                                                 <th>{{ __('Name') }}</th>
-                                                <th>{{ __('Username') }}</th>
-                                                <th>{{ __('Email') }}</th>
-                                                <th>{{ __('Phone') }}</th>
+                                                <th>{{ __('Nombre de usuario') }}</th>
+                                                <th>{{ __('Correo') }}</th>
+                                                <th>{{ __('Teléfono') }}</th>
                                                 <th>{{ __('Status') }}</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            
+
                                             @if(count($users_table) > 0 )
                                                 @foreach($users_table as $user)
                                                     <tr>
@@ -66,7 +66,7 @@
                                                         </td>
                                                         <td>{{$user->firstname}} {{$user->lastname}}</td>
                                                         <td>{{$user->username}}</td>
-                                                        <td>{{$user->email}}</td>  
+                                                        <td>{{$user->email}}</td>
                                                         <td>{{$user->phone}}</td>
                                                         <td>
                                                             @if($user->status == 1 || $user->status == 'Active')
@@ -76,16 +76,16 @@
                                                              @else
                                                              {{'Blocked'}}
                                                             @endif
-                                                        </td>                                     
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             @else
-                                                
+
                                             @endif
                                         </tbody>
                                     </table>
                                     <div class="" align="">
-                                       <span> {{$users_table->links()}}</span>  
+                                       <span> {{$users_table->links()}}</span>
                                     </div>
                                 </div>
                             </div>

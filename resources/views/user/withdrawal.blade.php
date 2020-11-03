@@ -22,7 +22,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>{{ __('Fecha') }}</th>
-                                                    <th>{{ __('Plan') }}</th>
+                                                    <th>{{ __('Modalidad') }}</th>
                                                     <th>{{ __('Cuenta') }}</th>
                                                     <th>{{ __('Monto') }}</th>
                                                     <th>{{ __('Status') }}</th>

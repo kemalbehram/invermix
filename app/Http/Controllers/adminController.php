@@ -59,6 +59,7 @@ class adminController extends Controller
     $settings = site_settings::find(1);
 
 
+
     $this->data_files = [$adm, $inv, $deposits, $users, $wd, $today_wd, $today_dep, $today_inv, $logs, $settings];
     return $this->data_files;
   }
@@ -166,7 +167,7 @@ class adminController extends Controller
           try
           {
             $validate = $req->validate([
-                 'phone' => 'required|digits_between:10,15',
+                 'phone' => 'required|digits_between:7,15',
               ]);
 
             //$country = country::find($req->input('country'))
@@ -192,7 +193,7 @@ class adminController extends Controller
           }
           catch(\Exception $e)
           {
-            Session::put('status', "Error saving your data! Please make sure your number is valid");
+            Session::put('status', "¡Error guardando tu información! Por favor colocar un número válido.");
             Session::put('msgType', "err");
             return back();
           }
@@ -204,6 +205,10 @@ class adminController extends Controller
         }
 
   }
+
+
+
+
 
   public function changeUserPwd(Request $req)
   {
@@ -2459,7 +2464,7 @@ if(Session::has('adm') && !empty(Session::get('adm')))
 
     try
     {
-        
+
         $customers = new User;
         $customers ->firstname = $req->input('fname');
         $customers ->lastname= $req->input('lname');
@@ -2485,10 +2490,93 @@ else
         }
     }
 
+
+
+
+
+    public function first_invest(Request $req)
+  {
+    //   dd($req);
+    //   die();
+
+      $user = $req->uid;
+
+
+      if(!empty($user))
+      {
+
+        try
+        {
+          $capital = $req->input('capital');
+          $pack = packages::find($req->input('p_id'));
+
+
+          if($capital >= $pack->min && $capital <= $pack->max)
+          {
+            $inv = new investment;
+            $inv->capital = $capital;
+            $inv->user_id = $req->uid;
+            $inv->usn = $req->username;
+            $inv->package = $pack->package_name;
+            $inv->date_invested = date("d-m-Y");
+            $inv->period = $pack->period;
+            $inv->days_interval = $pack->days_interval;
+            $inv->i_return = (round($capital*$pack->daily_interest*$pack->period,2));
+            $inv->interest = $pack->daily_interest;
+
+            $dt = strtotime(date('Y-m-d'));
+            $days = $pack->period;
+
+            while ($days > 0)
+            {
+                $dt    +=   86400   ;
+                $actualDate = date('Y-m-d', $dt);
+                $days--;
+            }
+
+            $inv->package_id = $pack->id;
+            $inv->currency = $this->st->currency;
+            $inv->end_date = $actualDate;
+            $inv->last_wd = date("Y-m-d");
+            $inv->status = 'Activa';
+
+            $user->wallet -= $capital;
+            $user->save();
+
+            $inv->save();
+
+
+
+            $act = new activities;
+            $act->action = "User Invested ".$capital." in ".$pack->package_name." package";
+            $act->user_id = $user->id;
+            $act->save();
+
+            Session::put('status', "Inversión enviada para su aprobación.");
+            Session::put('msgType', "suc");
+            return back() ;
+          }
+          else
+          {
+            Session::put('status', "¡Monto invalido! Intenta nuevamente.");
+            Session::put('msgType', "err");
+            return back();
+          }
+
+        }
+        catch(\Exception $e)
+        {
+            Session::put('status', "¡Error creando inversión! Por favor intentar nuevamente.".$e->getMessage());
+            Session::put('msgType', "err");
+            return back();
+        }
+
+      }
+      else
+      {
+        return redirect('/fdsfds');
+      }
+
+  }
+
 }
-
-
-
-
-// companies::where('id', $id)->update(array('status' => '0'));
-//         return json_encode('["rst" => "suc"]');

@@ -3,6 +3,7 @@
 @php($dt = $user_data['dt'])
 @extends('admin.atlantis.layout')
 @Section('content')
+
         <div class="main-panel">
             <div class="content">
                 @include('admin.atlantis.main_bar')
@@ -16,21 +17,21 @@
                                     <div class="card-head-row card-tools-still-right">
                                         <h4 class="card-title text-white"> {{ __('Detalles Cliente') }} </h4>
                                         <div class="card-tools">
-                                            <a href="/admin/block/user/{{$user->id}}" > 
+                                            <a href="/admin/block/user/{{$user->id}}" >
                                                 <span class=""><i class="fa fa-ban btn btn-warning" ></i></span>
                                             </a>
-                                            <a href="/admin/activate/user/{{$user->id}}" > 
+                                            <a href="/admin/activate/user/{{$user->id}}" >
                                                 <span><i class="fa fa-check btn btn-success"></i></span>
                                             </a>
                                             @if($adm->role != 1)
-                                                <a href="/admin/delete/user/{{$user->id}}" > 
+                                                <a href="/admin/delete/user/{{$user->id}}" >
                                                     <span class=""><i class="fa fa-times btn btn-danger"></i></span>
                                                 </a>
                                             @endif
-                                        </div>                                                                             
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card-body">                                    
+                                <div class="card-body">
                                     <div class="row pad_top_20">
                                         <div class="col-lg-6">
                                             <div class="form-group" align="center">
@@ -40,7 +41,7 @@
                                                     <img class="img-responsive" src="/img/profile/{{ $user->img }}" width="200px" height="200px">
                                                 @endif
                                             </div>
-                                        </div>  
+                                        </div>
                                         <div class="col-lg-6">
                                             <div class="card full-height">
                                                 <div class="card-body">
@@ -54,9 +55,9 @@
                                                                 <h4 class="fw-bold  text-info op-8"> {{ __('Wallet Balance') }} </h4>
                                                                 <h3 class="fw-bold">{{$settings->currency}} {{ round($user->wallet,2) }}</h3>
                                                                 <div class="colhd margin_top_n10 font_10">&emsp;</div>
-                                                            </div>                      
-                                                          <div class="clearfix"><br></div>                      
-                                                            <div>                           
+                                                            </div>
+                                                          <div class="clearfix"><br></div>
+                                                            <div>
                                                                 <h4 class="fw-bold text-info op-8"> {{ __('Referral Bonus') }} </h4>
                                                                 <h3 class="fw-bold">{{$settings->currency}} {{ round ($user->ref_bal, 2)}}</h3>
                                                                 <div class="colhd margin_top_n10 font_10 ">&emsp;</div>
@@ -67,35 +68,35 @@
                                                             <div class="border_btm_1" >
                                                                 <h4 class="fw-bold text-info op-8"> {{ __('Fecha de creacion') }} </h4>
                                                                 {{$dt->format('Y-m-d')}}
-                                                                <div class="colhd margin_top_n10 font_10">&emsp;</div> 
-                                                                <br>    
+                                                                <div class="colhd margin_top_n10 font_10">&emsp;</div>
+                                                                <br>
                                                             </div>
-                                                            <div class="clearfix"><br></div> 
+                                                            <div class="clearfix"><br></div>
                                                             <div>
-                                                                <h4 class="fw-bold text-info op-8"> {{ __('Status') }} </h4>       
+                                                                <h4 class="fw-bold text-info op-8"> {{ __('Status') }} </h4>
                                                                 <span class="fa fa-circle" style="color: green;"></span>
                                                                 <span class="">
-                                                                @if($user->status == 1 || $user->status == 'Active') 
+                                                                @if($user->status == 1 || $user->status == 'Active')
                                                                     Active
-                                                                @elseif($user->status == 2 || $user->status == 'Blocked') 
+                                                                @elseif($user->status == 2 || $user->status == 'Blocked')
                                                                     Blocked
-                                                                @elseif($user->status == 0 || $user->status == 'Inactive') 
+                                                                @elseif($user->status == 0 || $user->status == 'Inactive')
                                                                     Not Active
                                                                 @endif
-                                                                </span> 
-                                                               
-                                                                <div class="colhd margin_top_n10 font_10" >&emsp;</div> 
-                                                                <br>    
+                                                                </span>
+
+                                                                <div class="colhd margin_top_n10 font_10" >&emsp;</div>
+                                                                <br>
                                                             </div>
 
                                                         </div>
 
-                                                    </div>             
+                                                    </div>
                                                 </div>
-                                            </div>                                            
-                                            
-                                        </div>                               
-                                        
+                                            </div>
+
+                                        </div>
+
                                     </div>
 
                                     <div class="row">
@@ -104,41 +105,41 @@
                                                 <label> {{ __('Nombres') }} </label>
                                                 <input id="adr" type="text" value="{{ucfirst($user->firstname)}}" class="form-control" name="fname" readonly>
                                             </div>
-                                        </div>  
+                                        </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label> {{ __('Apellidos') }} </label>
                                                 <input id="adr" type="text" value="{{ucfirst($user->lastname)}}" class="form-control" name="lname" readonly>
                                             </div>
-                                        </div>                               
-                                        
+                                        </div>
+
                                     </div>
 
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label> {{ __('Correo Electrónico') }} </label>
-                                                <div class="input-group">                                                       
+                                                <div class="input-group">
                                                     <input id="email" type="email" value="{{$user->email}}" class="form-control" name="email">
                                                 </div>
-                                                
+
                                             </div>
-                                        </div>     
+                                        </div>
 
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label> {{ __('Usuario') }} </label>
-                                                <div class="input-group">                                                       
+                                                <div class="input-group">
                                                     <input id="usn" type="text" value="{{$user->username}}" class="form-control" name="usn" readonly>
                                                 </div>
-                                                
+
                                             </div>
-                                        </div>                                             
-                                        
-                                    </div>   
+                                        </div>
+
+                                    </div>
 
                                     <form class="" method="post" action="/admin/update/user/profile">
-                                        
+
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-group">
@@ -146,17 +147,17 @@
                                                     <input type="hidden" name="uid" value="{{$user->id}}">
                                                     <label> {{ __('País') }} </label>
                                                     <select id="country" class="form-control" name="country" >
-                                                        <?php 
+                                                        <?php
                                                             $country = App\country::orderby('name', 'asc')->get();
                                                         ?>
                                                         @php($phn_code = '')
-                                                        @foreach($country as $c)                                                           
+                                                        @foreach($country as $c)
                                                             @if($c->id == $user->country)
                                                                 @php($cs = $c->id)
                                                                 @php($phn_code = $c->phonecode)
                                                                 {{'selected'}}
                                                                 <option selected  value="{{$c->id}}">{{$c->name}}</option>
-                                                             
+
                                                             @else
                                                                 <option value="{{$c->id}}">{{$c->name}}</option>
                                                             @endif
@@ -172,7 +173,7 @@
                                                     <label> {{ __('Estado/Provincia') }} </label>
                                                     <select  id="states" class="form-control" name="state" required>
                                                         @if(isset($cs))
-                                                            <?php 
+                                                            <?php
                                                                 $st = App\states::where('id', $user->state)->get();
                                                             ?>
                                                             @if(count($st) > 0)
@@ -180,11 +181,11 @@
                                                             @else
                                                                 <option selected disabled>Seleccionar provincia</option>
                                                             @endif
-                                                            
+
                                                         @else
                                                            <option selected disabled>Seleccionar provincia</option>
-                                                        @endif                                                           
-                                                    </select>                                                        
+                                                        @endif
+                                                    </select>
                                                 </div>
                                             </div>
 
@@ -195,7 +196,7 @@
                                                     <label> {{ __('Dirección') }} </label>
                                                     <input id="adr" type="text" class="form-control" value="{{$user->address}}" name="adr" required>
                                                 </div>
-                                            </div>  
+                                            </div>
 
                                             <div class="col-lg-6">
                                                 <div class="form-group">
@@ -209,21 +210,21 @@
                                                                     +1
                                                                 @endif
                                                             </span>
-                                                        </div>                                                        
+                                                        </div>
                                                         <input id="cCode" type="hidden" class="form-control" name="cCode" required>
                                                         <input id="phone" type="text" class="form-control" value="{{str_replace('+'.$phn_code,'',$user->phone)}}" name="phone" required>
                                                     </div>
-                                                    
+
                                                 </div>
-                                            </div>                                             
-                                            
-                                        </div>   
+                                            </div>
+
+                                        </div>
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                        <button class="collb btn btn-info"> {{ __('Guardar') }} </button>
                                                 </div>
-                                            </div>              
+                                            </div>
                                         </div>
                                     </form>
 
@@ -241,7 +242,7 @@
                                 <div class="card-body pb-0">
                                     <form class="" method="post" action="/admin/change/user/pwd">
                                         <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                        <input type="hidden" name="uid" value="{{$user->id}}">
+                                        <input type="hidden" name="uid" value="100">
                                         <div class="form-group">
                                             <label> {{ __('Nueva Contraseña') }} </label>
                                             <input type="password" class="form-control" name="newpwd" placeholder="Nueva Contraseña" required>
@@ -257,10 +258,26 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title"> {{ __('Primera Inversión Cliente') }} </div>
+                                </div>
+                                <div class="card-body pb-0">
+                                    @include('user.inc.packages')
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @include('admin.inc.first_inv')
+                     @include('user.inc.withdrawal')
+
 
                     <!-- KYC -->
-                    <div class="row">  
+                    <div class="row">
                                 <form id="id_verify" class="" method="post" action="{{ route('kyc.kyc_upload') }}" enctype="multipart/form-data">
                                   <div class="row form-group">
                                     <div class="col-sm-6">
@@ -274,7 +291,7 @@
                                             <div class="col-lg-12">
                                                 <div id="selfie" class="">
                                                   <div class="form-group" align="center">
-                                                    
+
                                                   </div>
                                                 </div>
                                                 <hr>
@@ -362,7 +379,7 @@
 
                                   </div>
                                 </form>
-                              
+
                             </div>
                             <!-- End of KYC -->
 
@@ -479,7 +496,7 @@
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <?php 
+                                            <?php
                                                  $mybanks = App\banks::where('user_id', $user->id)->get();
                                             ?>
                                             @if(count($mybanks) > 0)
@@ -498,10 +515,9 @@
                                     <br><br>
                                 </div>
                             </div>
-                        </div>                        
-                    </div>         
-                    
+                        </div>
+                    </div>
+
                 </div>
             </div>
 @endSection
-            

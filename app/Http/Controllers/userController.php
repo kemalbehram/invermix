@@ -466,6 +466,7 @@ class userController extends Controller
 
 
 
+
   public function invest(Request $req)
   {
       $user = Auth::User();

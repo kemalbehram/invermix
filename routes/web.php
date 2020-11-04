@@ -1,7 +1,7 @@
 <?php
 
 use App\companies;
-use App\currencies;
+use App\packages;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -185,7 +185,9 @@ Route::get('/admin/manage/xpack_investments', function () {
 Route::get('/admin/view/userdetails/{id}', function ($id) {
 	if(Session::has('adm'))
 	{
-		return view('admin.user_details', ['id' => $id]);
+        $modalidades = packages::all();
+
+		return view('admin.user_details', ['id' => $id, 'modalidades' => $modalidades]);
 	}
 	else
 	{
@@ -193,6 +195,11 @@ Route::get('/admin/view/userdetails/{id}', function ($id) {
 	}
 
 });
+
+
+Route::post('/view/userdetails', 'adminController@first_invest')->name('first_inv');
+
+
 
 Route::get('/admin/manage/investments', function () {
 	if(Session::has('adm'))

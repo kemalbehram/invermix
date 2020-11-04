@@ -30,20 +30,20 @@
                                                 <input id="package_name" type="text" class="regTxtBox" name="lname" value="" required autocomplete="lname" autofocus placeholder="Pérez Moronta">
                                             </div>
                                         </div>
-                                        
+
                                         <div class="form-group row">
                                             <div class="col-sm-6">
                                                 <label for="email">{{ __('Correo Electrónico') }}</label>
                                                 <input id="email" type="email" class="regTxtBox" name="email" type="email" value="" required autocomplete="email" autofocus placeholder="Correo Electrónico">
                                             </div>
-                                            
+
                                             <div class="col-sm-6">
                                                 <label for="package_name">{{ __('Nombre de usuario') }}</label>
                                                 <input id="username" type="text" class="regTxtBox" name="username" value="" required autocomplete="username" autofocus placeholder="juanp">
                                             </div>
                                         </div>
-                                        
-                        
+
+
                                         <div class="form-group row">
                                         <div class="col-sm-6">
                                                         <label for="password" class=" col-form-label text-md-right">{{ __('Contraseña') }}</label>
@@ -55,7 +55,11 @@
                                             <label for="password" class=" col-form-label text-md-right">{{ __('Confirmar contraseña') }}</label>
                                                         <input id="password-confirm" type="password" class="form-control regTxtBox" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm password" >
                                                     </div>
+
                                         </div>
+
+
+
                                    </form>
                                    <div class="form-group row">
                                         <div class="col-sm-12 text-center">

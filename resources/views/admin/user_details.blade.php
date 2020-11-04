@@ -14,7 +14,7 @@
                             <div class="card">
                                 <div class="card-header card_header_bg_blue" >
                                     <div class="card-head-row card-tools-still-right">
-                                        <h4 class="card-title text-white"> {{ __('User Details') }} </h4>
+                                        <h4 class="card-title text-white"> {{ __('Detalles Cliente') }} </h4>
                                         <div class="card-tools">
                                             <a href="/admin/block/user/{{$user->id}}" > 
                                                 <span class=""><i class="fa fa-ban btn btn-warning" ></i></span>
@@ -45,7 +45,7 @@
                                             <div class="card full-height">
                                                 <div class="card-body">
                                                     <div class="card-title">
-                                                        <h2 class="text-success"> {{ __('Account Summary') }} </h2>
+                                                        <h2 class="text-success"> {{ __('Resumen de la cuenta') }} </h2>
                                                     </div>
                                                     <hr>
                                                     <div class="row py-3 @if($adm->role < 2) {{blur_cnt}}@endif position_relative">
@@ -65,7 +65,7 @@
 
                                                         <div class="col-md-6">
                                                             <div class="border_btm_1" >
-                                                                <h4 class="fw-bold text-info op-8"> {{ __('Date Created') }} </h4>
+                                                                <h4 class="fw-bold text-info op-8"> {{ __('Fecha de creacion') }} </h4>
                                                                 {{$dt->format('Y-m-d')}}
                                                                 <div class="colhd margin_top_n10 font_10">&emsp;</div> 
                                                                 <br>    
@@ -101,13 +101,13 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label> {{ __('First Name') }} </label>
+                                                <label> {{ __('Nombres') }} </label>
                                                 <input id="adr" type="text" value="{{ucfirst($user->firstname)}}" class="form-control" name="fname" readonly>
                                             </div>
                                         </div>  
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label> {{ __('Last Name') }} </label>
+                                                <label> {{ __('Apellidos') }} </label>
                                                 <input id="adr" type="text" value="{{ucfirst($user->lastname)}}" class="form-control" name="lname" readonly>
                                             </div>
                                         </div>                               
@@ -117,7 +117,7 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label> {{ __('Email Address') }} </label>
+                                                <label> {{ __('Correo Electrónico') }} </label>
                                                 <div class="input-group">                                                       
                                                     <input id="email" type="email" value="{{$user->email}}" class="form-control" name="email">
                                                 </div>
@@ -127,7 +127,7 @@
 
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label> {{ __('Username') }} </label>
+                                                <label> {{ __('Usuario') }} </label>
                                                 <div class="input-group">                                                       
                                                     <input id="usn" type="text" value="{{$user->username}}" class="form-control" name="usn" readonly>
                                                 </div>
@@ -144,7 +144,7 @@
                                                 <div class="form-group">
                                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                                     <input type="hidden" name="uid" value="{{$user->id}}">
-                                                    <label> {{ __('Country') }} </label>
+                                                    <label> {{ __('País') }} </label>
                                                     <select id="country" class="form-control" name="country" >
                                                         <?php 
                                                             $country = App\country::orderby('name', 'asc')->get();
@@ -162,14 +162,14 @@
                                                             @endif
                                                         @endforeach
                                                         @if(!isset($cs))
-                                                                <option selected disabled>Select Country</option>
+                                                                <option selected disabled>Seleccionar País</option>
                                                         @endif
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                  <div class="form-group">
-                                                    <label> {{ __('State/Province') }} </label>
+                                                    <label> {{ __('Estado/Provincia') }} </label>
                                                     <select  id="states" class="form-control" name="state" required>
                                                         @if(isset($cs))
                                                             <?php 
@@ -178,11 +178,11 @@
                                                             @if(count($st) > 0)
                                                                 <option selected value="{{$st[0]->id}}">{{$st[0]->name}}</option>
                                                             @else
-                                                                <option selected disabled>Select State</option>
+                                                                <option selected disabled>Seleccionar provincia</option>
                                                             @endif
                                                             
                                                         @else
-                                                           <option selected disabled>Select State</option>
+                                                           <option selected disabled>Seleccionar provincia</option>
                                                         @endif                                                           
                                                     </select>                                                        
                                                 </div>
@@ -192,14 +192,14 @@
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label> {{ __('Address') }} </label>
+                                                    <label> {{ __('Dirección') }} </label>
                                                     <input id="adr" type="text" class="form-control" value="{{$user->address}}" name="adr" required>
                                                 </div>
                                             </div>  
 
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label> {{ __('Phone') }} </label>
+                                                    <label> {{ __('Teléfono') }} </label>
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                             <span id="countryCode" class="input-group-text">
@@ -221,7 +221,7 @@
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="form-group">
-                                                       <button class="collb btn btn-info"> {{ __('Save') }} </button>
+                                                       <button class="collb btn btn-info"> {{ __('Guardar') }} </button>
                                                 </div>
                                             </div>              
                                         </div>
@@ -236,28 +236,184 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title"> {{ __('Reset User Password') }} </div>
+                                    <div class="card-title"> {{ __('Restablecer Contraseña Cliente') }} </div>
                                 </div>
                                 <div class="card-body pb-0">
                                     <form class="" method="post" action="/admin/change/user/pwd">
                                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                                         <input type="hidden" name="uid" value="{{$user->id}}">
                                         <div class="form-group">
-                                            <label> {{ __('New Password') }} </label>
-                                            <input type="password" class="form-control" name="newpwd" placeholder="New Password" required>
+                                            <label> {{ __('Nueva Contraseña') }} </label>
+                                            <input type="password" class="form-control" name="newpwd" placeholder="Nueva Contraseña" required>
                                         </div>
                                         <div class="form-group">
-                                            <label> {{ __('Confirm Password') }} </label>
-                                            <input type="password" class="form-control" name="cpwd" placeholder="Confirm Password" required>
+                                            <label> {{ __('Confirmar Contraseña') }} </label>
+                                            <input type="password" class="form-control" name="cpwd" placeholder="Confirmar Contraseña" required>
                                         </div>
                                             <div class="form-group" align="left">
-                                               <button class="collb btn btn-info"> {{ __('Save') }} </button>
+                                               <button class="collb btn btn-info"> {{ __('Guardar') }} </button>
                                             </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div> 
+
+                    <!-- KYC -->
+                    <div class="row">  
+                                <form id="id_verify" class="" method="post" action="{{ route('kyc.kyc_upload') }}" enctype="multipart/form-data">
+                                  <div class="row form-group">
+                                    <div class="col-sm-6">
+                                      <div class="card">
+                                        <div class="card-header">
+                                            <div class="card-title">{{ __('Conoce tu Cliente') }}</div>
+                                        </div>
+                                        <div class="card-body">
+
+                                          <div class="row">
+                                            <div class="col-lg-12">
+                                                <div id="selfie" class="">
+                                                  <div class="form-group" align="center">
+                                                    
+                                                  </div>
+                                                </div>
+                                                <hr>
+                                                <div class="form-group">
+                                                  <h3>{{ __('Documento de Identidad') }}</h3>
+                                                  <p>
+                                                    {{ __('Documentos válidos son: Cédula, Pasaporte y Licencia de Conducir') }}
+                                                  </p>
+                                                </div>
+                                                <div class="form-group mt-4">
+                                                  <label>Tipo de Identificación</label>
+                                                  <select id="card_select" name="cardtype" class="form-control" required="required">
+                                                    <option selected disabled >Seleccionar</option>
+                                                    <option value="idcard_op">Cédula</option>
+                                                    <option value="passport_op">Pasaporte</option>
+                                                    <option value="driver_op">Licencia de Conducir</option>
+                                                  </select>
+                                                </div>
+                                                <hr>
+                                                <div id="card_cont" class="cont_display_none">
+                                                  <div class="form-group mt-3">
+                                                    <label>Card Front</label>
+                                                    <br>
+                                                    <img src="/img/id_temp_front.png" class="img_card_temp" width="100%">
+                                                    <input type="file" class="form-control upload_inp mt-2" name="id_front" >
+                                                  </div>
+
+                                                  <hr>
+                                                  <div class="form-group mt-3">
+                                                    <label>Card Back</label>
+                                                    <br>
+                                                    <img src="/img/id_tem_bac.png" class="img_card_temp" width="100%">
+                                                    <input type="file" class="form-control mt-2" name="id_back" >
+                                                  </div>
+                                                </div>
+
+                                                <div id="pass_cont" class="cont_display_none">
+                                                  <div class="form-group">
+                                                    <label>Passport Front</label>
+                                                    <br>
+                                                    <img src="/img/id_temp_front.png" class="img_card_temp" width="100%">
+                                                    <input type="file" class="form-control upload_inp mt-2" name="pas_id_front" >
+                                                  </div>
+                                                </div>
+
+                                            </div>
+                                          </div>
+
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                      <div class="card">
+                                        <div class="card-header">
+                                          <div class="card-title">{{ __('Proof of Address') }}</div>
+                                        </div>
+                                        <div class="card-body">
+                                          <div class="row">
+                                            <div class="row">
+                                              <div class="col-lg-12">
+
+                                                  <div class="form-group">
+                                                    <h3></h3>
+                                                    <p>
+                                                      {{ __('Valid documents are: Utility bill and Bank statement') }}
+                                                    </p>
+                                                    <input type="file" class="form-control" name="utility_doc" required >
+                                                  </div>
+
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                        </div>
+                                      </div>
+
+                                    </div>
+
+                                    <div class="col-sm-12 mt-5">
+                                      <div class="form-group">
+                                        <button class="collcc btn btn-info float-right">{{ __('Guardar') }}</button>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </form>
+                              
+                            </div>
+                            <!-- End of KYC -->
+
+                            <div class="row">
+                        <div class="col-md-12">
+                        <div class="card">
+                                    <div class="card-header">
+                                        <div class="card-title">{{ __('Cuenta de Banco') }}</div>
+                                    </div>
+                                    <div class="card-body">
+                                        <form class="" method="post" action="/user/add/bank">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Nombre Banco') }}</label>
+                                                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                                        <input type="text" class="form-control" name="bname" required placeholder="Nombre Banco">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Número de Cuenta') }}</label>
+                                                        <input type="text" class="form-control" name="actNo"  required placeholder="Número de Cuenta">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Nombre Cuenta') }}</label>
+                                                        <input type="text" class="form-control" name="act_name" required placeholder="Nombre Cuenta">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <button class="collcc btn btn-info">{{ __('Guardar') }}</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                  </div>
+
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col-md-12">

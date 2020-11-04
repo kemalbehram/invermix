@@ -12,102 +12,57 @@
                                 <div class="card-header card_header_bg_blue" >
                                     <div class="card-head-row card-tools-still-right">
                                         <h4 class="card-title text-white">
-                                            <i class="fas fa-plus"></i>{{ __(' Registrar Nuevo Cliente') }}
+                                            <i class="fas fa-plus"></i>{{ __('Añadir Cliente') }}
                                         </h4>
                                     </div>
                                 </div>
                                 <div class="card-body pb-0 table-responsive">
-                                    <form method="POST" action="{{ route('register') }}">
-                                        <input id="csrf" type="hidden"  name="_token" value="{{ csrf_token() }}" >
+                                   <form id="add_new_pack" action="/admin/users/register'" method="post" >
+                                       @csrf()
                                         <div class="form-group row">
                                             <div class="col-sm-6">
-                                                <label for="Fname" class=" col-form-label text-md-right">{{ __('Nombres') }}</label>
-                                                <input id="Fname" type="text" class="form-control @error('Fname') is-invalid @enderror regTxtBox" name="Fname" value="{{ old('Fname') }}" required autocomplete="Fname" autofocus placeholder="Juan">
-
-                                                @error('Fname')
-                                                    <span class="invalid-feedback" role="alert alert-danger">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                                <label for="package_name">{{ __('Nombres') }}</label>
+                                                <input id="fname" type="text" class="regTxtBox" name="fname" value="" required autocomplete="fname" autofocus placeholder="Juan Antonio">
                                             </div>
-                                             <div class="col-sm-6">
-                                                <label for="Lname" class=" col-form-label text-md-right">{{ __('Apellidos') }}</label>
-                                                <input id="Lname" type="text" class="form-control @error('Lname') is-invalid @enderror regTxtBox" name="Lname" value="{{ old('Lname') }}" required autocomplete="Lname" autofocus placeholder="Pérez">
 
-                                                @error('Lname')
-                                                    <span class="invalid-feedback" role="alert alert-danger">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                            <div class="col-sm-6">
+                                                <label for="lname">{{ __('Apellidos') }}</label>
+                                                <input id="package_name" type="text" class="regTxtBox" name="lname" value="" required autocomplete="lname" autofocus placeholder="Pérez Moronta">
                                             </div>
                                         </div>
-
-                                        <div class="form-group row">
-
-                                            <div class="col-sm-12">
-                                                <label for="email" class=" col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-                                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror regTxtBox" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="juanperez@outlook.com">
-
-                                                @error('email')
-                                                    <span class="invalid-feedback" role="alert alert-danger">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-
-                                            <div class="col-sm-12">
-                                                <label for="username" class=" col-form-label text-md-right">{{ __('Nombre de usuario') }}</label>
-                                                <input id="username" type="username" class="form-control @error('username') is-invalid @enderror regTxtBox" name="username" value="{{ old('username') }}" required autocomplete="username" placeholder="Ej.: Juanp">
-
-                                                @error('username')
-                                                    <span class="invalid-feedback" role="alert alert-danger" >
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
+                                        
                                         <div class="form-group row">
                                             <div class="col-sm-6">
-                                                <label for="password" class=" col-form-label text-md-right">{{ __('Password') }}</label>
-                                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror regTxtBox" name="password" required autocomplete="new-password" placeholder="Contraseña">
-
-                                                @error('password')
-                                                    <span class="invalid-feedback" role="alert alert-danger" >
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                                <label for="email">{{ __('Correo Electrónico') }}</label>
+                                                <input id="email" type="email" class="regTxtBox" name="email" type="email" value="" required autocomplete="email" autofocus placeholder="Correo Electrónico">
                                             </div>
+                                            
                                             <div class="col-sm-6">
-                                                <label for="password-confirm" class=" col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-                                                <input id="password-confirm" type="password" class="form-control regTxtBox" name="password_confirmation" required autocomplete="new-password" placeholder="Confirmar contraseña" >
+                                                <label for="package_name">{{ __('Nombre de usuario') }}</label>
+                                                <input id="username" type="text" class="regTxtBox" name="username" value="" required autocomplete="username" autofocus placeholder="juanp">
                                             </div>
-
                                         </div>
+                                        
+                        
+                                        <div class="form-group row">
+                                        <div class="col-sm-6">
+                                                        <label for="password" class=" col-form-label text-md-right">{{ __('Contraseña') }}</label>
+                                                        <input id="password" type="password" class="regTxtBox" name="password" required autocomplete="new-password" placeholder="Password">
 
-                                        <?php
-                                                    $usn = App\User::where('username', Session::get('ref'))->get();
-                                                ?>
-
-                                                <div class="row">
-                                                    <div class="">
-                                                        <input id="ref" type="hidden" class="form-control" name="ref" value="@if(count($usn) > 0){{Session::get('ref')}}@endif" >
                                                     </div>
-                                                </div>
 
-                                                <div class="">
-                                                    <div class="" align="center">
-                                                        <br><br>
-
-                                                            <button type="submit" class="collc btn btn-primary">
-                                                                {{ __('Registrar') }}
-                                                            </button>
-                                                        <br><br>
+                                            <div class="col-sm-6">
+                                            <label for="password" class=" col-form-label text-md-right">{{ __('Confirmar contraseña') }}</label>
+                                                        <input id="password-confirm" type="password" class="form-control regTxtBox" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm password" >
                                                     </div>
-                                                </div>
+                                        </div>
+                                   </form>
+                                   <div class="form-group row">
+                                        <div class="col-sm-12 text-center">
+                                            <br><br>
+                                            <button class="btn btn-info btn_form" onclick="load_post_ajax('/admin/users/register', 'add_new_pack', 'add_pack')"><i class="fa fa-plus"></i> {{ __('Añadir') }} </button>
+                                        </div>
+                                    </div>
 
                                    <br><br>
                                 </div>

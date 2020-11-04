@@ -17,9 +17,9 @@
                                             <div class="input-group">
                                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text"> {{ __('Search') }} </span>
+                                                    <span class="input-group-text"> {{ __('Buscar') }} </span>
                                                 </div>
-                                                <input type="text" name="search_val" class="form-control" placeholder="Search by Name, Username, email, phone and status">
+                                                <input type="text" name="search_val" class="form-control" placeholder="Buscar por Nombre, usuario, correo, teléfono y status">
                                                 <div class="input-group-append" style="padding: 0px;">
                                                     <button class="fa fa-search btn"></button>
                                                 </div>
@@ -37,8 +37,8 @@
                                         <thead>
                                             <tr>
                                                 <th><i class="fa fa-eye"></i></th>
-                                                <th>{{ __('Nombre de usuario') }}</th>
-                                                <th>{{ __('Username') }}</th>
+                                                <th>{{ __('Nombre Cliente') }}</th>
+                                                <th>{{ __('Usuario') }}</th>
                                                 <th>{{ __('Correo') }}</th>
                                                 <th>{{ __('Teléfono') }}</th>
                                                 <th>{{ __('Status') }}</th>
@@ -60,8 +60,8 @@
                                                 @foreach($users_table as $user)
                                                     <tr>
                                                         <td>
-                                                            <a class="btn btn-info" href="/admin/view/userdetails/{{$user->id}}" title="View user details">
-                                                                <i class="fa fa-eye"> VIEW</i>
+                                                            <a class="btn btn-info" href="/admin/view/userdetails/{{$user->id}}" title="Ver detalles del cliente">
+                                                                <i class="fa fa-eye"> VER</i>
                                                             </a>
                                                         </td>
                                                         <td>{{$user->firstname}} {{$user->lastname}}</td>

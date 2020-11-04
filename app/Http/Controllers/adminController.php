@@ -34,6 +34,7 @@ use App\comments;
 use App\companies;
 use App\currencies;
 
+
 class adminController extends Controller
 {
   private $data_files = [];
@@ -2429,9 +2430,62 @@ public function admAddnew(Request $req)
 
     }
 
+
+
+///////////////////////////////////////////  Register Customers//////////////////////////////////////////////////
+
+public function RegCustomers(Request $req){
+
+if(Session::has('adm') && !empty(Session::get('adm')))
+{
+    $this->token = mt_rand(0000, 9999).strtotime(date("Y-m-d H:i:s"));
+    //Session::forget('ref');
+    $this->email = $req['email'];
+    $this->usr = $req['username'];
+
+    $val = Validator::make($req->all(),[
+        'fname' => 'required|string|max:50',
+        'lname' => 'required|string|max:50',
+        'email' => 'required|email|unique:users',
+        'username' => 'required|string|max:12|unique:users',
+        'password' => 'required|string'
+    ]);
+
+    if($val->fails())
+    {
+        $toast_msg = ['msg' => $val->errors()->first(), 'type' => 'err'];
+        return json_encode($toast_msg);
+    }
+
+    try
+    {
+        
+        $customers = new User;
+        $customers ->firstname = $req->input('fname');
+        $customers ->lastname= $req->input('lname');
+        $customers ->email = $req->input('email');
+        $customers ->username = $req->input('username');
+        $customers ->pwd = Hash::make($req->input('password'));
+        $customers ->status = 1;
+        $customers ->reg_date = date('d-m-Y');
+        $customers ->save();
+    }
+    catch(\Exception $e)
+    {
+        $toast_msg = ['msg' => $e->getMessage(), 'type' => 'err'];
+        return json_encode($toast_msg);
+    }
+
+    $toast_msg = ['msg' => '¡Cliente añadido satisfactoriamente!', 'type' => 'suc'];
+    return json_encode($toast_msg);
 }
+else
+{
+    return redirect('/');
+        }
+    }
 
-
+}
 
 
 

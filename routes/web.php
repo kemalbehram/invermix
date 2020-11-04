@@ -158,17 +158,16 @@ Route::get('/admin/manage/users', function () {
 });
 
 
-Route::get('/admin/users/register', function () {
-	if(Session::has('adm'))
-	{
-		return view('admin.register');
-	}
-	else
-	{
-		return redirect('/back-end');
-	}
 
-});
+Route::get('/admin/users/register', function () {
+
+		return view('admin.register');
+
+	});
+
+Route::post('/admin/users/register', 'adminController@RegCustomers')->name('regcustomers');
+
+
 
 
 Route::get('/admin/manage/xpack_investments', function () {

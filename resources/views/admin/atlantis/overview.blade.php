@@ -27,7 +27,7 @@
                 $dep2 = 0;
             ?>
 						<div id="circles-3"></div>
-						<h6 class="fw-bold mt-3 mb-0">Deposits</h6>
+						<h6 class="fw-bold mt-3 mb-0">Depositos</h6>
             			<span>Inactive: {{count($deposits->where('status', '!=', '1'))}}</span>
 					</div>
 				</div>

@@ -192,7 +192,7 @@
                                         	<a class="dropdown-item" href="/admin/viewlogs">
 												<span class="fa fa-list"></span>&nbsp; Ver Actividades de Usuarios
 											</a>
-											<a class="dropdown-item" href="/admin/view/settings">
+											<a class="dropdown-item" href="">
 												<span class="fa fa-wrench"></span>&nbsp; Ajustes
 											</a>
 										@endif
@@ -240,11 +240,11 @@
 						</li>
 
 						@php($role = Session::get('adm'))
-                        @if($role->role == 3)
+                        @if($role->role == 3 | $role->role == 2)
                         	<li class="nav-item">
 								<a data-toggle="collapse" href="#user_drp">
 									<i class="fa fa-users"></i>
-									<p> Manejar Clientes</p>
+									<p> Manejar Usuarios</p>
 									<span class="caret"></span>
 								</a>
 								<div class="collapse" id="user_drp" >
@@ -328,35 +328,39 @@
 						</li>
 
 
-                        @if($role->role == 3)
+                        @if($role->role == 3 | $role->role == 2)
 							<li class="nav-item">
 								<a data-toggle="collapse" href="#base">
 									<i class="fas fa-wrench"></i>
 									<p>Ajustes</p>
 									<span class="caret"></span>
-								</a>
+                                </a>
+
 								<div class="collapse" id="base">
+
 									<ul class="nav nav-collapse">
+                                    @if($role->role == 3)
 										<li >
 				                        	<a href="/admin/viewlogs">
 												<span class="sub-item">Ver Actividades de Usuarios</span>
 											</a>
 										</li>
-
+                                        @endif
 										<li class="">
 											<a href="/admin/view/settings">
 												<span class="sub-item">Configuraciones</span>
 											</a>
-										</li>
+                                        </li>
+                                        @if($role->role == 3)
 										<li class="">
 											<a href="/admin/profile/settings">
 												<span class="sub-item">Perfil</span>
 											</a>
 										</li>
-
+                                        @endif
 										<li class="">
 											<a href="/admin/profile/kyc">
-												<span class="sub-item">Documentos</span>
+												<span class="sub-item">Documentos Clientes</span>
 											</a>
 										</li>
 

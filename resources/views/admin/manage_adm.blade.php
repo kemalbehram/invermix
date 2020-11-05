@@ -7,22 +7,22 @@
                 <div class="page-inner mt--5">
                     @include('admin.atlantis.overview')
                     <div id="prnt"></div>
-                    
+
                     <div class="row">
                         <div class="col-md-8">
                             <div class="card">
                                 <div class="card-header card_header_bg_blue">
                                     <div class="card-head-row card-tools-still-right">
-                                        <h4 class="card-title text-white">{{ __('Admin Users') }}</h4>                                        
+                                        <h4 class="card-title text-white">{{ __('Usuarios Admin') }}</h4>
                                     </div>
                                     <p class="card-category text-white pl-2">
-                                        {{ __('All admin users.') }}
+                                        {{ __('Todos los usuarios administradores.') }}
                                     </p>
                                 </div>
-                                <div class="card-body">                    
+                                <div class="card-body">
                                     <div class="table-responsive">
-                                        @include('admin.temp.admin')  
-                                    </div>  
+                                        @include('admin.temp.admin')
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -30,21 +30,21 @@
                             <div class="card">
                                 <div class="card-header card_header_bg_blue">
                                     <div class="card-head-row card-tools-still-right">
-                                        <h4 class="card-title pl-2 text-white">{{ __('Add New users') }}</h4>                                        
+                                        <h4 class="card-title pl-2 text-white">{{ __('Añadir Nuevo Usuario') }}</h4>
                                     </div>
                                     <p class="card-category text-white pl-2">
-                                        {{ __('Create new admin users.') }}
+                                        {{ __('Crear usuario administrador.') }}
                                     </p>
                                 </div>
-                                <div class="card-body">                    
+                                <div class="card-body">
                                     <div class="table-responsive">
-                                        @include('admin.temp.add_new_admin')  
-                                    </div>  
+                                        @include('admin.temp.add_new_admin')
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
 @endSection

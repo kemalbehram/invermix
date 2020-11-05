@@ -18,44 +18,44 @@
         $mDep = App\deposits::where('created_at', 'like', '%'.date('Y-m').'%')->where('status', 1)->orderby('created_at', 'asc')->get();
         $mWd = App\Withdrawal::where('w_date', 'like', '%'.date('Y-m').'%')->where('status', 'Approved')->orderby('w_date', 'asc')->get();
     }
-    
+
 ?>
 
 <div class="row">
-    <div class="col-sm-12 float-right" align="" style="">        
+    <div class="col-sm-12 float-right" align="" style="">
         <form id="search_form" action="/admin/search/stat" method="post">
-            <label><b>Search (YYYY-MM):</b></label>
+            <label><b>Buscar (YYYY-MM):</b></label>
             <div class="input-group margin_top_10" >
-                <input type="hidden" name="_token" value="{{csrf_token()}}"> 
-                <div class="input-group-prepend">               
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                <div class="input-group-prepend">
                     <span class="input-group-text span_bg" style="">
                         <i class="fa fa-calendar"></i>
                     </span>
                 </div>
                 <input type="text" name="search_val" class="form-control input_height_45" required placeholder="2019-09">
-                <div class="input-group-append span_bg">                     
+                <div class="input-group-append span_bg">
                     <button class="span_bg btn_prepend search_btn_append"><i class="fa fa-search"></i></button>
                 </div>
             </div>
         </form>
-                                                    
+
     </div>
     <div class="col-sm-12" align="center" style=" padding-top: 30px;">
-        <h4 id="search_mt" align="right">            
-            Result for: &nbsp; 
+        <h4 id="search_mt" align="right">
+            Resultado para: &nbsp;
             @if(Session::has('val'))
                 {{$num.'-'.$datpart[0]}}
             @else
                 {{date('M-Y')}}
             @endif
-            @php(Session::forget('val'))            
+            @php(Session::forget('val'))
         </h4>
     </div>
 
 </div>
 
-<div class="row margin_top_10"> 
-    <div class="col-sm-3 btn_prepend" onclick="load_Stat()">        
+<div class="row margin_top_10">
+    <div class="col-sm-3 btn_prepend" onclick="load_Stat()">
         <div class="card card-stats card-primary card-round">
             <div class="card-body">
                 <div class="row">
@@ -66,8 +66,8 @@
                     </div>
                     <div class="col-7 col-stats">
                         <div class="numbers">
-                            <p class="card-category">Users</p>
-                            <h4 id="uCount" class="card-title">{{count($musers)}}</h4>                            
+                            <p class="card-category">Clientes</p>
+                            <h4 id="uCount" class="card-title">{{count($musers)}}</h4>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
         @php($dep = 0)
         @php($dep2 = 0)
         @foreach($mInv as $in)
-            @php($dep = $dep + intval($in->capital) )                       
+            @php($dep = $dep + intval($in->capital) )
         @endforeach
         <div class="card card-stats card-success card-round">
             <div class="card-body">
@@ -91,21 +91,21 @@
                     </div>
                     <div class="col-9 col-stats">
                         <div class="numbers">
-                            <p class="card-category">Investment</p>
+                            <p class="card-category">Inversiones</p>
                             <h4 id="iCount" class="card-title">{{$settings->currency}} {{ $dep }}</h4>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
     </div>
 
     <div class="col-sm-3 btn_prepend" onclick="load_dStat()">
         @php($dep = 0)
         @php($dep2 = 0)
-        @foreach($mDep as $in)                        
-            @php($dep = $dep + intval($in->amount) )                        
+        @foreach($mDep as $in)
+            @php($dep = $dep + intval($in->amount) )
         @endforeach
         <div class="card card-stats card-secondary  card-round">
             <div class="card-body">
@@ -117,20 +117,20 @@
                     </div>
                     <div class="col-9 col-stats">
                         <div class="numbers">
-                            <p class="card-category">Deposits</p>
+                            <p class="card-category">Depositos</p>
                             <h4 id="dCount" class="card-title">{{$settings->currency}} {{$dep}}</h4>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
 
-    <div class="col-sm-3 btn_prepend" onclick="load_wStat()">        
+    <div class="col-sm-3 btn_prepend" onclick="load_wStat()">
         @php($dep = 0)
         @php($dep2 = 0)
-        @foreach($mWd as $in)                        
-            @php($dep = $dep + intval($in->amount) )                        
+        @foreach($mWd as $in)
+            @php($dep = $dep + intval($in->amount) )
         @endforeach
         <div class="card card-stats card-warning card-round">
             <div class="card-body">
@@ -142,24 +142,24 @@
                     </div>
                     <div class="col-9 col-stats">
                         <div class="numbers">
-                            <p class="card-category">Withdrawal</p>
+                            <p class="card-category">Retiros</p>
                             <h4 id="wCount" class="card-title">{{$settings->currency}} {{$dep}}</h4>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>   
-        
+        </div>
+
     </div>
-    
+
     <div class="col-sm-12">
         <div align="center">
             <span id="adminStatChart_m_legend" class="admin_stat_legend" align="center"></span>
-        </div> 
+        </div>
         <div id="cart_cont" class="chart-container" style="min-height: 375px">
             <canvas id="adminStatChart_m"></canvas>
         </div>
-                  
+
     </div>
 
 </div>
@@ -167,34 +167,34 @@
 
 
 <?php
-       
+
         $musersDate = $mInvDate = $mDepDate = $mWdDate = [];
-        $musersVal = $mInvVal = $mDepval = $mWdVal = [];  
+        $musersVal = $mInvVal = $mDepval = $mWdVal = [];
         $pt = "";
         $cnt = 0;
         $sum_cap = 0;
 
         foreach ($musers as $in) {
             if($pt != date('Y-m-d', strtotime($in->created_at)))
-            {           $sum_cap = 0;    
+            {           $sum_cap = 0;
                 $pt = date('Y-m-d', strtotime($in->created_at));
                 $musersDate[$cnt] = date('d/m/y', strtotime($in->created_at));
-                $m_count = App\withdrawal::where('created_at', 'like','%'.$pt.'%')->get();                
+                $m_count = App\withdrawal::where('created_at', 'like','%'.$pt.'%')->get();
                 $musersVal[$cnt] = count($m_count);
                 $sum_cap = 0;
                 $cnt += 1;
             }
-        } 
+        }
         $pt = "";
         $cnt = 0;
         $sum_cap = 0;
         foreach ($mInv as $in) {
             if($pt != date('Y-m-d', strtotime($in->created_at)))
-            {               
+            {
                 $pt = date('Y-m-d', strtotime($in->created_at));
                 $mInvDate[$cnt] = date('d/m/y', strtotime($in->created_at));
                 $m_count = App\withdrawal::where('created_at', 'like','%'.$pt.'%')->get();
-                foreach ($m_count as $n) 
+                foreach ($m_count as $n)
                 {
                     $sum_cap += $n->amount;
                 }
@@ -202,17 +202,17 @@
                 $sum_cap = 0;
                 $cnt += 1;
             }
-        } 
+        }
         $pt = "";
         $cnt = 0;
         $sum_cap = 0;
         foreach ($mDep as $in) {
             if($pt != date('Y-m-d', strtotime($in->created_at)))
-            {               
+            {
                 $pt = date('Y-m-d', strtotime($in->created_at));
                 $mDepDate[$cnt] = date('d/m/y', strtotime($in->created_at));
                 $m_count = App\withdrawal::where('created_at', 'like','%'.$pt.'%')->orderby('id', 'desc')->get();
-                foreach ($m_count as $n) 
+                foreach ($m_count as $n)
                 {
                     $sum_cap += $n->amount;
                 }
@@ -226,11 +226,11 @@
         $sum_cap = 0;
         foreach ($mWd as $in) {
             if($pt != date('Y-m-d', strtotime($in->created_at)))
-            {               
+            {
                 $pt = date('Y-m-d', strtotime($in->created_at));
                 $mWdDate[$cnt] = date('d/m/y', strtotime($in->created_at));
                 $m_count = App\withdrawal::where('created_at', 'like','%'.$pt.'%')->orderby('id', 'desc')->get();
-                foreach ($m_count as $n) 
+                foreach ($m_count as $n)
                 {
                     $sum_cap += $n->amount;
                 }
@@ -238,7 +238,7 @@
                 $cnt += 1;
                 $sum_cap = 0;
             }
-        }            
+        }
     ?>
 
     <script type="text/javascript">
@@ -249,18 +249,18 @@
         var mInvVal = JSON.parse('{!! json_encode($mInvVal) !!}');
 
         var mDepDate = JSON.parse('{!! json_encode($mDepDate) !!}');
-        var mDepval = JSON.parse('{!! json_encode($mDepval) !!}'); 
+        var mDepval = JSON.parse('{!! json_encode($mDepval) !!}');
 
         var mWdDate = JSON.parse('{!! json_encode($mWdDate) !!}');
         var mWdVal = JSON.parse('{!! json_encode($mWdVal) !!}');
 
         $('#search_form').submit(function(e){
             e.preventDefault();
-            var data = new FormData(document.getElementById('search_form'));            
+            var data = new FormData(document.getElementById('search_form'));
             $.ajax
             ({
                 url: "/admin/search/stat",
-                type: "post",                
+                type: "post",
                 data: data,
                 dataType: "json",
                 cache: false,
@@ -285,16 +285,16 @@
                     $('#iCount').html(str[9]);
                     $('#dCount').html(str[10]);
                     $('#wCount').html(str[11]);
-                    $('#search_mt').text('Result for: '+str[12]);
+                    $('#search_mt').text('Resultador para: '+str[12]);
                     loadStat(musersDate, musersVal);
 
                 },
-                error: function (xhr) {                     
-                    alert(xhr.responseText)                     
+                error: function (xhr) {
+                    alert(xhr.responseText)
                 }
-               
-            }); 
-            
+
+            });
+
         });
 
 
@@ -309,9 +309,9 @@
             var adminStatChart_m = new Chart(ctx2, {
                 type: 'line',
                 data: {
-                    labels: statDate, 
-                    datasets: 
-                    [ 
+                    labels: statDate,
+                    datasets:
+                    [
                         {
                             label: "Value",
                             borderColor: '#08C',
@@ -321,13 +321,13 @@
                             legendColor: '#08C',
                             fill: true,
                             borderWidth: 2,
-                            data: statVal //[154, 184, 175] 
-                        }, 
-                      
+                            data: statVal //[154, 184, 175]
+                        },
+
                     ]
                 },
                 options : {
-                    responsive: true, 
+                    responsive: true,
                     maintainAspectRatio: false,
                     legend: {
                         display: false
@@ -366,20 +366,20 @@
                                 fontStyle: "500"
                             }
                         }]
-                    }, 
-                    legendCallback: function(chart) { 
-                        var text = []; 
-                        text.push('<ul class="' + chart.id + '-legend html-legend">'); 
-                        for (var i = 0; i < chart.data.datasets.length; i++) { 
-                            text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>'); 
-                            if (chart.data.datasets[i].label) { 
-                                text.push(chart.data.datasets[i].label); 
-                            } 
-                            text.push('</li>'); 
-                        } 
-                        text.push('</ul>'); 
-                        return text.join(''); 
-                    }  
+                    },
+                    legendCallback: function(chart) {
+                        var text = [];
+                        text.push('<ul class="' + chart.id + '-legend html-legend">');
+                        for (var i = 0; i < chart.data.datasets.length; i++) {
+                            text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>');
+                            if (chart.data.datasets[i].label) {
+                                text.push(chart.data.datasets[i].label);
+                            }
+                            text.push('</li>');
+                        }
+                        text.push('</ul>');
+                        return text.join('');
+                    }
                 }
             });
 
@@ -395,7 +395,7 @@
             }
 
 
-            
+
         }
 
         $('#adminStatChart_m_legend').text('User Statistics');
@@ -404,22 +404,22 @@
 
         function load_Stat(){
             $('#adminStatChart_m_legend').text('User Statistics');
-            loadStat(musersDate, musersVal);            
+            loadStat(musersDate, musersVal);
         }
 
         function load_iStat(){
             $('#adminStatChart_m_legend').text('Investment Statistics');
-            loadStat(mInvDate, mInvVal);            
+            loadStat(mInvDate, mInvVal);
         }
 
         function load_dStat(){
             $('#adminStatChart_m_legend').text('Deposits Statistics');
-            loadStat(mDepDate, mDepval);            
+            loadStat(mDepDate, mDepval);
         }
 
         function load_wStat(){
             $('#adminStatChart_m_legend').text('Withdrawal Statistics');
-            loadStat(mWdDate, mWdVal);            
+            loadStat(mWdDate, mWdVal);
         }
-        
+
     </script>

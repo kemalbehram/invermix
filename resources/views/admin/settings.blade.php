@@ -9,12 +9,16 @@
                     <div class="col-sm-12 card">
                       <form id="settings_form" action="/admin/update/site/settings" method="post">
                         <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
+                        @php($role = Session::get('adm'))
+                        @if($role->role == 3)
                           <li class="nav-item">
-                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">General</a>
+                            <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">General</a>
                           </li>
+
                           <li class="nav-item">
                             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Deposit</a>
                           </li>
+
                           <li class="nav-item">
                             <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Withdrawal</a>
                           </li>
@@ -27,8 +31,9 @@
                           <li class="nav-item">
                             <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#payment_setting_tab" role="tab" aria-controls="pills-contact" aria-selected="false">Payment Methods</a>
                           </li>
+                          @endif
                           <li class="nav-item">
-                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#currency_config" role="tab" aria-controls="pills-contact" aria-selected="false">Monedas</a>
+                            <a class="nav-link active" id="pills-contact-tab" data-toggle="pill" href="#currency_config" role="tab" aria-controls="pills-contact" aria-selected="false">Monedas</a>
                           </li>
 
 
@@ -36,7 +41,7 @@
                         </ul>
 
                         <div class="tab-content" id="pills-tabContent">
-                          <div class="p-5 tab-pane fade show active" id="pills-home" role="tabpanel" >
+                          <div class="p-5 tab-pane " id="pills-home" role="tabpanel" >
                             <div class="form-group">
                               <div class="row">
                                 <div class="col-md-6" align="">
@@ -130,7 +135,7 @@
                           </div>
 
                             <!-- @foreach($currencies as $curr) -->
-                          <div class="p-5 tab-pane fade" id="currency_config" role="tabpanel" >
+                          <div class="p-5 tab-pane fade show active "  id="currency_config" role="tabpanel" >
                             <div class="row">
 
                                  <div   class="col-md-6 ">
@@ -139,7 +144,7 @@
                                           <input type="text" name="cur_rd" value="{{$curr->currency_rd}}" class="form-control" placeholder="currency symbol or code" required >
                                       </div>
                                   </div>
-                                  
+
                                   <div   class="col-md-6">
                                       <div class="card form-group pad_20" >
                                           <h5> {{ __('Valor de moneda en dolar EE.UU.') }} </h5>
@@ -147,7 +152,7 @@
                                       </div>
                                   </div>
                             </div>
-                           
+
                             <div class="row">
                                  <div   class="col-md-6 ">
                                       <div class="card pad_20" >

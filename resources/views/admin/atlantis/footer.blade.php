@@ -1,9 +1,9 @@
 			<footer class="foot">
-				<div class="container-fluid">					
+				<div class="container-fluid">
 					<div class="copyright" align="center">
 					    <?php $settings = App\site_settings::find(1); ?>
 					    Copyright &#169; <a href="/">{{$settings->site_title}}</a> {{ date("Y") }}. All Rights Reserved.
-					</div>				
+					</div>
 				</div>
 			</footer>
 		</div>
@@ -17,7 +17,7 @@
                 editor1.on('change', function () {
                     editor1.save();
                 });
-            },            
+            },
 	        plugins: [
 	            'advlist autolink lists link image charmap print preview hr anchor pagebreak',
 	            'searchreplace wordcount visualblocks visualchars code fullscreen',
@@ -29,7 +29,7 @@
 	        image_advtab: true,
         });
     </script>
-	
+
 	<script>
 		Circles.create({
 			id:'circles-1',
@@ -152,7 +152,7 @@
 			lineWidth: '2',
 			lineColor: '#ffa534',
 			fillColor: 'rgba(255, 165, 52, .14)'
-		});	
+		});
 
 	</script>
 
@@ -163,20 +163,20 @@
 		// $inv = App\deposits::whereBetween('date_invested',    [$from, $nw])->orderby('id', 'asc')->get();
 
 		$inv_dates = [];
-		$inv_vals = [];	
+		$inv_vals = [];
 
 		$dep_dates = [];
-		$dep_vals = [];	
+		$dep_vals = [];
 
 		$pt = "";
 		$cnt = 0;
 		foreach ($inv as $in) {
 			if($pt != date('Y-m', strtotime($in->date_invested)))
-			{				
+			{
 				$pt = date('Y-m', strtotime($in->date_invested));
 				$inv_dates[$cnt] = date('m/y', strtotime($in->date_invested));
 				$m_count = App\investment::where('date_invested', 'like','%'.date('Y-m', strtotime($in->date_invested)).'%')->orderby('id', 'asc')->get();
-				foreach ($m_count as $n) 
+				foreach ($m_count as $n)
 				{
 					$sum_cap += $n->capital;
 				}
@@ -187,17 +187,17 @@
 	/////////////////////// for deposits //////////////////
 
 		$nw = date('Y-m-d H:s:i');
-		$from = date('Y-m-d H:s:i', strtotime($nw. "-12 months"));			
+		$from = date('Y-m-d H:s:i', strtotime($nw. "-12 months"));
 		$dep_st = App\deposits::whereBetween('created_at',    [$from, $nw])->orderby('id', 'asc')->get();
 		$pt = "";
 		$cnt = 0;
 		foreach ($dep_st as $in) {
 			if($pt != date('Y-m', strtotime($in->created_at)))
-			{				
+			{
 				$pt = date('Y-m', strtotime($in->created_at));
 				$dep_dates[$cnt] = date('m/y', strtotime($in->created_at));
 				$m_count = App\deposits::where('created_at', 'like','%'.date('Y-m', strtotime($in->created_at)).'%')->orderby('id', 'asc')->get();
-				foreach ($m_count as $n) 
+				foreach ($m_count as $n)
 				{
 					$sum_cap += $n->amount;
 				}
@@ -205,10 +205,10 @@
 				$cnt += 1;
 			}
 		}
-		
+
 	?>
 	<script type="text/javascript">
-		
+
 		var inv_dates = JSON.parse('{!! json_encode($inv_dates) !!}');
 		var inv_vals = JSON.parse('{!! json_encode($inv_vals) !!}');
 		var dep_dates = JSON.parse('{!! json_encode($dep_dates) !!}');
@@ -219,11 +219,11 @@
 		var adminStatisticsChart2 = new Chart(ctx2, {
 			type: 'line',
 			data: {
-				labels: inv_dates, 
-				datasets: 
-				[ 
+				labels: inv_dates,
+				datasets:
+				[
 					{
-						label: "Investment Stats",
+						label: "Estadísticas de Inversión",
 						borderColor: '#08C',
 						pointBackgroundColor: 'rgba(0, 84, 180, 0.6)',
 						pointRadius: 0,
@@ -231,10 +231,10 @@
 						legendColor: '#08C',
 						fill: true,
 						borderWidth: 2,
-						data: inv_vals //[154, 184, 175] 
-					}, 
+						data: inv_vals //[154, 184, 175]
+					},
 					{
-						label: "Deposit Stats",
+						label: "Estadísticas de Dépositos",
 						borderColor: '#0C8',
 						pointBackgroundColor: 'rgba(0, 184, 80, 0.6)',
 						pointRadius: 0,
@@ -242,13 +242,13 @@
 						legendColor: '#0c8',
 						fill: true,
 						borderWidth: 2,
-						data: dep_vals //[154, 184, 175] 
-					}, 
-					
+						data: dep_vals //[154, 184, 175]
+					},
+
 				]
 			},
 			options : {
-				responsive: true, 
+				responsive: true,
 				maintainAspectRatio: false,
 				legend: {
 					display: false
@@ -287,20 +287,20 @@
 							fontStyle: "500"
 						}
 					}]
-				}, 
-				legendCallback: function(chart) { 
-					var text = []; 
-					text.push('<ul class="' + chart.id + '-legend html-legend">'); 
-					for (var i = 0; i < chart.data.datasets.length; i++) { 
-						text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>'); 
-						if (chart.data.datasets[i].label) { 
-							text.push(chart.data.datasets[i].label); 
-						} 
-						text.push('</li>'); 
-					} 
-					text.push('</ul>'); 
-					return text.join(''); 
-				}  
+				},
+				legendCallback: function(chart) {
+					var text = [];
+					text.push('<ul class="' + chart.id + '-legend html-legend">');
+					for (var i = 0; i < chart.data.datasets.length; i++) {
+						text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>');
+						if (chart.data.datasets[i].label) {
+							text.push(chart.data.datasets[i].label);
+						}
+						text.push('</li>');
+					}
+					text.push('</ul>');
+					return text.join('');
+				}
 			}
 		});
 
@@ -320,39 +320,39 @@
 
 	<?php
 		$nw = date('Y-m-d H:s:i');
-		$from = date('Y-m-d H:s:i', strtotime($nw. "-12 months"));			
+		$from = date('Y-m-d H:s:i', strtotime($nw. "-12 months"));
 		$wd_st = App\withdrawal::whereBetween('created_at',    [$from, $nw])->orderby('id', 'asc')->get();
 		$inv_dates = [];
-		$inv_vals = [];	
+		$inv_vals = [];
 		$pt = "";
 		$cnt = 0;
 		foreach ($wd_st as $in) {
 			if($pt != date('Y-m', strtotime($in->created_at)))
-			{				
+			{
 				$pt = date('Y-m', strtotime($in->created_at));
 				$inv_dates[$cnt] = date('m/y', strtotime($in->created_at));
 				$m_count = App\withdrawal::where('created_at', 'like','%'.date('Y-m', strtotime($in->created_at)).'%')->orderby('id', 'asc')->get();
-				foreach ($m_count as $n) 
+				foreach ($m_count as $n)
 				{
 					$sum_cap += $n->amount;
 				}
 				$inv_vals[$cnt] = $sum_cap;
 				$cnt += 1;
 			}
-		}		
+		}
 	?>
 
 	<script type="text/javascript">
 
 		var inv_dates = JSON.parse('{!! json_encode($inv_dates) !!}');
-		var inv_vals = JSON.parse('{!! json_encode($inv_vals) !!}');	
-		
+		var inv_vals = JSON.parse('{!! json_encode($inv_vals) !!}');
+
 		// $.each( js_inv, function( k, val ) {
 	 //        // $('#prnt').append(', ' +ky+": "+val['created_at']);
 	 //        var dt = moment(new Date(val['created_at'])).format('MM/YY'); //new Date(val['created_at']);
 	 //        inv_dates[k] = dt; // dt.getMonth() + '/'+ dt.getFullYear();
 	 //        inv_vals[k] = val['amount'];
-	 //    }); 
+	 //    });
 
 		var ctx = document.getElementById('wd_stats').getContext('2d');
 
@@ -360,9 +360,9 @@
 			type: 'line',
 			scaleFontColor: '#CCC',
 			data: {
-				labels: inv_dates, //["Jan", "Feb", "Mar"], 
-				datasets: 
-				[ 
+				labels: inv_dates, //["Jan", "Feb", "Mar"],
+				datasets:
+				[
 					{
 						label: "Withdrawal Stats",
 						borderColor: '#FFF',
@@ -372,13 +372,13 @@
 						legendColor: '#CCC',
 						fill: true,
 						borderWidth: 2,
-						data: inv_vals //[154, 184, 175] 
-					} 
-					
+						data: inv_vals //[154, 184, 175]
+					}
+
 				]
 			},
-			options : {				
-				responsive: true, 
+			options : {
+				responsive: true,
 				maintainAspectRatio: false,
 				legend: {
 					display: false
@@ -402,7 +402,7 @@
 							beginAtZero: false,
 							maxTicksLimit: 5,
 							padding: 10,
-							fontColor: "#CCC",							
+							fontColor: "#CCC",
 						},
 						gridLines: {
 							drawTicks: false,
@@ -422,24 +422,24 @@
 							fontColor: "#CCC",
 						}
 					}]
-				}, 
-				legendCallback: function(chart) { 
-					var text = []; 
-					text.push('<ul class="' + chart.id + '-legend html-legend">'); 
-					for (var i = 0; i < chart.data.datasets.length; i++) { 
-						text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>'); 
-						if (chart.data.datasets[i].label) { 
-							text.push(chart.data.datasets[i].label); 
-						} 
-						text.push('</li>'); 
-					} 
-					text.push('</ul>'); 
-					return text.join(''); 
-				}  
+				},
+				legendCallback: function(chart) {
+					var text = [];
+					text.push('<ul class="' + chart.id + '-legend html-legend">');
+					for (var i = 0; i < chart.data.datasets.length; i++) {
+						text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>');
+						if (chart.data.datasets[i].label) {
+							text.push(chart.data.datasets[i].label);
+						}
+						text.push('</li>');
+					}
+					text.push('</ul>');
+					return text.join('');
+				}
 			}
 		});
 
-		
+
 	</script>
 	{{ homeLogin() }}
 	<script >
@@ -507,13 +507,13 @@
 
 	@include('user.inc.alert')
 
-	@if(Session::has('status')  && Session::get('msgType') == 'suc')         
-	    <script type="text/javascript">            
+	@if(Session::has('status')  && Session::get('msgType') == 'suc')
+	    <script type="text/javascript">
 	        $('#succ').show();
 	    </script>
 	    {{Session::forget('status')}}
-	    {{Session::forget('msgType')}}         
-	@elseif(Session::has('status')  && Session::get('msgType') == 'err')        
+	    {{Session::forget('msgType')}}
+	@elseif(Session::has('status')  && Session::get('msgType') == 'err')
 	    <script type="text/javascript">
 	        $('#errr_msg').html('{{Session::get('status')}}');
 	        $('#errr').show();

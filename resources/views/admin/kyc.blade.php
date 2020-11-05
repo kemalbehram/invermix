@@ -25,7 +25,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                    </div>                                                                             
+                                    </div>
                                 </div>
                                 <?php
                                     if(Session::has('val'))
@@ -35,38 +35,38 @@
                                 ?>
                                 <!-- <p class="card-category text-white" > {{ __('All registered users.') }} </p> -->
                             </div>
-                            <div class="card-body">                                
+                            <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="" class="table  table-hover" >
                                         <thead>
-                                            <tr>                                                                                                
-                                                <th>{{ __('Username') }}</th>
-                                                <th>{{ __('Selfie') }}</th>
-                                                <th>{{ __('Card Type') }}</th>
-                                                <th>{{ __('Card Front') }}</th>
-                                                <th>{{ __('Card Back') }}</th>
+                                            <tr>
+                                                <th>{{ __('Nombre de usuario') }}</th>
+                                                <!-- <th>{{ __('Selfie') }}</th> -->
+                                                <th>{{ __('Tipo Documento') }}</th>
+                                                <th>{{ __('Parte Frontal') }}</th>
+                                                <th>{{ __('Parte Trasera') }}</th>
                                                 <th>{{ __('Proof Of Address') }}</th>
                                                 <th>{{ __('Status') }}</th>
-                                                <th>{{ __('Manage') }}</th>
+                                                <th>{{ __('Manejar') }}</th>
                                             </tr>
-                                        </thead>                                        
+                                        </thead>
                                         <tbody>
-                                            
+
                                             @if(count($kyc) > 0 )
                                                 @foreach($kyc as $user)
                                                     <tr>
-                                                        <td>{{$user->username}}</td>                                                        
-                                                        <td>
+                                                        <td>{{$user->username}}</td>
+                                                        <!-- <td>
                                                             <a href="{{ env('APP_URL').'/img/kyc/'.$user->selfie }}" class=" text-info">
                                                                 <i class="fa fa-download"></i>Download
                                                             </a>
-                                                        </td> 
+                                                        </td> -->
                                                         <td>{{$user->card_type}}</td>
                                                         <td>
                                                             <a href="{{ env('APP_URL').'/img/kyc/'.$user->front_card }}" class=" text-info">
                                                                 <i class="fa fa-download"></i>Download
                                                             </a>
-                                                        </td>  
+                                                        </td>
                                                         <td>
                                                             @if(!empty($user->back_card))
                                                             <a href="{{ env('APP_URL').'/img/kyc/'.$user->back_card }}" class=" text-info">
@@ -76,13 +76,13 @@
                                                         <td>
                                                             <a href="{{ env('APP_URL').'/img/kyc/'.$user->address_proof }}" class=" text-info">
                                                                 <i class="fa fa-download"></i>Download
-                                                            </a>                                                            
+                                                            </a>
                                                         </td>
                                                         <td>
                                                             @if($user->status == 1 )
-                                                                {{__('Verified')}}
+                                                                {{__('Verificado')}}
                                                             @elseif($user->status == 0)
-                                                                {{__('Pending')}}
+                                                                {{__('Pendiente')}}
                                                             @endif
                                                         </td>
                                                         <td>
@@ -92,27 +92,26 @@
                                                             <a title="Reject" href="{{ route('admin_kyc.reject_kyc', ['id' => $user->id]) }}" class=" text-danger">
                                                                 <i class="fa fa-times"></i>
                                                             </a>
-                                                        </td>                                     
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             @else
-                                                
+
                                             @endif
                                         </tbody>
                                     </table>
                                     <div class="" align="">
-                                       <span> {{$kyc->links()}}</span>  
+                                       <span> {{$kyc->links()}}</span>
                                     </div>
                                 </div>
-                                      
+
 
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
 
 @endSection
-            

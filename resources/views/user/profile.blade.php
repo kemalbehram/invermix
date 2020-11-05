@@ -76,13 +76,13 @@
                                                       $state = App\states::find($user->state);
                                                   ?>
 
-                                                  <div align="center" style="">
+                                                  <!-- <div align="center" style="">
                                                       <b>Referral link:</b><br>
                                                       <div style="color: #c60; font-size: 13px; word-wrap: break-word;">
                                                           {{env('APP_URL').__('/register/').$user->username}}
                                                       </div>
                                                       <br>
-                                                  </div>
+                                                  </div> -->
 
                                               </div>
                                           </div>

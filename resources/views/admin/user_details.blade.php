@@ -242,7 +242,7 @@
                                 <div class="card-body pb-0">
                                     <form class="" method="post" action="/admin/change/user/pwd">
                                         <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                        <input type="hidden" name="uid" value="100">
+                                        <input type="hidden" name="uid" value="{{ $user->id }}">
                                         <div class="form-group">
                                             <label> {{ __('Nueva Contraseña') }} </label>
                                             <input type="password" class="form-control" name="newpwd" placeholder="Nueva Contraseña" required>
@@ -294,7 +294,7 @@
 
                                                   </div>
                                                 </div>
-                                                
+
                                                 <div class="form-group">
                                                   <h3>{{ __('Documento de Identidad') }}</h3>
                                                   <p>
@@ -349,7 +349,7 @@
                                     <div class="col-sm-6">
                                       <div class="card">
                                         <div class="card-header">
-                                          <div class="card-title">{{ __('Proof of Address') }}</div>
+                                          <div class="card-title">{{ __('Formulario Conoce tu Cliente') }}</div>
                                         </div>
                                         <div class="card-body">
                                           <div class="row">
@@ -359,7 +359,7 @@
                                                   <div class="form-group">
                                                     <h3></h3>
                                                     <p>
-                                                      {{ __('Valid documents are: Utility bill and Bank statement') }}
+                                                      {{ __('Para clientes cuya inversión sea superior a RD$500,000 o equivalente en dolares.') }}
                                                     </p>
                                                     <input type="file" class="form-control" name="utility_doc" required >
                                                   </div>
@@ -448,7 +448,8 @@
                                                 <th> {{ __('Nombre Banco') }} </th>
                                                 <th> {{ __('Número de Cuenta') }} </th>
                                                 <th> {{ __('Nombre de Cuenta') }} </th>
-                                                
+                                                <th data-field="company" >Acciones</th>
+
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -456,7 +457,8 @@
                                                 <th> {{ __('Nombre Banco') }} </th>
                                                 <th> {{ __('Número de Cuenta') }} </th>
                                                 <th> {{ __('Nombre de Cuenta') }} </th>
-                                                
+                                                <th data-field="company" >Acciones</th>
+
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -470,7 +472,11 @@
                                                         <td>{{$bank->Account_name}}</td>
                                                         <td>{{$bank->Account_number}}</td>
                                                         <td>
+                                                                <a class="btn btn-danger" href="/view/userdetails/remove/bankaccount/{{$bank->id}}" title="Remove">
+                                                                    <i class="fa fa-times"></i>
+                                                                </a>
                                                         </td>
+
                                                     </tr>
                                                 @endforeach
                                             @endif

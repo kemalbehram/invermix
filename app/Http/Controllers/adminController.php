@@ -213,12 +213,16 @@ class adminController extends Controller
 
   public function changeUserPwd(Request $req)
   {
+
+    // dd($req);
+    // die();
+
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
 
       if($req->input('newpwd') != $req->input('cpwd'))
       {
-        Session::put('status', "Password do not match!");
+        Session::put('status', "Contrasenas no coinciden.");
         Session::put('msgType', "err");
         return back();
       }
@@ -233,17 +237,17 @@ class adminController extends Controller
         $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
-        $act->action = "Changed User Password. User_id: ".$req->input('uid');
+        $act->action = "Contrasena cambiada. User_id: ".$req->input('uid');
         $act->save();
 
-        Session::put('status', "Successful");
+        Session::put('status', "Satisfactoriamente.");
         Session::put('msgType', "suc");
         return back();
 
       }
       catch(\Exception $e)
       {
-        Session::put('status', "Error saving password! Try again");
+        Session::put('status', "Error actualizando contrasena. Intenta otra vez.");
         Session::put('msgType', "err");
         return back();
       }
@@ -2574,7 +2578,7 @@ else
   {
 
        $user = $req->uid;
-       
+
      	if(!empty($user))
      	{
       	try
@@ -2611,6 +2615,42 @@ else
   }
 
 
+
+  /////////////////////////////DELETE BANK ACCOUNT//////////////////////////////
+
+
+  public function deleteBankAccount($id)
+  {
+
+     	if(!empty($id))
+     	{
+
+      	try
+      	{
+              $bank = banks::where('id', $id)->delete();
+
+
+              Session::put('status', "Cuenta de banco borrado satisfactoriamente.");
+              Session::put('msgType', "suc");
+              return back();
+
+      	}
+      	catch(\Exception $e)
+      	{
+          Session::put('status', 'Error guardando los datos. Intente nuevamente.');
+          Session::put('msgType', "err");
+          return back();
+      	}
+
+     	}
+     	else
+     	{
+     		return redirect('/');
+     	}
+
+  }
+
+
   /////////////////////////////KYC//////////////////////////////
 
 
@@ -2630,7 +2670,7 @@ else
           $file = $req->file('id_back');
           $file->move(base_path().'/../img/kyc/', $user->username."_id_back.jpg");
           $file = $req->file('utility_doc');
-          $file->move(base_path().'/../img/kyc/', $user->username."_utility_doc.jpg");
+          $file->move(base_path().'/../img/kyc/', $user->username."_utility_doc.pdf");
 
           $kyc = new kyc;
           $kyc->user_id = $req->uid;
@@ -2639,7 +2679,7 @@ else
           // $kyc->selfie = $req->username."_selfie.jpg";
           $kyc->front_card = $req->username."_id_front.jpg";
           $kyc->back_card = $req->username."_id_back.jpg";
-          $kyc->address_proof = $req->username."_utility_doc.jpg";
+          $kyc->address_proof = $req->username."_utility_doc.pdf";
 
           $kyc->save();
 
@@ -2666,7 +2706,7 @@ else
           $file = $req->file('pas_id_front');
           $file->move(base_path().'/../img/kyc/', $req->username."_pas_id_front.jpg");
           $file = $req->file('utility_doc');
-          $file->move(base_path().'/../img/kyc/', $req->username."_utility_doc.jpg");
+          $file->move(base_path().'/../img/kyc/', $req->username."_utility_doc.pdf");
 
           $kyc = new kyc;
           $kyc->user_id = $req->uid;
@@ -2674,7 +2714,7 @@ else
           // $kyc->selfie = $req->username."_selfie.jpg";
           $kyc->card_type = $req['cardtype'];
           $kyc->front_card = $req->username."_id_front.jpg";
-          $kyc->address_proof = $req->username."_utility_doc.jpg";
+          $kyc->address_proof = $req->username."_utility_doc.pdf";
 
           $kyc->save();
 

@@ -200,7 +200,8 @@ Route::get('/admin/view/userdetails/{id}', function ($id) {
 
 Route::post('/view/userdetails', 'adminController@first_invest')->name('first_inv');
 Route::post('/view/userdetails/bank', 'adminController@addbank')->name('add_bank');
-Route::post('/view/userdetails/bank/kyc', 'adminController@upload_kyc_doc')->name('kyc_upload_admin');
+Route::post('/view/userdetails/kyc', 'adminController@upload_kyc_doc')->name('kyc_upload_admin');
+Route::get('/view/userdetails/remove/bankaccount/{id}', 'adminController@deleteBankAccount')->name('delete_bank');
 
 
 

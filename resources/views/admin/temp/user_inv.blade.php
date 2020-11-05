@@ -40,15 +40,15 @@
     <table id="basic-datatables" class="display table table-striped table-hover">
         <thead class="web-table">
             <tr>                
-               <th> {{ __('Package') }} </th>
+               <th> {{ __('Modalidad') }} </th>
                <th> {{ __('Capital') }} </th>
-               <th> {{ __('Return') }} </th>
-               <th> {{ __('Date Invested') }} </th> 
-               <th> {{ __('Elapse') }} </th>  
-               <th> {{ __('Days Spent') }} </th> 
-               <th> {{ __('Withdrawn') }} </th>  
+               <th> {{ __('Retorno') }} </th>
+               <th> {{ __('Fecha de Inversión') }} </th> 
+               <th> {{ __('Hasta') }} </th>  
+               <th> {{ __('Días transcurridos') }} </th> 
+               <th> {{ __('Retirado') }} </th>  
                <th> {{ __('Status') }} </th>
-               <th> {{ __('Earning') }} </th>                                   
+               <th> {{ __('Ganancia') }} </th>                                   
             </tr>
         </thead>
         

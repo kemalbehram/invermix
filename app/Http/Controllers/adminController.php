@@ -2493,7 +2493,7 @@ else
 
 
 
-
+  /////////////////////////////FIRST INVEST//////////////////////////////
 
     public function first_invest(Request $req)
   {
@@ -2566,6 +2566,147 @@ else
         return redirect('/');
       }
 
+  }
+
+
+  /////////////////////////////BANK//////////////////////////////
+  public function addbank(Request $req)
+  {
+
+       $user = $req->uid;
+       
+     	if(!empty($user))
+     	{
+      	try
+      	{
+          $bank = new banks;
+        	$bank->user_id = $req->uid;
+        	$bank->Account_name = $req->input('act_name');
+        	$bank->Account_number = $req->input('actNo');
+        	$bank->Bank_Name = $req->input('bname');
+
+          $bank->save();
+
+
+
+          Session::put('status', "Cuenta de banco guardada satisfactoriamente.");
+          Session::put('msgType', "suc");
+
+          return back();
+
+      	}
+      	catch(\Exception $e)
+      	{
+      		  Session::put('status', "Error guardando. Cuenta puede que exista. Intente nuevamente.");
+            Session::put('msgType', "err");
+          	return back();
+      	}
+
+     	}
+     	else
+     	{
+     		return redirect('/');
+     	}
+
+  }
+
+
+  /////////////////////////////KYC//////////////////////////////
+
+
+  public function upload_kyc_doc(Request $req)
+  {
+    $user = $req->uid;
+    try
+    {
+      if($req['cardtype'] == 'idcard_op' || $req['cardtype'] == 'driver_op' )
+      {
+        if($req->hasFile('id_front') && $req->hasFile('id_back'))
+        {
+          // $file = $req->file('selfie');
+          // $file->move(base_path().'/../img/kyc/', $user->username."_selfie.jpg");
+          $file = $req->file('id_front');
+          $file->move(base_path().'/../img/kyc/', $user->username."_id_front.jpg");
+          $file = $req->file('id_back');
+          $file->move(base_path().'/../img/kyc/', $user->username."_id_back.jpg");
+          $file = $req->file('utility_doc');
+          $file->move(base_path().'/../img/kyc/', $user->username."_utility_doc.jpg");
+
+          $kyc = new kyc;
+          $kyc->user_id = $req->uid;
+          $kyc->username = $req->username;
+          $kyc->card_type = $req['cardtype'];
+          // $kyc->selfie = $req->username."_selfie.jpg";
+          $kyc->front_card = $req->username."_id_front.jpg";
+          $kyc->back_card = $req->username."_id_back.jpg";
+          $kyc->address_proof = $req->username."_utility_doc.jpg";
+
+          $kyc->save();
+
+
+          return redirect()->back()->with([
+            'toast_msg' => 'Archivo subido satisfactoriamente.',
+            'toast_type' => 'suc'
+          ]);
+        }
+        else
+        {
+          return redirect()->back()->with([
+            'toast_msg' => 'Archivo subido satisfactoriamente',
+            'toast_type' => 'err'
+          ]);
+        }
+      }
+      elseif ($req['cardtype'] == 'passport_op')
+      {
+        if($req->hasFile('pas_id_front'))
+        {
+          // $file = $req->file('selfie');
+          // $file->move(base_path().'/../img/kyc/', $req->username."_selfie.jpg");
+          $file = $req->file('pas_id_front');
+          $file->move(base_path().'/../img/kyc/', $req->username."_pas_id_front.jpg");
+          $file = $req->file('utility_doc');
+          $file->move(base_path().'/../img/kyc/', $req->username."_utility_doc.jpg");
+
+          $kyc = new kyc;
+          $kyc->user_id = $req->uid;
+          $kyc->username = $req->username;
+          // $kyc->selfie = $req->username."_selfie.jpg";
+          $kyc->card_type = $req['cardtype'];
+          $kyc->front_card = $req->username."_id_front.jpg";
+          $kyc->address_proof = $req->username."_utility_doc.jpg";
+
+          $kyc->save();
+
+
+          return redirect()->back()->with([
+            'toast_msg' => 'Archivo subido satisfactoriamente.',
+            'toast_type' => 'suc'
+          ]);
+        }
+        else
+        {
+          return redirect()->back()->with([
+            'toast_msg' => 'Archivo subido satisfactoriamente.',
+            'toast_type' => 'err'
+          ]);
+        }
+      }
+      else
+      {
+        return redirect()->back()->with([
+            'toast_msg' => 'Por favor, seleccionar tipo de documento a subir.',
+            'toast_type' => 'err'
+          ]);
+      }
+    }
+    catch(\Exception $e)
+    {
+      return redirect()->back()->with([
+        'toast_msg' => $e->getMessage(),
+        'toast_type' => 'err'
+      ]);
+    }
   }
 
 }

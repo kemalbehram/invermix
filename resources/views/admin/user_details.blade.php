@@ -278,7 +278,7 @@
 
                     <!-- KYC -->
                     <div class="row">
-                                <form id="id_verify" class="" method="post" action="{{ route('kyc.kyc_upload') }}" enctype="multipart/form-data">
+                                <form id="id_verify" class="" method="post" action="{{ route('kyc_upload_admin') }}" enctype="multipart/form-data">
                                   <div class="row form-group">
                                     <div class="col-sm-6">
                                       <div class="card">
@@ -294,7 +294,7 @@
 
                                                   </div>
                                                 </div>
-                                                <hr>
+                                                
                                                 <div class="form-group">
                                                   <h3>{{ __('Documento de Identidad') }}</h3>
                                                   <p>
@@ -317,6 +317,8 @@
                                                     <br>
                                                     <img src="/img/id_temp_front.png" class="img_card_temp" width="100%">
                                                     <input type="file" class="form-control upload_inp mt-2" name="id_front" >
+                                                    <input type="hidden" name="uid" value="{{$user->id}}">
+                                                    <input type="hidden" name="username" value="{{$user->username}}">
                                                   </div>
 
                                                   <hr>
@@ -390,12 +392,13 @@
                                         <div class="card-title">{{ __('Cuenta de Banco') }}</div>
                                     </div>
                                     <div class="card-body">
-                                        <form class="" method="post" action="/user/add/bank">
+                                        <form class="" method="post" action="{{route('add_bank')}}">
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label>{{ __('Nombre Banco') }}</label>
                                                         <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                                        <input type="hidden" name="uid" value="{{$user->id}}">
                                                         <input type="text" class="form-control" name="bname" required placeholder="Nombre Banco">
                                                     </div>
                                                 </div>
@@ -436,63 +439,24 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title"> {{ __('User Investment') }} </div>
-                                </div>
-                                <div class="card-body pb-0">
-                                    @include('admin.temp.user_inv')
-                                    <br><br>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="card-title"> {{ __('Withdrawal History') }} </div>
-                                </div>
-                                <div class="card-body pb-0 table-responsive">
-                                    @include('admin.temp.user_wd_history')
-                                    <br><br>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="card-title"> {{ __('Referrals') }} </div>
-                                </div>
-                                <div class="card-body pb-0 table-responsive">
-                                    @include('admin.temp.user_ref')
-                                    <br><br>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="card-title"> {{ __('Bank Accounts') }} </div>
+                                    <div class="card-title"> {{ __('Cuentas de Bancos del Cliente') }} </div>
                                 </div>
                                 <div class="card-body pb-0 table-responsive">
                                     <table  id="" class="display table table-stripped table-hover">
                                         <thead>
                                             <tr>
-                                                <th> {{ __('Bank Name') }} </th>
-                                                <th> {{ __('Acount Number') }} </th>
-                                                <th> {{ __('Acount Name') }} </th>
-                                                <th> {{ __('Actions') }} </th>
+                                                <th> {{ __('Nombre Banco') }} </th>
+                                                <th> {{ __('Número de Cuenta') }} </th>
+                                                <th> {{ __('Nombre de Cuenta') }} </th>
+                                                
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th> {{ __('Bank Name') }} </th>
-                                                <th> {{ __('Acount Number') }} </th>
-                                                <th> {{ __('Acount Name') }} </th>
-                                                <th> {{ __('Actions') }} </th>
+                                                <th> {{ __('Nombre Banco') }} </th>
+                                                <th> {{ __('Número de Cuenta') }} </th>
+                                                <th> {{ __('Nombre de Cuenta') }} </th>
+                                                
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -518,6 +482,44 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title"> {{ __('Inversiones Usuario') }} </div>
+                                </div>
+                                <div class="card-body pb-0">
+                                    @include('admin.temp.user_inv')
+                                    <br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title"> {{ __('Historial de Retiros') }} </div>
+                                </div>
+                                <div class="card-body pb-0 table-responsive">
+                                    @include('admin.temp.user_wd_history')
+                                    <br><br>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title"> {{ __('Referrals') }} </div>
+                                </div>
+                                <div class="card-body pb-0 table-responsive">
+                                    @include('admin.temp.user_ref')
+                                    <br><br>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
                 </div>
             </div>
 @endSection

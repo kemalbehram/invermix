@@ -196,12 +196,20 @@ Route::get('/admin/view/userdetails/{id}', function ($id) {
 
 });
 
-//Creadas
+/////////////////////CREADAS/////////////////////////////
 
 Route::post('/view/userdetails', 'adminController@first_invest')->name('first_inv');
 Route::post('/view/userdetails/bank', 'adminController@addbank')->name('add_bank');
 Route::post('/view/userdetails/kyc', 'adminController@upload_kyc_doc')->name('kyc_upload_admin');
 Route::get('/view/userdetails/remove/bankaccount/{id}', 'adminController@deleteBankAccount')->name('delete_bank');
+
+
+///////////////////////INYECCIONES////////////////////
+
+Route::get('/{username}/inyects', function () {
+    return view('user.inyects.inyects');
+})->middleware('auth');
+
 
 
 

@@ -235,10 +235,11 @@
 								<i class="fas fa-folder"></i>
 								<p>Mis Inversiones</p>
 							</a>
-						</li>
+                        </li>
+
 
 						<li class="nav-item">
-							<a href="/{{$user->username}}/downlines">
+                         <a href="/{{$user->username}}/inyects">
 							<i class="fas fa-hand-holding-usd"></i>
 								<p>Inyecciones</p>
 							</a>
@@ -281,7 +282,7 @@
 						<li class="nav-item">
 							<a href="/logout">
 								<i class="fas fa-arrow-right"></i>
-								<p>Logout</p>
+								<p>Salir</p>
 							</a>
 						</li>
 

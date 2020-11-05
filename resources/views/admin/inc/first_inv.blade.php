@@ -27,9 +27,21 @@
               <input type="hidden" class="form-control" name="_token" value="{{csrf_token()}}">
               <input id="p_id" type="hidden" class="form-control" name="p_id" value="">
               <input type="hidden" name="uid" value="{{$user->id}}">
-              <input type="hidden" name="uid" value="{{$user->username}}">
+              <input type="hidden" name="username" value="{{$user->username}}">
               <input type="text" class="form-control" name="capital" placeholder="Digitar capital a invertir" required>
             </div>
+            <div class="input-group">
+                <div class="input-group-prepend " >
+                  <span class="input-group-text "><i class=""></i>Moneda</span>
+                </div>
+                <select class="form-control" id="currency" name="currency">
+                                        <option value="RD$" name="currency">RD$</option>
+                                        <option value="US$" name="currency">US$</option>
+                                        </select>
+                <div class="input-group-append " >
+                  <span class="input-group-text " ><i class=""></i></span>
+                </div>
+              </div>
             <div class="form-group">
                 <button class="collb btn btn-info">{{ __('Proceder') }}</button>
                 <span style="">

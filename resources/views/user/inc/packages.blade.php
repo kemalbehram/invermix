@@ -75,7 +75,7 @@
                 @endif
             @else
                 <div class="alert alert-warning">
-                    <a href="/{{$user->username}}/profile#userdet">{{ __('Please, click here to update your profile before you can invest.') }}</a>
+                    <a>{{ __('Por favor, actualice los datos principales del cliente para poder invertir.') }}</a>
                 </div>
             @endif
         </div>

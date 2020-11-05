@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
+// use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\File;
 
 use DotenvEditor;
@@ -2496,13 +2497,8 @@ else
 
     public function first_invest(Request $req)
   {
-    //   dd($req);
-    //   die();
 
-      $user = $req->uid;
-
-
-      if(!empty($user))
+      if(!empty($req))
       {
 
         try
@@ -2535,24 +2531,17 @@ else
             }
 
             $inv->package_id = $pack->id;
-            $inv->currency = $this->st->currency;
+            $inv->currency = $req->currency;
             $inv->end_date = $actualDate;
             $inv->last_wd = date("Y-m-d");
             $inv->status = 'Activa';
 
-            $user->wallet -= $capital;
-            $user->save();
+            // $user->wallet -= $capital;
+            // $user->save();
 
             $inv->save();
 
-
-
-            $act = new activities;
-            $act->action = "User Invested ".$capital." in ".$pack->package_name." package";
-            $act->user_id = $user->id;
-            $act->save();
-
-            Session::put('status', "Inversión enviada para su aprobación.");
+            Session::put('status', "Inversión aplicada al cliente exitosamente.");
             Session::put('msgType', "suc");
             return back() ;
           }
@@ -2574,7 +2563,7 @@ else
       }
       else
       {
-        return redirect('/fdsfds');
+        return redirect('/');
       }
 
   }

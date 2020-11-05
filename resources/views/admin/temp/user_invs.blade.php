@@ -1,5 +1,5 @@
 <?php
-    
+
     if(Session::has('val'))
     {
         $v = Session::get('val');
@@ -12,24 +12,24 @@
     }
 
 ?>
-               
+
 <table class="display table table-stripped table-hover">
     <thead>
         <tr>
-            <th> {{ __('Action') }} </th>
-            <th> {{ __('Username') }} </th>
-            <th> {{ __('Package') }} </th>
+            <th> {{ __('Acción') }} </th>
+            <th> {{ __('Nombre de usuario') }} </th>
+            <th> {{ __('Modalidad') }} </th>
             <th> {{ __('Capital') }} </th>
-            <th> {{ __('Return') }} </th>
-            <th> {{ __('Date Invested') }} </th> 
-            <th> {{ __('Elapse') }} </th>  
-            <th> {{ __('Days Spent') }} </th> 
-            <th> {{ __('Withdrawn') }} </th>  
+            <th> {{ __('Retorno') }} </th>
+            <th> {{ __('Fecha inversión') }} </th>
+            <th> {{ __('Hasta') }} </th>
+            <th> {{ __('Días transcurridos') }} </th>
+            <th> {{ __('Retirado') }} </th>
             <th> {{ __('Status') }} </th>
-            <th> {{ __('Earning') }} </th>                                  
+            <th> {{ __('Ganancias') }} </th>
         </tr>
     </thead>
-    <tbody class="web-table">  
+    <tbody class="web-table">
         @if(count($actInv) > 0 )
             @foreach($actInv as $in)
                 <?php
@@ -42,7 +42,7 @@
                         $Edays = getWorkingDays($lastWD, $enddate);
                         $ern  = intval($Edays)*floatval($in->interest)*intval($in->capital);
                         $withdrawable = $ern;
-                                                             
+
                         $totalDays = getWorkingDays($in->date_invested, $in->end_date);
                         $ended = "yes";
 
@@ -58,7 +58,7 @@
                         {
                             $withdrawable = intval($in->days_interval)*intval($in->interest)*intval($in->capital);
                         }
-                                                       
+
                         $totalDays = getWorkingDays($in->date_invested, date('Y-m-d'));
                         $ended = "no";
                     }
@@ -66,24 +66,24 @@
                 ?>
                 <tr class="">
                     <td>
-                        <a title="Pause Investment" href="/admin/pause/user_inv/{{$in->id}}" > 
+                        <a title="Pause Investment" href="/admin/pause/user_inv/{{$in->id}}" >
                             <span class=""><i class="fa fa-pause text-warning" ></i></span>
-                        </a>                                    
-                        @if($adm->role == 3)
-                            <a title="Activate Investment" href="/admin/activate/user_inv/{{$in->id}}" > 
+                        </a>
+                        @if($adm->role == 3 |$adm->role == 2 )
+                            <a title="Activate Investment" href="/admin/activate/user_inv/{{$in->id}}" >
                                 <span><i class="fa fa-check text-success"></i></span>
                             </a>
-                            <a title="Delete Investment" href="/admin/delete/user_inv/{{$in->id}}" > 
+                            <a title="Delete Investment" href="/admin/delete/user_inv/{{$in->id}}" >
                                 <span class=""><i class="fa fa-times text-danger"></i></span>
                             </a>
                         @endif
-                    </td>   
+                    </td>
                     <td>{{$in->usn}}</td>
                     <td>{{$in->package}}</td>
                     <td>{{$in->currency}}{{$in->capital}}</td>
                     <td>{{$in->currency}}{{round ($in->i_return, 2)}}</td>
                     <td>{{$in->date_invested}}</td>
-                    <td>{{$in->end_date}}</td> 
+                    <td>{{$in->end_date}}</td>
                     <td>
                         @if($in->status != 'Expired')
                             {{$totalDays}}
@@ -91,26 +91,26 @@
                             0
                         @endif
                     </td>
-                    <td>{{$in->w_amt}}</td> 
+                    <td>{{$in->w_amt}}</td>
                     <td>{{$in->status}}</td>
-                    <td>   
+                    <td>
                         @if($in->currency == "" && $in->package != 'International')
-                            N {{round ($ern, 2)}} 
+                            N {{round ($ern, 2)}}
                         @elseif($in->currency == "" && $in->package = 'International')
                             $ {{round ($ern, 2)}}
                         @else
                             {{$in->currency}} {{round ($ern, 2)}}
-                        @endif                              
+                        @endif
                     </td>
-                </tr>                            
+                </tr>
             @endforeach
-            
+
         @else
-            
+
         @endif
     </tbody>
-    
+
 </table>
 <div class="" align="">
-   <span> {{$actInv->links()}}</span>  
+   <span> {{$actInv->links()}}</span>
 </div>

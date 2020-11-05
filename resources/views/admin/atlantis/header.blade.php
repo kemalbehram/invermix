@@ -163,9 +163,9 @@
 											<a class="dropdown-item" href="/admin/manage/investments">
 												<span class="fa fa-paper-plane"></span>&nbsp; Manejar Inversiones
 											</a>
-											<a class="dropdown-item" href="/admin/manage/deposits">
+											<!-- <a class="dropdown-item" href="/admin/manage/deposits">
 												<span class="fas fa-donate"></span>&nbsp; Depósitos de Usuario
-											</a>
+											</a> -->
 											<a class="dropdown-item" href="/admin/manage/withdrawals">
 												<span class="fa fa-file"></span>&nbsp; Retiro de Usuario
 											</a>
@@ -277,12 +277,12 @@
 								</a>
 							</li>
 
-							<li class="nav-item">
+							<!-- <li class="nav-item">
 						    	<a href="/admin/manage/deposits">
 									<i class="fas fa-donate"></i>
 									<p> Depósitos de Usuarios </p>
 								</a>
-							</li>
+							</li> -->
 
 							<li class="nav-item">
 						    	<a href="/admin/manage/withdrawals">

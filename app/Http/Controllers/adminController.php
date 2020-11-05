@@ -1939,7 +1939,7 @@ public function admAddnew(Request $req)
 
         $file = DotenvEditor::save();
         $settings->save();
-        $toast_msg = ['msg' => 'Settings was saved successfully <br> Reload to view changes', 'type' => 'suc'];
+        $toast_msg = ['msg' => 'La configuración se guardó correctamente. <br> Recargar para ver los cambios', 'type' => 'suc'];
         return json_encode($toast_msg);
 
       }

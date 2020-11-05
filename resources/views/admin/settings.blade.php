@@ -544,7 +544,7 @@
 
                         <div class="row margin_top50 mb-5">
                           <div   class="col-md-12">
-                            <button class="btn btn-info float-right"  onclick="load_post_ajax('/admin/update/site/settings', 'settings_form', 'admin_settings_form' )" > {{ __('Save Changes') }} </button>
+                            <button class="btn btn-info float-right"  onclick="load_post_ajax('/admin/update/site/settings', 'settings_form', 'admin_settings_form' )" > {{ __('Guardar Cambios') }} </button>
                           </div>
                         </div>
 

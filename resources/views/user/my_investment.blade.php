@@ -3,7 +3,7 @@
 @Section('content')
         <div class="main-panel">
             <div class="content">
-                @php($breadcome = 'My Investments')
+                @php($breadcome = 'Mis Inversiones')
                 @include('user.atlantis.main_bar')
                 <div class="page-inner mt--5">
                     @include('user.atlantis.overview')
@@ -21,14 +21,15 @@
                                         <table id="basic-datatables" class="display table table-hover" >
                                             <thead>
                                                 <tr>
-                                                    <th>{{ __('Plan') }}</th>
+                                                    <th>{{ __('Modalidad') }}</th>
                                                     <th>{{ __('Capital') }}</th>
                                                     <th>{{ __('Fecha de inversión') }}</th>
                                                     <th>{{ __('Hasta') }}</th>
                                                     <th>{{ __('Días transcurridos') }}</th>
                                                     <th>{{ __('Status') }}</th>
                                                     <th>{{ __('Ganancias') }}</th>
-                                                    <th>{{ __('Acción') }}</th>
+                                                    <th>{{ __('Retirar') }}</th>
+                                                    <th>{{ __('Inyectar') }}</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="web-table">
@@ -72,8 +73,14 @@
                                                             <td>{{$in->status}}</td>
                                                             <td>{{$settings->currency}} {{$ern}} </td>
                                                             <td>
-                                                                <a title="Withdraw" href="javascript:void(0)" class="btn btn-info" onclick="wd('pack', '{{$in->id}}', '{{$ern}}', '{{ $withdrawable }}', '{{$Edays}}', '{{$ended}}')">
+                                                                <a title="Retirar" href="javascript:void(0)" class="btn btn-info" onclick="wd('pack', '{{$in->id}}', '{{$ern}}', '{{ $withdrawable }}', '{{$Edays}}', '{{$ended}}')">
                                                                     <i class="fas fa-arrow-down"></i>
+                                                                </a>
+                                                            </td>
+
+                                                            <td>
+                                                                <a title="Inyectar" href="javascript:void(0)" class="btn btn-info" onclick="inyect('pack', '{{$in->id}}')">
+                                                                    <i class="fas fa-arrow-up"></i>
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -156,5 +163,5 @@
 
     @include('user.inc.confirm_inv')
     @include('user.inc.withdrawal')
-
+    @include('user.inc.inyect')
 @endSection

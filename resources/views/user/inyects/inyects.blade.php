@@ -21,7 +21,7 @@
                                         <table id="basic-datatables" class="display table table-hover" >
                                             <thead>
                                                 <tr>
-                                                    <th>{{ __('Plan') }}</th>
+                                                    <th>{{ __('Modalidad') }}</th>
                                                     <th>{{ __('Capital') }}</th>
                                                     <th>{{ __('Fecha de inversión') }}</th>
                                                     <th>{{ __('Hasta') }}</th>
@@ -32,8 +32,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="web-table">
-                                                @if(count($actInv) > 0 )
-                                                    @foreach($actInv as $in)
+                                                @if(count($actIny) > 0 )
+                                                    @foreach($actIny as $in)
                                                         <?php
 
                                                             $totalElapse = getDays(date('Y-m-d'), $in->end_date);
@@ -44,7 +44,7 @@
                                                                 $Edays = getDays($lastWD, $enddate);
                                                                 $ern  = $Edays*$in->interest*$in->capital;
                                                                 $withdrawable = $ern;
-                                                                $totalDays = getDays($in->date_invested, $in->end_date);
+                                                                $totalDays = getDays($in->date_inyected, $in->end_date);
                                                                 $ended = "yes";
                                                             }
                                                             else
@@ -59,20 +59,20 @@
                                                                     $withdrawable = $in->days_interval*$in->interest*$in->capital;
                                                                 }
 
-                                                                $totalDays = getDays($in->date_invested, date('Y-m-d'));
+                                                                $totalDays = getDays($in->date_inyected, date('Y-m-d'));
                                                                 $ended = "no";
                                                             }
                                                         ?>
                                                         <tr class="">
                                                             <td>{{$in->package}}</td>
                                                             <td>{{($settings->currency)}} {{$in->capital}}</td>
-                                                            <td>{{$in->date_invested}}</td>
+                                                            <td>{{$in->date_inyected}}</td>
                                                             <td>{{$in->end_date}}</td>
                                                             <td>{{$totalDays}}</td>
                                                             <td>{{$in->status}}</td>
                                                             <td>{{$settings->currency}} {{$ern}} </td>
                                                             <td>
-                                                                <a title="Withdraw" href="javascript:void(0)" class="btn btn-info" onclick="wd('pack', '{{$in->id}}', '{{$ern}}', '{{ $withdrawable }}', '{{$Edays}}', '{{$ended}}')">
+                                                                <a title="Retirar" href="javascript:void(0)" class="btn btn-info" onclick="wd('pack', '{{$in->id}}', '{{$ern}}', '{{ $withdrawable }}', '{{$Edays}}', '{{$ended}}')">
                                                                     <i class="fas fa-arrow-down"></i>
                                                                 </a>
                                                             </td>
@@ -87,8 +87,8 @@
 
                                     <div class="mobile_table container messages-scrollbar" >
 
-                                        @if(count($actInv) > 0 )
-                                            @foreach($actInv as $in)
+                                        @if(count($actIny) > 0 )
+                                            @foreach($actIny as $in)
                                                 <?php
 
                                                     $totalElapse = getDays(date('y-m-d'), $in->end_date);
@@ -100,7 +100,7 @@
                                                         $ern  = $Edays*$in->interest*$in->capital;
                                                         $withdrawable = $ern;
 
-                                                        $totalDays = getDays($in->date_invested, $in->end_date);
+                                                        $totalDays = getDays($in->date_inyected, $in->end_date);
                                                         $ended = "yes";
 
                                                     }
@@ -116,7 +116,7 @@
                                                             $withdrawable = $in->days_interval*$in->interest*$in->capital;
                                                         }
 
-                                                        $totalDays = getDays($in->date_invested, date('Y-m-d'));
+                                                        $totalDays = getDays($in->date_inyected, date('Y-m-d'));
                                                         $ended = "no";
                                                     }
 

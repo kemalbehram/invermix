@@ -66,12 +66,12 @@
                                                         ?>
                                                         <tr class="">
                                                             <td>{{$in->package}}</td>
-                                                            <td>{{($settings->currency)}} {{$in->capital}}</td>
+                                                            <td>{{($in->currency)}} {{$in->capital}}</td>
                                                             <td>{{$in->date_invested}}</td>
                                                             <td>{{$in->end_date}}</td>
                                                             <td>{{$totalDays}}</td>
                                                             <td>{{$in->status}}</td>
-                                                            <td>{{$settings->currency}} {{$ern}} </td>
+                                                            <td>{{$in->currency}} {{$ern}} </td>
                                                             <td>
                                                                 <a title="Retirar" href="javascript:void(0)" class="btn btn-info" onclick="wd('pack', '{{$in->id}}', '{{$ern}}', '{{ $withdrawable }}', '{{$Edays}}', '{{$ended}}')">
                                                                     <i class="fas fa-arrow-down"></i>
@@ -79,7 +79,7 @@
                                                             </td>
 
                                                             <td>
-                                                                <a title="Inyectar" href="javascript:void(0)" class="btn btn-info" onclick="inyect('pack', '{{$in->id}}')">
+                                                                <a title="Inyectar"  href="javascript:void(0)" class="btn btn-info" onclick="inyect('{{$in->package_id}}', '{{$in->id}}','{{$in->package}}', ' {{$in->capital}}', ' {{$in->curency}}', '{{$in->package_name}}',  '{{$in->period}}', '{{$in->daily_interest}}')">
                                                                     <i class="fas fa-arrow-up"></i>
                                                                 </a>
                                                             </td>

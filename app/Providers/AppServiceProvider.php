@@ -28,6 +28,7 @@ use App\xpack_inv;
 use Validator;
 use App\site_settings;
 use App\kyc;
+use App\inyects;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -67,6 +68,7 @@ class AppServiceProvider extends ServiceProvider
 
                 $myInv = investment::where('user_id', $user->id)->orderby('id', 'asc')->get();
                 $actInv = investment::where('user_id', $user->id)->orderby('id', 'desc')->get();
+                $actIny = inyects::where('user_id', $user->id)->orderby('created_at', 'desc')->get();
                 $refs = User::where('referal', $user->username)->orderby('id', 'DESC')->get();
                 $wd = withdrawal::where('user_id', $user->id)->orderby('id', 'asc')->get();
                 $logs = activities::where('user_id', $user->id)->orderby('id', 'DESC')->take(20)->paginate(5);
@@ -78,6 +80,7 @@ class AppServiceProvider extends ServiceProvider
                     'user' => $user,
                     'myInv' => $myInv,
                     'actInv' => $actInv,
+                    'actIny' => $actIny,
                     'refs' => $refs,
                     'wd' => $wd,
                     'logs' => $logs,

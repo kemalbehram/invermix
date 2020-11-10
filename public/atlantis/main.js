@@ -210,10 +210,12 @@ function wd(p,id, earn, w_able, days, ended)
 
 }
 
-function inyect(id)
+function inyect(packa_id, id )
 {
-    alert(id);
-    $('#PopInyect').show();
+
+    $('#packa_id').val(packa_id);
+    $('#invest_id').val(id);
+    $('#popInyect').show();
 }
 
 function edit_pack(id, min, max, interest, wd_fee, token, cur)

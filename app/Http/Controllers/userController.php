@@ -18,6 +18,7 @@ use App\banks;
 use App\activities;
 use App\packages;
 use App\investment;
+use App\inyects;
 use App\msg;
 use App\withdrawal;
 use App\deposits;
@@ -2397,6 +2398,194 @@ class userController extends Controller
         }
       }
     }
+  }
+
+////////////////////////////////////////////INYECT//////////////////////////////
+
+  public function inyect(Request $req)
+  {
+
+    // dd($req);
+    // die();
+
+      $user = Auth::User();
+
+      if($this->st->investment != 1 )
+      {
+        Session::put('msgType', "err");
+        Session::put('status', 'Inversión no disponible! Serás notificado cuando esté disponible.');
+        return back();
+      }
+
+      if($user->status == 'Blocked' || $user->status == 2 )
+      {
+        Session::put('msgType', "err");
+        Session::put('status', 'Account Blocked! Please contact support.');
+        return redirect('/login');
+      }
+
+      if($user->status == 'pending' || $user->status == 0 )
+      {
+        Session::put('msgType', "err");
+        Session::put('status', 'Account not activated! Please contact support.');
+        return redirect('/login');
+      }
+
+
+
+      if(!empty($user))
+      {
+
+        try
+        {
+          $capital = $req->input('capital');
+          $invest_id = $req->input('invest_id');
+          $pack = packages::find($req->input('packa_id'));
+
+
+          if($capital >= $pack->min && $capital <= $pack->max)
+          {
+            $inv = new inyects;
+            $inv->capital = $capital;
+            $inv->invest_id = $invest_id;
+            $inv->user_id = $user->id;
+            $inv->usn = $user->username;
+            $inv->package = $pack->package_name;
+            $inv->date_inyected = date("d-m-Y");
+            $inv->period = $pack->period;
+            $inv->days_interval = $pack->days_interval;
+            $inv->i_return = (round($capital*$pack->daily_interest*$pack->period,2));
+            $inv->interest = $pack->daily_interest;
+            // $no = 0;
+            $dt = strtotime(date('Y-m-d'));
+            $days = $pack->period;
+
+            while ($days > 0)
+            {
+                $dt    +=   86400   ;
+                $actualDate = date('Y-m-d', $dt);
+                $days--;
+            }
+
+            $inv->package_id = $pack->id;
+            $inv->currency = $this->st->currency;
+            $inv->end_date = $actualDate;
+            $inv->last_wd = date("Y-m-d");
+            $inv->status = 'Pendiente';
+
+            $user->wallet -= $capital;
+            $user->save();
+
+            $inv->save();
+
+            if(!empty($user->referal))
+            {
+              $ref_bonuses = ref_set::all();
+
+              if(env('REF_TYPE') == 'Once')
+              {
+                $ref_cnt = env('REF_LEVEL_CNT');
+                $new_ref_user = $user->referal;
+                $itr_cnt = 0;
+
+                $refExist = ref::where('user_id', $user->id)->get();
+                if(count($refExist) == 0)
+                {
+                  $ref = new ref;
+                  $ref->user_id = $user->id;
+                  $ref->username = $user->referal;
+                  // $ref->referral = 0;
+                  $ref->wdr = 0;
+                  $ref->currency = env('CURRENCY');
+                  $ref->amount = $capital * $ref_bonuses[0]->val;
+                  $ref->save();
+
+                  while ($itr_cnt <= $ref_cnt-1)
+                  {
+                    $refUser = User::where('username', $new_ref_user)->get();
+                    if(count($refUser) > 0)
+                    {
+                      $refUser[0]->ref_bal += $capital * $ref_bonuses[$itr_cnt]->val;
+                      $new_ref_user = $refUser[0]->referal;
+                      $refUser[0]->save();
+                    }
+                    $itr_cnt += 1;
+                    if(env('REF_SYSTEM') == 'Single_level')
+                    {
+                      break;
+                    }
+                  }
+
+                }
+
+              }
+              if(env('REF_TYPE') == 'Continous')
+              {
+                $ref_cnt = env('REF_LEVEL_CNT');
+                $new_ref_user = $user->referal;
+                $itr_cnt = 0;
+
+                while ($itr_cnt <= $ref_cnt-1) {
+                  $refUser = User::where('username', $new_ref_user)->get();
+                  if(count($refUser) > 0)
+                  {
+                    $refUser[0]->ref_bal += $capital * $ref_bonuses[$itr_cnt]->val;
+                    $refUser[0]->save();
+                    $new_ref_user = $refUser[0]->referal;
+                  }
+                  $itr_cnt += 1;
+                  if(env('REF_SYSTEM') == 'Single_level')
+                  {
+                    break;
+                  }
+                }
+              }
+            }
+
+            // $maildata = ['email' => $user->email, 'username' => $user->username];
+            // Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            //     $msg->to($maildata['email']);
+            //     $msg->subject('User Investment');
+            // });
+
+            // $maildata = ['email' => $user->email, 'username' => $user->username];
+            // Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            //     $msg->to(env('SUPPORT_EMAIL'));
+            //     $msg->subject('User Investment');
+            // });
+
+            $act = new activities;
+            $act->action = "User Inyected ".$capital." in ".$pack->package_name." package";
+            $act->user_id = $user->id;
+            $act->save();
+
+            Session::put('status', "Inyección enviada para su aprobación.");
+            Session::put('msgType', "suc");
+            return back() ;
+          }
+          else
+          {
+            Session::put('status', "¡Monto invalido! Intenta nuevamente.");
+            Session::put('msgType', "err");
+            return back();
+          }
+
+        }
+        catch(\Exception $e)
+        {
+            Session::put('status', "¡Error creando Inyección! Por favor intentar nuevamente.".$e->getMessage());
+            Session::put('msgType', "err");
+            return back();
+        }
+
+      }
+      else
+      {
+        return redirect('/');
+      }
+
   }
 
 }

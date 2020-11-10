@@ -210,6 +210,20 @@ function wd(p,id, earn, w_able, days, ended)
 
 }
 
+function inywd(ps,ids, earns, w_ables, dayss, endeds)
+{
+    // alert(id);
+    $('#pack_types').val(ps);
+	$('#earneds').text(earns);
+	$('#dayss').text(dayss);
+	$('#inv_ids').val(ids);
+	$('#endeds').val(endeds);
+	$('#withdrawable_amts').val(w_ables);
+	$('#div_iny').show();
+
+}
+
+
 function inyect(packa_id, id )
 {
 

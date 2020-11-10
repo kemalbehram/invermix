@@ -72,7 +72,7 @@
                                                             <td>{{$in->status}}</td>
                                                             <td>{{$settings->currency}} {{$ern}} </td>
                                                             <td>
-                                                                <a title="Retirar" href="javascript:void(0)" class="btn btn-info" onclick="wd('pack', '{{$in->id}}', '{{$ern}}', '{{ $withdrawable }}', '{{$Edays}}', '{{$ended}}')">
+                                                                <a title="Retirar" href="javascript:void(0)" class="btn btn-info" onclick="inywd('pack', '{{$in->id}}', '{{$ern}}', '{{ $withdrawable }}', '{{$Edays}}', '{{$ended}}')">
                                                                     <i class="fas fa-arrow-down"></i>
                                                                 </a>
                                                             </td>

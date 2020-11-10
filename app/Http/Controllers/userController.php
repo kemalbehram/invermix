@@ -717,7 +717,7 @@ class userController extends Controller
           if($amt <= 0)
           {
             Session::put('msgType', "err");
-            Session::put('status', 'Invalid amount/Package Expired');
+            Session::put('status', 'Fecha de retiro no cumplida/ Monto inválido/ Inversión expirada');
             return back();
           }
 
@@ -2586,6 +2586,114 @@ class userController extends Controller
         return redirect('/');
       }
 
+  }
+
+
+
+  //////////////////////////////WD INYECTS////////////////////////////////////
+
+  public function wd_inyect(Request $req)
+  {
+      $user = Auth::User();
+
+      if($user->status == 'pending' || $user->status == 0 )
+      {
+        Session::put('msgType', "err");
+        Session::put('status', 'Account not activated! Please contact support.');
+        return redirect('/login');
+      }
+
+      if($user->status == 'Blocked' || $user->status == 2 )
+      {
+        Session::put('msgType', "err");
+        Session::put('status', 'Account Blocked! Please contact support.');
+        return redirect('/login');
+      }
+
+
+      if(!empty($user))
+      {
+
+        try
+        {
+
+          $amt = $req->input('amt');
+
+          if($req->input('pack_type') == 'xpack')
+          {
+              $pack = xpack_inv::find($req->input('p_id'));
+          }
+          else
+          {
+              $pack = investment::find($req->input('p_id'));
+          }
+
+
+          if($amt <= 0)
+          {
+            Session::put('msgType', "err");
+            Session::put('status', 'Fechasssssssssssss de retiro no cumplida/ Monto inválido/ Inversión expirada');
+            return back();
+          }
+
+          if($req->input('ended') == 'yes')
+          {
+            if($pack->status != 'Expired')
+            {
+                $user->wallet += $pack->capital;
+                $user->save();
+            }
+            $pack->last_wd = $pack->end_date;
+            $pack->status = 'Expired';
+
+          }
+          else
+          {
+
+            $dt = strtotime($pack->last_wd);
+            $days = $pack->days_interval;
+
+            while ($days > 0)
+            {
+              $dt    +=   86400   ;
+              $actualDate = date('Y-m-d', $dt);
+              // if (date('N', $dt) < 6)
+              // {
+                  $days--;
+              //}
+            }
+            $pack->last_wd = $actualDate;
+          }
+
+          $pack->w_amt += $amt;
+          $pack->save();
+
+          $usr = User::find($user->id);
+          $usr->wallet += $amt;
+          $usr->save();
+
+          $act = new activities;
+          $act->action = "User withdrawn to wallet from ".$pack->package.'package. package id: '.$pack->id;
+          $act->user_id = $user->id;
+          $act->save();
+
+          Session::put('status', 'Package Withdrawal Successful, Amount Withdrawn Has Been Added to your Wallet');
+          Session::put('msgType', "suc");
+          return back();
+
+        }
+        catch(\Exception $e)
+        {
+          Session::put('status', 'Error submitting your withdrawal');
+          Session::put('msgType', "err");
+          return back();
+        }
+
+      }
+      else
+      {
+        return redirect('/');
+      }
   }
 
 }

@@ -59,8 +59,8 @@
 						<a id="wd_bal" title="Click to withdraw" href="javascript:void(0)" >
 							<div class="border_btm">
 								<h4 class="fw-bold text-uppercase text-success op-8">{{ __('Inyecciones') }}</h4>
-								<h3 class="fw-bold">{{$settings->currency}} {{ round($user->wallet, 2) }}</h3>
-								<div class="colhd margin_n10">{{ __('Click para inyectar al capital') }}</div>
+								<h3 class="fw-bold">{{$settings->currency}} {{ Auth::user()->inyects->sum('capital') }}</h3>
+								<!-- <div class="colhd margin_n10">{{ __('Click para inyectar al capital') }}</div> -->
 								<br>
 							</div>
 						</a>

@@ -210,18 +210,18 @@ function wd(p,id, earn, w_able, days, ended)
 
 }
 
-function inywd(ps,ids, earns, w_ables, dayss, endeds)
-{
-    // alert(id);
-    $('#pack_types').val(ps);
-	$('#earneds').text(earns);
-	$('#dayss').text(dayss);
-	$('#inv_ids').val(ids);
-	$('#endeds').val(endeds);
-	$('#withdrawable_amts').val(w_ables);
-	$('#div_iny').show();
+// function inywd(p,id, earn, w_able, days, ended)
+// {
+//     alert(id);
+//     // $('#pack_type').val(p);
+// 	// $('#earned').text(earn);
+// 	// $('#days').text(days);
+// 	// $('#inv_id').val(id);
+// 	// $('#ended').val(ended);
+// 	// $('#withdrawable_amt').val(w_able);
+// 	$('#div_inyect').show();
 
-}
+// }
 
 
 function inyect(packa_id, id )

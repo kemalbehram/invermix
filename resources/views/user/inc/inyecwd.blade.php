@@ -1,4 +1,4 @@
-<div id="div_iny" class="container popmsgContainer" >
+<div id="div_inyect" class="container popmsgContainer" >
     <div class="row wd_row_pad" >
       <div class="col-md-4">&emps;</div>
       <div class="col-md-4 card popmsg-mobile pop_invest_col" align="Center">
@@ -28,7 +28,7 @@
                 <br><br>
                   <button class="btn btn-info"> {{ __('Retirar') }} </button>
                   <span style="">
-                    <a id="div_iny_close" href="javascript:void(0)" class="btn btn-danger"> {{ __('Cancelar') }} </a>
+                    <a id="div_inyect_close" href="javascript:void(0)" class="btn btn-danger"> {{ __('Cancelar') }} </a>
                   </span>
                   <br>
               </div>
@@ -36,8 +36,8 @@
         </div>
         <!-- close btn -->
         <script type="text/javascript">
-          $('#div_iny_close').click( function(){
-            $('#div_iny').hide();
+          $('#div_inyect_close').click( function(){
+            $('#div_inyect').hide();
           });
         </script>
         <!-- end close btn -->

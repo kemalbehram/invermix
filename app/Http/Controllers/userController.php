@@ -769,7 +769,7 @@ class userController extends Controller
         }
         catch(\Exception $e)
         {
-          Session::put('status', 'Error submitting your withdrawal');
+          Session::put('status', 'Error al enviar su retiro');
           Session::put('msgType', "err");
           return back();
         }
@@ -987,7 +987,7 @@ class userController extends Controller
         }
         catch(\Exception $e)
         {
-          Session::put('status', $e->getMessage().' Error submitting your withdrawal');
+          Session::put('status', $e->getMessage().' Error al enviar su retiro');
           Session::put('msgType', "err");
           return back();
         }
@@ -2632,7 +2632,7 @@ class userController extends Controller
           if($amt <= 0)
           {
             Session::put('msgType', "err");
-            Session::put('status', 'Fechasssssssssssss de retiro no cumplida/ Monto inválido/ Inversión expirada');
+            Session::put('status', 'Fechas de retiro no cumplida/ Monto inválido/ Inversión expirada');
             return back();
           }
 
@@ -2673,18 +2673,18 @@ class userController extends Controller
           $usr->save();
 
           $act = new activities;
-          $act->action = "User withdrawn to wallet from ".$pack->package.'package. package id: '.$pack->id;
+          $act->action = "Usuario retiró desde ".$pack->package.'package. package id: '.$pack->id;
           $act->user_id = $user->id;
           $act->save();
 
-          Session::put('status', 'Package Withdrawal Successful, Amount Withdrawn Has Been Added to your Wallet');
+          Session::put('status', 'Retiro solicitado, cuando sea acutalizado será notificado');
           Session::put('msgType', "suc");
           return back();
 
         }
         catch(\Exception $e)
         {
-          Session::put('status', 'Error submitting your withdrawal');
+          Session::put('status', 'Error al enviar su retiro');
           Session::put('msgType', "err");
           return back();
         }

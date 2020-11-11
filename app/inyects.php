@@ -10,4 +10,9 @@ class inyects extends Model
 
         return $this->belongsTo('App\investment', 'id');
     }
+
+    public function users(){
+
+        return $this->belongsTo('App\User', 'id');
+    }
 }

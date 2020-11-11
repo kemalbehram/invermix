@@ -10,10 +10,10 @@ use App\Notifications\PasswordReset;
 class User extends Authenticatable
 {
     use Notifiable;
-    
+
 
     protected $table = 'users';
-     
+
 
     /**
      * The attributes that are mass assignable.
@@ -46,7 +46,7 @@ class User extends Authenticatable
     {
       return $this->pwd;
     }
-    
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new PasswordReset($token));
@@ -58,6 +58,10 @@ class User extends Authenticatable
 
     public function comments(){
         return $this->hasMany('App\comments', 'sender_id');
+    }
+
+    public function inyects(){
+        return $this->hasMany('App\inyects', 'user_id');
     }
 
 }

@@ -2625,17 +2625,23 @@ class userController extends Controller
           }
           else
           {
-              $pack = investment::find($req->input('p_id'));
+              $pack = inyects::find($req->input('p_id'));
+
           }
 
+        //   if($pack->status = 'active')
+        //   {
+        //   Session::put('msgType', "err");
+        //   Session::put('status', 'Inyeccion no ha sido aprobada aún, debe solicitar la aprobación de la misma.');
+        //   return back();
+        // }
 
           if($amt <= 0)
           {
             Session::put('msgType', "err");
             Session::put('status', 'Fechas de retiro no cumplida/ Monto inválido/ Inversión expirada');
             return back();
-          }
-
+        }
           if($req->input('ended') == 'yes')
           {
             if($pack->status != 'Expired')

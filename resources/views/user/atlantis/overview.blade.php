@@ -56,7 +56,8 @@
 				<div class="card-title"><h2>{{ __('Balance') }}</h2></div>
 				<div class="row py-3">
 					<div class="col-md-6 d-flex flex-column justify-content-around">
-						<a id="wd_bal" title="Click to withdraw" href="javascript:void(0)" >
+						<!-- <a id="wd_bal" title="Click to withdraw" href="javascript:void(0)" > -->
+                        <a href="#">
 							<div class="border_btm">
 								<h4 class="fw-bold text-uppercase text-success op-8">{{ __('Inyecciones') }}</h4>
 								<h3 class="fw-bold">{{$settings->currency}} {{ Auth::user()->inyects->sum('capital') }}</h3>
@@ -64,7 +65,7 @@
 								<br>
 							</div>
 						</a>
-						{{-- <div class="clearfix"><br></div>
+						<!-- {{-- <div class="clearfix"><br></div>
 						<a id="wd_ref_bal" title="Click to withdraw" href="javascript:void(0)">
 							<div>
 								<h4 class="fw-bold text-uppercase text-success op-8">{{ __('Referral Bonus') }}</h4>
@@ -72,7 +73,7 @@
 								<div class="colhd margin_n10" >{{ __('Click to Withdraw Fund') }}</div>
 								<br>
 							</div>
-						</a> --}}
+						</a> --}} -->
 					</div>
 
 					<div class="col-md-6">

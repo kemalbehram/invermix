@@ -544,7 +544,7 @@ class userController extends Controller
             $inv->days_interval = $pack->days_interval;
             $inv->i_return = (round($capital*$pack->daily_interest*$pack->period,2));
             $inv->interest = $pack->daily_interest;
-            // $no = 0;
+
             $dt = strtotime(date('Y-m-d'));
             $days = $pack->period;
 
@@ -723,13 +723,13 @@ class userController extends Controller
 
           if($req->input('ended') == 'yes')
           {
-            if($pack->status != 'Expired')
+            if($pack->status != 'Retirado')
             {
                 $user->wallet += $pack->capital;
                 $user->save();
             }
             $pack->last_wd = $pack->end_date;
-            $pack->status = 'Expired';
+            $pack->status = 'Retirado';
 
           }
           else
@@ -2644,13 +2644,13 @@ class userController extends Controller
         }
           if($req->input('ended') == 'yes')
           {
-            if($pack->status != 'Expired')
+            if($pack->status != 'Retirado')
             {
                 $user->wallet += $pack->capital;
                 $user->save();
             }
             $pack->last_wd = $pack->end_date;
-            $pack->status = 'Expired';
+            $pack->status = 'Retirado';
 
           }
           else
@@ -2683,6 +2683,34 @@ class userController extends Controller
           $act->user_id = $user->id;
           $act->save();
 
+        // $wd = new withdrawal;
+        // $wd->user_id = $user->id;
+        // $wd->usn = $user->username;
+        // $wd->package = $req->input('package_name');
+        // $wd->invest_id = $req->input('inyect_id');
+        // $wd->amount = intval($req->input('amt'));
+        // $wd->account = $user->bank_account;
+        // $wd->w_date = date('Y-m-d');
+        // $wd->currency = $user->currency;
+        // $wd->charges = $charge = intval($req->input('amt'))*env('WD_FEE');
+        // $wd->recieving = intval($req->input('amt'))-$charge;
+        // $wd->save();
+
+
+        // $maildata = ['email' => $user->email, 'username' => $user->username];
+        // Mail::send('mail.wd_notification', ['md' => $maildata], function($msg) use ($maildata){
+        //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+        //     $msg->to($maildata['email']);
+        //     $msg->subject('Withdrawal Notification');
+        // });
+
+        // $maildata = ['email' => $user->email, 'username' => $user->username];
+        // Mail::send('mail.admin_wd_notification', ['md' => $maildata], function($msg) use ($maildata){
+        //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+        //     $msg->to(env('SUPPORT_EMAIL'));
+        //     $msg->subject('Withdrawal Notification');
+        // });
+
           Session::put('status', 'Retiro solicitado, cuando sea acutalizado será notificado');
           Session::put('msgType', "suc");
           return back();
@@ -2704,3 +2732,54 @@ class userController extends Controller
 
 }
 
+
+
+
+
+
+//     $wd = new withdrawal;
+//     $wd->user_id = $user->id;
+//     $wd->usn = $user->username;
+//     $wd->package = 'wallet';
+//     $wd->invest_id = $user->id;
+//     $wd->amount = intval($req->input('amt'));
+//     $wd->account = $req->input('bank');
+//     $wd->w_date = date('Y-m-d');
+//     $wd->currency = $user->currency;
+//     $wd->charges = $charge = intval($req->input('amt'))*env('WD_FEE');
+//     $wd->recieving = intval($req->input('amt'))-$charge;
+//     $wd->save();
+
+
+//     $maildata = ['email' => $user->email, 'username' => $user->username];
+//     Mail::send('mail.wd_notification', ['md' => $maildata], function($msg) use ($maildata){
+//         $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+//         $msg->to($maildata['email']);
+//         $msg->subject('Withdrawal Notification');
+//     });
+
+//     $maildata = ['email' => $user->email, 'username' => $user->username];
+//     Mail::send('mail.admin_wd_notification', ['md' => $maildata], function($msg) use ($maildata){
+//         $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+//         $msg->to(env('SUPPORT_EMAIL'));
+//         $msg->subject('Withdrawal Notification');
+//     });
+
+//     $wd_fee = env("WD_FEE")*100;
+//     Session::put('status', 'Wallet Withdrawal Successful! Note: Withdrawal attracts '.$wd_fee.'% processing fee');
+//     Session::put('msgType', "suc");
+//     return back();
+//   }
+//   catch(\Exception $e)
+//   {
+//     Session::put('status', $e->getMessage());
+//     Session::put('msgType', "err");
+//     return back();
+//   }
+
+// }
+// else
+// {
+//   return redirect('/');
+// }
+// }

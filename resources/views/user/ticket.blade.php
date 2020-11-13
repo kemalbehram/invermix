@@ -3,35 +3,35 @@
 @Section('content')
         <div class="main-panel">
             <div class="content">
-                @php($breadcome = 'Support Chats')
+                @php($breadcome = 'Chat de Soporte')
                 @include('user.atlantis.main_bar')
-                <div class="page-inner mt--5">                    
+                <div class="page-inner mt--5">
                     <div id="prnt"></div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="card-head-row">
-                                        <div class="card-title col-sm-12"  >{{ __('Open Ticket') }} 
-                                            <span class="float-right"><a data-target="#open_ticket" data-toggle="modal" href="javascript:void(0)" class="btn btn_blue text-white"><i class="fas fa-plus-circle "></i>New Ticket</a></span>
+                                        <div class="card-title col-sm-12"  >{{ __('Ticket Abierto') }}
+                                            <span class="float-right"><a data-target="#open_ticket" data-toggle="modal" href="javascript:void(0)" class="btn btn_blue text-white"><i class="fas fa-plus-circle "></i> Nuevo Ticket</a></span>
                                         </div>
                                     </div>
-                                     
+
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive">                                        
+                                    <div class="table-responsive">
                                         <table  class=" display table table-striped table-hover" >
                                             <thead>
-                                                <tr>                                                   
-                                                    <th>{{ __('Ticket ID') }}</th> 
-                                                    <th>{{ __('Title') }}</th>
-                                                    <th>{{ __('status') }}</th>
-                                                    <th>{{ __('Action') }}</th>                                                   
+                                                <tr>
+                                                    <th>{{ __('Ticket ID') }}</th>
+                                                    <th>{{ __('Título') }}</th>
+                                                    <th>{{ __('Status') }}</th>
+                                                    <th>{{ __('Acción') }}</th>
                                                     <!-- <th>{{ __('Status') }}</th>                                   -->
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                
+
                                                 @if(!empty($tickets))
                                                     @foreach($tickets as $ticket)
                                                         <tr>
@@ -63,24 +63,24 @@
                                                                         <i class="fas fa-stop-circle"></i>
                                                                     </a>
                                                                 @endif
-                                                                
-                                                            </td>                                                                                 
+
+                                                            </td>
                                                         </tr>
                                                     @endforeach
                                                 @else
-                                                    
+
                                                 @endif
                                             </tbody>
                                         </table>
-                                        
+
                                     </div>
                                     {{$tickets->links()}}
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -100,29 +100,28 @@
                     <form class="form-horizontal" method="POST" role="form" action="{{ route('ticket.create') }}" >
                         @csrf
                         <div class="form-group {{ $errors->has('amount') ? ' has-error' : '' }}">
-                            <label class="control-label">{{ __('Title') }}</label>                            
+                            <label class="control-label">{{ __('Title') }}</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-pen-alt"></i></span>
                                 </div>
-                                <input type="text" class="form-control" name="title" value="" required autofocus>                    
+                                <input type="text" class="form-control" name="title" value="" required autofocus>
                             </div>
                         </div>
                         <div class="form-group ">
-                            <label class="control-label">{{ __('Message') }}</label>                            
-                            <div class="input-group">                               
-                                <textarea name="msg" class="form-control" required></textarea>                                                   
+                            <label class="control-label">{{ __('Message') }}</label>
+                            <div class="input-group">
+                                <textarea name="msg" class="form-control" required></textarea>
                             </div>
                         </div>
-                        <div class="form-group">                                                                                                           
-                            <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>  
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
                         </div>
                     </form>
                   </div>
-                  
+
                 </div>
               </div>
             </div>
 
 @endSection
-            

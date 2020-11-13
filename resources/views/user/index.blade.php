@@ -29,16 +29,17 @@
 						<div class="col-md-4">
 							<div class="card card-primary">
 								<div class="card-header">
-									<div class="card-title">{{ __('Estadísticas de Retiros') }} </div>
+									<div class="card-title">{{ __('Estadísticas de Retiros en Inversión') }} </div>
 									<div class="card-category">
-									    <?php
-									        $total_wd = 0;
-									        foreach($wd as $w)
-									        {
-    											$total_wd += $w->amount;
-									        }
-									    ?>
-										<h1>{{$settings->currency.' '. $total_wd}}</h1>
+                                    <?php
+                                                    $activities = App\investment::where('user_id', $user->id)->orderby('id', 'desc')->paginate(1);
+                                                ?>
+
+                                    @foreach($activities as $activity)
+
+
+                                        <h1>{{$activity->currency.' '. $activity->sum('w_amt')}}</h1>
+                                        @endforeach
 									</div>
 								</div>
 								<div class="card-body pb-0">
@@ -56,7 +57,8 @@
 									</div>
 								</div>
 							</div> -->
-						</div>
+                        </div>
+
 					</div>
 
 					<div class="row">

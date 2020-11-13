@@ -13,7 +13,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="card-head-row">
-                                        <div class="card-title">{{ __('Historial de Retiro') }}</div>
+                                        <div class="card-title">{{ __('Historial de Retiro de Inversiones') }}</div>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -23,22 +23,71 @@
                                                 <tr>
                                                     <th>{{ __('Fecha') }}</th>
                                                     <th>{{ __('Modalidad') }}</th>
-                                                    <th>{{ __('Cuenta') }}</th>
-                                                    <th>{{ __('Monto') }}</th>
+                                                    <th>{{ __('Capital') }}</th>
+                                                    <th>{{ __('Monto Retirado') }}</th>
                                                     <th>{{ __('Status') }}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php
-                                                    $activities = App\withdrawal::where('user_id', $user->id)->orderby('id', 'desc')->get();
+                                            <?php
+                                                    $activities = App\investment::where('user_id', $user->id)->where('status', 'Retirado')
+                                                    ->orderby('id', 'desc')->get();
                                                 ?>
                                                 @if(count($activities) > 0 )
                                                     @foreach($activities as $activity)
                                                         <tr>
                                                             <td>{{$activity->created_at}}</td>
                                                             <td>{{$activity->package}}</td>
-                                                            <td>{{$activity->account}}</td>
-                                                            <td>{{$settings->currency.' '.$activity->amount}}</td>
+                                                            <td>{{$activity->capital}}</td>
+                                                            <td>{{$activity->currency.' '.$activity->w_amt}}</td>
+                                                            <td>{{$activity->status}}</td>
+
+                                                        </tr>
+                                                    @endforeach
+                                                @else
+
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="prnt"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-head-row">
+                                        <div class="card-title">{{ __('Historial de Retiro de Inyecciones') }}</div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="basic-datatables" class="display table table-striped table-hover" >
+                                            <thead>
+                                                <tr>
+                                                    <th>{{ __('Fecha') }}</th>
+                                                    <th>{{ __('Modalidad') }}</th>
+                                                    <th>{{ __('Capital') }}</th>
+                                                    <th>{{ __('Monto Retirado') }}</th>
+                                                    <th>{{ __('Status') }}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php
+                                                    $activities = App\inyects::where('user_id', $user->id)->where('status', 'Retirado')
+                                                    ->orderby('id', 'desc')->get();
+                                                ?>
+                                                @if(count($activities) > 0 )
+                                                    @foreach($activities as $activity)
+                                                        <tr>
+                                                            <td>{{$activity->created_at}}</td>
+                                                            <td>{{$activity->package}}</td>
+                                                            <td>{{$activity->capital}}</td>
+                                                            <td>{{$activity->currency.' '.$activity->w_amt}}</td>
                                                             <td>{{$activity->status}}</td>
 
                                                         </tr>

@@ -292,14 +292,14 @@
 		var inv_dates = [];
 		var inv_vals = [];
 
-		var inv = '{!! json_encode($wd) !!}' ;
+		var inv = '{!! json_encode($myInv) !!}' ;
 		var js_inv = JSON.parse(inv);
 
 		$.each( js_inv, function( k, val ) {
 	        // $('#prnt').append(', ' +ky+": "+val['created_at']);
 	        var dt = moment(new Date(val['created_at'])).format('MM/YY'); //new Date(val['created_at']);
 	        inv_dates[k] = dt; // dt.getMonth() + '/'+ dt.getFullYear();
-	        inv_vals[k] = val['amount'];
+	        inv_vals[k] = val['w_amt'];
 	    });
 
 		var ctx = document.getElementById('wd_stats').getContext('2d');
@@ -312,7 +312,7 @@
 				datasets:
 				[
 					{
-						label: "Withdrawal Stats",
+						label: "Estadísticas de Retiros",
 						borderColor: '#FFF',
 						pointBackgroundColor: 'rgba(243, 84, 93, 0.6)',
 						pointRadius: 0,

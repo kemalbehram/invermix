@@ -364,7 +364,7 @@
 				datasets:
 				[
 					{
-						label: "Withdrawal Stats",
+						label: "Estadística de Retiros",
 						borderColor: '#FFF',
 						pointBackgroundColor: 'rgba(243, 84, 93, 0.6)',
 						pointRadius: 0,

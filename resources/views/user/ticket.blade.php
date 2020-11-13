@@ -39,9 +39,9 @@
                                                             <td>{{$ticket->title}}</td>
                                                             <td>
                                                                 @if($ticket->status == 0)
-                                                                    {{__('Closed')}}
+                                                                    {{__('Cerrado')}}
                                                                 @elseif($ticket->status == 1)
-                                                                    {{__('Open')}}
+                                                                    {{__('Abierto')}}
                                                                 @endif
                                                             </td>
                                                             <td>
@@ -91,7 +91,7 @@
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Open a new ticket</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Abrir un nuevo ticket</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true" class="text-danger">&times;</span>
                     </button>
@@ -100,7 +100,7 @@
                     <form class="form-horizontal" method="POST" role="form" action="{{ route('ticket.create') }}" >
                         @csrf
                         <div class="form-group {{ $errors->has('amount') ? ' has-error' : '' }}">
-                            <label class="control-label">{{ __('Title') }}</label>
+                            <label class="control-label">{{ __('Título') }}</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-pen-alt"></i></span>
@@ -109,13 +109,13 @@
                             </div>
                         </div>
                         <div class="form-group ">
-                            <label class="control-label">{{ __('Message') }}</label>
+                            <label class="control-label">{{ __('Mensaje') }}</label>
                             <div class="input-group">
                                 <textarea name="msg" class="form-control" required></textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                            <button type="submit" class="btn btn-primary">{{ __('Enviar') }}</button>
                         </div>
                     </form>
                   </div>

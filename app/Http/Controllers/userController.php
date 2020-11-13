@@ -1786,7 +1786,7 @@ class userController extends Controller
 
         // $tickets = ticket::find($user->id);
         return back()->With([
-          'toast_msg' => 'Ticket submitted successfully! Admin will attend to you shortly',
+          'toast_msg' => '¡Ticket enviado correctamente! El administrador te atenderá en breve',
           'toast_type' => 'suc',
           // 'tickets' => $tickets
         ]);
@@ -1794,7 +1794,7 @@ class userController extends Controller
       catch(\Exception $e)
       {
         return back()->With([
-          'toast_msg' => 'Ticket not created! Error'.$e->getMessage(),
+          'toast_msg' => '¡Ticket no fue creado! Error'.$e->getMessage(),
           'toast_type' => 'err'
         ]);
       }
@@ -1846,7 +1846,8 @@ class userController extends Controller
       {
         ticket::where('id', $id)->update(['status' => 0]);
         return back()->with([
-          'toast_msg' => 'Ticket closed successfully!',
+          'toast_msg' => '
+          ¡Ticket cerrado con éxito!',
           'toast_type' => 'suc'
         ]);
       }
@@ -1873,7 +1874,7 @@ class userController extends Controller
       if(empty($close_check) || $close_check->status == 0)
       {
         return json_encode([
-          'toast_msg' => 'Ticket closed',
+          'toast_msg' => 'Ticket cerrado',
           'toast_type' => 'err'
         ]);
       }
@@ -1886,7 +1887,7 @@ class userController extends Controller
       if($validator->fails())
       {
         return json_encode([
-          'toast_msg' => 'Message not sent! Error'.$validator->errors()->first(),
+          'toast_msg' => 'Mensaje no enviado. Error'.$validator->errors()->first(),
           'toast_type' => 'err'
         ]);
       }

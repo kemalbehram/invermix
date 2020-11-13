@@ -147,7 +147,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title"> Modalidades Disponibles</div>
+                                    <div class="card-title" id="invertir"> Modalidades Disponibles</div>
                                 </div>
                                 <div class="card-body pb-0">
                                     @include('user.inc.packages')

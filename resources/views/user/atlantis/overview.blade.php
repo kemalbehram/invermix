@@ -60,7 +60,7 @@
                         <a href="#">
 							<div class="border_btm">
 								<h4 class="fw-bold text-uppercase text-success op-8">{{ __('Inyecciones') }}</h4>
-								<h3 class="fw-bold">{{$settings->currency}} {{ Auth::user()->inyects->sum('capital') }}</h3>
+								<h3 class="fw-bold">${{ number_format( Auth::user()->inyects->sum('capital')), 2 }}</h3>
 								<!-- <div class="colhd margin_n10">{{ __('Click para inyectar al capital') }}</div> -->
 								<br>
 							</div>
@@ -80,7 +80,7 @@
             <a href="#">
   						<div class="border_btm">
   							<h4 class="fw-bold text-uppercase text-success op-8">{{ __('Ganancia total') }}</h4>
-  							<h3 class="fw-bold">{{$settings->currency}} {{ round($currentEarning, 2) }}</h3>
+  							<h3 class="fw-bold">${{ number_format(round($currentEarning, 2)), 2 }}</h3>
   							<div class="colhd margin_n10" >&emsp;</div>
   							<br>
   						</div>

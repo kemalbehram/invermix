@@ -7,8 +7,8 @@
 				</h2>
 			</div>
 			<div class="ml-md-auto py-2 py-md-0">
-				<a href="/{{$user->username}}/investments" class="btn btn-white btn-border btn-round mr-2">Invertir</a>
-				<a href="/{{$user->username}}/wallet" class="btn btn-secondary btn-round">Inyectar</a>
+				<a href="/{{$user->username}}/investments#invertir" class="btn btn-white btn-border btn-round mr-2">Invertir</a>
+				<a href="/{{$user->username}}/investments" class="btn btn-secondary btn-round">Inyectar</a>
 			</div>
 		</div>
 	</div>

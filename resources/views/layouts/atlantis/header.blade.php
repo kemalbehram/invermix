@@ -65,7 +65,7 @@
                                         @endif
                                     @endforeach
 
-								</i> <span class="text-white">Notifications </span><i class="fa fa-chevron-down text-white"></i>
+								</i> <span class="text-white">Notificaciones </span><i class="fa fa-chevron-down text-white"></i>
 							</a>
 							<ul class="dropdown-menu messages-notif-box animated fadeIn" aria-labelledby="messageDropdown">
 								<li>
@@ -105,7 +105,7 @@
 									</div>
 									<div class="dropdown-divider"></div>
 									<div align="center">
-										<a href="/notifications"> &nbsp;View all</a>
+										<a href="/notifications"> &nbsp;Ver todas</a>
 										<br><br>
 									</div>
 								</li>
@@ -137,7 +137,7 @@
 											</div>
 											<a href="/{{$user->username}}/profile">
 												<div class="u-text">
-													<h4>Hi {{ $user->username }}</h4>
+													<h4>Hola, {{ $user->firstname }}</h4>
 													<p class="text-muted">{{ $user->email }}</p>
 												</div>
 											</a>
@@ -146,13 +146,14 @@
 									<li>
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="/{{$user->username}}/dashboard"><span class="fa fa-desktop"></span> &nbsp;Dashboard</a>
-										<a class="dropdown-item" href="/{{$user->username}}/wallet"><span class="fa fa-folder"></span>&nbsp; Deposit</a>
-										<a class="dropdown-item" href="/{{$user->username}}/send_money"><span class="fa fa-paper-plane"></span>&nbsp; Transfer Fund</a>
-										<a class="dropdown-item" href="/{{$user->username}}/investments"><span class="fa fa-wallet"></span>&nbsp; My Investments</a>
-										<a class="dropdown-item" href="/{{$user->username}}/withdrawal"><span class="fa fa-download"></span>&nbsp; Withdrawal</a>
-										<a class="dropdown-item" href="/{{$user->username}}/downlines"><span class="fa fa-users"></span>&nbsp; Downlines</a>
+										<!-- <a class="dropdown-item" href="/{{$user->username}}/wallet"><span class="fa fa-folder"></span>&nbsp; Deposit</a> -->
+										<!-- <a class="dropdown-item" href="/{{$user->username}}/send_money"><span class="fa fa-paper-plane"></span>&nbsp; Transfer Fund</a> -->
+                                        <a class="dropdown-item" href="/{{$user->username}}/investments"><span class="fa fa-wallet"></span>&nbsp; Mis Inversiones</a>
+                                        <a class="dropdown-item" href="/{{$user->username}}/inyects"><span class="fa fa-users"></span>&nbsp; Inyecciones</a>
+										<a class="dropdown-item" href="/{{$user->username}}/withdrawal"><span class="fa fa-download"></span>&nbsp; Retiros</a>
+
 										<a class="dropdown-item" href="{{route('ticket.index')}}">
-											<span class="fab fa-teamspeak"></span>&nbsp; Contact Support
+											<span class="fab fa-teamspeak"></span>&nbsp; Soporte
 											<?php
 				                                $msgs = App\ticket::With('comments')->orderby('id', 'desc')->get();
 				                                $rd = 0;
@@ -170,7 +171,7 @@
 										</a>
 
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="/logout"><span class="fa fa-arrow-right"></span> &nbsp;Logout</a>
+										<a class="dropdown-item" href="/logout"><span class="fa fa-arrow-right"></span> &nbsp;Salir</a>
 
 									</li>
 								</div>

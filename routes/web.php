@@ -208,7 +208,7 @@ Route::get('/view/userdetails/remove/bankaccount/{id}', 'adminController@deleteB
 
 ///////////////////////INYECCIONES////////////////////
 
-Route::get('/{username}/inyects', function () {
+Route::get('/{username}/injects', function () {
     return view('user.inyects.inyects');
 })->middleware('auth');
 
@@ -218,7 +218,19 @@ Route::get('/{username}/inyects', function () {
 Route::get('/admin/manage/investments', function () {
 	if(Session::has('adm'))
 	{
-		return view('admin.manage_inv');
+		return view('admin.manage_inj');
+	}
+	else
+	{
+		return redirect('/back-end');
+	}
+
+});
+
+Route::get('/admin/manage/injects', function () {
+	if(Session::has('adm'))
+	{
+		return view('admin.manage_inj');
 	}
 	else
 	{

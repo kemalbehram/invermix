@@ -133,7 +133,7 @@
                                     @if($rd == 1)
                                     	<i class="fa fa-circle new_not"></i>
                                     @endif
-								</i> Support Center
+								</i> Centro de Soporte
 							</a>
 						</li>
 
@@ -260,20 +260,28 @@
 												<span class="sub-item"> Registrar Clientes </span>
 											</a>
 										</li>
-
+                                        @if($role->role == 3)
 										<li class="">
 											<a href="/admin/manage/adminUsers">
 												<span class="sub-item"> Admin </span>
 											</a>
-										</li>
+                                        </li>
+                                        @endif
 									</ul>
 								</div>
 							</li>
 
 							<li class="nav-item">
 						    	<a href="/admin/manage/investments">
-									<i class="fas fa-hand-holding-usd"></i>
+									<i class="fas fa-folder"></i>
 									<p> Manejar Inversiones</p>
+								</a>
+                            </li>
+
+                            <li class="nav-item">
+						    	<a href="/admin/manage/injects">
+									<i class="fas fa-hand-holding-usd"></i>
+									<p> Manejar Inyecciones</p>
 								</a>
 							</li>
 

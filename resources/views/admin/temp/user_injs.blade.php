@@ -3,12 +3,12 @@
     if(Session::has('val'))
     {
         $v = Session::get('val');
-        $actInv = App\investment::where('user_id', $v)->orwhere('usn', 'like', '%'.$v.'%')->orwhere('capital', $v)->orwhere('status', $v)->orwhere('date_invested', 'like', '%'.$v.'%')->orderby('id', 'desc')->paginate(50);
+        $actIny = App\inyects::where('user_id', $v)->orwhere('usn', 'like', '%'.$v.'%')->orwhere('capital', $v)->orwhere('status', $v)->orwhere('date_invested', 'like', '%'.$v.'%')->orderby('id', 'desc')->paginate(50);
         Session::forget('val');
     }
     else
     {
-        $actInv = App\investment::orderby('id', 'desc')->paginate(50);
+        $actIny = App\inyects::orderby('id', 'desc')->paginate(50);
     }
 
 ?>
@@ -30,8 +30,8 @@
         </tr>
     </thead>
     <tbody class="web-table">
-        @if(count($actInv) > 0 )
-            @foreach($actInv as $in)
+        @if(count($actIny) > 0 )
+            @foreach($actIny as $in)
                 <?php
 
                     $totalElapse = getWorkingDays(date('y-m-d'), $in->end_date);
@@ -112,5 +112,5 @@
 
 </table>
 <div class="" align="">
-   <span> {{$actInv->links()}}</span>
+   <span> {{$actIny->links()}}</span>
 </div>

@@ -25,7 +25,7 @@
                                             <div align="center">
                                                 <img src="/img/{{$settings->site_logo}}" alt="{{$settings->site_title}}" class="login_logo">
                                                 <br>
-                                                <h3 class="colhd"><i class="fa fa-key"></i>{{ __('User Login') }}</h3>
+                                                <h3 class="colhd"><i class="fa fa-key"></i> {{ __('Inicio de sesión') }}</h3>
                                                 <hr>
                                             </div>
                                         </div>
@@ -48,7 +48,7 @@
 
                                                 <div class="form-group row" >
                                                         <label for="email">{{ __('E-Mail Address') }}</label>
-                                                        <input id="email" type="email" class=" @error('email') is-invalid @enderror regTxtBox" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="E-Mail Address">
+                                                        <input id="email" type="email" class=" @error('email') is-invalid @enderror regTxtBox" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Correo electrónico">
 
                                                         @error('email')
                                                             <span class="invalid-feedback" role="alert alert-danger" >
@@ -59,7 +59,7 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="password">{{ __('Password') }}</label>
-                                                        <input id="password" type="password" class=" @error('password') is-invalid @enderror regTxtBox" name="password" required autocomplete="current-password" placeholder="Password">
+                                                        <input id="password" type="password" class=" @error('password') is-invalid @enderror regTxtBox" name="password" required autocomplete="current-password" placeholder="Contraseña">
 
                                                         @error('password')
                                                             <span class="invalid-feedback" role="alert alert-danger" >

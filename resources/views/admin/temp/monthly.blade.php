@@ -3,8 +3,8 @@
     {
         $val = Session::get('val');
         $musers = App\User::where('created_at', 'like', '%'.$val.'%')->where('status', 1)->orderby('created_at', 'asc')->get();
-        $mInv = App\investment::where('date_invested', 'like', '%'.$val.'%')->where('status', 'active')->orderby('date_invested', 'asc')->get();
-        $mDep = App\deposits::where('created_at', 'like', '%'.$val.'%')->where('status', 1)->orderby('created_at', 'asc')->get();
+        $mInv = App\investment::where('created_at', 'like', '%'.$val.'%')->where('status', 'Activa')->orderby('date_invested', 'asc')->get();
+        $mDep = App\inyects::where('created_at', 'like', '%'.$val.'%')->where('status', 'active')->orderby('date_invested', 'asc')->get();
         $mWd = App\Withdrawal::where('w_date', 'like', '%'.$val.'%')->where('status', 'Approved')->orderby('w_date', 'asc')->get();
 
         $mnt = ['Jan','Feb', 'Mar','Apr','May','Jun','Jul','Aug', 'Sep','Oct','Nov','Dec'];
@@ -14,9 +14,9 @@
     else
     {
         $musers = App\User::where('created_at', 'like',  '%'.date('Y-m').'%')->where('status', 1)->orderby('created_at', 'asc')->get();
-        $mInv = App\investment::where('date_invested', 'like', '%'.date('Y-m').'%')->where('status', 'active')->orderby('date_invested', 'asc')->get();
-        $mDep = App\deposits::where('created_at', 'like', '%'.date('Y-m').'%')->where('status', 1)->orderby('created_at', 'asc')->get();
-        $mWd = App\Withdrawal::where('w_date', 'like', '%'.date('Y-m').'%')->where('status', 'Approved')->orderby('w_date', 'asc')->get();
+        $mInv = App\investment::where('created_at', 'like', '%'.date('Y-m').'%')->where('status', 'Activa')->orderby('date_invested', 'asc')->get();
+        $mDep = App\inyects::where('created_at', 'like', '%'.date('Y-m').'%')->where('status', 'active')->orderby('created_at', 'asc')->get();
+        $mWd = App\Withdrawal::where('created_at', 'like', '%'.date('Y-m').'%')->where('status', 'Approved')->orderby('created_at', 'asc')->get();
     }
 
 ?>
@@ -105,7 +105,7 @@
         @php($dep = 0)
         @php($dep2 = 0)
         @foreach($mDep as $in)
-            @php($dep = $dep + intval($in->amount) )
+            @php($dep = $dep + intval($in->capital) )
         @endforeach
         <div class="card card-stats card-secondary  card-round">
             <div class="card-body">
@@ -117,7 +117,7 @@
                     </div>
                     <div class="col-9 col-stats">
                         <div class="numbers">
-                            <p class="card-category">Depositos</p>
+                            <p class="card-category">Inyecciones</p>
                             <h4 id="dCount" class="card-title">{{$settings->currency}} {{$dep}}</h4>
                         </div>
                     </div>
@@ -398,27 +398,27 @@
 
         }
 
-        $('#adminStatChart_m_legend').text('User Statistics');
+        $('#adminStatChart_m_legend').text('Estadísticas de Clientes');
 
         loadStat(musersDate, musersVal);
 
         function load_Stat(){
-            $('#adminStatChart_m_legend').text('User Statistics');
+            $('#adminStatChart_m_legend').text('Estadísticas de Clientes');
             loadStat(musersDate, musersVal);
         }
 
         function load_iStat(){
-            $('#adminStatChart_m_legend').text('Investment Statistics');
+            $('#adminStatChart_m_legend').text('Estadísticas de Inversiones');
             loadStat(mInvDate, mInvVal);
         }
 
         function load_dStat(){
-            $('#adminStatChart_m_legend').text('Deposits Statistics');
+            $('#adminStatChart_m_legend').text('Estadísticas de Inyecciones');
             loadStat(mDepDate, mDepval);
         }
 
         function load_wStat(){
-            $('#adminStatChart_m_legend').text('Withdrawal Statistics');
+            $('#adminStatChart_m_legend').text('Estadísticas de Retiro');
             loadStat(mWdDate, mWdVal);
         }
 

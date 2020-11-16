@@ -49,10 +49,10 @@
 		Circles.create({
 			id:'circles-2',
 			radius:45,
-			value:'{{count($inv->where("status", "=", "Active"))}}',
+			value:'{{count($inv->where("status", "=", "Activa"))}}',
 			maxValue:'{{ count($inv) }}',
 			width:7,
-			text: '{{count($inv->where("status", "=", "Active"))}}',
+			text: '{{count($inv->where("status", "=", "Activa"))}}',
 			colors:['#f1f1f1', '#2BB930'],
 			duration:400,
 			wrpClass:'circles-wrp',
@@ -64,10 +64,10 @@
 		Circles.create({
 			id:'circles-3',
 			radius:45,
-			value:'{{count($deposits->where("status", "=", 1))}}',
-			maxValue:'{{ count($deposits) }}',
+			value:'{{count($iny->where("status", "=", "Activa"))}}',
+			maxValue:'{{ count($iny) }}',
 			width:7,
-			text: '{{count($deposits->where("status",      "=", 1))}}',
+			text: '{{count($iny->where("status", "=", "Activa"))}}',
 			colors:['#f1f1f1', '#F25961'],
 			duration:400,
 			wrpClass:'circles-wrp',
@@ -159,7 +159,7 @@
 	<?php
 		$nw = date('Y-m-d');
 		$from = date('Y-m-d', strtotime($nw. "-12 months"));
-		$inv = App\investment::whereBetween('date_invested',    [$from, $nw])->orderby('id', 'asc')->get();
+		$inv = App\investment::whereBetween('created_at',    [$from, $nw])->orderby('id', 'asc')->get();
 		// $inv = App\deposits::whereBetween('date_invested',    [$from, $nw])->orderby('id', 'asc')->get();
 
 		$inv_dates = [];
@@ -175,7 +175,7 @@
 			{
 				$pt = date('Y-m', strtotime($in->date_invested));
 				$inv_dates[$cnt] = date('m/y', strtotime($in->date_invested));
-				$m_count = App\investment::where('date_invested', 'like','%'.date('Y-m', strtotime($in->date_invested)).'%')->orderby('id', 'asc')->get();
+				$m_count = App\investment::where('created_at', 'like','%'.date('Y-m', strtotime($in->date_invested)).'%')->orderby('id', 'asc')->get();
 				foreach ($m_count as $n)
 				{
 					$sum_cap += $n->capital;
@@ -184,22 +184,23 @@
 				$cnt += 1;
 			}
 		}
-	/////////////////////// for deposits //////////////////
+	/////////////////////// for inyects //////////////////
 
 		$nw = date('Y-m-d H:s:i');
 		$from = date('Y-m-d H:s:i', strtotime($nw. "-12 months"));
-		$dep_st = App\deposits::whereBetween('created_at',    [$from, $nw])->orderby('id', 'asc')->get();
+		$dep_st = App\inyects::whereBetween('created_at',    [$from, $nw])->orderby('id', 'asc')->get();
 		$pt = "";
-		$cnt = 0;
+        $cnt = 0;
+
 		foreach ($dep_st as $in) {
 			if($pt != date('Y-m', strtotime($in->created_at)))
 			{
 				$pt = date('Y-m', strtotime($in->created_at));
 				$dep_dates[$cnt] = date('m/y', strtotime($in->created_at));
-				$m_count = App\deposits::where('created_at', 'like','%'.date('Y-m', strtotime($in->created_at)).'%')->orderby('id', 'asc')->get();
+				$m_count = App\inyects::where('created_at', 'like','%'.date('Y-m', strtotime($in->created_at)).'%')->orderby('id', 'asc')->get();
 				foreach ($m_count as $n)
 				{
-					$sum_cap += $n->amount;
+					$sum_cap += $n->capital;
 				}
 				$dep_vals[$cnt] = $sum_cap;
 				$cnt += 1;
@@ -234,7 +235,7 @@
 						data: inv_vals //[154, 184, 175]
 					},
 					{
-						label: "Estadísticas de Dépositos",
+						label: "Estadísticas de Inyecciones",
 						borderColor: '#0C8',
 						pointBackgroundColor: 'rgba(0, 184, 80, 0.6)',
 						pointRadius: 0,
@@ -325,7 +326,8 @@
 		$inv_dates = [];
 		$inv_vals = [];
 		$pt = "";
-		$cnt = 0;
+        $cnt = 0;
+
 		foreach ($wd_st as $in) {
 			if($pt != date('Y-m', strtotime($in->created_at)))
 			{
@@ -345,7 +347,7 @@
 	<script type="text/javascript">
 
 		var inv_dates = JSON.parse('{!! json_encode($inv_dates) !!}');
-		var inv_vals = JSON.parse('{!! json_encode($inv_vals) !!}');
+        var inv_vals = JSON.parse('{!! json_encode($inv_vals) !!}');
 
 		// $.each( js_inv, function( k, val ) {
 	 //        // $('#prnt').append(', ' +ky+": "+val['created_at']);

@@ -8,7 +8,7 @@
 					<div class="px-2 pb-2 pb-md-0 text-center">
 						<div id="circles-1"></div>
 						<h6 class="fw-bold mt-3 mb-0">Clientes</h6>
-            <span>Inactivos: {{count($users->where('status', '!=', '1'))}}</span>
+            <span>Inactivo: {{count($users->where('status', '!=', '1'))}}</span>
 					</div>
 					<div class="px-2 pb-2 pb-md-0 text-center">
             <?php
@@ -18,17 +18,17 @@
             ?>
 						<div id="circles-2"></div>
 						<h6 class="fw-bold mt-3 mb-0">Inversiones</h6>
-            <span>Inactiva: {{count($inv->where('status', '!=', 'Active'))}}</span>
+            <span>Inactiva: {{count($inv->where('status', '!=', 'Activa'))}}</span>
 					</div>
 					<div class="px-2 pb-2 pb-md-0 text-center">
             <?php
-                $deposits = App\deposits::orderby('id', 'desc')->get();
+                $deposits = App\inyects::orderby('id', 'desc')->get();
                 $dep = 0;
                 $dep2 = 0;
             ?>
 						<div id="circles-3"></div>
-						<h6 class="fw-bold mt-3 mb-0">Depositos</h6>
-            			<span>Inactive: {{count($deposits->where('status', '!=', '1'))}}</span>
+						<h6 class="fw-bold mt-3 mb-0">Inyecciones</h6>
+            			<span>Inactiva: {{count($deposits->where('status', '=', 'Pendiente'))}}</span>
 					</div>
 				</div>
 			</div>
@@ -40,10 +40,10 @@
   @endforeach
 
  <?php
- $deposits = App\deposits::where('status', 1)-> orderby('id', 'desc')->get();
+ $deposits = App\inyects::where('status','Activa')-> orderby('id', 'desc')->get();
  ?>
   @foreach($deposits as $in)
-    @php($dep += $in->amount)
+    @php($dep += $in->capital)
   @endforeach
 
  <?php
@@ -61,15 +61,15 @@
 					<div class="col-md-6 d-flex flex-column justify-content-around">
 						<div style="border-bottom: 1px solid #CCC;">
 							<h4 class="fw-bold text-uppercase text-success op-8">Inversiones</h4>
-							<h3 class="fw-bold">{{$settings->currency}} {{ $cap }}</h3>
+							<h3 class="fw-bold">$ {{number_format($cap)}}</h3>
 							<div class="colhd" style="font-size: 10px; margin-top: -10px;">&emsp;</div>
 							<br>
 						</div>
 					  <div class="clearfix"><br></div>
 						<div>
 
-							<h4 class="fw-bold text-uppercase text-success op-8">Deposits</h4>
-							<h3 class="fw-bold">{{$settings->currency}} {{ $dep }}</h3>
+							<h4 class="fw-bold text-uppercase text-success op-8">Inyecciones</h4>
+							<h3 class="fw-bold">$ {{number_format($dep)}}</h3>
 							<div class="colhd" style="font-size: 10px; margin-top: -10px;">&emsp;</div>
 							<br>
 						</div>
@@ -78,7 +78,7 @@
 					<div class="col-md-6">
 						<div style="border-bottom: 1px solid #CCC;">
 							<h4 class="fw-bold text-uppercase text-success op-8">Retiros</h4>
-							<h3 class="fw-bold">{{$settings->currency}} {{$wd_bal}}</h3>
+							<h3 class="fw-bold">$ {{number_format($wd_bal)}}</h3>
 							<div class="colhd" style="font-size: 10px; margin-top: -10px;">&emsp;</div>
 							<br>
 						</div>

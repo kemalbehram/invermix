@@ -1,22 +1,22 @@
 @extends('inc.auth_layout')
- <title>Password Recovery - {{env('APP_NAME')}}</title>
+ <title>Recuperación de contraseña- {{env('APP_NAME')}}</title>
 @section('content')
 <body>
     <div>
-        <img src="/img/adult.jpg" class="fixedOverlayIMG">         
+        <img src="/img/adult.jpg" class="fixedOverlayIMG">
         <div class="fixedOeverlayBG"></div>
         <div class="container">
             <div class="row pad_T90">
                 <div class="col-md-4"></div>
                 <div class="col-md-4 card">
                     <div class="card-header" align="center">
-                        <img src="/img/{{$settings->site_logo}}" alt="{{$settings->site_title}}" class="login_logo"> 
+                        <img src="/img/{{$settings->site_logo}}" alt="{{$settings->site_title}}" class="login_logo">
                         <br>
-                        <h3><i class="fa fa-key"></i> Password Recovery</h3>
+                        <h3><i class="fa fa-key"></i> Recuperación de contraseña</h3>
                     </div>
                     <div class="card-body">
-                        <div class="">                    
-                            @if(Session::has('msgType') && Session::get('msgType') == 'err')                                
+                        <div class="">
+                            @if(Session::has('msgType') && Session::get('msgType') == 'err')
                                 <div class="alert alert-danger">
                                     {{Session::get('status')}}
                                 </div>
@@ -24,19 +24,19 @@
                                 {{Session::forget('status')}}
 
                             @elseif(Session::has('msgType') && Session::get('msgType') == 'suc')
-                            
+
                                 <div class="alert alert-success">
                                     {{Session::get('status')}}
                                 </div>
                                 {{Session::forget('msgType')}}
-                                {{Session::forget('status')}}                                
+                                {{Session::forget('status')}}
                             @else
                             @endif
                             <div>
                                 <form method="POST" action="/user/request/change/pwd">
                                     @csrf
                                     <div class="form-group row">
-                                        <label for="email">{{ __('Email Address') }}</label>                                        
+                                        <label for="email">{{ __('Correo Electrónico') }}</label>
                                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                         @error('email')
@@ -44,7 +44,7 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                        
+
                                     </div>
 
                                     <div class="form-group row mb-0">
@@ -52,15 +52,15 @@
                                             <button type="submit" class="collcc btn btn-primary">
                                                 {{ __('Reset Password') }}
                                         </div>
-                                        <br><br>                                     
+                                        <br><br>
                                     </div>
-                                    <div class="form-group row mb-0">                                      
+                                    <div class="form-group row mb-0">
                                         <a href="/login">
-                                            <i class="fa fa-arrow-left"></i> {{ __('Back to Login') }}
-                                        </a>                                    
-                                        <br><br>                                     
+                                            <i class="fa fa-arrow-left"></i> {{ __('Volver al Login') }}
+                                        </a>
+                                        <br><br>
                                     </div>
-                                     
+
                                 </form>
                             </div>
                         </div>

@@ -97,6 +97,7 @@ class AppServiceProvider extends ServiceProvider
                 $user = null;
 
                 $inv = investment::orderby('id', 'desc')->get();
+                $iny = investment::orderby('id', 'desc')->get();
                 $deposits = deposits::orderby('id', 'desc')->get();
                 $users = User::orderby('id', 'desc')->get();
                 $wd = withdrawal::orderby('id', 'desc')->paginate(20);
@@ -109,6 +110,7 @@ class AppServiceProvider extends ServiceProvider
 
                 $view->with([
                     'inv' => $inv,
+                    'iny' => $iny,
                     'deposits' => $deposits,
                     'users' => $users,
                     'wd' => $wd,

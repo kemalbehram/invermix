@@ -64,7 +64,7 @@
                                 </div>
                             </div>
                             <div class="income-range order-cl">
-                                <p> N{{$cap}}; ${{$cap2}}</p>                            
+                                <p> N{{$cap}}; ${{$cap2}}</p>
                                 <span class="income-percentange"><i class="fa fa-pie-chart"></i></span>
                             </div>
                             <div class="clear"></div>
@@ -85,7 +85,7 @@
                             <div class="income-rate-total">
                                 <div class="price-adminpro-rate">
                                     <?php
-                                        $deposits = App\deposits::where('status', 1)->orderby('id', 'desc')->get();
+                                        $deposits = App\inyects::where('status', 'Activa')->orderby('id', 'desc')->get();
                                         $dep = 0;
                                         $dep2 = 0;
                                     ?>
@@ -121,7 +121,7 @@
                                     $dep = 0;
                                     $dep2 = 0;
                                 ?>
-                                
+
                                 @foreach($wd as $in)
                                     @if($in->currency == 'N' || $in->package != 'International')
                                         @php($dep = $dep + $in->amount )
@@ -152,7 +152,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -224,7 +224,7 @@
                                 </div>
                             </div>
                             <div class="income-range order-cl">
-                                <p></p>                            
+                                <p></p>
                                 <span class="income-percentange"><i class="fa fa-pie-chart"></i></span>
                             </div>
                             <div class="clear"></div>
@@ -311,7 +311,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>

@@ -24,7 +24,7 @@
             <th> {{ __('Fecha inversión') }} </th>
             <th> {{ __('Hasta') }} </th>
             <th> {{ __('Días transcurridos') }} </th>
-            <th> {{ __('Retirado') }} </th>
+            <th> {{ __('Retorno') }} </th>
             <th> {{ __('Status') }} </th>
             <th> {{ __('Ganancias') }} </th>
         </tr>

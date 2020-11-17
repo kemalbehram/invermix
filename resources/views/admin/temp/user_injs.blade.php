@@ -24,7 +24,7 @@
             <th> {{ __('Fecha inversión') }} </th>
             <th> {{ __('Hasta') }} </th>
             <th> {{ __('Días transcurridos') }} </th>
-            <th> {{ __('Retirado') }} </th>
+            <th> {{ __('Retirados') }} </th>
             <th> {{ __('Status') }} </th>
             <th> {{ __('Ganancias') }} </th>
         </tr>
@@ -66,38 +66,40 @@
                 ?>
                 <tr class="">
                     <td>
-                        <a title="Pausar Inversión" href="/admin/pause/user_inj/{{$in->id}}" >
+                        <a title="Pausar Inyección" href="/admin/pause/user_inj/{{$in->id}}" >
                             <span class=""><i class="fa fa-pause text-warning" ></i></span>
                         </a>
                         @if($adm->role == 3 |$adm->role == 2 )
-                            <a title="Activar Inversión" href="/admin/activate/user_inj/{{$in->id}}" >
+                        &nbsp;&nbsp;&nbsp;
+                            <a title="Activar Inyección" href="/admin/activate/user_inj/{{$in->id}}" >
                                 <span><i class="fa fa-check text-success"></i></span>
                             </a>
-                            <a title="Borrar Inversión" href="/admin/delete/user_inj/{{$in->id}}" >
+                            <br>
+                            <a title="Borrar Inyección" href="/admin/delete/user_inj/{{$in->id}}" >
                                 <span class=""><i class="fa fa-times text-danger"></i></span>
                             </a>
                         @endif
                     </td>
                     <td>{{$in->usn}}</td>
                     <td>{{$in->package}}</td>
-                    <td>{{$in->currency}}{{$in->capital}}</td>
-                    <td>{{$in->currency}}{{round ($in->i_return, 2)}}</td>
+                    <td>{{$in->currency}}{{number_format($in->capital), 2}}</td>
+                    <td>{{$in->currency}}{{number_format(round ( $in->i_return, 2), 2)}}</td>
                     <td>{{$in->created_at->format('d-m-Y')}}</td>
                     <td>{{$in->end_date}}</td>
                     <td>
-                        @if($in->status != 'Expired')
+                        @if($in->status != 'Retirado')
                             {{$totalDays}}
                         @else
                             0
                         @endif
                     </td>
-                    <td>{{$in->w_amt}}</td>
+                    <td>{{number_format($in->w_amt), 2}}</td>
                     <td>{{$in->status}}</td>
                     <td>
                         @if($in->currency == "" && $in->package != 'International')
-                            N {{round ($ern, 2)}}
+                            N {{number_format(round ($ern, 2)),2}}
                         @elseif($in->currency == "" && $in->package = 'International')
-                            $ {{round ($ern, 2)}}
+                            $ {{number_format(round ($ern, 2)),2}}
                         @else
                             {{$in->currency}} {{round ($ern, 2)}}
                         @endif

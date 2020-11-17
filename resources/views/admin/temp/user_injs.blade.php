@@ -3,12 +3,12 @@
     if(Session::has('val'))
     {
         $v = Session::get('val');
-        $actIny = App\inyects::where('user_id', $v)->orwhere('usn', 'like', '%'.$v.'%')->orwhere('capital', $v)->orwhere('status', $v)->orwhere('date_invested', 'like', '%'.$v.'%')->orderby('id', 'desc')->paginate(50);
+        $actIny = App\inyects::where('user_id', $v)->orwhere('usn', 'like', '%'.$v.'%')->orwhere('capital', $v)->orwhere('status', $v)->orwhere('created_at', 'like', '%'.$v.'%')->orderby('created_at', 'desc')->whereNull('deleted_at')->paginate(50);
         Session::forget('val');
     }
     else
     {
-        $actIny = App\inyects::orderby('id', 'desc')->paginate(50);
+        $actIny = App\inyects::where('deleted_at', NULL)->orderby('created_at', 'desc')->paginate(50);
     }
 
 ?>

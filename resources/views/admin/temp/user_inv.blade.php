@@ -1,6 +1,6 @@
 <?php
-    
-    $actInv = App\investment::where('user_id', $user->id)->orderby('id', 'desc')->get();
+
+    $actInv = App\investment::where('user_id', $user->id)->where('deleted_at', NULL)->orderby('id', 'desc')->get();
 
     $refs = App\ref::where('username', $user->username)->orderby('id', 'desc')->get();
     $ref_amt = 0;
@@ -10,10 +10,10 @@
     }
     $ref_bal = $ref_amt - $user->ref_bal;
 
-    $totalEarning = 0;   
+    $totalEarning = 0;
     $currentEarning = 0;
     $workingDays = 0;
-    
+
 
     foreach($actInv as $inv)
     {
@@ -36,24 +36,24 @@
 ?>
 
 
-<div class="table-responsive">            
+<div class="table-responsive">
     <table id="basic-datatables" class="display table table-striped table-hover">
         <thead class="web-table">
-            <tr>                
+            <tr>
                <th> {{ __('Modalidad') }} </th>
                <th> {{ __('Capital') }} </th>
                <th> {{ __('Retorno') }} </th>
-               <th> {{ __('Fecha de Inversión') }} </th> 
-               <th> {{ __('Hasta') }} </th>  
-               <th> {{ __('Días transcurridos') }} </th> 
-               <th> {{ __('Retirado') }} </th>  
+               <th> {{ __('Fecha de Inversión') }} </th>
+               <th> {{ __('Hasta') }} </th>
+               <th> {{ __('Días transcurridos') }} </th>
+               <th> {{ __('Retirado') }} </th>
                <th> {{ __('Status') }} </th>
-               <th> {{ __('Ganancia') }} </th>                                   
+               <th> {{ __('Ganancia') }} </th>
             </tr>
         </thead>
-        
+
         <tbody class="web-table">
-            
+
             @if(count($actInv) > 0 )
                 @foreach($actInv as $in)
                     <?php
@@ -66,7 +66,7 @@
                             $Edays = getWorkingDays($lastWD, $enddate);
                             $ern  = $Edays*$in->interest*$in->capital;
                             $withdrawable = $ern;
-                                                                 
+
                             $totalDays = getWorkingDays($in->date_invested, $in->end_date);
                             $ended = "yes";
 
@@ -82,7 +82,7 @@
                             {
                                 $withdrawable = $in->days_interval*$in->interest*$in->capital;
                             }
-                                                           
+
                             $totalDays = getWorkingDays($in->date_invested, date('Y-m-d'));
                             $ended = "no";
                         }
@@ -93,7 +93,7 @@
                         <td>{{$in->capital}}</td>
                         <td>{{$in->i_return}}</td>
                         <td>{{$in->date_invested}}</td>
-                        <td>{{$in->end_date}}</td> 
+                        <td>{{$in->end_date}}</td>
                         <td>
                             @if($in->status != 'Expired')
                                 {{$totalDays}}
@@ -101,26 +101,26 @@
                                 0
                             @endif
                         </td>
-                        <td>{{$in->w_amt}}</td> 
+                        <td>{{$in->w_amt}}</td>
                         <td>{{$in->status}}</td>
                         <td>
                             <a title="Withdraw" href="javascript:void(0)" onclick="wdnone('{{$in->id}}', '{{$ern}}', '{{$withdrawable}}', '{{$Edays}}', '{{$ended}}')">
                                 {{$user->currency}} {{$ern}}
                             </a>
-                        </td>           
+                        </td>
                     </tr>
-                    
-                    
+
+
                 @endforeach
             @else
-                
+
             @endif
         </tbody>
     </table>
 
-    
+
 </div>
-    
+
 <div class="mobile_table container messages-scrollbar" >
             @if(count($actInv) > 0 )
                 @foreach($actInv as $in)
@@ -134,7 +134,7 @@
                             $Edays = getWorkingDays($lastWD, $enddate);
                             $ern  = $Edays*$in->interest*$in->capital;
                             $withdrawable = $ern;
-                                                                 
+
                             $totalDays = getWorkingDays($in->date_invested, $in->end_date);
                             $ended = "yes";
 
@@ -150,47 +150,47 @@
                             {
                                 $withdrawable = $in->days_interval*$in->interest*$in->capital;
                             }
-                                                           
+
                             $totalDays = getWorkingDays($in->date_invested, date('Y-m-d'));
                             $ended = "no";
                         }
 
                     ?>
-                        
+
                     <div class="alert alert-info margin_top_10 pad_top_0 font_14" >
                         <div class="row admin_usr_inv_row" >
                             <div class="col-xs-12 pad_top_5" align="center" >
                                 <h4 class="u_case"> {{ __('Pakage:') }}  {{$in->package}}</h4>
-                               
+
                             </div>
-                        </div> 
+                        </div>
                         <div class="row color_blue_9">
                             <div class="col-xs-6">
-                                {{ __('Capital:') }} 
+                                {{ __('Capital:') }}
                             </div>
                             <div class="col-xs-6">
                                 {{$in->capital}}
                             </div>
-                        </div> 
+                        </div>
                         <div class="row" style="">
                             <div class="col-xs-6">
-                                {{ __('Return:') }} 
+                                {{ __('Return:') }}
                             </div>
                             <div class="col-xs-6">
                                 {{$in->i_return}}
                             </div>
-                        </div>  
+                        </div>
                         <div class="row" style="">
                             <div class="col-xs-6">
-                                {{ __('Started:') }} 
+                                {{ __('Started:') }}
                             </div>
                             <div class="col-xs-6">
                                 {{$in->date_invested}}
                             </div>
-                        </div> 
+                        </div>
                         <div class="row" style="">
                             <div class="col-xs-6">
-                                {{ __('Ending:') }} 
+                                {{ __('Ending:') }}
                             </div>
                             <div class="col-xs-6">
                                 {{$in->end_date}}
@@ -198,7 +198,7 @@
                         </div>
                         <div class="row" style="">
                             <div class="col-xs-6">
-                                {{ __('Days:') }} 
+                                {{ __('Days:') }}
                             </div>
                             <div class="col-xs-6">
                                 {{$totalDays}}
@@ -206,20 +206,20 @@
                         </div>
                         <div class="row" style="">
                             <div class="col-xs-6">
-                                {{ __('Withdrawn:') }} 
+                                {{ __('Withdrawn:') }}
                             </div>
                             <div class="col-xs-6">
                                 {{$in->w_amt}}
                             </div>
-                        </div> 
+                        </div>
                         <div class="row" style="">
                             <div class="col-xs-6">
-                                {{ __('Status:') }} 
+                                {{ __('Status:') }}
                             </div>
                             <div class="col-xs-6">
                                 {{$in->status}}
                             </div>
-                        </div> 
+                        </div>
                         <div class="row" style="">
                             <br>
                             <div class="col-xs-12" align="center">
@@ -227,10 +227,10 @@
                                     {{$user->currency}} {{$ern}}
                                 </a>
                             </div>
-                        </div>                                                                     
+                        </div>
                     </div>
                 @endforeach
             @else
-                
+
             @endif
 </div>

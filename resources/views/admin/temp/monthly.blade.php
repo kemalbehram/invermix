@@ -24,7 +24,7 @@
 <div class="row">
     <div class="col-sm-12 float-right" align="" style="">
         <form id="search_form" action="/admin/search/stat" method="post">
-            <label><b>Buscar (YYYY-MM):</b></label>
+            <label><b>Buscar (AAAA-MM):</b></label>
             <div class="input-group margin_top_10" >
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <div class="input-group-prepend">
@@ -92,7 +92,7 @@
                     <div class="col-9 col-stats">
                         <div class="numbers">
                             <p class="card-category">Inversiones</p>
-                            <h4 id="iCount" class="card-title">{{$settings->currency}} {{ $dep }}</h4>
+                            <h4 id="iCount" class="card-title">$ {{ $dep }}</h4>
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                     <div class="col-9 col-stats">
                         <div class="numbers">
                             <p class="card-category">Inyecciones</p>
-                            <h4 id="dCount" class="card-title">{{$settings->currency}} {{$dep}}</h4>
+                            <h4 id="dCount" class="card-title">$ {{$dep}}</h4>
                         </div>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
                     <div class="col-9 col-stats">
                         <div class="numbers">
                             <p class="card-category">Retiros</p>
-                            <h4 id="wCount" class="card-title">{{$settings->currency}} {{$dep}}</h4>
+                            <h4 id="wCount" class="card-title">$ {{$dep}}</h4>
                         </div>
                     </div>
                 </div>

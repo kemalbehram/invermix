@@ -18,7 +18,7 @@
                                                 <div class="input-group">
                                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text"> {{ __('Search:') }} </span>
+                                                        <span class="input-group-text"> {{ __('Buscar:') }} </span>
                                                     </div>
                                                     <input type="text" name="search_val" class="form-control" placeholder="Buscar by nombre de usuario, cantidad, detalles bancarios, fecha o estado">
                                                     <div class="input-group-append">

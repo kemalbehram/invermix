@@ -3,7 +3,7 @@
 @Section('content')
         <div class="main-panel">
             <div class="content">
-                @php($breadcome = 'Support')
+                @php($breadcome = 'Soporte')
                 @include('user.atlantis.main_bar')
                 <div class="page-inner mt--5">
                     <div id="prnt"></div>
@@ -19,7 +19,7 @@
                                 </div>
                                 <div class="card-body position_relative" >
                                     <div class='p-2 text-center bg_white chat_msg'>
-                                        <strong>Ticket Issue Messages</strong><br>
+                                        <strong>Ticket Mensajes</strong><br>
                                         {{$ticket_view->msg}}
                                     </div>
                                     <div class="pl-3 pr-3 chat_container">
@@ -64,7 +64,7 @@
                                                 <div class="form-group {{ $errors->has('amount') ? ' has-error' : '' }}">
                                                     <div class="input-group">
                                                         <input id="ticket_id" type="hidden" class="form-control" name="ticket_id" value="{{$ticket_view->id}}" required autofocus>
-                                                        <input type="text" id="msg_entry" class="form-control msg_entry" name="msg" autofocus placeholder="Your Message">
+                                                        <input type="text" id="msg_entry" class="form-control msg_entry" name="msg" autofocus placeholder="Tu Mensaje">
                                                         <div class="input-group-append">
                                                             <span class="input-group-text btn_blue">
                                                                 <button type="submit" class="btn btn_blue" onclick="post_comment('user')"><i class="fab fa-telegram-plane"></i></button>

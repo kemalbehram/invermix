@@ -149,7 +149,7 @@
 										<!-- <a class="dropdown-item" href="/{{$user->username}}/wallet"><span class="fa fa-folder"></span>&nbsp; Deposit</a> -->
 										<!-- <a class="dropdown-item" href="/{{$user->username}}/send_money"><span class="fa fa-paper-plane"></span>&nbsp; Transfer Fund</a> -->
                                         <a class="dropdown-item" href="/{{$user->username}}/investments"><span class="fa fa-wallet"></span>&nbsp; Mis Inversiones</a>
-                                        <a class="dropdown-item" href="/{{$user->username}}/inyects"><span class="fa fa-users"></span>&nbsp; Inyecciones</a>
+                                        <a class="dropdown-item" href="/{{$user->username}}/injects"><span class="fa fa-users"></span>&nbsp; Inyecciones</a>
 										<a class="dropdown-item" href="/{{$user->username}}/withdrawal"><span class="fa fa-download"></span>&nbsp; Retiros</a>
 
 										<a class="dropdown-item" href="{{route('ticket.index')}}">
@@ -240,7 +240,7 @@
 
 
 						<li class="nav-item">
-                         <a href="/{{$user->username}}/inyects">
+                         <a href="/{{$user->username}}/injects">
 							<i class="fas fa-hand-holding-usd"></i>
 								<p>Inyecciones</p>
 							</a>

@@ -34,6 +34,7 @@ use App\ticket;
 use App\comments;
 use App\companies;
 use App\currencies;
+use App\inyects;
 
 
 class adminController extends Controller
@@ -498,7 +499,7 @@ class adminController extends Controller
             $inv_user->save();
         }
 
-        investment::where('id',$id)->delete();
+        investment::where('id',$id)->update(array('deleted_at' => date('Y-m-d H:i:s')));
 
         $adm = Session::get('adm');
         $act = new adminLog;
@@ -2747,6 +2748,132 @@ else
         'toast_type' => 'err'
       ]);
     }
+  }
+
+
+/////////////////////////////INJECT//////////////////////////////
+
+  public function pauseInj($id)
+  {
+    if(Session::has('adm') && !empty(Session::get('adm')))
+    {
+
+      try
+      {
+        $usr = inyects::find($id);
+        $usr->status = 'Pausada';
+        $usr->save();
+
+        $adm = Session::get('adm');
+        $act = new adminLog;
+        $act->admin = $adm->email;
+        $act->action = "Inyección de usuario en pausa. Investment id: ".$id;
+        $act->save();
+
+        Session::put('status', "Successful");
+        Session::put('msgType', "suc");
+        return back(); //
+
+      }
+      catch(\Exception $e)
+      {
+        Session::put('status', "¡Error al actualizar el registro! Intente nuevamente.");
+        Session::put('msgType', "err");
+        return back();
+      }
+
+
+    }
+    else
+    {
+      return redirect('/');
+    }
+
+  }
+
+  public function activateInj($id)
+  {
+    if(Session::has('adm') && !empty(Session::get('adm')))
+    {
+
+      try
+      {
+        $usr = inyects::find($id);
+        $usr->status = 'Activa';
+        $usr->save();
+
+        $adm = Session::get('adm');
+        $act = new adminLog;
+        $act->admin = $adm->email;
+        $act->action = "Inyección de usuario activada. Investment id: ".$id;
+        $act->save();
+
+        Session::put('status', "Exitosa");
+        Session::put('msgType', "suc");
+        return back(); //
+
+      }
+      catch(\Exception $e)
+      {
+        Session::put('status', "¡Error al actualizar el registro! Intente nuevamente.");
+        Session::put('msgType', "err");
+        return back();
+      }
+
+
+    }
+    else
+    {
+      return redirect('/');
+    }
+
+  }
+
+  public function deleteInj($id)
+  {
+    if(Session::has('adm') && !empty(Session::get('adm')))
+    {
+
+      try
+      {
+        $inv = inyects::find($id);
+
+        $inv_user = User::find($inv->user_id);
+        $amt = $inv->capital;
+
+        if($inv->w_amt == 0)
+        {
+            $inv_user->wallet += $amt;
+            $inv_user->save();
+        }
+
+        inyects::where('id',$id)->update(array('deleted_at' => date('Y-m-d H:i:s')));
+
+        $adm = Session::get('adm');
+        $act = new adminLog;
+        $act->admin = $adm->email;
+        $act->action = "Inyección de usuario eliminado. Inversión id: ".$id;
+        $act->save();
+
+        Session::put('status', "Exitoso");
+        Session::put('msgType', "suc");
+        return back();
+
+      }
+      catch(\Exception $e)
+      {
+        Session::put('status', "¡Error actualizando registro! Intente nuevamente.");
+        Session::put('msgType', "err");
+        return back();
+      }
+
+
+    }
+    else
+    {
+      return redirect('/');
+    }
+
   }
 
 }

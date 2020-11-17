@@ -218,7 +218,7 @@ Route::get('/{username}/injects', function () {
 Route::get('/admin/manage/investments', function () {
 	if(Session::has('adm'))
 	{
-		return view('admin.manage_inj');
+		return view('admin.manage_inv');
 	}
 	else
 	{
@@ -371,6 +371,10 @@ Route::get('/admin/delete/user/payment/{id}', 'adminController@deleteDep');
 Route::get('/admin/pause/user_inv/{id}', 'adminController@pauseInv');
 Route::get('/admin/activate/user_inv/{id}', 'adminController@activateInv');
 Route::get('/admin/delete/user_inv/{id}', 'adminController@deleteInv');
+
+Route::get('/admin/pause/user_inj/{id}', 'adminController@pauseInj');
+Route::get('/admin/activate/user_inj/{id}', 'adminController@activateInj');
+Route::get('/admin/delete/user_inj/{id}', 'adminController@deleteInj');
 
 Route::get('/admin/pause/x_inv/{id}', 'adminController@xpauseInv');
 Route::get('/admin/activate/x_inv/{id}', 'adminController@xactivateInv');

@@ -60,6 +60,8 @@
                         </div>
                     </div>
 
+                    @php($role = Session::get('adm'))
+                    @if($role->role == 3)
                     <div class="row row-card-no-pd">
                         <div class="col-md-12">
                             <div class="card">
@@ -118,6 +120,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
 
                 </div>
             </div>

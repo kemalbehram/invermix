@@ -13,25 +13,25 @@
                                 <div class="card-header">
                                     <div class="card-head-row">
                                         <div class="card-title col-sm-12"  >
-                                            {{ __('View Support Tickets') }}                                             
+                                            {{ __('Ver tickets de soporte') }}
                                         </div>
                                     </div>
-                                     
+
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive">                                        
+                                    <div class="table-responsive">
                                         <table id="basic-datatables" class=" display  table table-striped table-hover" >
                                             <thead>
-                                                <tr> 
+                                                <tr>
                                                     <th>{{ __('Ticket ID') }}</th>
-                                                    <th>{{ __('User ID') }}</th> 
-                                                    <th>{{ __('Title') }}</th>
-                                                    <th>{{ __('status') }}</th>
-                                                    <th>{{ __('Action') }}</th>  
+                                                    <th>{{ __('Usuario ID') }}</th>
+                                                    <th>{{ __('Título') }}</th>
+                                                    <th>{{ __('Status') }}</th>
+                                                    <th>{{ __('Acción') }}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                
+
                                                 @if(!empty($tickets))
                                                     @foreach($tickets as $ticket)
                                                         <tr>
@@ -46,7 +46,7 @@
                                                                 @endif
                                                             </td>
                                                             <td>
-                                                                <a title="View Chat" href="/support/{{$ticket->id}}" class="btn btn_blue">
+                                                                <a title="Ver Chat" href="/support/{{$ticket->id}}" class="btn btn_blue">
                                                                     <i class="fab fa-teamspeak"></i>
                                                                     @if($ticket->state == 1 && $ticket->status != 0)
                                                                         @php($rd = 1)
@@ -60,21 +60,21 @@
                                                                         <i class="fa fa-circle new_not"></i>
                                                                         @php($rd = 0)
                                                                     @endif
-                                                                </a>                                                                
+                                                                </a>
                                                                 @if($ticket->status == 0)
                                                                     <a title="Delete Ticket" href="{{ route('support.delete', $ticket->id) }}" class="btn btn-danger">
                                                                         <i class="fa fa-times"></i>
                                                                     </a>
                                                                 @else
-                                                                    <a title="Close Ticket" href="{{ route('support.close', $ticket->id) }}" class="btn btn-warning">
+                                                                    <a title="Cerrar Ticket" href="{{ route('support.close', $ticket->id) }}" class="btn btn-warning">
                                                                         <i class="fas fa-stop-circle"></i>
                                                                     </a>
                                                                 @endif
-                                                            </td>                                                                                 
+                                                            </td>
                                                         </tr>
                                                     @endforeach
                                                 @else
-                                                    
+
                                                 @endif
                                             </tbody>
                                         </table>
@@ -83,9 +83,9 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
-                    
+
                 </div>
             </div>
 @endSection

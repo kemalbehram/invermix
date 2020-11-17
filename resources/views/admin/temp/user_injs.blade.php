@@ -66,14 +66,14 @@
                 ?>
                 <tr class="">
                     <td>
-                        <a title="Pause Investment" href="/admin/pause/user_inv/{{$in->id}}" >
+                        <a title="Pausar Inversión" href="/admin/pause/user_inj/{{$in->id}}" >
                             <span class=""><i class="fa fa-pause text-warning" ></i></span>
                         </a>
                         @if($adm->role == 3 |$adm->role == 2 )
-                            <a title="Activate Investment" href="/admin/activate/user_inv/{{$in->id}}" >
+                            <a title="Activar Inversión" href="/admin/activate/user_inj/{{$in->id}}" >
                                 <span><i class="fa fa-check text-success"></i></span>
                             </a>
-                            <a title="Delete Investment" href="/admin/delete/user_inv/{{$in->id}}" >
+                            <a title="Borrar Inversión" href="/admin/delete/user_inj/{{$in->id}}" >
                                 <span class=""><i class="fa fa-times text-danger"></i></span>
                             </a>
                         @endif

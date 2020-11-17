@@ -67,8 +67,8 @@ class AppServiceProvider extends ServiceProvider
                 $adm = null;
 
                 $myInv = investment::where('user_id', $user->id)->orderby('id', 'asc')->get();
-                $actInv = investment::where('user_id', $user->id)->orderby('id', 'desc')->get();
-                $actIny = inyects::where('user_id', $user->id)->orderby('created_at', 'desc')->get();
+                $actInv = investment::where('user_id', $user->id)->where('deleted_at', NULL)->orderby('created_at', 'desc')->get();
+                $actIny = inyects::where('user_id', $user->id)->where('deleted_at', NULL)->orderby('created_at', 'desc')->get();
                 $refs = User::where('referal', $user->username)->orderby('id', 'DESC')->get();
                 $wd = withdrawal::where('user_id', $user->id)->orderby('id', 'asc')->get();
                 $logs = activities::where('user_id', $user->id)->orderby('id', 'DESC')->take(20)->paginate(5);
@@ -96,8 +96,8 @@ class AppServiceProvider extends ServiceProvider
                 Session::put('adm', $adm);
                 $user = null;
 
-                $inv = investment::orderby('id', 'desc')->get();
-                $iny = investment::orderby('id', 'desc')->get();
+                $inv = investment::orderby('id', 'desc')->where('deleted_at', NULL)->get();
+                $iny = investment::orderby('id', 'desc')->where('deleted_at', NULL)->get();
                 $deposits = deposits::orderby('id', 'desc')->get();
                 $users = User::orderby('id', 'desc')->get();
                 $wd = withdrawal::orderby('id', 'desc')->paginate(20);

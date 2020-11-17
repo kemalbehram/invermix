@@ -97,7 +97,7 @@ class AppServiceProvider extends ServiceProvider
                 $user = null;
 
                 $inv = investment::orderby('id', 'desc')->where('deleted_at', NULL)->get();
-                $iny = investment::orderby('id', 'desc')->where('deleted_at', NULL)->get();
+                $iny = inyects::orderby('id', 'desc')->where('deleted_at', NULL)->get();
                 $deposits = deposits::orderby('id', 'desc')->get();
                 $users = User::orderby('id', 'desc')->get();
                 $wd = withdrawal::orderby('id', 'desc')->paginate(20);

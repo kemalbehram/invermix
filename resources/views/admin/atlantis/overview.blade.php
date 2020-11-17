@@ -18,7 +18,7 @@
             ?>
 						<div id="circles-2"></div>
 						<h6 class="fw-bold mt-3 mb-0">Inversiones</h6>
-            <span>Inactiva: {{count($inv->where('status', '!=', 'Activa'))}}</span>
+            <span>Inactiva: {{count($inv->where('status', '=', 'Pendiente'))}}</span>
 					</div>
 					<div class="px-2 pb-2 pb-md-0 text-center">
             <?php

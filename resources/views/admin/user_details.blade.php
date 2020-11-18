@@ -273,6 +273,11 @@
                                 <div class="card-body pb-0">
                                     @include('user.inc.packages')
                                 </div>
+                                @else
+                                <div class="card-body pb-0">
+                                    <h3><em>Ya el cliente tiene inversiones</em></h3>
+                                </div>
+
                                 @endif
                             </div>
                         </div>

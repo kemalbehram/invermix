@@ -38,8 +38,8 @@
                                             <tr>
                                                 <th><i class="fa fa-eye"></i></th>
                                                 <th>{{ __('Nombre Cliente') }}</th>
-                                                <th>{{ __('Usuario') }}</th>
-                                                <th>{{ __('Correo') }}</th>
+                                                <th>{{ __('Nombre de usuario') }}</th>
+                                                <th>{{ __('Correo Electrónico') }}</th>
                                                 <th>{{ __('Teléfono') }}</th>
                                                 <th>{{ __('Status') }}</th>
                                             </tr>
@@ -49,7 +49,7 @@
                                                 <th><i class="fa fa-eye"></i></th>
                                                 <th>{{ __('Name') }}</th>
                                                 <th>{{ __('Nombre de usuario') }}</th>
-                                                <th>{{ __('Correo') }}</th>
+                                                <th>{{ __('Correo Electrónico') }}</th>
                                                 <th>{{ __('Teléfono') }}</th>
                                                 <th>{{ __('Status') }}</th>
                                             </tr>
@@ -70,9 +70,9 @@
                                                         <td>{{$user->phone}}</td>
                                                         <td>
                                                             @if($user->status == 1 || $user->status == 'Active')
-                                                                {{'Active'}}
+                                                                {{'Activo'}}
                                                              @elseif($user->status == 0 || $user->status == 'Not Active')
-                                                             {{'Not Active'}}
+                                                             {{'Sin Activar'}}
                                                              @else
                                                              {{'Blocked'}}
                                                             @endif

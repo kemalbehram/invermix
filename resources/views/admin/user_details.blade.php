@@ -266,9 +266,14 @@
                                 <div class="card-header">
                                     <div class="card-title"> {{ __('Primera Inversión Cliente') }} </div>
                                 </div>
+                                <?php
+                                                 $myinv = App\investment::where('user_id', $user->id)->get();
+                                            ?>
+                                @if(count($myinv) == 0)
                                 <div class="card-body pb-0">
                                     @include('user.inc.packages')
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>

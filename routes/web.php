@@ -369,7 +369,7 @@ Route::get('/admin/approve/user/payment/{id}', 'adminController@approveDep');
 Route::get('/admin/delete/user/payment/{id}', 'adminController@deleteDep');
 
 Route::get('/admin/pause/user_inv/{id}', 'adminController@pauseInv');
-Route::get('/admin/activate/user_inv/{id}', 'adminController@activateInv');
+Route::post('/admin/activate/user_inv', 'adminController@activateInv');
 Route::get('/admin/delete/user_inv/{id}', 'adminController@deleteInv');
 
 Route::get('/admin/pause/user_inj/{id}', 'adminController@pauseInj');

@@ -51,17 +51,17 @@
                                                     <hr>
                                                     <div class="row py-3 @if($adm->role < 2) {{blur_cnt}}@endif position_relative">
                                                         <div class="col-md-6 d-flex flex-column justify-content-around">
-                                                            <div class="border_btm_1">
+                                                            <!-- <div class="border_btm_1">
                                                                 <h4 class="fw-bold  text-info op-8"> {{ __('Wallet Balance') }} </h4>
                                                                 <h3 class="fw-bold">{{$settings->currency}} {{ round($user->wallet,2) }}</h3>
                                                                 <div class="colhd margin_top_n10 font_10">&emsp;</div>
-                                                            </div>
+                                                            </div> -->
                                                           <div class="clearfix"><br></div>
-                                                            <div>
+                                                            <!-- <div>
                                                                 <h4 class="fw-bold text-info op-8"> {{ __('Referral Bonus') }} </h4>
                                                                 <h3 class="fw-bold">{{$settings->currency}} {{ round ($user->ref_bal, 2)}}</h3>
                                                                 <div class="colhd margin_top_n10 font_10 ">&emsp;</div>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
 
                                                         <div class="col-md-6">
@@ -77,11 +77,11 @@
                                                                 <span class="fa fa-circle" style="color: green;"></span>
                                                                 <span class="">
                                                                 @if($user->status == 1 || $user->status == 'Active')
-                                                                    Active
+                                                                    Activo
                                                                 @elseif($user->status == 2 || $user->status == 'Blocked')
-                                                                    Blocked
+                                                                    Bloqueado
                                                                 @elseif($user->status == 0 || $user->status == 'Inactive')
-                                                                    Not Active
+                                                                    Inactivo
                                                                 @endif
                                                                 </span>
 

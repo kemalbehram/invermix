@@ -269,6 +269,32 @@ function edit_comp(id, name_comp, rnc, email, o_capital, a_capital, bonus_open, 
 }
 
 
+
+// function (id, usn, package, capital, status, token)
+// {
+// 	$('#id').val(id);
+// 	$('#usn').text(usn);
+//   $('#package').text(package);
+// 	$('#capital').val(capital);
+//     $('#status').text(status);
+// 	$('#token').val(token);
+// 	$('#packEdit').show();
+
+// }
+
+
+
+// function activate_inv(id, usn, package)
+// {
+// 	$('#id').val(id);
+// 	$('#usn').val(usn);
+//     document.getElementById('package').style.display = "block";
+// 	$('#ActivateINV').show();
+
+// }
+
+
+
 $(document).ready(function()
 {
     $('#invdata').show();

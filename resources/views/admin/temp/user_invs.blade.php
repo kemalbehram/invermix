@@ -72,7 +72,7 @@
                         </a>
                         @if($adm->role == 3 |$adm->role == 2 )
                         &nbsp;&nbsp;&nbsp;
-                            <a title="Activar Inversión" href="/admin/activate/user_inv/{{$in->id}}" >
+                            <a title="Activar Inversión" href="javascript:void(0)" onclick="activate_inv('{{$in->id}}','{{$in->usn}}', '{{$in->package}}', '{{number_format($in->capital), 2}}', '{{$in->status}}', '{{$in->currency}}','{{csrf_token()}}')" >
                                 <span><i class="fa fa-check text-success"></i></span>
                             </a>
                             <br>
@@ -118,3 +118,4 @@
 <div class="" align="">
    <span> {{$actInv->links()}}</span>
 </div>
+@include('admin.temp.activate_inv')

@@ -443,21 +443,86 @@ class adminController extends Controller
 
   }
 
-  public function activateInv($id)
+//   public function activateInv($id)
+//   {
+//     if(Session::has('adm') && !empty(Session::get('adm')))
+//     {
+
+//       try
+//       {
+//         $usr = investment::find($id);
+//         $usr->status = 'Activa';
+//         $usr->save();
+
+//         $adm = Session::get('adm');
+//         $act = new adminLog;
+//         $act->admin = $adm->email;
+//         $act->action = "Inversión de usuario activada. Inversión id: ".$id;
+//         $act->save();
+
+//         Session::put('status', "Successful");
+//         Session::put('msgType', "suc");
+//         return back(); //
+
+//       }
+//       catch(\Exception $e)
+//       {
+//         Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
+//         Session::put('msgType', "err");
+//         return back();
+//       }
+
+
+//     }
+//     else
+//     {
+//       return redirect('/');
+//     }
+
+//   }
+
+
+
+public function activateInv(Request $request)
   {
+    // $test = str_replace(',', '', $request->capital);
+
+    // dd($request);
+    // die();
+
+
+
+
+
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
 
       try
       {
-        $usr = investment::find($id);
+        $company = companies::find($request->company);
+
+         if($company->status = 1){
+
+             $capitalsubs = str_replace(',', '', $request->capital);
+             $company->decrement('a_capital', $capitalsubs);
+             $company->sold_bonus =  str_replace(',', '', $request->capital) / $company->bonus_cost;
+
+
+             $company->save();
+            // str_replace(',', '', $request->capital);
+
+        }
+
+
+
+        $usr = investment::find($request->id);
         $usr->status = 'Activa';
         $usr->save();
 
         $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
-        $act->action = "Activated User Investment. Investment id: ".$id;
+        $act->action = "Inversión de usuario activada. Inversión id: ".$request->id;
         $act->save();
 
         Session::put('status', "Successful");
@@ -467,7 +532,7 @@ class adminController extends Controller
       }
       catch(\Exception $e)
       {
-        Session::put('status', "Error updating record! Try again");
+        Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
         Session::put('msgType', "err");
         return back();
       }

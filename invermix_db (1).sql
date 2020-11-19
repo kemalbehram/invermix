@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2020 at 10:23 PM
+-- Generation Time: Nov 19, 2020 at 10:31 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -82,7 +82,28 @@ INSERT INTO `activities` (`id`, `user_id`, `action`, `created_at`, `updated_at`)
 (40, 1, 'User logged in to account', '2020-11-11 17:48:31', '2020-11-11 17:48:31'),
 (41, 1, 'User logged in to account', '2020-11-11 18:07:56', '2020-11-11 18:07:56'),
 (42, 1, 'User logged in to account', '2020-11-11 19:32:07', '2020-11-11 19:32:07'),
-(43, 1, 'User Inyected 10 in Prueba package', '2020-11-11 20:59:41', '2020-11-11 20:59:41');
+(43, 1, 'User Inyected 10 in Prueba package', '2020-11-11 20:59:41', '2020-11-11 20:59:41'),
+(44, 1, 'User logged in to account', '2020-11-12 19:11:07', '2020-11-12 19:11:07'),
+(45, 1, 'Usuario retiró desde Pruebapackage. package id: 14', '2020-11-12 19:30:55', '2020-11-12 19:30:55'),
+(46, 1, 'Usuario retiró desde Pruebapackage. package id: 11', '2020-11-12 19:37:16', '2020-11-12 19:37:16'),
+(47, 1, 'User logged in to account', '2020-11-12 20:20:11', '2020-11-12 20:20:11'),
+(48, 1, 'User Inyected 10 in Prueba package', '2020-11-12 21:05:28', '2020-11-12 21:05:28'),
+(49, 1, 'User Invested 150 in Prueba package', '2020-11-12 21:09:13', '2020-11-12 21:09:13'),
+(50, 1, 'User logged in to account', '2020-11-13 15:28:49', '2020-11-13 15:28:49'),
+(51, 1, 'User withdrawn to wallet from Pruebapackage. package id: 11', '2020-11-13 15:33:13', '2020-11-13 15:33:13'),
+(52, 1, 'User Invested 50000 in Trismetral package', '2020-11-13 15:55:49', '2020-11-13 15:55:49'),
+(53, 1, 'Usuario retiró desde Pruebapackage. package id: 15', '2020-11-13 16:57:40', '2020-11-13 16:57:40'),
+(54, 1, 'User logged in to account', '2020-11-13 22:18:17', '2020-11-13 22:18:17'),
+(55, 1, 'User logged in to account', '2020-11-13 22:47:42', '2020-11-13 22:47:42'),
+(56, 1, 'User logged in to account', '2020-11-16 15:59:16', '2020-11-16 15:59:16'),
+(57, 1, 'User Invested 10 in Prueba package', '2020-11-16 16:43:20', '2020-11-16 16:43:20'),
+(58, 1, 'User logged in to account', '2020-11-16 19:18:20', '2020-11-16 19:18:20'),
+(59, 1, 'User Invested 13 in Prueba package', '2020-11-16 19:18:42', '2020-11-16 19:18:42'),
+(60, 1, 'User logged in to account', '2020-11-17 17:40:06', '2020-11-17 17:40:06'),
+(61, 1, 'User Invested 50000 in Trismetral package', '2020-11-17 18:04:05', '2020-11-17 18:04:05'),
+(62, 1, 'User Invested 458246 in Trismetral package', '2020-11-17 18:12:02', '2020-11-17 18:12:02'),
+(63, 1, 'User Invested 458246 in Capitalizable package', '2020-11-17 18:36:48', '2020-11-17 18:36:48'),
+(64, 1, 'User logged in to account', '2020-11-17 19:08:57', '2020-11-17 19:08:57');
 
 -- --------------------------------------------------------
 
@@ -195,7 +216,49 @@ INSERT INTO `admin_log` (`id`, `admin`, `action`, `created_at`, `updated_at`) VA
 (63, 'diego@diego.com', 'Logged in to the system', '2020-11-05 16:35:03', '2020-11-05 16:35:03'),
 (64, 'dynamiscreatives@gmail.com', 'Logged in to the system', '2020-11-06 13:10:45', '2020-11-06 13:10:45'),
 (65, 'dynamiscreatives@gmail.com', 'Logged in to the system', '2020-11-06 15:30:26', '2020-11-06 15:30:26'),
-(66, 'dynamiscreatives@gmail.com', 'Logged in to the system', '2020-11-10 19:47:43', '2020-11-10 19:47:43');
+(66, 'dynamiscreatives@gmail.com', 'Logged in to the system', '2020-11-10 19:47:43', '2020-11-10 19:47:43'),
+(67, 'dynamiscreatives@gmail.com', 'Logged in to the system', '2020-11-12 20:19:09', '2020-11-12 20:19:09'),
+(68, 'dynamiscreatives@gmail.com', 'Logged in to the system', '2020-11-13 15:40:04', '2020-11-13 15:40:04'),
+(69, 'diego@diego.com', 'Logged in to the system', '2020-11-13 15:41:25', '2020-11-13 15:41:25'),
+(70, 'dynamiscreatives@gmail.com', 'Logged in to the system', '2020-11-13 16:26:34', '2020-11-13 16:26:34'),
+(71, 'dynamiscreatives@gmail.com', 'Approved user withdrawal. withdrawal id: 1', '2020-11-13 17:53:08', '2020-11-13 17:53:08'),
+(72, 'dynamiscreatives@gmail.com', 'Logged in to the system', '2020-11-13 22:33:43', '2020-11-13 22:33:43'),
+(73, 'diego@diego.com', 'Logged in to the system', '2020-11-16 16:31:24', '2020-11-16 16:31:24'),
+(74, 'diego@diego.com', 'Logged in to the system', '2020-11-16 18:34:06', '2020-11-16 18:34:06'),
+(75, 'diego@diego.com', 'Activated User Investment. Investment id: 14', '2020-11-16 19:20:36', '2020-11-16 19:20:36'),
+(76, 'diego@diego.com', 'Activated User Investment. Investment id: 13', '2020-11-16 21:18:33', '2020-11-16 21:18:33'),
+(77, 'dynamiscreatives@gmail.com', 'Logged in to the system', '2020-11-17 13:03:13', '2020-11-17 13:03:13'),
+(78, 'dynamiscreatives@gmail.com', 'Logged in to the system', '2020-11-17 16:08:30', '2020-11-17 16:08:30'),
+(79, 'diego@diego.com', 'Logged in to the system', '2020-11-17 16:09:29', '2020-11-17 16:09:29'),
+(80, 'dynamiscreatives@gmail.com', 'Logged in to the system', '2020-11-17 19:30:26', '2020-11-17 19:30:26'),
+(81, 'dynamiscreatives@gmail.com', 'Activated User Investment. Investment id: 12', '2020-11-17 19:31:39', '2020-11-17 19:31:39'),
+(82, 'dynamiscreatives@gmail.com', 'Inyección de usuario activada. Investment id: 13', '2020-11-17 19:45:03', '2020-11-17 19:45:03'),
+(83, 'dynamiscreatives@gmail.com', 'Inyección de usuario en pausa. Investment id: 13', '2020-11-17 19:47:16', '2020-11-17 19:47:16'),
+(84, 'dynamiscreatives@gmail.com', 'Inyección de usuario eliminado. Inversión id: 12', '2020-11-17 19:49:42', '2020-11-17 19:49:42'),
+(85, 'dynamiscreatives@gmail.com', 'Inversión de usuario eliminado. Inversión id: 9', '2020-11-17 19:51:19', '2020-11-17 19:51:19'),
+(86, 'dynamiscreatives@gmail.com', 'Inversión de usuario eliminado. Inversión id: 11', '2020-11-17 19:59:46', '2020-11-17 19:59:46'),
+(87, 'dynamiscreatives@gmail.com', 'Inversión de usuario eliminado. Inversión id: 9', '2020-11-17 19:59:57', '2020-11-17 19:59:57'),
+(88, 'dynamiscreatives@gmail.com', 'Inversión de usuario eliminado. Inversión id: 9', '2020-11-17 20:00:03', '2020-11-17 20:00:03'),
+(89, 'dynamiscreatives@gmail.com', 'Inversión de usuario eliminado. Inversión id: 9', '2020-11-17 20:00:14', '2020-11-17 20:00:14'),
+(90, 'dynamiscreatives@gmail.com', 'Inversión de usuario eliminado. Inversión id: 9', '2020-11-17 20:00:21', '2020-11-17 20:00:21'),
+(91, 'dynamiscreatives@gmail.com', 'Logged in to the system', '2020-11-17 20:01:59', '2020-11-17 20:01:59'),
+(92, 'dynamiscreatives@gmail.com', 'Activated User Investment. Investment id: 16', '2020-11-17 20:03:21', '2020-11-17 20:03:21'),
+(93, 'dynamiscreatives@gmail.com', 'Inversión de usuario eliminado. Inversión id: 16', '2020-11-17 20:04:06', '2020-11-17 20:04:06'),
+(94, 'diego@diego.com', 'Logged in to the system', '2020-11-17 20:50:03', '2020-11-17 20:50:03'),
+(95, 'diego@diego.com', 'Paused User Investment. Investment id: 15', '2020-11-17 21:13:32', '2020-11-17 21:13:32'),
+(96, 'diego@diego.com', 'Inyección de usuario en pausa. Investment id: 14', '2020-11-17 21:13:39', '2020-11-17 21:13:39'),
+(97, 'diego@diego.com', 'Logged in to the system', '2020-11-18 21:29:54', '2020-11-18 21:29:54'),
+(98, 'diego@diego.com', 'Logged in to the system', '2020-11-19 14:42:45', '2020-11-19 14:42:45'),
+(99, 'diego@diego.com', 'Logged in to the system', '2020-11-19 17:31:55', '2020-11-19 17:31:55'),
+(100, 'diego@diego.com', 'Inversión de usuario activada. Inversión id: 17', '2020-11-19 20:13:48', '2020-11-19 20:13:48'),
+(101, 'diego@diego.com', 'Paused User Investment. Investment id: 17', '2020-11-19 20:13:55', '2020-11-19 20:13:55'),
+(102, 'diego@diego.com', 'Inversión de usuario activada. Inversión id: 17', '2020-11-19 20:14:01', '2020-11-19 20:14:01'),
+(103, 'diego@diego.com', 'Inversión de usuario activada. Inversión id: 17', '2020-11-19 20:46:41', '2020-11-19 20:46:41'),
+(104, 'diego@diego.com', 'Inversión de usuario activada. Inversión id: 17', '2020-11-19 20:47:43', '2020-11-19 20:47:43'),
+(105, 'diego@diego.com', 'Inversión de usuario activada. Inversión id: 17', '2020-11-19 20:49:00', '2020-11-19 20:49:00'),
+(106, 'diego@diego.com', 'Inversión de usuario activada. Inversión id: 17', '2020-11-19 21:20:11', '2020-11-19 21:20:11'),
+(107, 'diego@diego.com', 'Inversión de usuario activada. Inversión id: 17', '2020-11-19 21:23:08', '2020-11-19 21:23:08'),
+(108, 'diego@diego.com', 'Inversión de usuario activada. Inversión id: 17', '2020-11-19 21:23:33', '2020-11-19 21:23:33');
 
 -- --------------------------------------------------------
 
@@ -268,6 +331,16 @@ CREATE TABLE `comments` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `ticket_id`, `message`, `sender`, `sender_id`, `state`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Error', 'user', 1, 0, '2020-11-14 02:16:59', '2020-11-17 20:59:47'),
+(2, 1, 'Saludos', 'support', 1, 0, '2020-11-14 02:33:55', '2020-11-14 02:34:42'),
+(3, 2, 'Error', 'support', 2, 0, '2020-11-17 21:41:49', '2020-11-17 22:02:50'),
+(4, 2, 'Error', 'support', 2, 0, '2020-11-17 21:41:55', '2020-11-17 22:02:50');
+
 -- --------------------------------------------------------
 
 --
@@ -297,9 +370,8 @@ CREATE TABLE `companies` (
 --
 
 INSERT INTO `companies` (`id`, `name_comp`, `rnc`, `email`, `o_capital`, `a_capital`, `bonus_open`, `sold_bonus`, `a_bonus`, `bonus_cost`, `currency`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(2, 'Invermix Finance S.R.L.', 123456789, 'invermix@invermix.com', '37500000.00', '19084553.00', 75000, 38525, 36475, 500, 'RD$', 1, '2020-10-30 20:44:25', '2020-11-02 23:32:33', NULL),
-(4, 'Lichabriel All More Auto Import S.R.L.', 131829821, 'lichabriel@gmail.com', '344000.00', '215312.00', 34400, 12859, 21531, 10, 'US$', 1, '2020-11-01 04:19:31', '2020-11-05 17:02:06', NULL),
-(5, 'Prueba', 123456789, 'prueba@prueba.com', '150.00', '150.00', 10, 10, 10, 10, 'US$', 1, '2020-11-05 22:03:42', '2020-11-05 22:03:50', '2020-11-05 22:03:50');
+(2, 'Invermix Finance S.R.L.', 123456789, 'invermix@invermix.com', '37500000.00', '18167061.00', 75000, 38525, 36475, 500, 'RD$', 1, '2020-10-30 20:44:25', '2020-11-20 01:27:50', NULL),
+(4, 'Lichabriel All More Auto Import S.R.L.', 131829821, 'lichabriel@gmail.com', '344000.00', '215312.00', 34400, 12859, 21531, 10, 'US$', 1, '2020-11-01 04:19:31', '2020-11-05 17:02:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -750,18 +822,24 @@ CREATE TABLE `invest` (
   `reinv` int(11) NOT NULL DEFAULT 0,
   `state` int(1) NOT NULL DEFAULT 0,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `invest`
 --
 
-INSERT INTO `invest` (`id`, `user_id`, `usn`, `package`, `package_id`, `currency`, `capital`, `i_return`, `date_invested`, `end_date`, `period`, `days_interval`, `interest`, `last_wd`, `next_w_date`, `status`, `img`, `hash`, `w_amt`, `daily`, `date`, `mode`, `s_date`, `reinv`, `state`, `created_at`, `updated_at`) VALUES
-(6, 1, 'jordyf', 'Trismetral', 3, '$', '800000', '192000', '28-10-2020', '2021-01-26', '90', '90', 0.0026666666666667, '2020-10-28', '', 'Active', '', '', 0, 0, '2020-10-28 20:47:50', '', '', 0, 0, '2020-10-28 20:30:23', '2020-10-28 20:31:07'),
-(8, 1, 'jordyf', 'Prueba', 6, 'RD$', '10', '2.5', '02-11-2020', '2020-11-03', '1', '1', 0.25, '2020-11-03', '', 'Expired', '', '', 2.5, 0, '2020-11-05 14:03:00', '', '', 0, 0, '2020-11-02 21:10:15', '2020-11-05 14:03:00'),
-(9, 1, 'jordyf', 'Prueba', 6, 'RD$', '200', '50', '04-11-2020', '2020-11-05', '1', '1', 0.25, '2020-11-05', '', 'Expired', '', '', 50, 0, '2020-11-05 14:18:22', '', '', 0, 0, '2020-11-04 20:58:47', '2020-11-05 14:18:22'),
-(10, 3, 'luissantana', 'Prueba', 6, 'RD$', '10', '2.5', '05-11-2020', '2020-11-06', '1', '1', 0.25, '2020-11-05', '', 'Pendiente', '', '', 0, 0, '2020-11-05 14:15:51', '', '', 0, 0, '2020-11-05 14:15:51', '2020-11-05 14:15:51');
+INSERT INTO `invest` (`id`, `user_id`, `usn`, `package`, `package_id`, `currency`, `capital`, `i_return`, `date_invested`, `end_date`, `period`, `days_interval`, `interest`, `last_wd`, `next_w_date`, `status`, `img`, `hash`, `w_amt`, `daily`, `date`, `mode`, `s_date`, `reinv`, `state`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(9, 1, 'jordyf', 'Prueba', 6, 'RD$', '200', '50', '04-11-2020', '2020-11-05', '1', '1', 0.25, '2020-11-05', '', 'Retirado', '', '', 50, 0, '2020-11-17 20:00:21', '', '', 0, 0, '2020-11-04 20:58:47', '2020-11-17 20:00:21', '2020-11-18 00:00:21'),
+(10, 3, 'luissantana', 'Prueba', 6, 'RD$', '10', '2.5', '05-11-2020', '2020-11-06', '1', '1', 0.25, '2020-11-05', '', 'Pendiente', '', '', 0, 0, '2020-11-05 14:15:51', '', '', 0, 0, '2020-11-05 14:15:51', '2020-11-05 14:15:51', NULL),
+(11, 1, 'jordyf', 'Prueba', 6, 'RD$', '150', '37.5', '12-11-2020', '2020-11-13', '1', '1', 0.25, '2020-11-13', '', 'Retirado', '', '', 37.5, 0, '2020-11-17 21:06:58', '', '', 0, 0, '2020-11-12 21:09:13', '2020-11-17 19:59:46', NULL),
+(12, 1, 'jordyf', 'Trismetral', 3, 'RD$', '50000', '12000', '13-11-2020', '2021-02-11', '90', '90', 0.0026666666666667, '2020-11-13', '', 'Activa', '', '', 0, 0, '2020-11-17 19:31:39', '', '', 0, 0, '2020-11-13 15:55:49', '2020-11-17 19:31:39', NULL),
+(13, 1, 'jordyf', 'Prueba', 6, 'RD$', '10', '2.5', '16-11-2020', '2020-11-17', '1', '1', 0.25, '2020-11-16', '', 'Activa', '', '', 0, 0, '2020-11-16 21:18:33', '', '', 0, 0, '2020-11-16 16:43:20', '2020-11-16 21:18:33', NULL),
+(14, 1, 'jordyf', 'Prueba', 6, 'RD$', '13', '3.25', '16-11-2020', '2020-11-17', '1', '1', 0.25, '2020-11-16', '', 'Activa', '', '', 0, 0, '2020-11-16 19:20:36', '', '', 0, 0, '2020-11-16 19:18:42', '2020-11-16 19:20:36', NULL),
+(15, 1, 'jordyf', 'Trismetral', 3, 'RD$', '50000', '12000', '17-11-2020', '2021-02-15', '90', '90', 0.0026666666666667, '2020-11-17', '', 'Activa', '', '', 0, 0, '2020-11-19 20:12:08', '', '', 0, 0, '2020-11-17 18:04:05', '2020-11-19 20:12:08', NULL),
+(16, 1, 'jordyf', 'Trismetral', 3, 'RD$', '458246', '109979.04', '17-11-2020', '2021-02-15', '90', '90', 0.0026666666666667, '2020-11-17', '', 'Activa', '', '', 0, 0, '2020-11-17 20:04:06', '', '', 0, 0, '2020-11-17 18:12:02', '2020-11-17 20:04:06', '2020-11-18 00:04:06'),
+(17, 1, 'jordyf', 'Capitalizable', 4, 'RD$', '458246', '122920.73', '17-11-2020', '2021-11-17', '365', '365', 0.00073490904109589, '2020-11-17', '', 'Activa', '', '', 0, 0, '2020-11-19 20:14:01', '', '', 0, 0, '2020-11-17 18:36:48', '2020-11-19 20:14:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -797,18 +875,20 @@ CREATE TABLE `inyects` (
   `reinv` int(11) NOT NULL DEFAULT 0,
   `state` int(1) NOT NULL DEFAULT 0,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `inyects`
 --
 
-INSERT INTO `inyects` (`id`, `user_id`, `invest_id`, `usn`, `package`, `package_id`, `currency`, `capital`, `i_return`, `date_inyected`, `end_date`, `period`, `days_interval`, `interest`, `last_wd`, `next_w_date`, `status`, `img`, `hash`, `w_amt`, `daily`, `date`, `mode`, `s_date`, `reinv`, `state`, `created_at`, `updated_at`) VALUES
-(11, 1, 9, 'jordyf', 'Prueba', 6, 'RD$', '10', '2.5', '10-11-2020', '2020-11-11', '1', '1', 0.25, '2020-11-10', '', 'Pendiente', '', '', 0, 0, '2020-11-10 21:19:31', '', '', 0, 0, '2020-11-10 21:19:31', '2020-11-10 21:19:31'),
-(12, 1, 6, 'jordyf', 'Trismetral', 3, 'RD$', '25000', '6000', '10-11-2020', '2021-02-08', '90', '90', 0.0026666666666667, '2020-11-10', '', 'Pendiente', '', '', 0, 0, '2020-11-10 21:25:58', '', '', 0, 0, '2020-11-10 21:25:58', '2020-11-10 21:25:58'),
-(13, 1, 6, 'jordyf', 'Trismetral', 3, 'RD$', '50000', '12000', '10-11-2020', '2021-02-08', '90', '90', 0.0026666666666667, '2020-11-10', '', 'Pendiente', '', '', 0, 0, '2020-11-10 21:44:02', '', '', 0, 0, '2020-11-10 21:44:02', '2020-11-10 21:44:02'),
-(14, 1, 9, 'jordyf', 'Prueba', 6, 'RD$', '10', '2.5', '11-11-2020', '2020-11-12', '1', '1', 0.25, '2020-11-11', '', 'Pendiente', '', '', 0, 0, '2020-11-11 20:59:41', '', '', 0, 0, '2020-11-11 20:59:41', '2020-11-11 20:59:41');
+INSERT INTO `inyects` (`id`, `user_id`, `invest_id`, `usn`, `package`, `package_id`, `currency`, `capital`, `i_return`, `date_inyected`, `end_date`, `period`, `days_interval`, `interest`, `last_wd`, `next_w_date`, `status`, `img`, `hash`, `w_amt`, `daily`, `date`, `mode`, `s_date`, `reinv`, `state`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(11, 1, 9, 'jordyf', 'Prueba', 6, 'RD$', '10', '2.5', '10-11-2020', '2020-11-11', '1', '1', 0.25, '2020-11-11', '', 'Activa', '', '', 2.5, 0, '2020-11-16 19:48:38', '', '', 0, 0, '2020-11-10 21:19:31', '2020-11-12 19:37:16', NULL),
+(12, 1, 6, 'jordyf', 'Trismetral', 3, 'RD$', '25000', '6000', '10-11-2020', '2021-02-08', '90', '90', 0.0026666666666667, '2020-11-10', '', 'Pendiente', '', '', 0, 0, '2020-11-17 21:20:26', '', '', 0, 0, '2020-11-10 21:25:58', '2020-11-17 19:49:42', NULL),
+(13, 1, 6, 'jordyf', 'Trismetral', 3, 'RD$', '50000', '12000', '10-11-2020', '2021-02-08', '90', '90', 0.0026666666666667, '2020-11-10', '', 'Pausada', '', '', 808080, 0, '2020-11-17 19:47:16', '', '', 0, 0, '2020-11-10 21:44:02', '2020-11-17 19:47:16', NULL),
+(14, 1, 9, 'jordyf', 'Prueba', 6, 'RD$', '10', '2.5', '11-11-2020', '2020-11-12', '1', '1', 0.25, '2020-11-12', '', 'Pausada', '', '', 2.5, 0, '2020-11-17 21:13:39', '', '', 0, 0, '2020-11-11 20:59:41', '2020-11-17 21:13:39', NULL),
+(15, 1, 9, 'jordyf', 'Prueba', 6, 'RD$', '10', '2.5', '12-11-2020', '2020-11-13', '1', '1', 0.25, '2020-11-13', '', 'Retirado', '', '', 2.5, 0, '2020-11-13 16:57:40', '', '', 0, 0, '2020-11-12 21:05:28', '2020-11-13 16:57:40', NULL);
 
 -- --------------------------------------------------------
 
@@ -5143,6 +5223,13 @@ CREATE TABLE `ticket` (
   `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `ticket`
+--
+
+INSERT INTO `ticket` (`id`, `ticket_id`, `user_id`, `title`, `msg`, `status`, `state`, `created_at`, `updated_at`) VALUES
+(2, '11605634816', 1, 'Prueba', 'Prueba', 1, 0, '2020-11-17 17:40:16', '2020-11-17 17:40:29');
+
 -- --------------------------------------------------------
 
 --
@@ -5183,10 +5270,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `username`, `email`, `pwd`, `phone`, `remember_token`, `email_verified_at`, `img`, `status`, `r_state`, `country`, `state`, `address`, `currency`, `wallet`, `ref_bal`, `referal`, `btc_wallet`, `act_code`, `sec_2fa`, `sec_2fa_status`, `reg_date`, `created_at`, `updated_at`) VALUES
-(1, 'Jordy', 'Frías', 'jordyf', 'jordy.f@mullenloweinteramerica.com', '$2y$10$Em078faAVqZng2U89rsgwehESiw4.Omag2DN9EZlfyIMzCIdNBULu', '948326040', '', NULL, '', '1', '', '61', '983', '132131', '$', -874977.5, 0, '', '', '81071602852774', '', 0, '16-10-2020', '2020-10-16 12:52:55', '2020-11-11 20:59:41'),
+(1, 'Jordy', 'Frías', 'jordyf', 'jordy.f@mullenloweinteramerica.com', '$2y$10$Em078faAVqZng2U89rsgwehESiw4.Omag2DN9EZlfyIMzCIdNBULu', '948326040', '', NULL, '', '1', '', '61', '983', '132131', '$', -1408181.5, 0, '', '', '81071602852774', '', 0, '16-10-2020', '2020-10-16 12:52:55', '2020-11-17 20:04:06'),
 (2, 'Juan', 'Perez', 'jordyfs', 'jordysddsfd.f@mullenloweinteramerica.com', '$2y$10$eondsXXnnoRv6ZasAAvpmOkKFG9hWqH5TaO7pqAOnfbSj98FKOc9e', NULL, '', NULL, '', '0', '', '', '', '', 'RD$', 0, 0, '', '', '92861604438633', '', 0, '03-11-2020', '2020-11-03 21:23:53', '2020-11-03 21:23:53'),
 (3, 'Luis', 'Santana', 'luissantana', 'luis@santana.com', '$2y$10$SSHGJ8gg2j18Pnq9lRz0gOOdWt0gyAjQ5rDk8RnAnFPJS5UTWUMVG', '+18095402020', '', NULL, '', '1', '', '61', '983', 'Victor Garrido Puello #19', 'RD$', -10, 0, '', '', '', '', 0, '04-11-2020', '2020-11-04 20:10:20', '2020-11-05 14:15:51'),
-(4, 'Bolivar Antonio', 'Castro Jiménez', 'bolivarcas', 'bolivar.castro@gmail.com', '$2y$10$HZUOLwm.3Z7olgeC9K6j9e7ZBmGy/mspYef4dbu./uHW7zIgqEIEK', NULL, '', NULL, '', '1', '', '', '', '', '', 0, 0, '', '', '', '', 0, '05-11-2020', '2020-11-05 16:15:23', '2020-11-05 16:15:23');
+(4, 'Bolivar Antonio', 'Castro Jiménez', 'bolivarcas', 'bolivar.castro@gmail.com', '$2y$10$HZUOLwm.3Z7olgeC9K6j9e7ZBmGy/mspYef4dbu./uHW7zIgqEIEK', NULL, '', NULL, '', '1', '', '', '', '', '', 0, 0, '', '', '', '', 0, '05-11-2020', '2020-11-05 16:15:23', '2020-11-05 16:15:23'),
+(5, 'Jovanny', 'Polanco', 'jovannyp', 'jova.m@gmail.com', '$2y$10$Mh.ihHSsOmxIkz5ZkxuovOawERhu7A73sik.3YLWtR973JLnowyMS', NULL, '', NULL, '', '1', '', '', '', '', '', 0, 0, '', '', '', '', 0, '18-11-2020', '2020-11-18 22:02:52', '2020-11-18 22:02:52');
 
 -- --------------------------------------------------------
 
@@ -5210,6 +5298,13 @@ CREATE TABLE `withdrawals` (
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `withdrawals`
+--
+
+INSERT INTO `withdrawals` (`id`, `user_id`, `usn`, `package`, `invest_id`, `account`, `amount`, `currency`, `charges`, `recieving`, `status`, `w_date`, `created_at`, `updated_at`) VALUES
+(1, 1, 'jordyf', '1', '1', '', '500', 'US$', 0, 50, 'Approved', '', '2020-11-13 13:45:03', '2020-11-13 17:53:08');
 
 --
 -- Indexes for dumped tables
@@ -5441,7 +5536,7 @@ ALTER TABLE `withdrawals`
 -- AUTO_INCREMENT for table `activities`
 --
 ALTER TABLE `activities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -5453,7 +5548,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `admin_log`
 --
 ALTER TABLE `admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT for table `bank`
@@ -5471,7 +5566,7 @@ ALTER TABLE `coinpayment_transactions`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `companies`
@@ -5531,13 +5626,13 @@ ALTER TABLE `fund_transfer`
 -- AUTO_INCREMENT for table `invest`
 --
 ALTER TABLE `invest`
-  MODIFY `id` bigint(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `inyects`
 --
 ALTER TABLE `inyects`
-  MODIFY `id` bigint(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `kyc`
@@ -5609,19 +5704,19 @@ ALTER TABLE `testimonial`
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `withdrawals`
 --
 ALTER TABLE `withdrawals`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

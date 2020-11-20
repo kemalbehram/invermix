@@ -712,13 +712,14 @@ class userController extends Controller
 
           if($req->input('ended') == 'yes')
           {
-            if($pack->status != 'Solicitado')
+            if($pack->wd_status != 'Solicitado')
             {
                 $user->wallet += $pack->capital;
                 $user->save();
             }
             $pack->last_wd = $pack->end_date;
-            $pack->status = 'Solicitado';
+            $pack->wd_status = 'Solicitado';
+            $pack->status = 'Retiro Solicitado';
 
           }
           else
@@ -2634,13 +2635,14 @@ class userController extends Controller
         }
           if($req->input('ended') == 'yes')
           {
-            if($pack->status != 'Solicitado')
+            if($pack->wd_status != 'Solicitado')
             {
                 $user->wallet += $pack->capital;
                 $user->save();
             }
             $pack->last_wd = $pack->end_date;
-            $pack->status = 'Solicitado';
+            $pack->wd_status = 'Solicitado';
+            $pack->status = 'Retiro Solicitado';
 
           }
           else

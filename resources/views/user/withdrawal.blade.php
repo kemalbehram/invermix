@@ -30,7 +30,7 @@
                                             </thead>
                                             <tbody>
                                             <?php
-                                                    $activities = App\investment::where('user_id', $user->id)->where('status', 'Solicitado')->Orwhere('status', 'Retirado')
+                                                    $activities = App\investment::where('user_id', $user->id)->where('wd_status', 'Solicitado')->Orwhere('wd_status', 'Depositado')
                                                     ->orderby('id', 'desc')->get();
                                                 ?>
                                                 @if(count($activities) > 0 )
@@ -40,7 +40,7 @@
                                                             <td>{{$activity->package}}</td>
                                                             <td>{{$activity->capital}}</td>
                                                             <td>{{$activity->currency.' '.$activity->w_amt}}</td>
-                                                            <td>{{$activity->status}}</td>
+                                                            <td>{{$activity->wd_status}}</td>
 
                                                         </tr>
                                                     @endforeach
@@ -78,7 +78,8 @@
                                             </thead>
                                             <tbody>
                                             <?php
-                                                    $activities = App\inyects::where('user_id', $user->id)->where('status', 'Retirado')
+                                                    $activities = App\inyects::where('user_id', $user->id)->where('wd_status', 'Solicitado')
+                                                    ->Orwhere('wd_status', 'Depositado')
                                                     ->orderby('id', 'desc')->get();
                                                 ?>
                                                 @if(count($activities) > 0 )
@@ -88,7 +89,7 @@
                                                             <td>{{$activity->package}}</td>
                                                             <td>{{$activity->capital}}</td>
                                                             <td>{{$activity->currency.' '.$activity->w_amt}}</td>
-                                                            <td>{{$activity->status}}</td>
+                                                            <td>{{$activity->wd_status}}</td>
 
                                                         </tr>
                                                     @endforeach

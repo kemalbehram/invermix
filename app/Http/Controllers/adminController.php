@@ -934,9 +934,9 @@ public function activateInv(Request $request)
 
       try
       {
-        $usr = withdrawal::find($id);
+        $usr = investment::find($id);
 
-        if($usr->status == 'Rejected')
+        if($usr->wd_status == 'Rechazado')
         {
           return back()->with([
             'toast_msg' => '¡Retiro ya rechazado!',
@@ -944,7 +944,7 @@ public function activateInv(Request $request)
           ]);
         }
 
-        $usr->status = 'Rejected';
+        $usr->wd_status = 'Rechazado';
 
         $user = User::find($usr->user_id);
         $user->wallet += $usr->amount;
@@ -988,55 +988,57 @@ public function activateInv(Request $request)
 
       try
       {
-        $usr = withdrawal::find($id);
-        if($usr->status == 'Approved')
+        $usr = investment::find($id);
+        if($usr->wd_status == 'Depositado')
         {
           return back()->with([
-            'toast_msg' => 'Withdrawal already approved!',
+            'toast_msg' => '¡Retiro ya depositado!',
             'toast_type' => 'err'
           ]);
         }
 
-        if($usr->status == 'Rejected')
+        if($usr->wd_status == 'Rechazado')
         {
           return back()->with([
-            'toast_msg' => 'Withdrawal already rejected. User has to create an new withdrawal request.',
+            'toast_msg' => 'Retiro ya rechazado. El usuario debe crear una nueva solicitud de retiro.',
             'toast_type' => 'err'
           ]);
         }
 
-        $userID = $usr->user_id;
-        $wd_id = $usr->id;
-        $wd_act = $usr->account;
-        $wd_amt = $usr->amount;
-        $wd_currency = $usr->currency;
-        $usr->status = 'Approved';
+        // $userID = $usr->user_id;
+        $usr->wd_status = 'Depositado';
+        $usr->status = 'Depositado';
         $usr->save();
 
         $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
-        $act->action = "Approved user withdrawal. withdrawal id: ".$id;
+        $act->action = "Retiro de usuario aprobado. Id de retiro: ".$id;
         $act->save();
 
-        $user_act = User::find($userID);
-
-        $maildata = ['email' => $user_act->email, 'wd_id' => $wd_id, 'act' => $wd_act, 'amt' => $wd_amt, 'currency' =>$wd_currency ];
-        Mail::send('mail.admin_approve_wd', ['md' => $maildata], function($msg) use ($maildata){
-            $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-            $msg->to($maildata['email']);
-            $msg->subject('Withdrawal Approval');
-        });
         return back()->with([
-        'toast_msg' => 'Approved successfully!',
-        'toast_type' => 'suc'
-      ]);
+                'toast_msg' => 'Aprobado con éxito!',
+                'toast_type' => 'suc'
+              ]);
+
+    //     $user_act = User::find($userID);
+
+    //     $maildata = ['email' => $user_act->email ];
+    //     Mail::send('mail.admin_approve_wd', ['md' => $maildata], function($msg) use ($maildata){
+    //         $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+    //         $msg->to($maildata['email']);
+    //         $msg->subject('Aprobación de retiro');
+    //     });
+    //     return back()->with([
+    //     'toast_msg' => 'Aprobado con éxito!',
+    //     'toast_type' => 'suc'
+    //   ]);
 
       }
       catch(\Exception $e)
       {
         return back()->with([
-          'toast_msg' => 'Error updating record! Try again!',
+          'toast_msg' => '¡Error al actualizar el registro! ¡Inténtalo de nuevo!',
           'toast_type' => 'err'
         ]);
       }
@@ -1049,43 +1051,43 @@ public function activateInv(Request $request)
 
   }
 
-  public function deleteWD($id)
-  {
-    if(Session::has('adm') && !empty(Session::get('adm')))
-    {
+//   public function deleteWD($id)
+//   {
+//     if(Session::has('adm') && !empty(Session::get('adm')))
+//     {
 
-      try
-      {
-        withdrawal::where('id',$id)->delete();
+//       try
+//       {
+//         investment::where('id',$id)->delete();
 
-        $adm = Session::get('adm');
-        $act = new adminLog;
-        $act->admin = $adm->email;
-        $act->action = "Deleted user withdrawal. withdrawal id: ".$id;
-        $act->save();
+//         $adm = Session::get('adm');
+//         $act = new adminLog;
+//         $act->admin = $adm->email;
+//         $act->action = "Deleted user withdrawal. withdrawal id: ".$id;
+//         $act->save();
 
-        return back()->with([
-          'toast_msg' => 'Successful',
-          'toast_type' => 'suc'
-        ]);
+//         return back()->with([
+//           'toast_msg' => 'Successful',
+//           'toast_type' => 'suc'
+//         ]);
 
-      }
-      catch(\Exception $e)
-      {
-        return back()->with([
-          'toast_msg' => 'Error Deleting record! Try again',
-          'toast_type' => 'err'
-        ]);
-      }
+//       }
+//       catch(\Exception $e)
+//       {
+//         return back()->with([
+//           'toast_msg' => 'Error Deleting record! Try again',
+//           'toast_type' => 'err'
+//         ]);
+//       }
 
 
-    }
-    else
-    {
-      return redirect('/');
-    }
+//     }
+//     else
+//     {
+//       return redirect('/');
+//     }
 
-  }
+//   }
 
   ///////////////////////////////////////////  pack edit//////////////////////////////////////////////////
 

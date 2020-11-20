@@ -22,7 +22,7 @@
                 <tbody>
 
                                                  <?php
-                                                    $inv = App\investment::where('status', 'Solicitado')->Orwhere('status', 'Retirado')
+                                                    $inv = App\investment::where('status', 'Solicitado')->Orwhere('status', 'Retirado')->Orwhere('status', 'Depositado')
                                                     ->orderby('created_at', 'desc')->get();
                                                 ?>
 
@@ -41,9 +41,9 @@
                                         </a>
                                         <br>
 
-                                        <a title="Borrar" href="/admin/delete/user/wd/{{$dep->id}}" >
+                                        <!-- <a title="Borrar" href="/admin/delete/user/wd/{{$dep->id}}" >
                                             <span class=""><i class="fa fa-times text-danger"></i></span>
-                                        </a>
+                                        </a> -->
                                         <br>
                                     @endif
                                 </td>
@@ -52,7 +52,7 @@
                                 <td>{{$dep->currency}} {{$dep->capital}}</td>
                                 <td><b>{{$dep->currency}} {{$dep->i_return}}</b></td>
                                 <td>{{substr($dep->created_at, 0, 10)}}</td>
-                                <td>{{$dep->status}}</td>
+                                <td>{{$dep->wd_status}}</td>
                             </tr>
                         @endforeach
                     @else

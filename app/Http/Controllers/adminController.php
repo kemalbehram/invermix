@@ -2851,35 +2851,92 @@ else
 
   }
 
-  public function activateInj($id)
+//   public function activateInj($id)
+//   {
+//     if(Session::has('adm') && !empty(Session::get('adm')))
+//     {
+
+//       try
+//       {
+//         $usr = inyects::find($id);
+//         $usr->status = 'Activa';
+//         $usr->save();
+
+//         $adm = Session::get('adm');
+//         $act = new adminLog;
+//         $act->admin = $adm->email;
+//         $act->action = "Inyección de usuario activada. Investment id: ".$id;
+//         $act->save();
+
+//         Session::put('status', "Exitosa");
+//         Session::put('msgType', "suc");
+//         return back(); //
+
+//       }
+//       catch(\Exception $e)
+//       {
+//         Session::put('status', "¡Error al actualizar el registro! Intente nuevamente.");
+//         Session::put('msgType', "err");
+//         return back();
+//       }
+
+
+//     }
+//     else
+//     {
+//       return redirect('/');
+//     }
+
+//   }
+
+
+public function activateInj(Request $request)
   {
+
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
-
       try
       {
-        $usr = inyects::find($id);
-        $usr->status = 'Activa';
-        $usr->save();
+         $company = companies::find($request->company);
 
-        $adm = Session::get('adm');
-        $act = new adminLog;
-        $act->admin = $adm->email;
-        $act->action = "Inyección de usuario activada. Investment id: ".$id;
-        $act->save();
+         if($company->status  ==  1 && $company->currency  ==  $request->currency){
 
-        Session::put('status', "Exitosa");
-        Session::put('msgType', "suc");
-        return back(); //
+             $capitalsubs = str_replace(',', '', $request->capital);
+             $divide = str_replace(',', '', $request->capital) / $company->bonus_cost;
+             $company->decrement('a_capital', $capitalsubs);
+             $company->decrement('a_bonus', $divide);
+             $company->increment('sold_bonus', $divide);
+             $company->save();
+
+             $usr = inyects::find($request->id);
+             $usr->status = 'Activa';
+             $usr->save();
+
+             $adm = Session::get('adm');
+             $act = new adminLog;
+             $act->admin = $adm->email;
+             $act->action = "Inyección de usuario activada. Inyección id: ".$request->id;
+             $act->save();
+
+             Session::put('status', "Successful");
+             Session::put('msgType', "suc");
+             return back(); //
+
+             }else{
+
+            Session::put('status', "¡Error! Verificar si moneda de compañía es igual a la de la Inyección que desea activar.");
+            Session::put('msgType', "err");
+            return back();
+
+          }
 
       }
       catch(\Exception $e)
       {
-        Session::put('status', "¡Error al actualizar el registro! Intente nuevamente.");
+        Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
         Session::put('msgType', "err");
         return back();
       }
-
 
     }
     else
@@ -2888,6 +2945,7 @@ else
     }
 
   }
+
 
   public function deleteInj($id)
   {

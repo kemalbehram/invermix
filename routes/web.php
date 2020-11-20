@@ -373,7 +373,7 @@ Route::post('/admin/activate/user_inv', 'adminController@activateInv');
 Route::get('/admin/delete/user_inv/{id}', 'adminController@deleteInv');
 
 Route::get('/admin/pause/user_inj/{id}', 'adminController@pauseInj');
-Route::get('/admin/activate/user_inj/{id}', 'adminController@activateInj');
+Route::post('/admin/activate/user_inj', 'adminController@activateInj');
 Route::get('/admin/delete/user_inj/{id}', 'adminController@deleteInj');
 
 Route::get('/admin/pause/x_inv/{id}', 'adminController@xpauseInv');

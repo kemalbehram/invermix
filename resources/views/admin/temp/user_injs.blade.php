@@ -71,7 +71,7 @@
                         </a>
                         @if($adm->role == 3 |$adm->role == 2 )
                         &nbsp;&nbsp;&nbsp;
-                            <a title="Activar Inyección" href="/admin/activate/user_inj/{{$in->id}}" >
+                             <a title="Activar Inyección" href="javascript:void(0)" onclick="activate_inj('{{$in->id}}','{{$in->usn}}', '{{$in->package}}', '{{number_format($in->capital), 2}}', '{{$in->status}}', '{{$in->currency}}','{{csrf_token()}}')" >
                                 <span><i class="fa fa-check text-success"></i></span>
                             </a>
                             <br>
@@ -116,3 +116,4 @@
 <div class="" align="">
    <span> {{$actIny->links()}}</span>
 </div>
+@include('admin.temp.activate_inj')

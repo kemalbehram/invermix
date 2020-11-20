@@ -14,26 +14,26 @@
               </div>
 
               <?php
-              $companies = App\companies::orderBy('id')->get();
+              $companies = App\companies::where('status', '=', 1)->where('a_capital', '>', '0')->where('a_bonus', '>', '0')->orderBy('created_at', 'ASC')->get();
               ?>
 
-               
+
               <div class="input-group">
                 <div class="input-group-prepend " >
                   <span class="input-group-text "><i class=""></i>Compañía</span>
                 </div>
-               
+
                 <select class="form-control" id="company" name="company">
                        @foreach($companies as $company)
                         <option value="{{ $company->id }}">{{ $company->name_comp }}</option>
                         @endforeach
                 </select>
-                                       
+
                 <div class="input-group-append " >
                   <span class="input-group-text " ><i class=""></i></span>
                 </div>
               </div>
-            
+
               <br>
 
               <div class="input-group">

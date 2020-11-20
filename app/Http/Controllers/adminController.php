@@ -485,49 +485,44 @@ class adminController extends Controller
 
 public function activateInv(Request $request)
   {
-    // $test = str_replace(',', '', $request->capital);
-
-    // dd($request);
-    // die();
-
-
-
-
 
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
 
       try
       {
-        $company = companies::find($request->company);
+         $company = companies::find($request->company);
 
-         if($company->status = 1){
+         if($company->status  ==  1 && $company->currency  ==  $request->currency){
 
              $capitalsubs = str_replace(',', '', $request->capital);
+             $divide = str_replace(',', '', $request->capital) / $company->bonus_cost;
              $company->decrement('a_capital', $capitalsubs);
-             $company->sold_bonus =  str_replace(',', '', $request->capital) / $company->bonus_cost;
-
-
+             $company->decrement('a_bonus', $divide);
+             $company->increment('sold_bonus', $divide);
              $company->save();
-            // str_replace(',', '', $request->capital);
 
-        }
+             $usr = investment::find($request->id);
+             $usr->status = 'Activa';
+             $usr->save();
 
+             $adm = Session::get('adm');
+             $act = new adminLog;
+             $act->admin = $adm->email;
+             $act->action = "Inversión de usuario activada. Inversión id: ".$request->id;
+             $act->save();
 
+             Session::put('status', "Successful");
+             Session::put('msgType', "suc");
+             return back(); //
 
-        $usr = investment::find($request->id);
-        $usr->status = 'Activa';
-        $usr->save();
+             }else{
 
-        $adm = Session::get('adm');
-        $act = new adminLog;
-        $act->admin = $adm->email;
-        $act->action = "Inversión de usuario activada. Inversión id: ".$request->id;
-        $act->save();
+            Session::put('status', "¡Error! Verificar si moneda de compañía es igual a la inversión que desea aprobar.");
+            Session::put('msgType', "err");
+            return back();
 
-        Session::put('status', "Successful");
-        Session::put('msgType', "suc");
-        return back(); //
+          }
 
       }
       catch(\Exception $e)

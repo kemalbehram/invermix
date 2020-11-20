@@ -85,7 +85,7 @@
                     <td>{{$in->usn}}</td>
                     <td>{{$in->package}}</td>
                     <td>{{$in->currency}}{{number_format($in->capital), 2}}</td>
-                    <td>{{$in->currency}}{{round ($in->i_return, 2)}}</td>
+                    <td>{{$in->currency}}{{number_format(round ($in->i_return, 2), 2 )}}</td>
                     <td>{{$in->created_at->format('d-m-Y')}}</td>
                     <td>{{$in->end_date}}</td>
                     <td>
@@ -95,7 +95,7 @@
                             0
                         @endif
                     </td>
-                    <td>{{$in->w_amt}}</td>
+                    <td>{{number_format($in->w_amt, 2)}}</td>
                     <td>{{$in->status}}</td>
                     <td>
                         @if($in->currency == "" && $in->package != 'International')
@@ -103,7 +103,7 @@
                         @elseif($in->currency == "" && $in->package = 'International')
                             $ {{number_format(round ($ern, 2)),2}}
                         @else
-                            {{$in->currency}} {{round ($ern, 2)}}
+                            {{$in->currency}} {{number_format(round ($ern, 2),2)}}
                         @endif
                     </td>
                 </tr>

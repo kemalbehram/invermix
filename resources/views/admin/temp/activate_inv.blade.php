@@ -119,7 +119,6 @@
     $('#currency').val(currency);
 	$('#token').val(token);
 	$('#ActivateINV').show();
-
 }
 </script>
 </div>

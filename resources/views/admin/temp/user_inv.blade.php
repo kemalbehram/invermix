@@ -90,22 +90,22 @@
                     ?>
                     <tr class="">
                         <td>{{$in->package}}</td>
-                        <td>{{$in->capital}}</td>
-                        <td>{{$in->i_return}}</td>
+                        <td>{{number_format($in->capital) ,2}}</td>
+                        <td>{{number_format($in->i_return) ,2}}</td>
                         <td>{{$in->date_invested}}</td>
                         <td>{{$in->end_date}}</td>
                         <td>
-                            @if($in->status != 'Expired')
+                            @if($in->status != 'Retirado')
                                 {{$totalDays}}
                             @else
                                 0
                             @endif
                         </td>
-                        <td>{{$in->w_amt}}</td>
+                        <td>{{number_format($in->w_amt) ,2}}</td>
                         <td>{{$in->status}}</td>
                         <td>
                             <a title="Withdraw" href="javascript:void(0)" onclick="wdnone('{{$in->id}}', '{{$ern}}', '{{$withdrawable}}', '{{$Edays}}', '{{$ended}}')">
-                                {{$user->currency}} {{$ern}}
+                                {{$in->currency}} {{$ern}}
                             </a>
                         </td>
                     </tr>

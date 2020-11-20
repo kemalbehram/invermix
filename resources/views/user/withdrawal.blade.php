@@ -30,7 +30,7 @@
                                             </thead>
                                             <tbody>
                                             <?php
-                                                    $activities = App\investment::where('user_id', $user->id)->where('status', 'Retirado')
+                                                    $activities = App\investment::where('user_id', $user->id)->where('status', 'Solicitado')->Orwhere('status', 'Retirado')
                                                     ->orderby('id', 'desc')->get();
                                                 ?>
                                                 @if(count($activities) > 0 )

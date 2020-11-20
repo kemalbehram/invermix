@@ -712,13 +712,13 @@ class userController extends Controller
 
           if($req->input('ended') == 'yes')
           {
-            if($pack->status != 'Retirado')
+            if($pack->status != 'Solicitado')
             {
                 $user->wallet += $pack->capital;
                 $user->save();
             }
             $pack->last_wd = $pack->end_date;
-            $pack->status = 'Retirado';
+            $pack->status = 'Solicitado';
 
           }
           else
@@ -751,7 +751,7 @@ class userController extends Controller
           $act->user_id = $user->id;
           $act->save();
 
-          Session::put('status', 'Package Withdrawal Successful, Amount Withdrawn Has Been Added to your Wallet');
+          Session::put('status', 'Retiro de inversión solicitada, la cantidad solicitada se depositará en su cuenta.');
           Session::put('msgType', "suc");
           return back();
 
@@ -2547,7 +2547,7 @@ class userController extends Controller
             // });
 
             $act = new activities;
-            $act->action = "User Inyected ".$capital." in ".$pack->package_name." package";
+            $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." modalidad";
             $act->user_id = $user->id;
             $act->save();
 
@@ -2634,13 +2634,13 @@ class userController extends Controller
         }
           if($req->input('ended') == 'yes')
           {
-            if($pack->status != 'Retirado')
+            if($pack->status != 'Solicitado')
             {
                 $user->wallet += $pack->capital;
                 $user->save();
             }
             $pack->last_wd = $pack->end_date;
-            $pack->status = 'Retirado';
+            $pack->status = 'Solicitado';
 
           }
           else
@@ -2669,7 +2669,7 @@ class userController extends Controller
           $usr->save();
 
           $act = new activities;
-          $act->action = "Usuario retiró desde ".$pack->package.'package. package id: '.$pack->id;
+          $act->action = "Cliente retiró desde ".$pack->package.'package. package id: '.$pack->id;
           $act->user_id = $user->id;
           $act->save();
 

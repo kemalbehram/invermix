@@ -12,7 +12,7 @@
                             <div class="card">
                                 <div class="card-header card_header_bg_blue" >
                                     <div class="card-head-row card-tools-still-right">
-                                        <h4 class="card-title text-white"> <i class="fas fa-arrow-alt-circle-down"></i> {{ __('Retiro Usuarios') }} </h4>
+                                        <h4 class="card-title text-white"> <i class="fas fa-arrow-alt-circle-down"></i> {{ __('Retiro Clientes') }} </h4>
                                         <div class="card-tools">
                                             <form action="/admin/search/Withdrawal" method="post">
                                                 <div class="input-group">

@@ -518,7 +518,7 @@ public function activateInv(Request $request)
 
              }else{
 
-            Session::put('status', "¡Error! Verificar si moneda de compañía es igual a la inversión que desea aprobar.");
+            Session::put('status', "¡Error! Verificar si moneda de compañía es igual a la inversión que desea activar.");
             Session::put('msgType', "err");
             return back();
 
@@ -540,6 +540,7 @@ public function activateInv(Request $request)
     }
 
   }
+
 
   public function deleteInv($id)
   {
@@ -938,7 +939,7 @@ public function activateInv(Request $request)
         if($usr->status == 'Rejected')
         {
           return back()->with([
-            'toast_msg' => 'Withdrawal already rejected!',
+            'toast_msg' => '¡Retiro ya rechazado!',
             'toast_type' => 'err'
           ]);
         }
@@ -954,11 +955,11 @@ public function activateInv(Request $request)
         $adm = Session::get('adm');
         $act = new adminLog;
         $act->admin = $adm->email;
-        $act->action = "Rejected user withdrawal. withdrawal id: ".$id;
+        $act->action = "Retiro de usuario rechazado. id de retiro: ".$id;
         $act->save();
 
         return back()->with([
-            'toast_msg' => 'Withdrawal Rejected Successfully and Funds Added Back to User Wallet!',
+            'toast_msg' => '¡El retiro se rechazó con éxito!',
             'toast_type' => 'suc'
         ]);
 
@@ -966,7 +967,7 @@ public function activateInv(Request $request)
       catch(\Exception $e)
       {
         return back()->with([
-          'toast_msg' => 'Error updating record! Try again!',
+          'toast_msg' => '¡Error al actualizar el registro! ¡Inténtalo de nuevo!',
           'toast_type' => 'err'
         ]);
       }

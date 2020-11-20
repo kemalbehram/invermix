@@ -15,6 +15,7 @@
             <div class="form-group" align="left">
               <div class="pop_form_min_max" align="center">
                 <b>{{ __('Inversión Min.:') }} {{$settings->currency}} <span id="min"></span></b> |
+                <br>
                 <b>{{ __('Inversión Máx.:') }} {{$settings->currency}} <span id="max"></span></b>
               </div>
               <br>
@@ -23,6 +24,14 @@
               <input id="p_id" type="hidden" class="form-control" name="p_id" value="">
               <input type="text" class="form-control" name="capital" placeholder="Digitar capital a invertir" required>
             </div>
+            <div class="form-group">
+
+                <select class="form-control" id="currency" name="currency" required>
+                                        <option value="RD$" name="currency">RD$</option>
+                                        <option value="US$" name="currency">US$</option>
+                                        </select>
+              </div>
+
             <div class="form-group">
                 <button class="collb btn btn-info">{{ __('Proceder') }}</button>
                 <span style="">
@@ -43,3 +52,6 @@
     </div>
   </div>
 </div>
+
+
+

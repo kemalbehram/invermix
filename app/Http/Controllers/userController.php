@@ -470,6 +470,9 @@ class userController extends Controller
 
   public function invest(Request $req)
   {
+    //   dd($req->currency);
+    //   die();
+
       $user = Auth::User();
 
       if($this->st->investment != 1 )
@@ -482,14 +485,14 @@ class userController extends Controller
       if($user->status == 'Blocked' || $user->status == 2 )
       {
         Session::put('msgType', "err");
-        Session::put('status', 'Account Blocked! Please contact support.');
+        Session::put('status', '¡Cuenta bloqueada! Póngase en contacto con soporte.');
         return redirect('/login');
       }
 
       if($user->status == 'pending' || $user->status == 0 )
       {
         Session::put('msgType', "err");
-        Session::put('status', 'Account not activated! Please contact support.');
+        Session::put('status', '¡Cuenta no activada! Póngase en contacto con soporte.');
         return redirect('/login');
       }
 
@@ -503,34 +506,20 @@ class userController extends Controller
           $capital = $req->input('capital');
           $pack = packages::find($req->input('p_id'));
 
-        //   if($user->wallet < $capital)
-        //  if($user->wallet = $capital)
-        //   {
-        //     Session::put('status', 'Your wallet balance is lower than capital.');
-        //     Session::put('msgType', "err");
-        //     return back();
-        //   }
 
-        //   if($user->wallet < $pack->min)
-        //   {
-        //     Session::put('status', 'Wallet balance is lower than minimum investment.');
-        //     Session::put('msgType', "err");
-        //     return back();
-        //   }
+          if($capital > $pack->max)
+          {
+            Session::put('status', 'El capital de entrada es mayor que la inversión máxima.');
+            Session::put('msgType', "err");
+            return back();
+          }
 
-        //   if($capital > $pack->max)
-        //   {
-        //     Session::put('status', 'Input Capital is greater than maximum investment.');
-        //     Session::put('msgType', "err");
-        //     return back();
-        //   }
-
-        //   if($capital < $pack->min)
-        //   {
-        //     Session::put('status', 'Input Capital is less than minimum investment.');
-        //     Session::put('msgType', "err");
-        //     return back();
-        //   }
+          if($capital < $pack->min)
+          {
+            Session::put('status', 'El capital de entrada es menos que la inversión mínima.');
+            Session::put('msgType', "err");
+            return back();
+          }
 
           if($capital >= $pack->min && $capital <= $pack->max)
           {
@@ -556,7 +545,7 @@ class userController extends Controller
             }
 
             $inv->package_id = $pack->id;
-            $inv->currency = $this->st->currency;
+            $inv->currency = $req->currency;
             $inv->end_date = $actualDate;
             $inv->last_wd = date("Y-m-d");
             $inv->status = 'Pendiente';

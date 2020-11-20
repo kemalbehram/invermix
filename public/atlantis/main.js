@@ -13,8 +13,8 @@ function confirm_inv(id, pn, p, di, min, max, wallet)
 	$('#pack_inv').text(pn);
 	$('#period').text(p);
 	$('#intr').text(Math.fround(di*p*100).toFixed(2));
-	$('#min').text(min);
-	$('#max').text(max);
+	$('#min').text(formatNumber(min));
+	$('#max').text(formatNumber(max));
 	$('#p_id').val(id);
 
 	$('#popInvest').show();

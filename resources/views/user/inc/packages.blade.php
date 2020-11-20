@@ -34,12 +34,17 @@
                                         </h4>
                                         <span class="pk_num">{{$settings->currency}} {{$inv->min}}</span>
                                         <br>
+                                        <span class="apunte">O equivalente en dolares</span>
+                                        <br>
                                         <br>
                                         <h4 class="u_case">
                                             <strong>{{ __('Inversión Máx.') }}</strong>
                                         </h4>
 
                                         <span class="pk_num">{{$settings->currency}} {{$inv->max}}</span>
+                                        <br>
+                                        <span class="apunte">O equivalente en dolares</span>
+
                                 </div>
 
 

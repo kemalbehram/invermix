@@ -8,10 +8,10 @@
     Version: 1.0
 
 -----------------------------------------------------------------------------------
-    
+
     CSS INDEX
     ===================
-	
+
     1. Theme Default CSS (body, link color, section etc)
 	2. Header Customize CSS
 	3. Header top Menu CSS
@@ -129,7 +129,14 @@
 }
 
 .u_case{
-	text-transform: uppercase;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.apunte{
+    /* padding-left: 2em; */
+    color:red;
+    font-size: 13px;
 }
 
 .color_blue_9{
@@ -142,7 +149,7 @@
 
 
 .form_cont{
-	overflow: hidden; overflow-y: auto; height: 500px; padding: 10px; 
+	overflow: hidden; overflow-y: auto; height: 500px; padding: 10px;
 }
 .bg_white{
 	background-color: #FFF !important;
@@ -184,7 +191,7 @@ button{
 	-moz-filter: blur(5px);
 	-o-filter: blur(5px);
 	-ms-filter: blur(5px);
-	filter: blur(5px);	
+	filter: blur(5px);
 }
 
 .fixedOeverlayBG{
@@ -196,7 +203,7 @@ button{
 }
 
 .login_fixed_panel{
-	background-color:#FFF; position: fixed; height: 100%; right: 0; top: 0; width: 50%; padding: 30px; 
+	background-color:#FFF; position: fixed; height: 100%; right: 0; top: 0; width: 50%; padding: 30px;
 }
 
 
@@ -260,12 +267,12 @@ input:checked + .slider:before {
 }
 
 .popup_alert_err{
-    position: fixed; bottom: 70px; right: 0px; display: none; z-index: 1000; 
+    position: fixed; bottom: 70px; right: 0px; display: none; z-index: 1000;
     background-color: #e50; color: #FFF; font-size:14px;
 }
 
 .disabled_input{
-	background-color: #FFF !important; 
+	background-color: #FFF !important;
 	height: 30px; border-radius: 4px;
 	border: 1px solid #CCC;
 }
@@ -287,7 +294,7 @@ input:checked + .slider:before {
 
 
 
-@media (max-width: 600px) 
+@media (max-width: 600px)
 {
 	.mobile_table{
 		display: block;
@@ -295,53 +302,53 @@ input:checked + .slider:before {
 	.web-table{
 		display: none;
 	}
-	.popmsg-mobile{		
+	.popmsg-mobile{
 		margin: 20% 6% 3% 1%;
 		border-radius: 7px; background-color: #FFF; min-height: 200px;
 	}
 	.bg-palet{
 	    display:none;
 	}
-	
+
 	.act_sum_mob{
 	    margin-top: 90px;
 	    margin-bottom: 150px;
 	}
 
 	.login_fixed_panel{
-		background-color:#FFF; position: fixed; height: 100%; right: 0; top: 0; width: 100%; padding: 30px; 
+		background-color:#FFF; position: fixed; height: 100%; right: 0; top: 0; width: 100%; padding: 30px;
 	}
-	
+
 }
 
-@media screen and (max-width: 995px) 
+@media screen and (max-width: 995px)
 {
 	.bg-palet{
 	    display:none;
 	}
-	
+
 	.act_sum_mob{
 	    padding-top: 100px;
 	    margin-bottom: 150px;
 	}
-	
+
 }
 
-@media (min-width: 601px ) 
+@media (min-width: 601px )
 {
 	.mobile_table{
 		display: none;
 	}
 	.popmsg-mobile{
 		margin: 10% 6% 3% 1%;
-	}	
+	}
 
-	
+
 }
 
 .xpack_inv{
-    margin-top: 20px; padding-top: 0px; font-size: 14px; 
-    border-top-left-radius: 20px; border-top-right-radius: 0px;  
+    margin-top: 20px; padding-top: 0px; font-size: 14px;
+    border-top-left-radius: 20px; border-top-right-radius: 0px;
     border-bottom-right-radius: 20px;  border-bottom-left-radius: 0px;
     background-color:#215; color:#FFF;
 }
@@ -368,7 +375,7 @@ input:checked + .slider:before {
 }
 
 .profile-sum{
-	background-color: #cec; border-radius: 5px; padding: 10px; 
+	background-color: #cec; border-radius: 5px; padding: 10px;
 }
 
 .profile-sum-cont{
@@ -380,22 +387,22 @@ input:checked + .slider:before {
 }
 
 
-.popmsgContainer 
+.popmsgContainer
 {
-	min-width: 100%; background-color: rgba(0,0,0,.6); 
+	min-width: 100%; background-color: rgba(0,0,0,.6);
 	position: fixed;  bottom: 0px; left:0px; height:100%;
 	z-index: 1000; display: none;
 }
 
-.popmsgContainerDisplay 
+.popmsgContainerDisplay
 {
-	min-width: 100%; background-color: rgba(0,0,0,.6); 
+	min-width: 100%; background-color: rgba(0,0,0,.6);
 	position: fixed;  bottom: 0px; left:0px; height:100%;
 	z-index: 1000;
 }
 
 
-.scroll {   
+.scroll {
    overflow: auto;
    scrollbar-width: thin;
    scrollbar-color: #CCC rgba(0,0,0,0.3);
@@ -406,13 +413,13 @@ input:checked + .slider:before {
 }
 
 .scroll::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     border-radius: 8px;
 }
 
 .scroll::-webkit-scrollbar-thumb {
     border-radius: 8px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 
 .popup_alert{
@@ -420,7 +427,7 @@ input:checked + .slider:before {
 }
 
 .camshow{
-    height: 150px; width: 150px; 
+    height: 150px; width: 150px;
     border-radius: 50%;
     display: none;
     position: absolute;
@@ -451,7 +458,7 @@ input:checked + .slider:before {
 }
 
 a{
-	text-decoration: none !important; 
+	text-decoration: none !important;
 }
 
 .headtext_blue{
@@ -484,15 +491,15 @@ a{
 	color: #999; font-size: 11px;
 }
 
-.pack-container{	
+.pack-container{
 	border-radius: 10px;
-	border:1px solid #CCC;	
+	border:1px solid #CCC;
 }
 
-.pack-container > .panel-head{	
+.pack-container > .panel-head{
 	color: #FFF;
-	padding:15px; 
-	background-color: #1269DB; 
+	padding:15px;
+	background-color: #1269DB;
 	border-bottom: 1px solid #CCC;
 }
 
@@ -552,7 +559,7 @@ a{
 
 /*************** message *****************/
 .msg_cont_bg{
-	background-color: #fff; 
+	background-color: #fff;
 }
 
 .msg_col_pad{
@@ -660,7 +667,7 @@ a{
 }
 
 .pop_read_msg > span{
-	float: right; margin-top: -40px; margin-right: 0px; z-index: 10; 
+	float: right; margin-top: -40px; margin-right: 0px; z-index: 10;
 }
 
 .pop_scroll_height{
@@ -670,8 +677,8 @@ a{
 /************************ confirm blade ****************************/
 
 .pop_invest_cont{
-	min-width: 100%; background-color: rgba(0,0,0,.6); 
-	position: fixed; top: 0; left: 0; 
+	min-width: 100%; background-color: rgba(0,0,0,.6);
+	position: fixed; top: 0; left: 0;
 	bottom: 0; width: 100%; z-index: 1000; display: none;
 }
 
@@ -719,8 +726,8 @@ a{
 }
 
 .edit_pack_cont{
-	min-width: 100%; background-color: rgba(0,0,0,.6); 
-	position: fixed; top: 0; left: 0; bottom: 0; 
+	min-width: 100%; background-color: rgba(0,0,0,.6);
+	position: fixed; top: 0; left: 0; bottom: 0;
 	width: 100%; z-index: 1000; display: none;
 }
 
@@ -1038,7 +1045,7 @@ a{
 }
 
 .width_100per{
-	min-width: 100%; 
+	min-width: 100%;
 }
 
 .img_card_temp{

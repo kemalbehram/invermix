@@ -153,7 +153,7 @@
 
 									<li>
 										<a class="dropdown-item" href="/admin/manage/users">
-											<span class="fa fa-users"></span> &nbsp;Manejo de Usuarios
+											<span class="fa fa-users"></span> &nbsp;Manejo de Clientes
 										</a>
 										@php($role = Session::get('adm'))
                                         @if($role->role == 3)
@@ -244,7 +244,7 @@
                         	<li class="nav-item">
 								<a data-toggle="collapse" href="#user_drp">
 									<i class="fa fa-users"></i>
-									<p> Manejar Usuarios</p>
+									<p> Manejar Clientes</p>
 									<span class="caret"></span>
 								</a>
 								<div class="collapse" id="user_drp" >

@@ -2,22 +2,26 @@
          
     <table id="" class=" table table-stripped table-hover">
         <thead>
-            <tr>               
-                <th> {{ __('Cuenta') }} </th>
-                <th> {{ __('Monto') }} </th>                
-                <th> {{ __('Fecha') }} </th>                                                    
+            <tr>                           
+                <th> {{ __('Capital') }} </th>
+                <th> {{ __('Monto pagable') }} </th>
+                <th> {{ __('Fecha') }} </th>
+                <th> {{ __('Status') }} </th>                                                   
             </tr>
         </thead>
         <tbody>
             <?php
-                $activities = App\Withdrawal::where('user_id', $user->id)->orderby('id', 'desc')->get();
+                $activities =  App\investment::where('user_id', $user->id)->where('status', 'Solicitado')->Orwhere('status', 'Retirado')->Orwhere('status', 'Depositado')
+                ->orderby('created_at', 'desc')->get();
+            
             ?>
             @if(count($activities) > 0 )
-                @foreach($activities as $activity)
+                @foreach($activities as $dep)
                     <tr> 
-                        <td>{{$activity->account}}</td>
-                        <td>{{$activity->amount}}</td>
-                        <td>{{$activity->created_at}}</td>                     
+                                <td>{{$dep->currency}} {{$dep->capital}}</td>
+                                <td><b>{{$dep->currency}} {{$dep->i_return}}</b></td>
+                                <td>{{substr($dep->created_at, 0, 10)}}</td>
+                                <td>{{$dep->wd_status}}</td>                   
                     </tr>
                 @endforeach
             @else

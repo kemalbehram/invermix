@@ -5,6 +5,7 @@
         $musers = App\User::where('created_at', 'like', '%'.$val.'%')->where('status', 1)->orderby('created_at', 'asc')->get();
         $mInv = App\investment::where('created_at', 'like', '%'.$val.'%')->where('status', 'Activa')->orderby('created_at', 'asc')->get();
         $mDep = App\inyects::where('created_at', 'like', '%'.$val.'%')->where('status', 'Activa')->orderby('date_invested', 'asc')->get();
+        $mIny = App\inyects::where('created_at', 'like', '%'.$val.'%')->where('status', 'Activa')->orderby('date_invested', 'asc')->get();
         $mWd = App\Withdrawal::where('w_date', 'like', '%'.$val.'%')->where('status', 'Approved')->orderby('w_date', 'asc')->get();
 
         $mnt = ['Jan','Feb', 'Mar','Apr','May','Jun','Jul','Aug', 'Sep','Oct','Nov','Dec'];
@@ -16,6 +17,7 @@
         $musers = App\User::where('created_at', 'like',  '%'.date('Y-m').'%')->where('status', 1)->orderby('created_at', 'asc')->get();
         $mInv = App\investment::where('created_at', 'like', '%'.date('Y-m').'%')->where('status', 'Activa')->orderby('created_at', 'asc')->get();
         $mDep = App\inyects::where('created_at', 'like', '%'.date('Y-m').'%')->where('status', 'Activa')->orderby('created_at', 'asc')->get();
+        $mIny = App\inyects::where('created_at', 'like', '%'.$val.'%')->where('status', 'Activa')->orderby('date_invested', 'asc')->get();
         $mWd = App\Withdrawal::where('created_at', 'like', '%'.date('Y-m').'%')->where('status', 'Approved')->orderby('created_at', 'asc')->get();
     }
 

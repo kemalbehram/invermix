@@ -1089,6 +1089,130 @@ public function activateInv(Request $request)
 
 //   }
 
+public function rejectWD_INJ($id)
+  {
+    if(Session::has('adm') && !empty(Session::get('adm')))
+    {
+
+      try
+      {
+        $usr = inyects::find($id);
+
+        if($usr->wd_status == 'Rechazado')
+        {
+          return back()->with([
+            'toast_msg' => '¡Retiro ya rechazado!',
+            'toast_type' => 'err'
+          ]);
+        }
+
+        $usr->wd_status = 'Rechazado';
+
+        $user = User::find($usr->user_id);
+        $user->wallet += $usr->amount;
+        $user->save();
+
+        $usr->save();
+
+        $adm = Session::get('adm');
+        $act = new adminLog;
+        $act->admin = $adm->email;
+        $act->action = "Retiro de usuario rechazado. id de retiro: ".$id;
+        $act->save();
+
+        return back()->with([
+            'toast_msg' => '¡El retiro se rechazó con éxito!',
+            'toast_type' => 'suc'
+        ]);
+
+      }
+      catch(\Exception $e)
+      {
+        return back()->with([
+          'toast_msg' => '¡Error al actualizar el registro! ¡Inténtalo de nuevo!',
+          'toast_type' => 'err'
+        ]);
+      }
+
+
+    }
+    else
+    {
+      return redirect('/');
+    }
+
+  }
+
+  public function approveWD_INJ($id)
+  {
+    if(Session::has('adm') && !empty(Session::get('adm')))
+    {
+
+      try
+      {
+        $usr = inyects::find($id);
+        if($usr->wd_status == 'Depositado')
+        {
+          return back()->with([
+            'toast_msg' => '¡Retiro ya depositado!',
+            'toast_type' => 'err'
+          ]);
+        }
+
+        if($usr->wd_status == 'Rechazado')
+        {
+          return back()->with([
+            'toast_msg' => 'Retiro ya rechazado. El usuario debe crear una nueva solicitud de retiro.',
+            'toast_type' => 'err'
+          ]);
+        }
+
+        // $userID = $usr->user_id;
+        $usr->wd_status = 'Depositado';
+        $usr->status = 'Depositado';
+        $usr->save();
+
+        $adm = Session::get('adm');
+        $act = new adminLog;
+        $act->admin = $adm->email;
+        $act->action = "Retiro de usuario aprobado. Id de retiro: ".$id;
+        $act->save();
+
+        return back()->with([
+                'toast_msg' => 'Aprobado con éxito!',
+                'toast_type' => 'suc'
+              ]);
+
+    //     $user_act = User::find($userID);
+
+    //     $maildata = ['email' => $user_act->email ];
+    //     Mail::send('mail.admin_approve_wd', ['md' => $maildata], function($msg) use ($maildata){
+    //         $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+    //         $msg->to($maildata['email']);
+    //         $msg->subject('Aprobación de retiro');
+    //     });
+    //     return back()->with([
+    //     'toast_msg' => 'Aprobado con éxito!',
+    //     'toast_type' => 'suc'
+    //   ]);
+
+      }
+      catch(\Exception $e)
+      {
+        return back()->with([
+          'toast_msg' => '¡Error al actualizar el registro! ¡Inténtalo de nuevo!',
+          'toast_type' => 'err'
+        ]);
+      }
+
+    }
+    else
+    {
+      return redirect('/');
+    }
+
+  }
+
   ///////////////////////////////////////////  pack edit//////////////////////////////////////////////////
 
   public function editPack(Request $req)

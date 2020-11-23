@@ -28,7 +28,7 @@
                                                     <th>{{ __('Días transcurridos') }}</th>
                                                     <th>{{ __('Status') }}</th>
                                                     <th>{{ __('Ganancias') }}</th>
-                                                    <th>{{ __('Acción') }}</th>
+                                                    <th>{{ __('Retirar') }}</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="web-table">
@@ -65,12 +65,12 @@
                                                         ?>
                                                         <tr class="">
                                                             <td>{{$in->package}}</td>
-                                                            <td>{{($settings->currency)}} {{$in->capital}}</td>
+                                                            <td>{{($in->currency)}} {{$in->capital}}</td>
                                                             <td>{{$in->date_inyected}}</td>
                                                             <td>{{$in->end_date}}</td>
                                                             <td>{{$totalDays}}</td>
                                                             <td>{{$in->status}}</td>
-                                                            <td>{{$settings->currency}} {{$ern}} </td>
+                                                            <td>{{$in->currency}} {{$ern}} </td>
                                                             <td>
                                                                 <a title="Retirar" href="javascript:void(0)" class="btn btn-info" onclick="inywd('pack', '{{$in->id}}', '{{$ern}}', '{{ $withdrawable }}', '{{$Edays}}', '{{$ended}}')">
                                                                     <i class="fas fa-arrow-down"></i>
@@ -160,7 +160,7 @@
       <div class="col-md-4 card popmsg-mobile pop_invest_col" align="Center">
         <div class="card-header" style="">
           <h3> {{ __('Retiro') }} </h3>
-          <h5>{{ __('Ganancia Total:') }} {{$settings->currency}} <span id="earned"></span></h5>
+          <h5>{{ __('Ganancia Total:') }} $ <span id="earned"></span></h5>
           <small>Días: <span id="days" class="text-danger" ></span></small>
         </div>
         <div class="card-body pt-0" >
@@ -176,7 +176,7 @@
               </div>
               <div class="input-group">
                 <div class="input-group-prepend " >
-                  <span class="input-group-text " >{{$settings->currency}}</span>
+                  <span class="input-group-text " >$ </span>
                 </div>
                 <input id="withdrawable_amt" type="text" value="" readonly class="bg_white form-control" name="amt"  required >
               </div>

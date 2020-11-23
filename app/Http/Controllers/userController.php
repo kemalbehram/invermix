@@ -668,19 +668,22 @@ class userController extends Controller
 
   public function wd_invest(Request $req)
   {
+
+            //  dd($req);
+            //   die();
       $user = Auth::User();
 
       if($user->status == 'pending' || $user->status == 0 )
       {
         Session::put('msgType', "err");
-        Session::put('status', 'Account not activated! Please contact support.');
+        Session::put('status', '¡Cuenta no activada! Póngase en contacto con soporte.');
         return redirect('/login');
       }
 
       if($user->status == 'Blocked' || $user->status == 2 )
       {
         Session::put('msgType', "err");
-        Session::put('status', 'Account Blocked! Please contact support.');
+        Session::put('status', '¡Cuenta bloqueada! Póngase en contacto con el servicio de asistencia.');
         return redirect('/login');
       }
 
@@ -700,6 +703,7 @@ class userController extends Controller
           else
           {
               $pack = investment::find($req->input('p_id'));
+
           }
 
 

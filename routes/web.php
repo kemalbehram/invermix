@@ -362,7 +362,11 @@ Route::get('/admin/delete/admuser/{id}', 'adminController@dadmin_delete_user');
 
 Route::get('/admin/reject/user/wd/{id}', 'adminController@rejectWD');
 Route::get('/admin/approve/user/wd/{id}', 'adminController@approveWD');
-Route::get('/admin/delete/user/wd/{id}', 'adminController@deleteWD');
+// Route::get('/admin/delete/user/wd/{id}', 'adminController@deleteWD');
+
+Route::get('/admin/reject/user/wd/inj/{id}', 'adminController@rejectWD_INJ');
+Route::get('/admin/approve/user/wd/inj/{id}', 'adminController@approveWD_INJ');
+// Route::get('/admin/delete/user/wd/inj/{id}', 'adminController@deleteWD');
 
 Route::get('/admin/reject/user/payment/{id}', 'adminController@rejectDep');
 Route::get('/admin/approve/user/payment/{id}', 'adminController@approveDep');

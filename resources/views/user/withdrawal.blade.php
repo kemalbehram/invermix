@@ -24,13 +24,13 @@
                                                     <th>{{ __('Fecha') }}</th>
                                                     <th>{{ __('Modalidad') }}</th>
                                                     <th>{{ __('Capital') }}</th>
-                                                    <th>{{ __('Monto Retirado') }}</th>
+                                                    <th>{{ __('Monto Retirado/Depositado') }}</th>
                                                     <th>{{ __('Status') }}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                             <?php
-                                                    $activities = App\investment::where('user_id', $user->id)->where('wd_status', 'Solicitado')->Orwhere('wd_status', 'Depositado')
+                                                    $activities = App\investment::where('user_id', $user->id)->where('wd_status', '!=', NULL)
                                                     ->orderby('id', 'desc')->get();
                                                 ?>
                                                 @if(count($activities) > 0 )
@@ -38,8 +38,8 @@
                                                         <tr>
                                                             <td>{{$activity->created_at}}</td>
                                                             <td>{{$activity->package}}</td>
-                                                            <td>{{$activity->capital}}</td>
-                                                            <td>{{$activity->currency.' '.$activity->w_amt}}</td>
+                                                            <td>{{number_format($activity->capital), 2}}</td>
+                                                            <td>{{$activity->currency.' '.number_format($activity->w_amt), 2}}</td>
                                                             <td>{{$activity->wd_status}}</td>
 
                                                         </tr>
@@ -72,14 +72,13 @@
                                                     <th>{{ __('Fecha') }}</th>
                                                     <th>{{ __('Modalidad') }}</th>
                                                     <th>{{ __('Capital') }}</th>
-                                                    <th>{{ __('Monto Retirado') }}</th>
+                                                    <th>{{ __('Monto Retirado/Depositado') }}</th>
                                                     <th>{{ __('Status') }}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                             <?php
-                                                    $activities = App\inyects::where('user_id', $user->id)->where('wd_status', 'Solicitado')
-                                                    ->Orwhere('wd_status', 'Depositado')
+                                                    $activities = App\inyects::where('user_id', $user->id)->where('wd_status', '!=', NULL)
                                                     ->orderby('id', 'desc')->get();
                                                 ?>
                                                 @if(count($activities) > 0 )
@@ -87,8 +86,8 @@
                                                         <tr>
                                                             <td>{{$activity->created_at}}</td>
                                                             <td>{{$activity->package}}</td>
-                                                            <td>{{$activity->capital}}</td>
-                                                            <td>{{$activity->currency.' '.$activity->w_amt}}</td>
+                                                            <td>{{number_format($activity->capital), 2}}</td>
+                                                            <td>{{$activity->currency.' '.number_format($activity->w_amt), 2}}</td>
                                                             <td>{{$activity->wd_status}}</td>
 
                                                         </tr>

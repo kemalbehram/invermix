@@ -92,7 +92,7 @@ class adminController extends Controller
     {
       if($adm[0]->status == 0)
       {
-        Session::put('err2', "Account not activated!");
+        Session::put('err2', "¡Cuenta no activada!");
         return back();
       }
       if(Hash::check($req->input('password'), $adm[0]->pwd))
@@ -110,14 +110,14 @@ class adminController extends Controller
       }
       else
       {
-        Session::put('err2', "Login password not correct!");
+        Session::put('err2', "¡La contraseña de inicio de sesión no es correcta!");
         return back();
       }
 
     }
     else
     {
-      Session::put('err2', "Login username not correct!");
+      Session::put('err2', "¡El nombre de usuario de inicio de sesión no es correcto!");
       return back();
     }
   }
@@ -188,7 +188,7 @@ class adminController extends Controller
               $act->action = "Updated User profile. User_id: ".$req->input('uid');
               $act->save();
 
-              Session::put('status', "Successful");
+              Session::put('status', "Exitoso");
               Session::put('msgType', "suc");
               return back();
 
@@ -280,14 +280,14 @@ class adminController extends Controller
         $act->action = "Blocked User Account. User_id: ".$id;
         $act->save();
 
-        Session::put('status', "Successful");
+        Session::put('status', "Exitoso");
         Session::put('msgType', "suc");
         return back();
 
       }
       catch(\Exception $e)
       {
-        Session::put('status', "Error updating record! Try again");
+        Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
         Session::put('msgType', "err");
         return back();
       }
@@ -325,7 +325,7 @@ class adminController extends Controller
       }
       catch(\Exception $e)
       {
-        Session::put('status', "Error updating record! Try again");
+        Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
         Session::put('msgType', "err");
         return back();
       }
@@ -354,14 +354,14 @@ class adminController extends Controller
         $act->action = "Delete User account. User_id: ".$id;
         $act->save();
 
-        Session::put('status', "Successful");
+        Session::put('status', "Exitoso");
         Session::put('msgType', "suc");
         return redirect('/admin/manage/users'); //
 
       }
       catch(\Exception $e)
       {
-        Session::put('status', "Error updating record! Try again");
+        Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
         Session::put('msgType', "err");
         return back();
       }
@@ -429,7 +429,7 @@ class adminController extends Controller
       }
       catch(\Exception $e)
       {
-        Session::put('status', "Error updating record! Try again");
+        Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
         Session::put('msgType', "err");
         return back();
       }
@@ -512,7 +512,7 @@ public function activateInv(Request $request)
              $act->action = "Inversión de usuario activada. Inversión id: ".$request->id;
              $act->save();
 
-             Session::put('status', "Successful");
+             Session::put('status', "Exitoso");
              Session::put('msgType', "suc");
              return back(); //
 
@@ -606,14 +606,14 @@ public function activateInv(Request $request)
         $act->action = "Paused User Investment. Investment id: ".$id;
         $act->save();
 
-        Session::put('status', "Successful");
+        Session::put('status', "Exitoso");
         Session::put('msgType', "suc");
         return back(); //
 
       }
       catch(\Exception $e)
       {
-        Session::put('status', "Error updating record! Try again");
+        Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
         Session::put('msgType', "err");
         return back();
       }
@@ -644,14 +644,14 @@ public function activateInv(Request $request)
         $act->action = "Activated User Investment. Investment id: ".$id;
         $act->save();
 
-        Session::put('status', "Successful");
+        Session::put('status', "Exitoso");
         Session::put('msgType', "suc");
         return back(); //
 
       }
       catch(\Exception $e)
       {
-        Session::put('status', "Error updating record! Try again");
+        Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
         Session::put('msgType', "err");
         return back();
       }
@@ -691,14 +691,14 @@ public function activateInv(Request $request)
         $act->action = "Deleted User Investment. Investment id: ".$id;
         $act->save();
 
-        Session::put('status', "Successful");
+        Session::put('status', "Exitioso");
         Session::put('msgType', "suc");
         return back();
 
       }
       catch(\Exception $e)
       {
-        Session::put('status', "Error updating record! Try again");
+        Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
         Session::put('msgType', "err");
         return back();
       }
@@ -800,14 +800,14 @@ public function activateInv(Request $request)
         $act->action = "Rejected user deposit. Deposit id: ".$id;
         $act->save();
 
-        Session::put('status', "Successful");
+        Session::put('status', "Exitoso");
         Session::put('msgType', "suc");
         return back(); //
 
       }
       catch(\Exception $e)
       {
-        Session::put('status', "Error updating record! Try again");
+        Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
         Session::put('msgType', "err");
         return back();
       }
@@ -906,14 +906,14 @@ public function activateInv(Request $request)
         $act->action = "Deleted ".$dep_user->username." deposit. Amount: ".$amt;
         $act->save();
 
-        Session::put('status', "Successful");
+        Session::put('status', "Exitoso");
         Session::put('msgType', "suc");
         return back();
 
       }
       catch(\Exception $e)
       {
-        Session::put('status', "Error deleting record! Try again");
+        Session::put('status', "¡Error al borrando el registro! Inténtalo de nuevo");
         Session::put('msgType', "err");
         return back();
       }
@@ -1268,14 +1268,14 @@ public function rejectWD_INJ($id)
         $usr = admin::find($id);
          if($usr->id == $adm->id)
         {
-          Session::put('status', "You cannot perform this action on yourself! Try again");
+          Session::put('status', "¡No puede realizar esta acción en usted mismo! Inténtalo de nuevo");
           Session::put('msgType', "err");
           return back();
         }
 
         if($usr->role >= $adm->role && $adm->id != 1)
         {
-          Session::put('status', "Error updating record! Try again");
+          Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
           Session::put('msgType', "err");
           return back();
         }
@@ -1298,7 +1298,7 @@ public function rejectWD_INJ($id)
       }
       catch(\Exception $e)
       {
-        Session::put('status', "Error updating record! Try again");
+        Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
         Session::put('msgType', "err");
         return back();
       }
@@ -1322,7 +1322,7 @@ public function rejectWD_INJ($id)
         $usr = admin::find($id);
         if($usr->id == $adm->id)
         {
-          Session::put('status', "You cannot perform this action on yourself! Try again");
+          Session::put('status', "¡No puede realizar esta acción en usted mismo! Inténtalo de nuevo");
           Session::put('msgType', "err");
           // return $usr->id.' '.$adm->id;
           return back();
@@ -1330,7 +1330,7 @@ public function rejectWD_INJ($id)
 
         if($usr->role >= $adm->role && $adm->id != 1)
         {
-          Session::put('status', "Error updating record! Try again");
+          Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
           Session::put('msgType', "err");
           return back();
         }
@@ -1353,7 +1353,7 @@ public function rejectWD_INJ($id)
       }
       catch(\Exception $e)
       {
-        Session::put('status', "Error updating record! Try again");
+        Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
         Session::put('msgType', "err");
         return back();
       }
@@ -1378,14 +1378,14 @@ public function rejectWD_INJ($id)
         $usr = admin::find($id);
         if($usr->id == $adm->id)
         {
-          Session::put('status', "You cannot delete yourself! Try again");
+          Session::put('status', "¡No puedes borrarte a ti mismo! Inténtalo de nuevo");
           Session::put('msgType', "err");
           return back();
         }
 
         if($usr->role >= $adm->role && $adm->author != 0 && $usr->author != $adm->id)
         {
-          Session::put('status', "Error updating record! Try again");
+          Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
           Session::put('msgType', "err");
           return back();
         }
@@ -1407,7 +1407,7 @@ public function rejectWD_INJ($id)
       }
       catch(\Exception $e)
       {
-        Session::put('status', "Error updating record! Try again");
+        Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
         Session::put('msgType', "err");
         return back();
       }
@@ -1432,14 +1432,14 @@ public function admAddnew(Request $req)
         // $usr = admin::find($id);
         if($adm->role < $req->input('role') )
         {
-          Session::put('status', "You cannot perform this operation! Try again");
+          Session::put('status', "¡No puede realizar esta operación! Inténtalo de nuevo");
           Session::put('msgType', "err");
           return back();
         }
 
         if($adm->role == 1)
         {
-          Session::put('status', "You cannot perform this operation! Try again");
+          Session::put('status', "¡No puede realizar esta operación! Inténtalo de nuevo");
           Session::put('msgType', "err");
           return back();
         }
@@ -1459,13 +1459,13 @@ public function admAddnew(Request $req)
         $act->action = "Created admin user. username: ".$req->input('email');
         $act->save();
 
-        Session::put('status', "Successful");
+        Session::put('status', "Exitoso");
         Session::put('msgType', "suc");
         return back();
       }
       catch(\Exception $e)
       {
-        Session::put('status', "Error saving record! Try again");
+        Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
         Session::put('msgType', "err");
         return back();
       }
@@ -1579,7 +1579,7 @@ public function admAddnew(Request $req)
 
         if($req->input('newpwd') != $req->input('cpwd'))
         {
-          Session::put('status', "New password do not match! Try again");
+          Session::put('status', "¡La nueva contraseña no coincide! Inténtalo de nuevo");
           Session::put('msgType', "err");
           return back();
         }
@@ -1595,7 +1595,7 @@ public function admAddnew(Request $req)
           $act->action = "Admin changed password.";
           $act->save();
 
-          Session::put('status', "Successful");
+          Session::put('status', "Exitoso");
           Session::put('msgType', "suc");
           return back();
         }
@@ -1605,7 +1605,7 @@ public function admAddnew(Request $req)
       }
       catch(\Exception $e)
       {
-        Session::put('status', "Error saving message! Try again");
+        Session::put('status', "¡Error al guardar el mensaje! Inténtalo de nuevo");
         Session::put('msgType', "err");
         return back();
       }
@@ -2957,7 +2957,7 @@ else
         $act->action = "Inyección de usuario en pausa. Investment id: ".$id;
         $act->save();
 
-        Session::put('status', "Successful");
+        Session::put('status', "Exitoso");
         Session::put('msgType', "suc");
         return back(); //
 
@@ -3045,7 +3045,7 @@ public function activateInj(Request $request)
              $act->action = "Inyección de usuario activada. Inyección id: ".$request->id;
              $act->save();
 
-             Session::put('status', "Successful");
+             Session::put('status', "Exitoso");
              Session::put('msgType', "suc");
              return back(); //
 

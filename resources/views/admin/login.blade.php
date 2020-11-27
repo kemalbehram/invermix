@@ -2,33 +2,33 @@
 @section('content')
 <body>
     <div style="">
-        <img src="/img/adult.jpg" class="fixedOverlayIMG">         
+        <img src="/img/adult.jpg" class="fixedOverlayIMG">
         <div class="fixedOeverlayBG"></div>
         <div class="">
             <div class="row admin_login_row">
                 <div class="col-md-6 position_relative" >
                     <div class="admin_login_title" align="center">
                         <img src="/img/{{$settings->site_logo}}" alt="{{$settings->site_title}}" class="login_logo">
-                        <h1>{{$settings->site_title}}</h1> 
-                        <p>                                                       
-                            <h4> {{ __('Login to manage website') }} </h4>
+                        <h1>{{$settings->site_title}}</h1>
+                        <p>
+                            <h4> {{ __('Inicar Sesión como Administrador') }} </h4>
                         </p>
-                    </div>                    
+                    </div>
                 </div>
                 <div class="col-md-6 bg_white">
                     <div class="login_fixed_panel">
                         <div class="row">
                             <div class="col-md-12" >
-                                <div style="">                        
+                                <div style="">
                                     <div class="panel" align="center">
                                         <img src="/img/{{$settings->site_logo}}" alt="{{$settings->site_title}}" class="login_logo">
                                         <br><br>
-                                        <h4 align="center"> {{ __('Admin Login') }} </h4> 
-                                        <div id="errMsg" class="card-header alert alert-danger cont_display_none" align="center">         
+                                        <h4 align="center"> {{ __('Iniciar Sesión Admin') }} </h4>
+                                        <div id="errMsg" class="card-header alert alert-danger cont_display_none" align="center">
                                         </div>
 
-                                        @if(Session::has('err2') )         
-                                            <script type="text/javascript">            
+                                        @if(Session::has('err2') )
+                                            <script type="text/javascript">
                                                 $('#errMsg').html("{{Session::get('err2')}}");
                                                 $('#errMsg').show();
                                             </script>
@@ -36,7 +36,7 @@
                                         @endif
 
                                         <div class="panel-body" style="">
-                                            <form method="POST" action="/dhadmin/login">                        
+                                            <form method="POST" action="/dhadmin/login">
                                                 <input id="csrf" type="hidden"  name="_token" value="{{ csrf_token() }}" >
                                                 <div class="form-group row">
                                                     <label for="email" class=" col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -76,8 +76,8 @@
                                                     <div class="" align="center">
                                                         <button type="submit" class="btn btn-primary">
                                                             {{ __('Login') }}
-                                                        </button>                               
-                                                    </div>                            
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>

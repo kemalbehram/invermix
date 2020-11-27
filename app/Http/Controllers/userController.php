@@ -90,13 +90,13 @@ class userController extends Controller
         if($user->status == 0 || $user->status == 'New' || $user->status == 'pending')
         {
             Session::flush();
-            Session::put('err_msg', 'Account not activated');
+            Session::put('err_msg', 'Cuenta no activada');
             return redirect()->bacK(); //->withErrors(['msg', 'Account not activated']);
         }
         if($user->status == 2 || $user->status == 'Blocked')
         {
             Session::flush();
-            Session::put('err_msg', 'Account Blocked! Please contact support.');
+            Session::put('err_msg', '¡Cuenta bloqueada! Póngase en contacto con el servicio de asistencia.');
             return redirect()->bacK(); //->withErrors(['msg', 'Account not activated']);
         }
 
@@ -210,13 +210,13 @@ class userController extends Controller
           $act->user_id = $user->id;
           $act->save();
 
-          Session::put('status', "Successful");
+          Session::put('status', "Exitoso");
           Session::put('msgType', "suc");
           return back();
       	}
       	catch(\Exception $e)
       	{
-    		  Session::put('status', "Error uploading image or invalid image file");
+    		  Session::put('status', "Error al cargar la imagen o el archivo de imagen no es válido");
           Session::put('msgType', "err");
         	return back();;
       	}
@@ -241,7 +241,7 @@ class userController extends Controller
       	    {
       	        if($usr[0]->act_code == 0000000000)
       	        {
-      	            Session::put('status', "Account already activated once");
+      	            Session::put('status', "Cuenta ya activada");
                       Session::put('msgType', "err");
       	        }
       	        elseif($usr[0]->act_code == $code)
@@ -250,19 +250,19 @@ class userController extends Controller
           	        $usr[0]->act_code = 0000000000;
                       $usr[0]->save();
 
-                      Session::put('status', "Account activation successful");
+                      Session::put('status', "Activación de cuenta exitosa");
                       Session::put('msgType', "suc");
       	        }
       	        else
       	        {
-      	            Session::put('status', "Invalid activation code passed!");
+      	            Session::put('status', "¡Se pasó un código de activación no válido!");
                       Session::put('msgType', "err");
       	        }
       	    }
       	    else
       	    {
 
-                  Session::put('status', "Account Activation Error");
+                  Session::put('status', "Error de activación de cuenta");
                   Session::put('msgType', "err");
 
       	    }
@@ -271,7 +271,7 @@ class userController extends Controller
       	}
       	catch(\Exception $e)
       	{
-      		Session::put('status', $e->getMessage()."Error Updating your account. Please contact support");
+      		Session::put('status', $e->getMessage()."Error al actualizar su cuenta. Póngase en contacto con soporte");
               Session::put('msgType', "err");
           	return view('auth.act_verify');
       	}
@@ -288,7 +288,7 @@ class userController extends Controller
           {
           	if($req->input('newpwd') == $req->input('oldpwd'))
           	{
-                Session::put('status', "You cannot use same old password! Please use a different password.");
+                Session::put('status', "¡No puede usar la misma contraseña anterior! Utilice una contraseña diferente.");
                 Session::put('msgType', "err");
                 return back();
           	}
@@ -305,13 +305,13 @@ class userController extends Controller
                       $act->user_id = $user->id;
                       $act->save();
 
-  		            Session::put('status', "Password Successfully Changed");
+  		            Session::put('status', "Contraseña cambiada correctamente");
                       Session::put('msgType', "suc");
   		            return back();
                 }
                 else
                 {
-                	Session::put('status', "Old Password invalid! Try again");
+                	Session::put('status', "¡Contraseña anterior no válida! Inténtalo de nuevo");
                       Session::put('msgType', "err");
                       return back();
             		// return back();
@@ -319,14 +319,14 @@ class userController extends Controller
         	}
         	catch(\Exception $e)
         	{
-        		Session::put('status', "Error saving password! Try again");
+        		Session::put('status', "¡Error al guardar la contraseña! Inténtalo de nuevo");
                   Session::put('msgType', "err");
   	            return back();
         	}
           }
           else
           {
-          	Session::put('status', "Password do not macth");
+          	Session::put('status', "La contraseña no coinciden.");
             Session::put('msgType', "err");
             return back();;
           }
@@ -365,14 +365,14 @@ class userController extends Controller
             $act->save();
 
 
-            Session::put('status', "Profile Update Successfully");
+            Session::put('status', "Actualización de perfil con éxito.");
             Session::put('msgType', "suc");
             return back();
 
       	}
       	catch(\Exception $e)
       	{
-      		Session::put('status', "Error saving your data! Please make sure your number is valid");
+      		Session::put('status', "¡Error al guardar sus datos! Asegúrese de que su número sea válido.");
           Session::put('msgType', "err");
           return back();
       	}
@@ -409,7 +409,7 @@ class userController extends Controller
 
 
 
-          Session::put('status', "Your Bank Has Been Added Successfully");
+          Session::put('status', "Su banco se ha agregado correctamente");
           Session::put('msgType', "suc");
 
           return back();
@@ -417,7 +417,7 @@ class userController extends Controller
       	}
       	catch(\Exception $e)
       	{
-      		  Session::put('status', "Error saving details! Account may exist. Please Try again");
+      		  Session::put('status', "¡Error al guardar los detalles! La cuenta puede existir. Inténtalo de nuevo");
             Session::put('msgType', "err");
           	return back();
       	}
@@ -445,14 +445,14 @@ class userController extends Controller
               $act->user_id = $user->id;
               $act->save();
 
-              Session::put('status', "Bank Deleted Successfully");
+              Session::put('status', "Cuenta de banco eliminado correctamente");
               Session::put('msgType', "suc");
               return back();
 
       	}
       	catch(\Exception $e)
       	{
-          Session::put('status', 'Error saving details! Account may exist. Please Try again');
+          Session::put('status', '¡Error al guardar los detalles! La cuenta puede existir. Inténtalo de nuevo');
           Session::put('msgType', "err");
           return back();
       	}
@@ -784,35 +784,35 @@ class userController extends Controller
       if($this->st->withdrawal != 1 )
       {
         Session::put('msgType', "err");
-        Session::put('status', 'Withdrawal disabled! Please contact support.');
+        Session::put('status', '¡Retiro desactivado! Póngase en contacto con el servicio de asistencia.');
         return back();
       }
 
       if($user->status == 'Blocked' || $user->status == 2 )
       {
         Session::put('msgType', "err");
-        Session::put('status', 'Account Blocked! Please contact support.');
+        Session::put('status', '¡Cuenta bloqueada! Póngase en contacto con el servicio de asistencia.');
         return back();
       }
 
       if($user->status == 'pending' || $user->status == 0 )
       {
         Session::put('msgType', "err");
-        Session::put('status', 'Account not activated! Please contact support.');
+        Session::put('status', '¡Cuenta no activada! Póngase en contacto con el servicio de asistencia.');
         return back();
       }
 
       if(intval($req->input('amt')) > intval($user->wallet) || intval($req->input('amt')) == 0 )
       {
         Session::put('msgType', "err");
-        Session::put('status', 'Invalid withdrawal amount. Amount must be greater than zero(0) and not more than wallet balance');
+        Session::put('status', 'Monto de retiro no válido. La cantidad debe ser mayor que cero (0) y no mayor que el saldo de la billetera');
         return back();
       }
 
       if(intval($req->input('amt')) > env('WD_LIMIT'))
       {
         Session::put('msgType', "err");
-        Session::put('status', env('WD_LIMIT').' Withdrawal limit exceeded!');
+        Session::put('status', env('WD_LIMIT').' ¡Se superó el límite de retiro!');
         return back();
       }
 
@@ -859,7 +859,7 @@ class userController extends Controller
           });
 
           $wd_fee = env("WD_FEE")*100;
-          Session::put('status', 'Wallet Withdrawal Successful! Note: Withdrawal attracts '.$wd_fee.'% processing fee');
+          Session::put('status', '¡Retiro de billetera exitoso!  '.$wd_fee.'% processing fee');
           Session::put('msgType', "suc");
           return back();
         }
@@ -1040,14 +1040,14 @@ class userController extends Controller
       if($user->status == 'Blocked' || $user->status == 2 )
       {
         Session::put('msgType', "err");
-        Session::put('status', 'Account Blocked! Please contact support.');
+        Session::put('status', '¡Cuenta bloqueada! Póngase en contacto con el servicio de asistencia.');
         return back();
       }
 
       if($user->status == 'pending' || $user->status == 0 )
       {
         Session::put('msgType', "err");
-        Session::put('status', 'Account not activated! Please contact support.');
+        Session::put('status', '¡Cuenta no activada! Póngase en contacto con el servicio de asistencia.');
         return back();
       }
 
@@ -1093,14 +1093,14 @@ class userController extends Controller
           $act->user_id = $user->id;
           $act->save();
 
-          Session::put('status', 'Your Deposit Details Has Been Received, Admin Will Confirm and Approve Payment');
+          Session::put('status', 'Se han recibido los detalles de su depósito, el administrador confirmará y aprobará el pago');
           Session::put('msgType', "suc");
           return back();
 
         }
         catch(\Exception $e)
         {
-          Session::put('status', $e->getMessage().' Error submitting your withdrawal');
+          Session::put('status', $e->getMessage().' Error al enviar su retiro');
           Session::put('msgType', "err");
           return back();
         }
@@ -1137,7 +1137,7 @@ class userController extends Controller
 
             Session::forget('pay_ref');
 
-            Session::put('status', 'Payment Successful');
+            Session::put('status', 'Pago exitoso');
             Session::put('msgType', "suc");
             Session::put('payment_complete', "yes");
             return redirect('/'.$user->username.'/dashboard');
@@ -1149,7 +1149,7 @@ class userController extends Controller
           }
           catch(\Eception $e)
           {
-              Session::put('status', 'Error updating wallet.');
+              Session::put('status', 'Error al actualizar la billetera.');
               Session::put('msgType', "err");
               Session::put('payment_complete', "yes");
               return redirect('/'.$user->username.'/wallet');
@@ -1158,7 +1158,7 @@ class userController extends Controller
       }
       else
       {
-        Session::put('status', 'Invalid Payment credentials');
+        Session::put('status', 'Credenciales de pago no válidas.');
         Session::put('msgType', "err");
         Session::put('payment_complete', "yes");
         return redirect('/'.$user->username.'/wallet');
@@ -1172,7 +1172,7 @@ class userController extends Controller
       // $user = Auth::User();
       if($req->input('password') != $req->input('c_pwd'))
       {
-          Session::put('status', 'Password not match!');
+          Session::put('status', '¡La contraseña no coincide!');
           Session::put('msgType', "err");
           return back();
       }
@@ -1202,7 +1202,7 @@ class userController extends Controller
                   // Session::forget('reset_pwd_token');
                   Session::forget('reset_pwd_usn');
 
-                  Session::put('status', 'Password reset Successful. You can now login.');
+                  Session::put('status', 'Restablecimiento de contraseña exitoso. Ahora puede iniciar sesión.');
                   Session::put('msgType', "suc");
                   Session::put('pwd_rst_suc', "successful");
                   return back();
@@ -1214,14 +1214,14 @@ class userController extends Controller
           }
           else
           {
-            Session::put('status', 'User with this email not found or token expired!');
+            Session::put('status', '¡Usuario con este correo electrónico no encontrado o token caducado!');
             Session::put('msgType', "err");
             return back();
           }
       }
       catch(\Exception $e)
       {
-          Session::put('status', 'Error Updating your password!');
+          Session::put('status', '¡Error al actualizar su contraseña!');
           Session::put('msgType', "err");
           return back();
       }
@@ -1261,21 +1261,21 @@ class userController extends Controller
               });
 
               Session::forget('pwd_rst_suc');
-              Session::put('status', 'Password reset link sent to email. Try again after some times if not received.');
+              Session::put('status', 'Enlace de restablecimiento de contraseña enviado al correo electrónico. Inténtelo de nuevo después de algunas veces si no lo recibe.');
               Session::put('msgType', "suc");
               return back();
 
           }
           else
           {
-            Session::put('status', 'User with this email not found!');
+            Session::put('status', '¡Usuario con este correo electrónico no encontrado!');
             Session::put('msgType', "err");
             return back();
           }
       }
       catch(\Exception $e)
       {
-          Session::put('status', 'Error sending password reset mail. Please try again later or contact support.');
+          Session::put('status', 'Error al enviar correo de restablecimiento de contraseña. Vuelva a intentarlo más tarde o póngase en contacto con el servicio de asistencia.');
           Session::put('msgType', "err");
           return back();
       }
@@ -1295,7 +1295,7 @@ class userController extends Controller
       }
       else
       {
-          Session::put('pwd_reset_err', 'Password reset username or token is invalid. Link may have expired.');
+          Session::put('pwd_reset_err', 'El nombre de usuario o token de restablecimiento de contraseña no es válido. Es posible que el enlace haya caducado.');
           return view('auth.passwords.reset');
       }
 
@@ -1331,16 +1331,16 @@ class userController extends Controller
 
       if($user->username == $req->input('usn'))
       {
-          Session::put('err_send', "You cannot send fund to yourself");
-          Session::put('status', 'You cannot send fund to yourself');
+          Session::put('err_send', "No puedes enviarte fondos a ti mismo");
+          Session::put('status', 'No puedes enviarte fondos a ti mismo');
           Session::put('msgType', "err");
           return back();
       }
 
       if($user->wallet < 10)
       {
-          Session::put('err_send', "Wallet balance is less than minimum!");
-          Session::put('status', 'Wallet balance is less than minimum!');
+          Session::put('err_send', "¡El saldo de la billetera es inferior al mínimo!");
+          Session::put('status', '¡El saldo de la billetera es inferior al mínimo!');
           Session::put('msgType', "err");
           return back();
       }
@@ -1348,8 +1348,8 @@ class userController extends Controller
 
       if($user->wallet < intval($req->input('s_amt')) )
       {
-          Session::put('err_send', "Wallet balance is lower than input amount!");
-          Session::put('status', 'Wallet balance is lower than input amount!');
+          Session::put('err_send', "¡El saldo de la billetera es menor que el monto ingresado!");
+          Session::put('status', '¡El saldo de la billetera es menor que el monto ingresado!!');
           Session::put('msgType', "err");
           return back();
       }
@@ -1359,8 +1359,8 @@ class userController extends Controller
           $rec = User::where('username', trim($req->input('usn')))->get();
           if(count($rec) < 1)
           {
-              Session::put('err_send', "Username record not found!");
-              Session::put('status', 'User record not found!');
+              Session::put('err_send', "¡No se encontró el registro de nombre de usuario!");
+              Session::put('status', '¡No se encontró el registro de nombre de usuario!');
               Session::put('msgType', "err");
               return back();
           }
@@ -1386,14 +1386,14 @@ class userController extends Controller
           $act->user_id = $user->id;
           $act->save();
 
-          Session::put('status', 'Your transaction was successful');
+          Session::put('status', 'Tu transacción fue exitosa');
           Session::put('msgType', "suc");
           return back();
       }
       catch(\Exception $e)
       {
-          Session::put('err_send', "Error sending fund to another user!");
-          Session::put('status', 'Error sending fund to another user!');
+          Session::put('err_send', "Error al enviar el fondo a otro usuario!");
+          Session::put('status', 'Error al enviar el fondo a otro usuario!');
           Session::put('msgType', "err");
           return back();
       }
@@ -2415,14 +2415,14 @@ class userController extends Controller
       if($user->status == 'Blocked' || $user->status == 2 )
       {
         Session::put('msgType', "err");
-        Session::put('status', 'Account Blocked! Please contact support.');
+        Session::put('status', '¡Cuenta bloqueada! Póngase en contacto con el servicio de asistencia.');
         return redirect('/login');
       }
 
       if($user->status == 'pending' || $user->status == 0 )
       {
         Session::put('msgType', "err");
-        Session::put('status', 'Account not activated! Please contact support.');
+        Session::put('status', '¡Cuenta no activada! Póngase en contacto con el servicio de asistencia.');
         return redirect('/login');
       }
 
@@ -2594,14 +2594,14 @@ class userController extends Controller
       if($user->status == 'pending' || $user->status == 0 )
       {
         Session::put('msgType', "err");
-        Session::put('status', 'Account not activated! Please contact support.');
+        Session::put('status', '¡Cuenta no activada! Póngase en contacto con el servicio de asistencia.');
         return redirect('/login');
       }
 
       if($user->status == 'Blocked' || $user->status == 2 )
       {
         Session::put('msgType', "err");
-        Session::put('status', 'Account Blocked! Please contact support.');
+        Session::put('status', '¡Cuenta bloqueada! Póngase en contacto con el servicio de asistencia.');
         return redirect('/login');
       }
 
@@ -2727,55 +2727,3 @@ class userController extends Controller
   }
 
 }
-
-
-
-
-
-
-//     $wd = new withdrawal;
-//     $wd->user_id = $user->id;
-//     $wd->usn = $user->username;
-//     $wd->package = 'wallet';
-//     $wd->invest_id = $user->id;
-//     $wd->amount = intval($req->input('amt'));
-//     $wd->account = $req->input('bank');
-//     $wd->w_date = date('Y-m-d');
-//     $wd->currency = $user->currency;
-//     $wd->charges = $charge = intval($req->input('amt'))*env('WD_FEE');
-//     $wd->recieving = intval($req->input('amt'))-$charge;
-//     $wd->save();
-
-
-//     $maildata = ['email' => $user->email, 'username' => $user->username];
-//     Mail::send('mail.wd_notification', ['md' => $maildata], function($msg) use ($maildata){
-//         $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-//         $msg->to($maildata['email']);
-//         $msg->subject('Withdrawal Notification');
-//     });
-
-//     $maildata = ['email' => $user->email, 'username' => $user->username];
-//     Mail::send('mail.admin_wd_notification', ['md' => $maildata], function($msg) use ($maildata){
-//         $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-//         $msg->to(env('SUPPORT_EMAIL'));
-//         $msg->subject('Withdrawal Notification');
-//     });
-
-//     $wd_fee = env("WD_FEE")*100;
-//     Session::put('status', 'Wallet Withdrawal Successful! Note: Withdrawal attracts '.$wd_fee.'% processing fee');
-//     Session::put('msgType', "suc");
-//     return back();
-//   }
-//   catch(\Exception $e)
-//   {
-//     Session::put('status', $e->getMessage());
-//     Session::put('msgType', "err");
-//     return back();
-//   }
-
-// }
-// else
-// {
-//   return redirect('/');
-// }
-// }

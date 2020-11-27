@@ -40,17 +40,17 @@
   @endforeach
 
  <?php
- $deposits = App\inyects::where('status','Activa')-> orderby('id', 'desc')->get();
+ $deposits = App\inyects::orderby('id', 'desc')->get();
  ?>
   @foreach($deposits as $in)
     @php($dep += $in->capital)
   @endforeach
 
  <?php
- $wd = App\withdrawal::where('status', 'Approved')-> orderby('id', 'desc')->get();
+ $wd = App\investment::where('wd_status', 'Depositado')-> orderby('id', 'desc')->get();
  ?>
   @foreach($wd as $in)
-    @php($wd_bal += $in->amount )
+    @php($wd_bal += $in->w_amt )
   @endforeach
 
 	<div class="col-md-6">

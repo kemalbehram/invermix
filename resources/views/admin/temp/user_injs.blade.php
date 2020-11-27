@@ -96,13 +96,9 @@
                     <td>{{number_format($in->w_amt, 2)}}</td>
                     <td>{{$in->status}}</td>
                     <td>
-                        @if($in->currency == "" && $in->package != 'International')
-                            N {{number_format(round ($ern, 2)),2}}
-                        @elseif($in->currency == "" && $in->package = 'International')
-                            $ {{number_format(round ($ern, 2)),2}}
-                        @else
+
                             {{$in->currency}} {{number_format(round ($ern, 2),2)}}
-                        @endif
+
                     </td>
                 </tr>
             @endforeach

@@ -43,7 +43,7 @@
                         $ern  = intval($Edays)*floatval($in->interest)*intval($in->capital);
                         $withdrawable = $ern;
 
-                        $totalDays = getWorkingDays($in->date_invested, $in->end_date);
+                        $totalDays = getWorkingDays($in->date_inyected, $in->end_date);
                         $ended = "yes";
 
                     }
@@ -59,7 +59,7 @@
                             $withdrawable = intval($in->days_interval)*intval($in->interest)*intval($in->capital);
                         }
 
-                        $totalDays = getWorkingDays($in->date_invested, date('Y-m-d'));
+                        $totalDays = getWorkingDays($in->date_inyected, date('Y-m-d'));
                         $ended = "no";
                     }
 
@@ -83,7 +83,7 @@
                     <td>{{$in->usn}}</td>
                     <td>{{$in->package}}</td>
                     <td>{{$in->currency}}{{number_format($in->capital), 2}}</td>
-                    <td>{{$in->currency}}{{number_format(round ( $in->i_return, 2), 2)}}</td>
+                    <td>{{$in->currency}}{{number_format(round ($in->i_return, 2), 2 )}}</td>
                     <td>{{$in->created_at->format('d-m-Y')}}</td>
                     <td>{{$in->end_date}}</td>
                     <td>
@@ -93,7 +93,7 @@
                             0
                         @endif
                     </td>
-                    <td>{{number_format($in->w_amt), 2}}</td>
+                    <td>{{number_format($in->w_amt, 2)}}</td>
                     <td>{{$in->status}}</td>
                     <td>
                         @if($in->currency == "" && $in->package != 'International')
@@ -101,7 +101,7 @@
                         @elseif($in->currency == "" && $in->package = 'International')
                             $ {{number_format(round ($ern, 2)),2}}
                         @else
-                            {{$in->currency}} {{round ($ern, 2)}}
+                            {{$in->currency}} {{number_format(round ($ern, 2),2)}}
                         @endif
                     </td>
                 </tr>

@@ -219,7 +219,7 @@
 				datasets:
 				[
 					{
-						label: "Investment Stats",
+						label: "Estadísticas de Inversión",
 						borderColor: '#08C',
 						pointBackgroundColor: 'rgba(0, 84, 180, 0.6)',
 						pointRadius: 0,

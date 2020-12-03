@@ -323,7 +323,7 @@
                                                 <hr>
                                                 <div id="card_cont" class="cont_display_none">
                                                   <div class="form-group mt-3">
-                                                    <label>Card Front</label>
+                                                    <label>Tarjeta Frontal</label>
                                                     <br>
                                                     <img src="/img/id_temp_front.png" class="img_card_temp" width="100%">
                                                     <input type="file" class="form-control upload_inp mt-2" name="id_front" >
@@ -333,7 +333,7 @@
 
                                                   <hr>
                                                   <div class="form-group mt-3">
-                                                    <label>Card Back</label>
+                                                    <label>Tarjeta Trasera</label>
                                                     <br>
                                                     <img src="/img/id_tem_bac.png" class="img_card_temp" width="100%">
                                                     <input type="file" class="form-control mt-2" name="id_back" >
@@ -342,7 +342,7 @@
 
                                                 <div id="pass_cont" class="cont_display_none">
                                                   <div class="form-group">
-                                                    <label>Passport Front</label>
+                                                    <label>Pasaporte Frontal</label>
                                                     <br>
                                                     <img src="/img/id_temp_front.png" class="img_card_temp" width="100%">
                                                     <input type="file" class="form-control upload_inp mt-2" name="pas_id_front" >

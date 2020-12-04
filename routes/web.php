@@ -13,6 +13,20 @@ use App\packages;
 |
 */
 
+/////////////////////LANDING ROUTES//////////////
+
+Route::domain('invermix.test')->group(function () {
+
+    Route::get('/', function () {
+        return view('landing.landing');
+    });
+});
+//////////////////////////////////////////////////
+
+
+
+Route::domain('app.invermix.test')->group(function () {
+
 Route::get('/', function () {
 	$user = Auth::User();
 	if(!empty($user))
@@ -565,3 +579,5 @@ Route::group([
 		Route::get('/cron/btc/deposit', 'userController@coinbase_cron_btc_deposit')->name('cron_btc_deposit');
 	}
 );
+
+});

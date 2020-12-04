@@ -63,18 +63,19 @@
                                                         </td> -->
                                                         <td>{{$user->card_type}}</td>
                                                         <td>
-                                                            <a href="{{ env('APP_URL').'/img/kyc/'.$user->front_card }}" class=" text-info">
+                                                            <a href="{{ URL::to('/').'/img/kyc/'.$user->front_card }}" class=" text-info">
                                                                 <i class="fa fa-download"></i>Download
                                                             </a>
                                                         </td>
                                                         <td>
                                                             @if(!empty($user->back_card))
-                                                            <a href="{{ env('APP_URL').'/img/kyc/'.$user->back_card }}" class=" text-info">
+                                                            <a href="{{ URL::to('/').'/img/kyc/'.$user->back_card }}" class=" text-info">
                                                                 <i class="fa fa-download"></i>Download
                                                             </a>
                                                             @endif
                                                         <td>
-                                                            <a href="{{ env('APP_URL').'/img/kyc/'.$user->address_proof }}" class=" text-info">
+                                                            <a href=" {{ URL::to('/') .'/img/kyc/'.$user->address_proof}}" class=" text-info">
+
                                                                 <i class="fa fa-download"></i>Download
                                                             </a>
                                                         </td>

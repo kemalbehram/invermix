@@ -2401,7 +2401,7 @@ public function admAddnew(Request $req)
         $kyc->status = 1;
         $kyc->save();
         return back()->with([
-          'toast_msg' => 'Approval successful!',
+          'toast_msg' => 'Aprobación exitosa!',
           'toast_type' => 'suc'
         ]);
       }
@@ -2430,7 +2430,7 @@ public function admAddnew(Request $req)
         File::delete($files);
         $kyc->delete();
         return back()->with([
-            'toast_msg' => 'KYC borrado satisfactoriamente!!',
+            'toast_msg' => 'Borrado satisfactoriamente!!',
             'toast_type' => 'suc'
           ]);
       }
@@ -2854,11 +2854,11 @@ else
           // $file = $req->file('selfie');
           // $file->move(base_path().'/../img/kyc/', $user->username."_selfie.jpg");
           $file = $req->file('id_front');
-          $file->move('/public/img/kyc/', $user->username."_id_front.jpg");
+          $file->move(base_path().'/public/img/kyc/', $user->username."_id_front.jpg");
           $file = $req->file('id_back');
-          $file->move('/public/img/kyc/', $user->username."_id_back.jpg");
+          $file->move(base_path().'/public/img/kyc/', $user->username."_id_back.jpg");
           $file = $req->file('utility_doc');
-          $file->move('/public/img/kyc/', $user->username."_utility_doc.pdf");
+          $file->move(base_path().'/public/img/kyc/', $user->username."_utility_doc.pdf");
 
           $kyc = new kyc;
           $kyc->user_id = $req->uid;
@@ -2892,9 +2892,9 @@ else
           // $file = $req->file('selfie');
           // $file->move(base_path().'/../img/kyc/', $req->username."_selfie.jpg");
           $file = $req->file('pas_id_front');
-          $file->move('/public/img/kyc/', $req->username."_pas_id_front.jpg");
+          $file->move(base_path().'/public/img/kyc/', $req->username."_pas_id_front.jpg");
           $file = $req->file('utility_doc');
-          $file->move('/public/img/kyc/', $req->username."_utility_doc.pdf");
+          $file->move(base_path().'/public/img/kyc/', $req->username."_utility_doc.pdf");
 
           $kyc = new kyc;
           $kyc->user_id = $req->uid;

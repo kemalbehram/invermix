@@ -313,11 +313,11 @@
                                                 </div>
                                                 <div class="form-group mt-4">
                                                   <label>Tipo de Identificación</label>
-                                                  <select id="card_select" name="cardtype" class="form-control" required="required">
+                                                  <select id="card_select" name="cardtype" class="form-control">
                                                     <option selected disabled >Seleccionar</option>
-                                                    <option value="idcard_op">Cédula</option>
-                                                    <option value="passport_op">Pasaporte</option>
-                                                    <option value="driver_op">Licencia de Conducir</option>
+                                                    <option value="Cédula">Cédula</option>
+                                                    <option value="Pasaporte">Pasaporte</option>
+                                                    <option value="Licencia-Conducir">Licencia de Conducir</option>
                                                   </select>
                                                 </div>
                                                 <hr>
@@ -371,7 +371,7 @@
                                                     <p>
                                                       {{ __('Para clientes cuya inversión sea superior a RD$500,000 o equivalente en dolares.') }}
                                                     </p>
-                                                    <input type="file" class="form-control" name="utility_doc" required >
+                                                    <input type="file" class="form-control" name="utility_doc">
                                                   </div>
 
                                               </div>

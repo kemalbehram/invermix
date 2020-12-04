@@ -2426,7 +2426,7 @@ public function admAddnew(Request $req)
       try
       {
         $kyc = kyc::find($req['id']);
-        $files = array(env('APP_URL').'/public/img/kyc/'.$kyc->front_card, env('APP_URL').'/public/img/kyc/'.$kyc->back_card, env('APP_URL').'/public/img/kyc/'.$kyc->address_proof);
+        $files = array(env('APP_URL').'/img/kyc/'.$kyc->front_card, env('APP_URL').'/img/kyc/'.$kyc->back_card, env('APP_URL').'/img/kyc/'.$kyc->address_proof);
         File::delete($files);
         $kyc->delete();
         return back()->with([
@@ -2854,11 +2854,11 @@ else
           // $file = $req->file('selfie');
           // $file->move(base_path().'/../img/kyc/', $user->username."_selfie.jpg");
           $file = $req->file('id_front');
-          $file->move(base_path().'/public/img/kyc/', $user->username."_id_front.jpg");
+          $file->move(base_path().'/../img/kyc/', $user->username."_id_front.jpg");
           $file = $req->file('id_back');
-          $file->move(base_path().'/public/img/kyc/', $user->username."_id_back.jpg");
+          $file->move(base_path().'/../img/kyc/', $user->username."_id_back.jpg");
           $file = $req->file('utility_doc');
-          $file->move(base_path().'/public/img/kyc/', $user->username."_utility_doc.pdf");
+          $file->move(base_path().'/../img/kyc/', $user->username."_utility_doc.pdf");
 
           $kyc = new kyc;
           $kyc->user_id = $req->uid;
@@ -2892,9 +2892,9 @@ else
           // $file = $req->file('selfie');
           // $file->move(base_path().'/../img/kyc/', $req->username."_selfie.jpg");
           $file = $req->file('pas_id_front');
-          $file->move(base_path().'/public/img/kyc/', $req->username."_pas_id_front.jpg");
+          $file->move(base_path().'/../img/kyc/', $req->username."_pas_id_front.jpg");
           $file = $req->file('utility_doc');
-          $file->move(base_path().'/public/img/kyc/', $req->username."_utility_doc.pdf");
+          $file->move(base_path().'/../img/kyc/', $req->username."_utility_doc.pdf");
 
           $kyc = new kyc;
           $kyc->user_id = $req->uid;

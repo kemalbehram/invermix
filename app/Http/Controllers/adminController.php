@@ -2854,11 +2854,11 @@ else
           // $file = $req->file('selfie');
           // $file->move(base_path().'/../img/kyc/', $user->username."_selfie.jpg");
           $file = $req->file('id_front');
-          $file->move(base_path().'/../img/kyc/', $user->username."_id_front.jpg");
+          $file->move('/public/img/kyc/', $user->username."_id_front.jpg");
           $file = $req->file('id_back');
-          $file->move(base_path().'/../img/kyc/', $user->username."_id_back.jpg");
+          $file->move('/public/img/kyc/', $user->username."_id_back.jpg");
           $file = $req->file('utility_doc');
-          $file->move(base_path().'/../img/kyc/', $user->username."_utility_doc.pdf");
+          $file->move('/public/img/kyc/', $user->username."_utility_doc.pdf");
 
           $kyc = new kyc;
           $kyc->user_id = $req->uid;
@@ -2892,9 +2892,9 @@ else
           // $file = $req->file('selfie');
           // $file->move(base_path().'/../img/kyc/', $req->username."_selfie.jpg");
           $file = $req->file('pas_id_front');
-          $file->move(base_path().'/../img/kyc/', $req->username."_pas_id_front.jpg");
+          $file->move('/public/img/kyc/', $req->username."_pas_id_front.jpg");
           $file = $req->file('utility_doc');
-          $file->move(base_path().'/../img/kyc/', $req->username."_utility_doc.pdf");
+          $file->move('/public/img/kyc/', $req->username."_utility_doc.pdf");
 
           $kyc = new kyc;
           $kyc->user_id = $req->uid;

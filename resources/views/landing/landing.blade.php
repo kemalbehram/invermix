@@ -120,7 +120,7 @@
 									<p class="text">
 										Cada 8 de 10 personas nos prefieren por nuestra gran experticia en terreno y eficacia ante tiempo de crisis, nos enfocamos en asegurarle la mayor rentabilidad y el menor riesgo a nuestros cliente.
 									</p>
-									<a href="#" class="base-btn2">Inicia Hoy</a>
+									<a href="#" class="btn btn-outline-primary  base-btn2 ">Inicia Hoy</a>
 							</div>
 						</div>
 					</div>
@@ -287,20 +287,58 @@
 	<section class="counter-area">
 			<div class="container">
 				<div class="row">
-					<div>
+					<div class="col-lg-3 col-md-6">
 						<div class="single-counter">
-							<div class="icon icon2">
-									<i class="flaticon-smile"></i>
+							<div class="icon icon1">
+									<i class="flaticon-verified"></i>
 							</div>
 							<div class="counter-wrapper">
-								<div class="counter">55</div> <span>+</span>
+							<span>+</span>	<div class="counter">80</div> 
 							</div>
 							<p class="text">
 								Inversionistas
 							</p>
 						</div>
 					</div>
-
+					<div class="col-lg-3 col-md-6">
+						<div class="single-counter">
+							<div class="icon icon2">
+									<i class="flaticon-smile"></i>
+							</div>
+							<div class="counter-wrapper">
+							<span>+</span>	<div class="counter">60</div> 
+							</div>
+							<p class="text">
+								Inversiones
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="single-counter">
+							<div class="icon icon3">
+									<i class="flaticon-review"></i>
+							</div>
+							<div class="counter-wrapper">
+							<span>+</span> <div class="counter">5</div> 
+							</div>
+							<p class="text">
+								PYMES Asociadas
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="single-counter">
+							<div class="icon  icon4">
+									<i class="flaticon-support"></i>
+							</div>
+							<div class="counter-wrapper">
+							 <div class="counter">3</div> 
+							</div>
+							<p class="text">
+								Planes de Inversión
+							</p>
+						</div>
+					</div>
 				</div>
 			</div>
 	</section>
@@ -316,9 +354,6 @@
 						<h2 class="title">
 							¿Por qué invertir a través de Invermix Capital?
 						</h2>
-						<p class="text">
-							Texto
-						</p>
 					</div>
 				</div>
 			</div>
@@ -334,7 +369,7 @@
 								Transparencia
 							</h4>
 							<p>
-								En Invermix Capital, Mantenemos el estatus de su inversión actualiza día a día con el fin de que cada socio tenga la información del comportamiento de su inversión al alcance de un click.
+								En Invermix Capital, Mantenemos el estatus de su inversión actualizada día a día con el fin de que cada socio tenga la información del comportamiento de su inversión al alcance de un click.
 							</p>
 						</div>
 					</div>
@@ -474,7 +509,7 @@
 							Testimonios
 						</h2>
 						<p class="text">
-							Texto de motivación.
+						¿Cual es el mejor momento para empezar? Hoy, el otro mejor momento fue ayer.
 						</p>
 					</div>
 				</div>
@@ -728,10 +763,10 @@
 							Preguntas Frecuentes
 						</h2>
 						<p class="text">
-							Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.
+							Para cada pregunta tenemos la respuesta necesaria, invertir es fácil y más si te acompaña un equipo de expertos.
 						</p>
-						<a href="#" class="base-btn1">
-							¿Preguntanos?
+						<a href="#contact" class="base-btn1">
+							¡Pregúntanos!
 						</a>
 					</div>
 				</div>
@@ -806,7 +841,7 @@
 								Galería de Imagénes
 						</h2>
 						<p class="text">
-							Texto
+						Acompañamos el inicio y el trayecto hacia la meta trazada por cada uno de nuestros socios.
 						</p>
 					</div>
 				</div>
@@ -1037,12 +1072,13 @@
 			<div class="row">
 				<div class="col-lg-5">
 					<h2 class="title">
-						Frase motivadora de invermix
+					“La mente que se abre a una nueva idea, jamás volverá a su tamaño original.”
 					</h2>
+					<span><em>- Albert Einstein</em></span>
 				</div>
 				<div class="col-lg-7 d-flex align-self-center">
 					<div class="right-links">
-						<a href="#" class="base-btn1">
+						<a href="#contact" class="base-btn1">
 							Inicia Hoy
 						</a>
 					</div>
@@ -1062,8 +1098,10 @@
 							Contáctanos
 							</h2>
 							<p class="text">
-								Frase para contacto
+								Permítenos ayudarte a realizar tus sueños.
+								
 							</p>
+							<span>Coloca tus datos y te contactaremos tan pronto como sea posible</span>
 						</div>
 					</div>
 				</div>

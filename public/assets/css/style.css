@@ -213,7 +213,9 @@ select:focus {
   -webkit-transition: all 0.3s ease-in;
   -o-transition: all 0.3s ease-in;
   transition: all 0.3s ease-in;
-  border: 1px solid #fff; }
+  border: 1px solid #fff;
+  color: black;
+  border-color: black;  }
   .base-btn1:hover {
     color: #fff;
     background: #000; }
@@ -223,14 +225,16 @@ select:focus {
   font-weight: 600;
   padding: 10px 30px;
   display: inline-block;
-  color: #fff;
+  /* color: #fff; */
   border: 1px solid #000;
   border-radius: 3px;
   cursor: pointer;
-  background: #000;
+  /* background: #000; */
   -webkit-transition: all 0.3s ease-in;
   -o-transition: all 0.3s ease-in;
-  transition: all 0.3s ease-in; }
+  transition: all 0.3s ease-in; 
+  color: white;
+  border-color: white;}
   .base-btn2 i {
     font-size: 14px; }
   .base-btn2:hover {
@@ -642,14 +646,15 @@ select:focus {
       right: 5px;
       height: 40px;
       width: 40px;
-      background: #0a0a0a;
-      color: #fff;
-      border: 0px;
+      background: #ffffff;
+      color: rgb(0, 0, 0);
+      border-color: rgb(108, 108, 108);
       border-radius: 50px;
       background-size: 100% 200%;
       -webkit-transition: all 0.3s ease-in;
       -o-transition: all 0.3s ease-in;
-      transition: all 0.3s ease-in; }
+      transition: all 0.3s ease-in; 
+    }
       .footer .about-widget .subscribe-form .submit-btn:focus {
         outline: 0px;
         -webkit-box-shadow: unset;

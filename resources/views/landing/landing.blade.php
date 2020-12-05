@@ -176,7 +176,7 @@
 										Invermix Capital SRL
 									</h4>
 									<p>
-											Es una asesora y referidora financiera de inversión Dominicana, dedicada al crecimiento de las empresas de su cartera al igual que al crecimiento de sus aliados comerciales mediante la venta de Acciones y Bonos Financieros.
+											Es una asesora y referidora financiera de inversión dominicana, dedicada al crecimiento de las empresas de su cartera al igual que al crecimiento de sus aliados comerciales mediante la venta de Acciones y Bonos Financieros.
 									</p>
 
 									<!-- <a href="#" class="base-btn1">

@@ -15,7 +15,7 @@ use App\packages;
 
 /////////////////////LANDING ROUTES//////////////
 
-Route::domain('invermix.test')->group(function () {
+Route::domain('invermixcapital.com')->group(function () {
 
     Route::get('/', function () {
         return view('landing.landing');
@@ -25,7 +25,7 @@ Route::domain('invermix.test')->group(function () {
 
 
 
-Route::domain('app.invermix.test')->group(function () {
+Route::domain('app.invermixcapital.com')->group(function () {
 
 Route::get('/', function () {
 	$user = Auth::User();

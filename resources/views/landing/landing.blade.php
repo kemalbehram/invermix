@@ -292,7 +292,7 @@
                             <span>+</span>
                             <?php
                             $musers = App\User::orderby('created_at', 'asc')->get();
-                            $investment = App\Investment::orderby('created_at', 'asc')->get();
+                            $investment = App\investment::orderby('created_at', 'asc')->get();
 
                             ?>
 

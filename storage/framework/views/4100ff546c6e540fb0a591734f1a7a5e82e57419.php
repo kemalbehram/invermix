@@ -15,6 +15,7 @@
             <div class="form-group" align="left">
               <div class="pop_form_min_max" align="center">
                 <b><?php echo e(__('Inversión Min.:')); ?> <?php echo e($settings->currency); ?> <span id="min"></span></b> |
+                <br>
                 <b><?php echo e(__('Inversión Máx.:')); ?> <?php echo e($settings->currency); ?> <span id="max"></span></b>
               </div>
               <br>
@@ -23,6 +24,14 @@
               <input id="p_id" type="hidden" class="form-control" name="p_id" value="">
               <input type="text" class="form-control" name="capital" placeholder="Digitar capital a invertir" required>
             </div>
+            <div class="form-group">
+
+                <select class="form-control" id="currency" name="currency" required>
+                                        <option value="RD$" name="currency">RD$</option>
+                                        <option value="US$" name="currency">US$</option>
+                                        </select>
+              </div>
+
             <div class="form-group">
                 <button class="collb btn btn-info"><?php echo e(__('Proceder')); ?></button>
                 <span style="">
@@ -43,4 +52,7 @@
     </div>
   </div>
 </div>
+
+
+
 <?php /**PATH C:\xampp\htdocs\invermix\invermix\resources\views/user/inc/confirm_inv.blade.php ENDPATH**/ ?>

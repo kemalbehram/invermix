@@ -56,22 +56,23 @@
 				<div class="card-title"><h2><?php echo e(__('Balance')); ?></h2></div>
 				<div class="row py-3">
 					<div class="col-md-6 d-flex flex-column justify-content-around">
-						<a id="wd_bal" title="Click to withdraw" href="javascript:void(0)" >
+						<!-- <a id="wd_bal" title="Click to withdraw" href="javascript:void(0)" > -->
+                        <a href="#">
 							<div class="border_btm">
 								<h4 class="fw-bold text-uppercase text-success op-8"><?php echo e(__('Inyecciones')); ?></h4>
-								<h3 class="fw-bold"><?php echo e($settings->currency); ?> <?php echo e(round($user->wallet, 2)); ?></h3>
-								<div class="colhd margin_n10"><?php echo e(__('Click para inyectar al capital')); ?></div>
+								<h3 class="fw-bold">$<?php echo e(number_format( Auth::user()->inyects->sum('capital')), 2); ?></h3>
+								<!-- <div class="colhd margin_n10"><?php echo e(__('Click para inyectar al capital')); ?></div> -->
 								<br>
 							</div>
 						</a>
-						
+						<!--  -->
 					</div>
 
 					<div class="col-md-6">
             <a href="#">
   						<div class="border_btm">
   							<h4 class="fw-bold text-uppercase text-success op-8"><?php echo e(__('Ganancia total')); ?></h4>
-  							<h3 class="fw-bold"><?php echo e($settings->currency); ?> <?php echo e(round($currentEarning, 2)); ?></h3>
+  							<h3 class="fw-bold">$<?php echo e(number_format(round($currentEarning, 2)), 2); ?></h3>
   							<div class="colhd margin_n10" >&emsp;</div>
   							<br>
   						</div>

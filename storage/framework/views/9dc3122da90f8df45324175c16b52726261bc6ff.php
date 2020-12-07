@@ -3,7 +3,7 @@
 <?php $__env->startSection('content'); ?>
         <div class="main-panel">
             <div class="content">
-                <?php ($breadcome = 'My Investments'); ?>
+                <?php ($breadcome = 'Mis Inversiones'); ?>
                 <?php echo $__env->make('user.atlantis.main_bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 <div class="page-inner mt--5">
                     <?php echo $__env->make('user.atlantis.overview', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -21,14 +21,15 @@
                                         <table id="basic-datatables" class="display table table-hover" >
                                             <thead>
                                                 <tr>
-                                                    <th><?php echo e(__('Plan')); ?></th>
+                                                    <th><?php echo e(__('Modalidad')); ?></th>
                                                     <th><?php echo e(__('Capital')); ?></th>
                                                     <th><?php echo e(__('Fecha de inversión')); ?></th>
                                                     <th><?php echo e(__('Hasta')); ?></th>
                                                     <th><?php echo e(__('Días transcurridos')); ?></th>
                                                     <th><?php echo e(__('Status')); ?></th>
                                                     <th><?php echo e(__('Ganancias')); ?></th>
-                                                    <th><?php echo e(__('Acción')); ?></th>
+                                                    <th><?php echo e(__('Retirar')); ?></th>
+                                                    <th><?php echo e(__('Inyectar')); ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody class="web-table">
@@ -65,15 +66,21 @@
                                                         ?>
                                                         <tr class="">
                                                             <td><?php echo e($in->package); ?></td>
-                                                            <td><?php echo e(($settings->currency)); ?> <?php echo e($in->capital); ?></td>
+                                                            <td><?php echo e(($in->currency)); ?> <?php echo e($in->capital); ?></td>
                                                             <td><?php echo e($in->date_invested); ?></td>
                                                             <td><?php echo e($in->end_date); ?></td>
                                                             <td><?php echo e($totalDays); ?></td>
                                                             <td><?php echo e($in->status); ?></td>
-                                                            <td><?php echo e($settings->currency); ?> <?php echo e($ern); ?> </td>
+                                                            <td><?php echo e($in->currency); ?> <?php echo e($ern); ?> </td>
                                                             <td>
-                                                                <a title="Withdraw" href="javascript:void(0)" class="btn btn-info" onclick="wd('pack', '<?php echo e($in->id); ?>', '<?php echo e($ern); ?>', '<?php echo e($withdrawable); ?>', '<?php echo e($Edays); ?>', '<?php echo e($ended); ?>')">
+                                                                <a title="Retirar" href="javascript:void(0)" class="btn btn-info" onclick="wd('pack', '<?php echo e($in->id); ?>', '<?php echo e($ern); ?>', '<?php echo e($withdrawable); ?>', '<?php echo e($Edays); ?>', '<?php echo e($ended); ?>')">
                                                                     <i class="fas fa-arrow-down"></i>
+                                                                </a>
+                                                            </td>
+
+                                                            <td>
+                                                                <a title="Inyectar"  href="javascript:void(0)" class="btn btn-info" onclick="inyect('<?php echo e($in->package_id); ?>', '<?php echo e($in->id); ?>','<?php echo e($in->package); ?>', ' <?php echo e($in->capital); ?>', ' <?php echo e($in->curency); ?>', '<?php echo e($in->package_name); ?>',  '<?php echo e($in->period); ?>', '<?php echo e($in->daily_interest); ?>')">
+                                                                    <i class="fas fa-arrow-up"></i>
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -140,7 +147,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title"> Planes Disponibles</div>
+                                    <div class="card-title" id="invertir"> Modalidades Disponibles</div>
                                 </div>
                                 <div class="card-body pb-0">
                                     <?php echo $__env->make('user.inc.packages', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -156,7 +163,7 @@
 
     <?php echo $__env->make('user.inc.confirm_inv', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php echo $__env->make('user.inc.withdrawal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-
+    <?php echo $__env->make('user.inc.inyect', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.atlantis.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\invermix\invermix\resources\views/user/my_investment.blade.php ENDPATH**/ ?>

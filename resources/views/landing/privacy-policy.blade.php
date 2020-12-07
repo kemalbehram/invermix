@@ -35,7 +35,7 @@
 
 
 	<!--Main-Menu Area Start-->
-	<div class="mainmenu-area">
+    <div class="mainmenu-area">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -50,50 +50,52 @@
 						<div class="collapse navbar-collapse fixed-height" id="main_menu">
 							<ul class="navbar-nav ml-auto">
 								<li class="nav-item">
-									<a class="nav-link" href="#hero-are">Inicio
+									<a class="nav-link" href="../#hero-are">Inicio
 										<div class="mr-hover-effect"></div>
 									</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="#about-section">Nosotros
+									<a class="nav-link" href="../#about-section">Nosotros
 										<div class="mr-hover-effect"></div>
 									</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="#services">¿Por qué invertir?
+									<a class="nav-link" href="../#services">¿Por qué invertir?
 										<div class="mr-hover-effect"></div>
 									</a>
 								</li>
-								<li class="nav-item">
+								<!-- <li class="nav-item">
 									<a class="nav-link" href="#partners">Filiales
 										<div class="mr-hover-effect"></div>
-									</a>
+									</a> -->
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="#testimonial">Testimonios
+									<a class="nav-link" href="../#testimonial">Testimonios
 										<div class="mr-hover-effect"></div>
 									</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="#project-gallery">Galería
+									<a class="nav-link" href="../#project-gallery">Galería
 										<div class="mr-hover-effect"></div>
 									</a>
 								</li>
 
 
 								<li class="nav-item">
-									<a class="nav-link" href="#contact">Contacto
+									<a class="nav-link" href="../#contact">Contacto
 										<div class="mr-hover-effect"></div>
 									</a>
 								</li>
 
 								<li class="nav-item">
-									<a class="nav-link" href="#" >Login
+									<a class="nav-link" href="{{route('login')}}" >
+                                        <button class="btn btn-outline-primary button-enter">Entrar<i class="fas fas fa-sign-in-alt pl-1"></i></button>
+
 										<div class="mr-hover-effect"></div>
 
 									</a>
 								</li>
-
+                                <!-- <a href="#" class="btn btn-danger">Default text here</a> -->
 							</ul>
 						</div>
 					</nav>

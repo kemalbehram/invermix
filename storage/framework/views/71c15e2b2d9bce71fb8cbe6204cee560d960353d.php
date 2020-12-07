@@ -29,16 +29,17 @@
 						<div class="col-md-4">
 							<div class="card card-primary">
 								<div class="card-header">
-									<div class="card-title"><?php echo e(__('Estadísticas de Retiros')); ?> </div>
+									<div class="card-title"><?php echo e(__('Estadísticas de Retiros en Inversión')); ?> </div>
 									<div class="card-category">
-									    <?php
-									        $total_wd = 0;
-									        foreach($wd as $w)
-									        {
-    											$total_wd += $w->amount;
-									        }
-									    ?>
-										<h1><?php echo e($settings->currency.' '. $total_wd); ?></h1>
+                                    <?php
+                                                    $activities = App\investment::where('user_id', $user->id)->orderby('id', 'desc')->paginate(1);
+                                                ?>
+
+                                    <?php $__currentLoopData = $activities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $activity): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+
+                                        <h1><?php echo e($activity->currency.' '. $activity->sum('w_amt')); ?></h1>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 									</div>
 								</div>
 								<div class="card-body pb-0">
@@ -56,7 +57,8 @@
 									</div>
 								</div>
 							</div> -->
-						</div>
+                        </div>
+
 					</div>
 
 					<div class="row">

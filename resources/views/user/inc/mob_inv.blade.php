@@ -1,75 +1,92 @@
-                
+
 <div class="alert alert-info inv_alert_cont" >
     <div class="row inv_alert_top_row">
         <div class="col-xs-12 pad_top_5" align="center" >
-            <h4 class="u_case">{{ __('Amount') }}Package: {{$in->package}}</h4>
-           
+            <h4 class="u_case">{{ __('Modalidad') }}: {{$in->package}}</h4>
+
         </div>
-    </div> 
+    </div>
+    <br>
     <div class="row color_blue_9">
         <div class="col-xs-6">
             {{ __('Capital:') }}
         </div>
+        &nbsp;
         <div class="col-xs-6">
-            {{($settings->currency)}} {{$in->capital}}
+            {{($in->currency)}} {{$in->capital}}
         </div>
-    </div> 
+    </div>
     <div class="row" style="">
         <div class="col-xs-6">
-            {{ __('Return:') }}
+            {{ __('Retorno:') }}
         </div>
+        &nbsp;
         <div class="col-xs-6">
-            {{($settings->currency)}} {{$in->i_return}}
+            {{($in->currency)}} {{$in->i_return}}
         </div>
-    </div>  
+    </div>
     <div class="row" style="">
         <div class="col-xs-6">
-            {{ __('Started:') }}
+            {{ __('Desde:') }}
         </div>
+        &nbsp;
         <div class="col-xs-6">
             {{$in->date_invested}}
         </div>
-    </div> 
+    </div>
     <div class="row" style="">
         <div class="col-xs-6">
-            {{ __('Ending:') }}
+            {{ __('Hasta:') }}
         </div>
+        &nbsp;
         <div class="col-xs-6">
             {{$in->end_date}}
         </div>
     </div>
     <div class="row" style="">
         <div class="col-xs-6">
-            {{ __('Days:') }}
+            {{ __('Días Transcurridos:') }}
         </div>
+        &nbsp;
         <div class="col-xs-6">
             {{$totalDays}}
         </div>
     </div>
     <div class="row" style="">
         <div class="col-xs-6">
-           {{ __('Withdrawn:') }} 
+           {{ __('Retirados:') }}
         </div>
+        &nbsp;
         <div class="col-xs-6">
-            {{($settings->currency)}} {{$in->w_amt}}
+            {{($in->currency)}} {{$in->w_amt}}
         </div>
-    </div> 
+    </div>
     <div class="row" style="">
         <div class="col-xs-6">
             {{ __('Status:') }}
         </div>
+        &nbsp;
         <div class="col-xs-6">
             {{$in->status}}
         </div>
-    </div> 
+        <br>
+        <br>
+    </div>
     <div class="row" style="" align="center">
         <br>
         <div class="col-xs-12" align="center">
             <a title="Withdraw" href="javascript:void(0)" class="btn btn-info" onclick="wd('pack', '{{$in->id}}', '{{$ern}}', '{{$withdrawable}}', '{{$Edays}}', '{{$ended}}')">
-                {{$settings->currency}} {{$ern}}
+                {{$in->currency}} {{$ern}}
+                <br>
+                {{ __('Solicitar Retiro') }}
+            </a>
+            <a title="Inyectar" href="javascript:void(0)" class="btn btn-info" onclick="inyect('{{$in->package_id}}', '{{$in->id}}','{{$in->package}}', ' {{$in->capital}}', ' {{$in->curency}}', '{{$in->package_name}}',  '{{$in->period}}', '{{$in->daily_interest}}')">
+            <br>
+                {{ __('Inyectar') }}
+
             </a>
         </div>
-        {{ __('Click to withdraw') }}
-    </div>                                                                     
+        <!-- {{ __('Solicitar Retiro') }} -->
+    </div>
 </div>
-        
+

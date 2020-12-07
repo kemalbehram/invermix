@@ -119,7 +119,7 @@ class userController extends Controller
         }
       }
       return redirect()->route('login')->with([
-        'toast_msg' => 'User credentials not correct!',
+        'toast_msg' => '¡Las credenciales de usuario no son correctas!',
         'toast_type' => 'err'
       ]);
     }
@@ -165,7 +165,7 @@ class userController extends Controller
           return redirect('/'.$user->username.'/dashboard');
         }
         return redirect()->route('login')->with([
-          'toast_msg' => 'User credentials not correct!',
+          'toast_msg' => '¡Las credenciales de usuario no son correctas!',
           'toast_type' => 'err'
         ]);
       }

@@ -232,7 +232,7 @@ select:focus {
   /* background: #000; */
   -webkit-transition: all 0.3s ease-in;
   -o-transition: all 0.3s ease-in;
-  transition: all 0.3s ease-in; 
+  transition: all 0.3s ease-in;
   color: white;
   border-color: white;}
   .base-btn2 i {
@@ -653,7 +653,7 @@ select:focus {
       background-size: 100% 200%;
       -webkit-transition: all 0.3s ease-in;
       -o-transition: all 0.3s ease-in;
-      transition: all 0.3s ease-in; 
+      transition: all 0.3s ease-in;
     }
       .footer .about-widget .subscribe-form .submit-btn:focus {
         outline: 0px;
@@ -2253,4 +2253,13 @@ select:focus {
 color: white;
 border-color: white;
 
+}
+
+.llegar{
+    color:white;
+
+}
+
+.llegar:hover{
+    color:rgb(225, 225, 225);
 }

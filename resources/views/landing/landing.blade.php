@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Invermix Capital</title>
 	<!-- favicon -->
-	<link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+	<link rel="shortcut icon" href="assets/images/logo-invermix.png" type="image/x-icon">
 	<!-- bootstrap -->
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<!-- Plugin css -->
@@ -120,7 +120,7 @@
 									<p class="text">
 										Cada 8 de 10 personas nos prefieren por nuestra gran experticia en terreno y eficacia ante tiempo de crisis, nos enfocamos en asegurarle la mayor rentabilidad y el menor riesgo a nuestros cliente.
 									</p>
-									<a href="#" class="btn btn-outline-primary  base-btn2 ">Inicia Hoy</a>
+									<a href="#contact" class="btn btn-outline-primary  base-btn2 ">Inicia Hoy</a>
 							</div>
 						</div>
 					</div>
@@ -143,10 +143,6 @@
 						<div class="left-content-w-i">
 							<div class="left-content">
 								<div class="title">
-									<h4 class="title">
-
-											Frase de inversión
-									</h4>
 								</div>
 								<div class="nav flex-column" role="tablist" aria-orientation="vertical">
 								<a class="nav-link active" id="v-pills-t2-tab" data-toggle="pill" href="#v-pills-t2" role="tab" aria-controls="v-pills-t2" aria-selected="false">¿Quiénes Somos?</a>
@@ -173,7 +169,7 @@
 							<div class="col-lg-7 align-self-center">
 								<div class="about-right">
 									<h4 class="title">
-										Invermix Capital SRL
+										Invermix Capital, SRL
 									</h4>
 									<p>
 											Es una asesora y referidora financiera de inversión dominicana, dedicada al crecimiento de las empresas de su cartera al igual que al crecimiento de sus aliados comerciales mediante la venta de Acciones y Bonos Financieros.
@@ -268,10 +264,10 @@
 									<div class="col-lg-7 align-self-center">
 										<div class="about-right">
 											<h4 class="title">
-												Visión 2025
+												Propósito
 											</h4>
 											<p>
-													Nos aseguraremos que para el 2025 seremos la empresa de inversiones mas exitosa, Agil, Rentable, Segura e Innovadora de Latinoamérica cambiando la historia del mercado de puesto de bolsa.
+                                            Esto lo lograremos cambiando la cultura Latinoaméricana de ahorrar por invertir, atrayendo a inversiones a través de venta de Acciones y bonos financieros de nuestras empresas enfocados en nuestro lema Ganar/Ganar garantizandole a nuestros aliados comerciales una alta rentabilidad con un bajo riesgo.
 											</p>
 										</div>
 									</div>
@@ -290,11 +286,19 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="single-counter">
 							<div class="icon icon1">
-									<i class="flaticon-verified"></i>
+									<i class="flaticon-smile"></i>
 							</div>
 							<div class="counter-wrapper">
-							<span>+</span>	<div class="counter">80</div> 
-							</div>
+                            <span>+</span>
+                            <?php
+                            $musers = App\User::orderby('created_at', 'asc')->get();
+                            $investment = App\Investment::orderby('created_at', 'asc')->get();
+
+                            ?>
+
+                            <div class="counter">{{count($musers)}}</div>
+                            </div>
+
 							<p class="text">
 								Inversionistas
 							</p>
@@ -303,10 +307,10 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="single-counter">
 							<div class="icon icon2">
-									<i class="flaticon-smile"></i>
+                            <i class="flaticon-verified"></i>
 							</div>
 							<div class="counter-wrapper">
-							<span>+</span>	<div class="counter">60</div> 
+							<span>+</span>	<div class="counter">{{count($investment)}}</div>
 							</div>
 							<p class="text">
 								Inversiones
@@ -316,10 +320,10 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="single-counter">
 							<div class="icon icon3">
-									<i class="flaticon-review"></i>
+									<i class="flaticon-prize"></i>
 							</div>
 							<div class="counter-wrapper">
-							<span>+</span> <div class="counter">5</div> 
+							<span>+</span> <div class="counter">5</div>
 							</div>
 							<p class="text">
 								PYMES Asociadas
@@ -329,10 +333,10 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="single-counter">
 							<div class="icon  icon4">
-									<i class="flaticon-support"></i>
+									<i class="flaticon-transfer-money"></i>
 							</div>
 							<div class="counter-wrapper">
-							 <div class="counter">3</div> 
+							 <div class="counter">3</div>
 							</div>
 							<p class="text">
 								Planes de Inversión
@@ -1099,7 +1103,7 @@
 							</h2>
 							<p class="text">
 								Permítenos ayudarte a realizar tus sueños.
-								
+
 							</p>
 							<span>Coloca tus datos y te contactaremos tan pronto como sea posible</span>
 						</div>
@@ -1108,36 +1112,36 @@
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="contact-form-wrapper">
-						<form>
+						<form action="{{route('contactform')}}"  method="post" >
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group">
 										<label for="name">Nombre:</label>
-										<input type="text" class="input-field" id="name" placeholder="">
+										<input type="text" name="name_inver" class="input-field" id="name" placeholder="">
 									</div>
 								</div>
 								<div class="col-lg-6">
 									<div class="form-group">
 										<label for="email">Correo Electrónico :</label>
-										<input type="text" class="input-field" id="email" placeholder="">
+										<input type="text" name="email_inver" class="input-field" id="email" placeholder="">
 									</div>
 								</div>
 								<div class="col-lg-6">
 									<div class="form-group">
 										<label for="subjict">Asunto:</label>
-										<input type="text" class="input-field" id="subjict" placeholder="">
+										<input type="text" name="subject_inver" class="input-field" id="subjict" placeholder="">
 									</div>
 								</div>
 								<div class="col-lg-6">
 									<div class="form-group">
 										<label for="phone">Número de teléfono:</label>
-										<input type="text" class="input-field" id="phone" placeholder="">
+										<input type="text"  name="phone_inver" class="input-field" id="phone" placeholder="">
 									</div>
 								</div>
 								<div class="col-lg-12">
 									<div class="form-group button-area">
 										<label for="message">Mensaje:</label>
-										<textarea id="message" class="input-field textarea" placeholder=""></textarea>
+										<textarea id="message" name="message_inver" class="input-field textarea" placeholder=""></textarea>
 									</div>
 								</div>
 								<div class="col-lg-12">
@@ -1174,7 +1178,7 @@
 							<li>
 								<p>
 										<i class="fas fa-globe-americas"></i>
-										<a href="https://www.google.com/maps/place/Invermix+Capital/@18.4670597,-69.9538178,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x6a1e3a9b016f9ff7!8m2!3d18.4670597!4d-69.9516291">Como llegar</a>
+										<a href="https://www.google.com/maps/place/Invermix+Capital/@18.4670597,-69.9538178,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x6a1e3a9b016f9ff7!8m2!3d18.4670597!4d-69.9516291" class="llegar">¡Como llegar!</a>
 								</p>
 							</li>
 						</ul>
@@ -1196,10 +1200,10 @@
 						</div>
 						<div class="about-content">
 							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor nemo error sit voluptatem consectetur repellat.
+                            El equipo de asesoría financiera más seguro y rentable de Latinoamérica.
 							</p>
 						</div>
-						<div class="subscribe-area">
+						<!-- <div class="subscribe-area">
 							<div class="about-content">
 							<p>
 								Suscribirse a nuestro boletín de noticias
@@ -1209,7 +1213,7 @@
 								<input type="email" placeholder="Suscribirse">
 								<button type="submit" class="submit-btn"><i class="far fa-paper-plane"></i></button>
 							</form>
-						</div>
+						</div> -->
 					</div>
 				</div>
 
@@ -1247,22 +1251,22 @@
 					<div class="col-lg-7">
 						<ul class="social-links">
 							<li>
-								<a href="#" data-toggle="tooltip" data-placement="top" title="Facebook">
+								<a href="https://facebook.com/invermixcapital" data-toggle="tooltip" data-placement="top" title="Facebook">
 									<i class="fab fa-facebook-f"></i>
 								</a>
 							</li>
 							<li>
-								<a href="#" data-toggle="tooltip" data-placement="top" title="Twitter">
+								<a href="https://twitter.com/invermixcapital" data-toggle="tooltip" data-placement="top" title="Twitter">
 									<i class="fab fa-twitter"></i>
 								</a>
 							</li>
 							<li>
-								<a href="#" data-toggle="tooltip" data-placement="top" title="Linkedin">
+								<a href="https://linkedin.com/invermixcapital" data-toggle="tooltip" data-placement="top" title="Linkedin">
 									<i class="fab fa-linkedin-in"></i>
 								</a>
 							</li>
 							<li>
-								<a href="#" data-toggle="tooltip" data-placement="top" title="Instagram">
+								<a href="https://instagram.com/invermixcapital" data-toggle="tooltip" data-placement="top" title="Instagram">
 									<i class="fab fa-instagram"></i>
 								</a>
 							</li>

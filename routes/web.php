@@ -20,6 +20,8 @@ Route::domain('invermixcapital.com')->group(function () {
     Route::get('/', function () {
         return view('landing.landing');
     });
+
+    Route::POST('contact', 'UserController@contactform')->name('contactform');
 });
 //////////////////////////////////////////////////
 

@@ -34,7 +34,7 @@ use App\kyc;
 use App\ref_set;
 use GuzzleHttp\Client as GuzzleClient;
 use DotenvEditor;
-
+use App\Mail\ContactMail;
 use CoinbaseCommerce\ApiClient;
 use CoinbaseCommerce\Resources\Checkout;
 use CoinbaseCommerce\Resources\Charge;
@@ -2725,5 +2725,39 @@ class userController extends Controller
         return redirect('/');
       }
   }
+
+  public function contactform(Request $request){
+
+    $validatedData = $request->validate([
+
+         'name_inver'     =>  'required',
+         'email_inver'  =>  'required|email',
+         'phone_inver'  =>  'required',
+         'subject_inver' =>  'required',
+         'message_inver' =>  'required'
+           ]);
+
+
+    if($validatedData)  {
+
+
+
+       $data = array(
+           'name_inver'      =>   $request->name_inver,
+           'email_inver'      =>  $request->email_inver,
+           'phone_inver'  =>      $request->phone_inver,
+           'subject_inver'   =>   $request->subject_inver,
+           'message_inver'   =>   $request->message_inver
+       );
+
+    Mail::to('jordy.f@mullenloweinteramerica.com')->send(new ContactMail($data));
+
+     }
+
+     Session::put('status', 'Retiro solicitado, cuando sea acutalizado será notificado');
+     Session::put('msgType', "suc");
+     return back();
+
+   }
 
 }

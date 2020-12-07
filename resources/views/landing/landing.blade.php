@@ -163,7 +163,7 @@
 						<div class="row">
 							<div class="col-lg-5">
 								<div class="about-left">
-									<img src="assets/images/about.jpg" alt="">
+									<img src="assets/images/team/buss-1.jpg" alt="">
 								</div>
 							</div>
 							<div class="col-lg-7 align-self-center">
@@ -188,10 +188,8 @@
 							<div class="row">
 									<div class="col-lg-5">
 										<div class="mesion-left">
-											<img src="assets/images/about.jpg" alt="">
-											<a href="#" class="video-play-btn">
-													<i class="fas fa-play"></i>
-											</a>
+											<img src="assets/images/team/successful-business-team-expressing-unity-min.jpg" alt="">
+
 										</div>
 									</div>
 									<div class="col-lg-7 align-self-center">
@@ -213,7 +211,7 @@
 							<div class="row">
 									<div class="col-lg-5">
 								<div class="about-left">
-									<img src="assets/images/about.jpg" alt="">
+									<img src="assets/images/team/workplace-of-analyst-min.jpg" alt="">
 								</div>
 							</div>
 									<div class="col-lg-7 align-self-center">
@@ -235,7 +233,7 @@
 							<div class="row">
 									<div class="col-lg-5">
 								<div class="about-left">
-									<img src="assets/images/about.jpg" alt="">
+									<img src="assets/images/team/scale.jpg" alt="">
 								</div>
 							</div>
 									<div class="col-lg-7 align-self-center">
@@ -258,7 +256,7 @@
 							<div class="row">
 									<div class="col-lg-5">
 								<div class="about-left">
-									<img src="assets/images/about.jpg" alt="">
+									<img src="assets/images/team/buss.jpg" alt="">
 								</div>
 							</div>
 									<div class="col-lg-7 align-self-center">

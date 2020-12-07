@@ -793,36 +793,36 @@
 							<div class="single-accordion">
 							  <div class="accordion-header">
 								  <h4 class="title collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-									<i class="fas fa-unlock-alt"></i> How do I get access to a App ?
+									<i class="fas fa-unlock-alt"></i> ¿Cómo puedo hacer mi primera inversión?
 								  </h4>
 							  </div>
 							  <div id="collapseTwo" class="collapse" data-parent="#tour-faq">
 								<div class="accordion-body">
-								  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor
+								  Solo debes ponerte en contacto con nosotros, ya sea llamando directamente a nuestras oficinas y/o visitándonos presencialmente, asimismo, puedes llenar nuestro formulario de contacto al final de esta página web, colocar tus datos y nos comunicaremos contigo tan pronto como sea posible y explicarte cómo puedes hacer tu primera inversión con nosotros y los beneficios atado a esto.
 								</div>
 							  </div>
 							</div>
 							<div class="single-accordion">
 							  <div class="accordion-header" >
 								  <h4 class="title collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-									<i class="far fa-credit-card"></i> How do I see previous orders?
+									<i class="far fa-credit-card"></i> ¿Dónde puedo ver cómo se va comportando mi inversión?
 								  </h4>
 							  </div>
 							  <div id="collapseThree" class="collapse" data-parent="#tour-faq">
 								<div class="accordion-body">
-								  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor
+								  Tenemos una aplicación web donde puedes ver el comportamiento de tu inversión en tiempo real, puedes hacer inversiones nuevas e inyectar a inversiones existentes, desde tu computador o equipo móvil.
 								</div>
 							  </div>
 							</div>
 							<div class="single-accordion">
 							  <div class="accordion-header">
 								  <h4 class="title collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-									<i class="fas fa-money-bill-wave"></i> it is refundable?
+									<i class="fas fa-money-bill-wave"></i> ¿Cada qué tiempo puedo retirar las ganancias de mi inversión?
 								  </h4>
 							  </div>
 							  <div id="collapseFour" class="collapse" data-parent="#tour-faq">
 								<div class="accordion-body">
-									Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor
+									Contamos con diferentes tipo de modalidades de inversión, de lo cual dependerá el tiempo que puedes retirar la ganancia generada por una inversión, este tiempo va desde tres meses a un año luego de la inversión inicial.
 								</div>
 							  </div>
 							</div>
@@ -866,18 +866,13 @@
 						<div class="mix col-md-6 col-lg-4 gallery-item cat-1 cat-3">
 							<div class="gallery-item-content">
 								<div class="item-thumbnail">
-									<img src="assets/images/work/7.jpg" alt="">
+									<img src="assets/images/galeria/6.JPG" alt="">
 									<div class="content-overlay">
 										<div class="content">
 											<div class="links">
-												<a class="img-popup image-preview" href="assets/images/work/7.jpg">
+												<a class="img-popup image-preview" href="assets/images/galeria/6.JPG">
 													<i class="fas fa-long-arrow-alt-right"></i>
 												</a>
-											</div>
-											<div class="info">
-												<p class="tag">Design | Branding</p>
-												<h4 class="project-name">Creative Web Design
-												</h4>
 											</div>
 										</div>
 									</div>
@@ -888,18 +883,13 @@
 						<div class="mix col-md-6 col-lg-4 gallery-item  cat-3 cat-4">
 							<div class="gallery-item-content">
 								<div class="item-thumbnail">
-									<img src="assets/images/work/1.jpg" alt="">
+									<img src="assets/images/galeria/7.JPG" alt="">
 									<div class="content-overlay">
 										<div class="content">
 											<div class="links">
-												<a class="img-popup image-preview" href="assets/images/work/1.jpg">
+												<a class="img-popup image-preview" href="assets/images/galeria/7.JPG">
 													<i class="fas fa-long-arrow-alt-right"></i>
 												</a>
-											</div>
-											<div class="info">
-												<p class="tag">Design | Branding</p>
-												<h4 class="project-name">Creative Web Design
-												</h4>
 											</div>
 										</div>
 									</div>
@@ -910,18 +900,13 @@
 						<div class="mix col-md-6 col-lg-4 gallery-item cat-2 cat-1">
 							<div class="gallery-item-content">
 								<div class="item-thumbnail">
-									<img src="assets/images/work/2.jpg" alt="">
+									<img src="assets/images/galeria/4.JPG" alt="">
 									<div class="content-overlay">
 										<div class="content">
 											<div class="links">
-												<a class="img-popup image-preview" href="assets/images/work/2.jpg">
+												<a class="img-popup image-preview" href="assets/images/galeria/4.JPG">
 													<i class="fas fa-long-arrow-alt-right"></i>
 												</a>
-											</div>
-											<div class="info">
-												<p class="tag">Design | Branding</p>
-												<h4 class="project-name">Creative Web Design
-												</h4>
 											</div>
 										</div>
 									</div>
@@ -932,18 +917,13 @@
 						<div class="mix col-md-6 col-lg-4 gallery-item cat-1 cat-3">
 								<div class="gallery-item-content">
 									<div class="item-thumbnail">
-										<img src="assets/images/work/9.jpg" alt="">
+										<img src="assets/images/galeria/8.JPG" alt="">
 										<div class="content-overlay">
 											<div class="content">
 												<div class="links">
-													<a class="img-popup image-preview" href="assets/images/work/9.jpg">
+													<a class="img-popup image-preview" href="assets/images/galeria/8.JPG">
 														<i class="fas fa-long-arrow-alt-right"></i>
 													</a>
-												</div>
-												<div class="info">
-													<p class="tag">Design | Branding</p>
-													<h4 class="project-name">Creative Web Design
-													</h4>
 												</div>
 											</div>
 										</div>
@@ -954,18 +934,13 @@
 						<div class="mix col-md-6 col-lg-4 gallery-item cat-3 cat-4">
 								<div class="gallery-item-content">
 									<div class="item-thumbnail">
-										<img src="assets/images/work/5.jpg" alt="">
+										<img src="assets/images/galeria/1.JPG" alt="">
 										<div class="content-overlay">
 											<div class="content">
 												<div class="links">
-													<a class="img-popup image-preview" href="assets/images/work/5.jpg">
+													<a class="img-popup image-preview" href="assets/images/galeria/1.JPG">
 														<i class="fas fa-long-arrow-alt-right"></i>
 													</a>
-												</div>
-												<div class="info">
-													<p class="tag">Design | Branding</p>
-													<h4 class="project-name">Creative Web Design
-													</h4>
 												</div>
 											</div>
 										</div>
@@ -976,85 +951,13 @@
 						<div class="mix col-md-6 col-lg-4 gallery-item cat-1 cat-2">
 							<div class="gallery-item-content">
 								<div class="item-thumbnail">
-									<img src="assets/images/work/3.jpg" alt="">
+									<img src="assets/images/galeria/18.JPG" alt="">
 									<div class="content-overlay">
 										<div class="content">
 											<div class="links">
-												<a class="img-popup image-preview" href="assets/images/work/3.jpg">
+												<a class="img-popup image-preview" href="assets/images/galeria/18.JPG">
 													<i class="fas fa-long-arrow-alt-right"></i>
 												</a>
-											</div>
-											<div class="info">
-												<p class="tag">Design | Branding</p>
-												<h4 class="project-name">Creative Web Design
-												</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="mix col-md-6 col-lg-4 gallery-item cat-4 cat-2">
-							<div class="gallery-item-content">
-								<div class="item-thumbnail">
-									<img src="assets/images/work/4.jpg" alt="">
-									<div class="content-overlay">
-										<div class="content">
-											<div class="links">
-												<a class="img-popup image-preview" href="assets/images/work/4.jpg">
-													<i class="fas fa-long-arrow-alt-right"></i>
-												</a>
-											</div>
-											<div class="info">
-												<p class="tag">Design | Branding</p>
-												<h4 class="project-name">Creative Web Design
-												</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-						<div class="mix col-md-6 col-lg-4 gallery-item cat-3 cat-2">
-							<div class="gallery-item-content">
-								<div class="item-thumbnail">
-									<img src="assets/images/work/6.jpg" alt="">
-									<div class="content-overlay">
-										<div class="content">
-											<div class="links">
-												<a class="img-popup image-preview" href="assets/images/work/6.jpg">
-													<i class="fas fa-long-arrow-alt-right"></i>
-												</a>
-											</div>
-											<div class="info">
-												<p class="tag">Design | Branding</p>
-												<h4 class="project-name">Creative Web Design
-												</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="mix col-md-6 col-lg-4 gallery-item cat-3 cat-1">
-							<div class="gallery-item-content">
-								<div class="item-thumbnail">
-									<img src="assets/images/work/8.jpg" alt="">
-									<div class="content-overlay">
-										<div class="content">
-											<div class="links">
-												<a class="img-popup image-preview" href="assets/images/work/8.jpg">
-													<i class="fas fa-long-arrow-alt-right"></i>
-												</a>
-											</div>
-											<div class="info">
-												<p class="tag">Design | Branding</p>
-												<h4 class="project-name">Creative Web Design
-												</h4>
 											</div>
 										</div>
 									</div>
@@ -1244,7 +1147,7 @@
 				<div class="row">
 					<div class="col-lg-5">
 						<div class="left-area">
-							<p>Copyright © 2020. Invermix Capital SRL
+							<p>Copyright © 2020. Invermix Capital, SRL
 							</p>
 						</div>
 					</div>

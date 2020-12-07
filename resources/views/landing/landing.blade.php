@@ -291,8 +291,8 @@
 							<div class="counter-wrapper">
                             <span>+</span>
                             <?php
-                            $musers = App\User::orderby('created_at', 'asc')->get();
-                            $investment = App\Investment::orderby('created_at', 'asc')->get();
+                            $musers = app\User::orderby('created_at', 'asc')->get();
+                            $investment = app\Investment::orderby('created_at', 'asc')->get();
 
                             ?>
 

@@ -21,7 +21,7 @@ Route::domain('invermixcapital.com')->group(function () {
         return view('landing.landing');
     });
 
-    Route::POST('contact', 'UserController@contactform')->name('contactform');
+    Route::POST('contact', 'userController@contactform')->name('contactform');
 });
 //////////////////////////////////////////////////
 

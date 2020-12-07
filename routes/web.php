@@ -21,11 +21,13 @@ Route::domain('invermixcapital.com')->group(function () {
         return view('landing.landing');
     });
 
+    Route::get('/privacy-policy', function () {
+        return view('landing.privacy-policy');
+    });
+
     Route::POST('contact', 'userController@contactform')->name('contactform');
 });
 //////////////////////////////////////////////////
-
-
 
 Route::domain('app.invermixcapital.com')->group(function () {
 

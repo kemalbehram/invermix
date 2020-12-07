@@ -40,7 +40,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<nav class="navbar navbar-expand-lg navbar-light">
-						<a class="navbar-brand" href="index.html">
+						<a class="navbar-brand" href="/">
 							<img src="assets/images/logoi2.png" alt="Invermix Capital">
 						</a>
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_menu" aria-controls="main_menu"
@@ -1104,17 +1104,6 @@
                             El equipo de asesoría financiera más seguro y rentable de Latinoamérica.
 							</p>
 						</div>
-						<!-- <div class="subscribe-area">
-							<div class="about-content">
-							<p>
-								Suscribirse a nuestro boletín de noticias
-							</p>
-						</div>
-							<form action="#" class="subscribe-form">
-								<input type="email" placeholder="Suscribirse">
-								<button type="submit" class="submit-btn"><i class="far fa-paper-plane"></i></button>
-							</form>
-						</div> -->
 					</div>
 				</div>
 
@@ -1125,12 +1114,7 @@
 						</h4>
 						<ul class="link-list">
 							<li>
-								<a href="#">
-									<i class="fas fa-angle-double-right"></i> Terminos & Condiciones
-								</a>
-							</li>
-							<li>
-								<a href="#">
+								<a href="/privacy-policy">
 									<i class="fas fa-angle-double-right"></i> Politicas de Privacidad
 								</a>
 							</li>
@@ -1151,24 +1135,20 @@
 					</div>
 					<div class="col-lg-7">
 						<ul class="social-links">
-							<li>
-								<a href="https://facebook.com/invermixcapital" data-toggle="tooltip" data-placement="top" title="Facebook">
-									<i class="fab fa-facebook-f"></i>
+                        <li>
+								<a target="a_blank" href="https://instagram.com/invermix_capital" data-toggle="tooltip" data-placement="top" title="Instagram">
+									<i class="fab fa-instagram"></i>
 								</a>
 							</li>
+
 							<li>
-								<a href="https://twitter.com/invermixcapital" data-toggle="tooltip" data-placement="top" title="Twitter">
+								<a target="a_blank" href="https://twitter.com/invermixcapital" data-toggle="tooltip" data-placement="top" title="Twitter">
 									<i class="fab fa-twitter"></i>
 								</a>
 							</li>
 							<li>
-								<a href="https://linkedin.com/invermixcapital" data-toggle="tooltip" data-placement="top" title="Linkedin">
+								<a target="a_blank" href="https://linkedin.com/invermixcapital" data-toggle="tooltip" data-placement="top" title="Linkedin">
 									<i class="fab fa-linkedin-in"></i>
-								</a>
-							</li>
-							<li>
-								<a href="https://instagram.com/invermixcapital" data-toggle="tooltip" data-placement="top" title="Instagram">
-									<i class="fab fa-instagram"></i>
 								</a>
 							</li>
 

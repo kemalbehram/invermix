@@ -1549,7 +1549,7 @@ public function admAddnew(Request $req)
           $act->save();
         }
         return back()->With([
-          'toast_msg' => 'Sent Successfully',
+          'toast_msg' => 'Enviado correctamente.',
           'toast_type' => 'suc'
         ]);
       }

@@ -199,7 +199,8 @@ class userController extends Controller
 
   		    $file = $req->file('prPic');
           $path = $user->username.".jpg"; //$req->file('u_file')->store('public/post_img');
-          $file->move(base_path().'/../img/profile/', $path);
+          $file->move(base_path().'/public/img/profile/', $path);
+
 
           $usr = User::find($user->id);
           $usr->img = $path;

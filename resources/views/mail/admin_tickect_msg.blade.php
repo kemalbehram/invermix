@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tickect Message</title>
+    <title>Mensaje Ticket</title>
 </head>
 <body>
     <div class="row">

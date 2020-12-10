@@ -2847,7 +2847,7 @@ else
     $user = $req->uid;
     try
     {
-      if($req['cardtype'] == 'idcard_op' || $req['cardtype'] == 'driver_op' )
+      if($req['cardtype'] == 'cedula' || $req['cardtype'] == 'licencia' )
       {
         if($req->hasFile('id_front') && $req->hasFile('id_back'))
         {
@@ -2885,7 +2885,7 @@ else
           ]);
         }
       }
-      elseif ($req['cardtype'] == 'passport_op')
+      elseif ($req['cardtype'] == 'pasaporte')
       {
         if($req->hasFile('pas_id_front'))
         {

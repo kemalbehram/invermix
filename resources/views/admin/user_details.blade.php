@@ -315,9 +315,9 @@
                                                   <label>Tipo de Identificación</label>
                                                   <select id="card_select" name="cardtype" class="form-control">
                                                     <option selected disabled >Seleccionar</option>
-                                                    <option value="Cédula">Cédula</option>
-                                                    <option value="Pasaporte">Pasaporte</option>
-                                                    <option value="Licencia-Conducir">Licencia de Conducir</option>
+                                                    <option value="cedula">Cédula</option>
+                                                    <option value="pasaporte">Pasaporte</option>
+                                                    <option value="licencia">Licencia de Conducir</option>
                                                   </select>
                                                 </div>
                                                 <hr>

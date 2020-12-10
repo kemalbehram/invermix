@@ -751,12 +751,12 @@ function s_2fa(opr)
 
 $(document).ready( function(){
     $('#card_select').change(function(){
-        if($('#card_select').val() == 'idcard_op' || $('#card_select').val() == 'driver_op')
+        if($('#card_select').val() == 'cedula' || $('#card_select').val() == 'licencia')
         {
             $('#pass_cont').hide();
             $('#card_cont').show();
         }
-        else if($('#card_select').val() == 'passport_op')
+        else if($('#card_select').val() == 'pasaporte')
         {
             $('#card_cont').hide();
             $('#pass_cont').show();

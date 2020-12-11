@@ -19,7 +19,7 @@ Route::domain('invermixcapital.com')->group(function () {
 
     Route::get('/', function () {
         return view('landing.landing');
-    });
+    })->name('landing-web');
 
     Route::get('/privacy-policy', function () {
         return view('landing.privacy-policy');
@@ -65,7 +65,7 @@ Route::get('/{username}/profile', function () {
 Route::get('/logout', function () {
 	Auth::logout();
     Session::flush();
-    return  view('landing.landing');
+    return redirect()->route('landing-web');
 });
 
 Route::get('/{username}/dashboard', function () {

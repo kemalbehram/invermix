@@ -2401,7 +2401,7 @@ public function admAddnew(Request $req)
         $kyc->status = 1;
         $kyc->save();
         return back()->with([
-          'toast_msg' => 'Aprobación exitosa!',
+          'toast_msg' => '¡Aprobación exitosa!',
           'toast_type' => 'suc'
         ]);
       }

@@ -27,7 +27,9 @@ Route::domain('invermixcapital.com')->group(function () {
 
     Route::POST('contact', 'userController@contactform')->name('contactform');
 });
+
 //////////////////////////////////////////////////
+
 
 Route::domain('app.invermixcapital.com')->group(function () {
 
@@ -63,7 +65,7 @@ Route::get('/{username}/profile', function () {
 Route::get('/logout', function () {
 	Auth::logout();
     Session::flush();
-    return Redirect::to('/login');
+    return  view('landing.landing');
 });
 
 Route::get('/{username}/dashboard', function () {

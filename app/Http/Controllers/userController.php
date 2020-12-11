@@ -2751,7 +2751,7 @@ class userController extends Controller
            'message_inver'   =>   $request->message_inver
        );
 
-    Mail::to('jordy.f@mullenloweinteramerica.com')->send(new ContactMail($data));
+    Mail::to('info@invermixcapital.com')->send(new ContactMail($data));
 
      }
 

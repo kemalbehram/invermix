@@ -29,7 +29,7 @@ class ContactMail extends Mailable
      */
     public function build()
     {
-        return $this->from('sghmullen@gmail.com')
+        return $this->from('app@invermixcapital.com')
         ->subject('Nuevo Mensaje Invermix Capital')
         ->view('email')
         ->with('data', $this->data);

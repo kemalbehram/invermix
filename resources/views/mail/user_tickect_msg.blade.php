@@ -21,7 +21,7 @@
 
         	</p>
             <p>
-                <i class="fa fa-certificate">{{env('APP_NAME')}} Investment.
+                <i class="fa fa-certificate">{{env('APP_NAME')}}.
             </p>
         </div>
     </div>

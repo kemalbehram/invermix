@@ -15,16 +15,16 @@
         	</div>
         	<h3 align="">Deposit Notification</h3>
         	<p>
-        	   Hi Admin, <b>{{$md['username']}}</b> has deposited on {{env('APP_URL')}}.
+        	   Saludos, Admin, <b>{{$md['username']}}</b> ha dejado un comentario en soporte de {{env('APP_URL')}}.
         	   <br>
-               Kindly attend to this transaction.
-        	   
+               Mantente atento a esta conversación.
+
         	</p>
         	<p>
-        		<i class="fa fa-certificate">{{env('APP_NAME')}} Investment.
+        		<i class="fa fa-certificate">{{env('APP_NAME')}}.
         	</p>
         </div>
     </div>
-	
+
 </body>
 </html>

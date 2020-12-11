@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tickect Message</title>
+    <title>Ticket Mensajes</title>
 </head>
 <body>
     <div class="row">
@@ -13,17 +13,18 @@
             <div align="">
                 <img src="http://{{env('MAIL_SENDER')}}/img/{{$st->site_logo}}" style="height:100px; width:100px;" align="center">
             </div>
-            <h3 align="">Tickect Message</h3>
+            <h3 align="">Ticket Mensajes</h3>
             <p>
-               Hi Admin, <b>{{$md['username']}}</b> has left a message on {{env('APP_URL')}}.
-               <br>
-               Kindly attend to this message.               
-            </p>
+        	   Saludos, Admin, <b>{{$md['username']}}</b> ha dejado un comentario en soporte de {{env('APP_URL')}}.
+        	   <br>
+               Mantente atento a esta conversación.
+
+        	</p>
             <p>
                 <i class="fa fa-certificate">{{env('APP_NAME')}} Investment.
             </p>
         </div>
     </div>
-    
+
 </body>
 </html>

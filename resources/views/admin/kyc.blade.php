@@ -64,19 +64,19 @@
                                                         <td>{{$user->card_type}}</td>
                                                         <td>
                                                             <a href="{{ URL::to('/').'/img/kyc/'.$user->front_card }}" class=" text-info">
-                                                                <i class="fa fa-download"></i>Download
+                                                                <i class="fa fa-download"></i>Ver
                                                             </a>
                                                         </td>
                                                         <td>
                                                             @if(!empty($user->back_card))
                                                             <a href="{{ URL::to('/').'/img/kyc/'.$user->back_card }}" class=" text-info">
-                                                                <i class="fa fa-download"></i>Download
+                                                                <i class="fa fa-download"></i>Ver
                                                             </a>
                                                             @endif
                                                         <td>
                                                             <a href=" {{ URL::to('/') .'/img/kyc/'.$user->address_proof}}" class=" text-info">
 
-                                                                <i class="fa fa-download"></i>Download
+                                                                <i class="fa fa-download"></i>Ver
                                                             </a>
                                                         </td>
                                                         <td>

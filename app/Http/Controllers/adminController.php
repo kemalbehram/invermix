@@ -2844,6 +2844,10 @@ else
 
   public function upload_kyc_doc(Request $req)
   {
+
+    // dd($req);
+    // die();
+
     $user = $req->uid;
     try
     {
@@ -2854,11 +2858,11 @@ else
           // $file = $req->file('selfie');
           // $file->move(base_path().'/../img/kyc/', $user->username."_selfie.jpg");
           $file = $req->file('id_front');
-          $file->move(base_path().'/public/img/kyc/', $user->username."_id_front.jpg");
+          $file->move(base_path().'/public/img/kyc/', $req->username."_id_front.jpg");
           $file = $req->file('id_back');
-          $file->move(base_path().'/public/img/kyc/', $user->username."_id_back.jpg");
+          $file->move(base_path().'/public/img/kyc/', $req->username."_id_back.jpg");
           $file = $req->file('utility_doc');
-          $file->move(base_path().'/public/img/kyc/', $user->username."_utility_doc.pdf");
+          $file->move(base_path().'/public/img/kyc/', $req->username."_utility_doc.pdf");
 
           $kyc = new kyc;
           $kyc->user_id = $req->uid;
@@ -2901,7 +2905,7 @@ else
           $kyc->username = $req->username;
           // $kyc->selfie = $req->username."_selfie.jpg";
           $kyc->card_type = $req['cardtype'];
-          $kyc->front_card = $req->username."_id_front.jpg";
+          $kyc->front_card = $req->username."_pas_id_front.jpg";
           $kyc->address_proof = $req->username."_utility_doc.pdf";
 
           $kyc->save();

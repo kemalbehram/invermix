@@ -29,6 +29,7 @@ use App\xpack_packages;
 use App\site_settings;
 use App\ticket;
 use App\comments;
+use App\currencies;
 use App\admin;
 use App\kyc;
 use App\ref_set;
@@ -2401,8 +2402,6 @@ class userController extends Controller
   public function inyect(Request $req)
   {
 
-    // dd($req);
-    // die();
 
       $user = Auth::User();
 
@@ -2436,11 +2435,36 @@ class userController extends Controller
         {
           $capital = $req->input('capital');
           $invest_id = $req->input('invest_id');
+          $invest = investment::find($req->input('invest_id'));
           $pack = packages::find($req->input('packa_id'));
+        //   $currency = currencies::first();
 
 
-          if($capital >= $pack->min && $capital <= $pack->max)
+
+
+          if($invest->currency == 'US$'){
+            $capital = $req->input('capital');
+
+            if($invest->package_id == 5 && $capital  <= 20)
+            {
+              Session::put('status', 'El capital de entrada para la inyección es menor que el monto permitido para el plan de inversión '.$invest->package.'.');
+              Session::put('msgType', "err");
+              return back();
+            }
+
+            if($invest->package_id != 5 && $capital  <= 100)
+            {
+              Session::put('status', 'El capital de entrada para la inyección es menor que el monto permitido para el plan de inversión '.$invest->package.'.');
+              Session::put('msgType', "err");
+              return back();
+            }
+
+          if($invest->package_id == 5 && $capital  >= 20)
           {
+
+            //   dd('Dolar, Inverflex, mayor que 20');
+            //   die();
+
             $inv = new inyects;
             $inv->capital = $capital;
             $inv->invest_id = $invest_id;
@@ -2459,13 +2483,15 @@ class userController extends Controller
             while ($days > 0)
             {
                 $dt    +=   86400   ;
-                $actualDate = date('Y-m-d', $dt);
+                // $actualDate = ;
+                $actualDate = date($invest->end_date, $dt) ;
                 $days--;
             }
 
+
             $inv->package_id = $pack->id;
             $inv->currency = $this->st->currency;
-            $inv->end_date = $actualDate;
+            $inv->end_date =  $actualDate;
             $inv->last_wd = date("Y-m-d");
             $inv->status = 'Pendiente';
 
@@ -2474,71 +2500,7 @@ class userController extends Controller
 
             $inv->save();
 
-            if(!empty($user->referal))
-            {
-              $ref_bonuses = ref_set::all();
-
-              if(env('REF_TYPE') == 'Once')
-              {
-                $ref_cnt = env('REF_LEVEL_CNT');
-                $new_ref_user = $user->referal;
-                $itr_cnt = 0;
-
-                $refExist = ref::where('user_id', $user->id)->get();
-                if(count($refExist) == 0)
-                {
-                  $ref = new ref;
-                  $ref->user_id = $user->id;
-                  $ref->username = $user->referal;
-                  // $ref->referral = 0;
-                  $ref->wdr = 0;
-                  $ref->currency = env('CURRENCY');
-                  $ref->amount = $capital * $ref_bonuses[0]->val;
-                  $ref->save();
-
-                  while ($itr_cnt <= $ref_cnt-1)
-                  {
-                    $refUser = User::where('username', $new_ref_user)->get();
-                    if(count($refUser) > 0)
-                    {
-                      $refUser[0]->ref_bal += $capital * $ref_bonuses[$itr_cnt]->val;
-                      $new_ref_user = $refUser[0]->referal;
-                      $refUser[0]->save();
-                    }
-                    $itr_cnt += 1;
-                    if(env('REF_SYSTEM') == 'Single_level')
-                    {
-                      break;
-                    }
-                  }
-
-                }
-
-              }
-              if(env('REF_TYPE') == 'Continous')
-              {
-                $ref_cnt = env('REF_LEVEL_CNT');
-                $new_ref_user = $user->referal;
-                $itr_cnt = 0;
-
-                while ($itr_cnt <= $ref_cnt-1) {
-                  $refUser = User::where('username', $new_ref_user)->get();
-                  if(count($refUser) > 0)
-                  {
-                    $refUser[0]->ref_bal += $capital * $ref_bonuses[$itr_cnt]->val;
-                    $refUser[0]->save();
-                    $new_ref_user = $refUser[0]->referal;
-                  }
-                  $itr_cnt += 1;
-                  if(env('REF_SYSTEM') == 'Single_level')
-                  {
-                    break;
-                  }
-                }
-              }
-            }
-
-            // $maildata = ['email' => $user->email, 'username' => $user->username];
+                  // $maildata = ['email' => $user->email, 'username' => $user->username];
             // Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
             //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
             //     $msg->to($maildata['email']);
@@ -2560,9 +2522,224 @@ class userController extends Controller
             Session::put('status', "Inyección enviada para su aprobación.");
             Session::put('msgType', "suc");
             return back() ;
+
+
+        }
+            elseif($req->packa_id != 5 && $capital  >= 100)
+            {
+
+            // dd('Dolar, Diferente a Inverflex, mayor que 100');
+            // die();
+
+            $inv = new inyects;
+            $inv->capital = $capital;
+            $inv->invest_id = $invest_id;
+            $inv->user_id = $user->id;
+            $inv->usn = $user->username;
+            $inv->package = $pack->package_name;
+            $inv->date_inyected = date("d-m-Y");
+            $inv->period = $pack->period;
+            $inv->days_interval = $pack->days_interval;
+            $inv->i_return = (round($capital*$pack->daily_interest*$pack->period,2));
+            $inv->interest = $pack->daily_interest;
+            $dt = strtotime(date('Y-m-d'));
+            $days = $pack->period;
+
+            while ($days > 0)
+            {
+                $dt    +=   86400   ;
+                $actualDate = date($invest->end_date, $dt) ;
+                $days--;
+            }
+
+
+            $inv->package_id = $pack->id;
+            $inv->currency = $this->st->currency;
+            $inv->end_date =  $actualDate;
+            $inv->last_wd = date("Y-m-d");
+            $inv->status = 'Pendiente';
+
+            $user->wallet -= $capital;
+            $user->save();
+
+            $inv->save();
+
+                // $maildata = ['email' => $user->email, 'username' => $user->username];
+            // Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            //     $msg->to($maildata['email']);
+            //     $msg->subject('User Investment');
+            // });
+
+            // $maildata = ['email' => $user->email, 'username' => $user->username];
+            // Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            //     $msg->to(env('SUPPORT_EMAIL'));
+            //     $msg->subject('User Investment');
+            // });
+
+            $act = new activities;
+            $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." modalidad";
+            $act->user_id = $user->id;
+            $act->save();
+
+            Session::put('status', "Inyección enviada para su aprobación.");
+            Session::put('msgType', "suc");
+            return back() ;
+
+
+    }
           }
+
+          if($invest->currency = 'RD$'){
+            $capital = $req->input('capital');
+
+            if($invest->package_id == 5 && $capital  <= 1000)
+            {
+              Session::put('status', 'El capital de entrada para la inyección es menor que el monto permitido para el plan de inversión '.$invest->package.'.');
+              Session::put('msgType', "err");
+              return back();
+            }
+
+            if($invest->package_id != 5 && $capital  <= 5000)
+            {
+              Session::put('status', 'El capital de entrada para la inyección es menor que el monto permitido para el plan de inversión '.$invest->package.'.');
+              Session::put('msgType', "err");
+              return back();
+            }
+
+            if($invest->package_id == 5 && $capital  >= 1000)
+            {
+                // dd('Peso dominicano, Inverflex, mayor que 1000');
+                // die();
+
+              $inv = new inyects;
+              $inv->capital = $capital;
+              $inv->invest_id = $invest_id;
+              $inv->user_id = $user->id;
+              $inv->usn = $user->username;
+              $inv->package = $pack->package_name;
+              $inv->date_inyected = date("d-m-Y");
+              $inv->period = $pack->period;
+              $inv->days_interval = $pack->days_interval;
+              $inv->i_return = (round($capital*$pack->daily_interest*$pack->period,2));
+              $inv->interest = $pack->daily_interest;
+              // $no = 0;
+              $dt = strtotime(date('Y-m-d'));
+              $days = $pack->period;
+
+              while ($days > 0)
+              {
+                  $dt    +=   86400   ;
+                  // $actualDate = ;
+                  $actualDate = date($invest->end_date, $dt) ;
+                  $days--;
+              }
+
+
+              $inv->package_id = $pack->id;
+              $inv->currency = $this->st->currency;
+              $inv->end_date =  $actualDate;
+              $inv->last_wd = date("Y-m-d");
+              $inv->status = 'Pendiente';
+
+              $user->wallet -= $capital;
+              $user->save();
+
+              $inv->save();
+
+                    // $maildata = ['email' => $user->email, 'username' => $user->username];
+              // Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+              //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+              //     $msg->to($maildata['email']);
+              //     $msg->subject('User Investment');
+              // });
+
+              // $maildata = ['email' => $user->email, 'username' => $user->username];
+              // Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+              //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+              //     $msg->to(env('SUPPORT_EMAIL'));
+              //     $msg->subject('User Investment');
+              // });
+
+              $act = new activities;
+              $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." modalidad";
+              $act->user_id = $user->id;
+              $act->save();
+
+              Session::put('status', "Inyección enviada para su aprobación.");
+              Session::put('msgType', "suc");
+              return back() ;
+
+
+          }
+              elseif($req->packa_id != 5 && $capital >= 5000)
+              {
+                // dd('Peso dominicano, Diferente Inverflex, mayor que 5000');
+                // die();
+
+              $inv = new inyects;
+              $inv->capital = $capital;
+              $inv->invest_id = $invest_id;
+              $inv->user_id = $user->id;
+              $inv->usn = $user->username;
+              $inv->package = $pack->package_name;
+              $inv->date_inyected = date("d-m-Y");
+              $inv->period = $pack->period;
+              $inv->days_interval = $pack->days_interval;
+              $inv->i_return = (round($capital*$pack->daily_interest*$pack->period,2));
+              $inv->interest = $pack->daily_interest;
+              $dt = strtotime(date('Y-m-d'));
+              $days = $pack->period;
+
+              while ($days > 0)
+              {
+                  $dt    +=   86400   ;
+                  $actualDate = date($invest->end_date, $dt) ;
+                  $days--;
+              }
+
+
+              $inv->package_id = $pack->id;
+              $inv->currency = $this->st->currency;
+              $inv->end_date =  $actualDate;
+              $inv->last_wd = date("Y-m-d");
+              $inv->status = 'Pendiente';
+
+              $user->wallet -= $capital;
+              $user->save();
+
+              $inv->save();
+
+            //       $maildata = ['email' => $user->email, 'username' => $user->username];
+            //   Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+            //       $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            //       $msg->to($maildata['email']);
+            //       $msg->subject('User Investment');
+            //   });
+
+            //   $maildata = ['email' => $user->email, 'username' => $user->username];
+            //   Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+            //       $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            //       $msg->to(env('SUPPORT_EMAIL'));
+            //       $msg->subject('User Investment');
+            //   });
+
+              $act = new activities;
+              $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." modalidad";
+              $act->user_id = $user->id;
+              $act->save();
+
+              Session::put('status', "Inyección enviada para su aprobación.");
+              Session::put('msgType', "suc");
+              return back() ;
+
+      }
+            }
           else
           {
+                // dd('Este es else');
+                // die();
             Session::put('status', "¡Monto invalido! Intenta nuevamente.");
             Session::put('msgType', "err");
             return back();

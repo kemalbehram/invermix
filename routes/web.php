@@ -137,6 +137,7 @@ Route::post('/user/change/pwd', 'userController@changePwd')->middleware('auth');
 Route::post('/user/update/profile', 'userController@updateProfile')->middleware('auth');
 Route::post('/user/add/bank', 'userController@addbank')->middleware('auth');
 Route::post('/user/invest/packages', 'userController@invest')->middleware('auth');
+Route::post('/user/invest/description', 'userController@description')->middleware('auth');
 Route::post('/user/inyect', 'userController@inyect')->middleware('auth');
 Route::post('/user/wdraw/earning', 'userController@wd_invest')->middleware('auth');
 Route::post('/user/wdraw/earning/inyect', 'userController@wd_inyect')->middleware('auth');

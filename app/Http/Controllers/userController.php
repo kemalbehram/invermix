@@ -667,6 +667,42 @@ class userController extends Controller
 
   }
 
+  public function description(Request $req){
+
+    $user = Auth::User();
+    
+    if(!empty($user))
+    { 
+      try
+      {
+        $validator = Validator::make($req->all(), [
+          'description' => 'required|string|max:25',
+
+        ]);
+
+        if($validator->fails()){
+          Session::put('msgType', "err");
+          Session::put('status', $validator->errors()->first());
+          return back();
+
+        }else{
+          $descript = investment::where('id', $req->id)->update(['description' => $req->description]);
+          Session::put('status', "Descripción agregada.");
+          Session::put('msgType', "suc");
+          return back() ;
+        }
+
+  }
+  
+  catch(\Exception $e)
+  {
+    Session::put('status', 'Error al agregar inversión');
+    Session::put('msgType', "err");
+    return back();
+  }
+    }
+
+}
 
   public function wd_invest(Request $req)
   {

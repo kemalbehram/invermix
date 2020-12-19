@@ -75,15 +75,14 @@
                                                             <td>{{$in->currency}} {{$ern}} </td>
                                                             <td>
 
-                                                                <form action="/invest/description">
+                                                      
 
                                                                 @if($in->description == Null)
-                                                            <div id="contentsssss">Doble clic para editar.</div>
+                                                            <a href="javascript:void(0)" onclick="description('{{$in->id}}')">Agregar descripción</a>
                                                                @else
-                                                            <div id="contentsssss">{{$in->description}}</div>
+                                                            <a  class="des-after" href="javascript:void(0)" onclick="description('{{$in->id}}')">{{$in->description}}</a>
                                                             @endif
                                                             </td>
-                                                            </form>
                                                             <td>
                                                                 <a title="Retirar" href="javascript:void(0)" class="btn btn-info" onclick="wd('pack', '{{$in->id}}', '{{$ern}}', '{{ $withdrawable }}', '{{$Edays}}', '{{$ended}}')">
                                                                     <i class="fas fa-arrow-down"></i>
@@ -168,28 +167,58 @@
                         </div>
                     </div>
                 </div>
+        
             </div>
 
-            <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
+            <div id="popDescription" class="container pop_invest_cont" >
+  <div class="row wd_row_pad" >
+    <div class="col-md-4">&emps;</div>
+    <div class="col-md-4 card pop_invest_col" align="center">
+      <div class="card-header" style="">
+   
+      </div>
+      <div class="pop_msg_contnt">
+        <p align="center" class="color_blue_b">
+            {{ __('Agrega una descripción para identificar tu inversión.') }} <b>
+        </p>
+        <form  action="/user/invest/description" method="post">
+            <div class="form-group" align="left">
+              <br>
+              <input type="hidden" class="form-control" name="_token" value="{{csrf_token()}}">
+              <input id="inv_id" type="hidden" class="form-control" name="id" value="">
+              <input type="text" class="form-control" name="description" placeholder="Agregar descripción, no más de 25 carácteres" required>
+            </div>
 
-<script>
-$(document).on("dblclick", "#contentsssss", function(){
+            <div class="form-group">
+                <button class="collb btn btn-info">{{ __('Agregar') }}</button>
+                <span style="">
+                  <a id="popDescription_close" href="javascript:void(0)" class="btn btn-danger">{{ __('Cancelar') }}</a>
+                </span>
+                <br><br>
+            </div>
+        </form>
 
-var current = $(this).text();
-$("#contentsssss").html('<textarea class="form-control" id="newcont" rows="5">'+current+'</textarea>');
-$("#newcont").focus();
+      </div>
+      <!-- close btn -->
+      <script type="text/javascript">
+        $('#popDescription_close').click( function(){
+          $('#popDescription').hide();
+        });
+</script>
+      <!-- end close btn -->
+    </div>
+  </div>
 
-$("#newcont").focus(function() {
-    console.log('in');
-}).blur(function() {
-     var newcont = $("#newcont").val();
-     $("#contentsssss").text(newcont);
-});
-
-})
+  <script type="text/javascript">
+function description(id)
+{
+    // alert(id);
+    $('#inv_id').val(id);
+    $('#popDescription').show();
+}
 </script>
 
-
+</div>
 
     @include('user.inc.confirm_inv')
     @include('user.inc.withdrawal')

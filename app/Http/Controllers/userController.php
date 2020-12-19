@@ -2561,7 +2561,6 @@ class userController extends Controller
 
             $user->wallet -= $capital;
             $user->save();
-
             $inv->save();
 
                 // $maildata = ['email' => $user->email, 'username' => $user->username];

@@ -28,6 +28,7 @@
                                                     <th>{{ __('Días transcurridos') }}</th>
                                                     <th>{{ __('Status') }}</th>
                                                     <th>{{ __('Ganancias') }}</th>
+                                                    <th>{{ __('Descripción') }}</th>
                                                     <th>{{ __('Retirar') }}</th>
                                                     <th>{{ __('Inyectar') }}</th>
                                                 </tr>
@@ -72,6 +73,17 @@
                                                             <td>{{$totalDays}}</td>
                                                             <td>{{$in->status}}</td>
                                                             <td>{{$in->currency}} {{$ern}} </td>
+                                                            <td>
+
+                                                                <form action="/invest/description">
+
+                                                                @if($in->description == Null)
+                                                            <div id="contentsssss">Doble clic para editar.</div>
+                                                               @else
+                                                            <div id="contentsssss">{{$in->description}}</div>
+                                                            @endif
+                                                            </td>
+                                                            </form>
                                                             <td>
                                                                 <a title="Retirar" href="javascript:void(0)" class="btn btn-info" onclick="wd('pack', '{{$in->id}}', '{{$ern}}', '{{ $withdrawable }}', '{{$Edays}}', '{{$ended}}')">
                                                                     <i class="fas fa-arrow-down"></i>
@@ -147,7 +159,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title" id="invertir"> Modalidades Disponibles</div>
+                                    <div class="card-title" id="invertir"> Planes Disponibles</div>
                                 </div>
                                 <div class="card-body pb-0">
                                     @include('user.inc.packages')
@@ -155,13 +167,32 @@
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
+
+            <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
+
+<script>
+$(document).on("dblclick", "#contentsssss", function(){
+
+var current = $(this).text();
+$("#contentsssss").html('<textarea class="form-control" id="newcont" rows="5">'+current+'</textarea>');
+$("#newcont").focus();
+
+$("#newcont").focus(function() {
+    console.log('in');
+}).blur(function() {
+     var newcont = $("#newcont").val();
+     $("#contentsssss").text(newcont);
+});
+
+})
+</script>
+
+
 
     @include('user.inc.confirm_inv')
     @include('user.inc.withdrawal')
     @include('user.inc.inyect')
 @endSection
+

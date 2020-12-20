@@ -27,12 +27,22 @@
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-6">
-                                                <label for="min">{{ __('Inversión Mínima') }}</label>
-                                                <input id="min" type="number" class="regTxtBox" name="min" value="" required autocomplete="min" autofocus placeholder="Inversión mínima">
+                                                <label for="min">{{ __('Inversión Mínima (RD$)') }}</label>
+                                                <input id="min" type="number" class="regTxtBox" name="min" value="" required autocomplete="min" autofocus placeholder="Inversión mínima en pesos dominicanos">
                                             </div>
                                              <div class="col-sm-6">
-                                                <label for="max" class="">{{ __('Inversión Máxima') }}</label>
-                                                <input id="max" type="number" class="regTxtBox" name="max" value="" required autocomplete="max" autofocus placeholder="Inversión máxima">
+                                                <label for="max" class="">{{ __('Inversión Máxima (RD$)') }}</label>
+                                                <input id="max" type="number" class="regTxtBox" name="max" value="" required autocomplete="max" autofocus placeholder="Inversión máxima en pesos dominicanos">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6">
+                                                <label for="min">{{ __('Inversión Mínima (US$)') }}</label>
+                                                <input id="mindol" type="number" class="regTxtBox" name="mindol" value="" required autocomplete="mindol" autofocus placeholder="Inversión mínima en dólares estadounidenses">
+                                            </div>
+                                             <div class="col-sm-6">
+                                                <label for="max" class="">{{ __('Inversión Máxima (US$)') }}</label>
+                                                <input id="maxdol" type="number" class="regTxtBox" name="maxdol" value="" required autocomplete="maxdol" autofocus placeholder="Inversión máxima en dólares estadounidenses">
                                             </div>
                                         </div>
                                         <div class="form-group row">

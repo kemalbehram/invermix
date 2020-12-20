@@ -3,8 +3,10 @@
                 <thead>
                     <tr>
                        <th> {{ __('Nombre') }} </th>
-                       <th> {{ __('Min.') }} </th>
-                       <th> {{ __('Max.') }} </th>
+                       <th> {{ __('Min. RD$') }} </th>
+                       <th> {{ __('Max. RD$') }} </th>
+                       <th> {{ __('Min. US$') }} </th>
+                       <th> {{ __('Max. US$') }} </th>
                        <th> {{ __('Interés (%)') }} </th>
                        <th> {{ __('Duración') }} </th>
                        <th> {{ __('Intervalo de Retiro') }} </th>
@@ -20,6 +22,8 @@
                                 <td>{{$dep->package_name}}</td>
                                 <td>{{number_format($dep->min)}}</td>
                                 <td>{{number_format($dep->max)}}</td>
+                                <td>{{number_format($dep->mindol)}}</td>
+                                <td>{{number_format($dep->maxdol)}}</td>
                                 <td>{{$dep->daily_interest*$dep->period*100}}</td>
                                 <td>{{$dep->period}}</td>
                                 <td>{{$dep->days_interval}}</td>

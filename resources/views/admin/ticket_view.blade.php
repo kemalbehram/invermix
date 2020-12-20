@@ -25,6 +25,7 @@
                                                 <tr>
                                                     <th>{{ __('Ticket ID') }}</th>
                                                     <th>{{ __('Usuario ID') }}</th>
+                                                    <th>{{ __('Categoría') }}</th>
                                                     <th>{{ __('Título') }}</th>
                                                     <th>{{ __('Status') }}</th>
                                                     <th>{{ __('Acción') }}</th>
@@ -38,6 +39,7 @@
                                                             <td>{{$ticket->ticket_id}}</td>
                                                             <td>{{$ticket->user_id}}</td>
                                                             <td>{{$ticket->title}}</td>
+                                                            <td>{{$ticket->category}}</td>
                                                             <td>
                                                                 @if($ticket->status == 0)
                                                                     {{__('Closed')}}

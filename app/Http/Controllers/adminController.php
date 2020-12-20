@@ -2157,12 +2157,15 @@ public function admAddnew(Request $req)
 
   public function create_package_post(Request $req)
   {
+    
     if(Session::has('adm') && !empty(Session::get('adm')))
     {
         $val = Validator::make($req->all(),[
             'package_name' => 'required|string|max:15',
             'min' => 'required|numeric',
             'max' => 'required|numeric',
+            'mindol' => 'required|numeric',
+            'maxdol' => 'required|numeric',
             'interest' => 'required|numeric',
             'period' => 'required|numeric',
             'interval' => 'required|numeric',
@@ -2186,6 +2189,8 @@ public function admAddnew(Request $req)
             $pack->currency = $this->settings->currency;
             $pack->min = $req->input('min');
             $pack->max = $req->input('max');
+            $pack->mindol = $req->input('mindol');
+            $pack->maxdol = $req->input('maxdol');
             $pack->daily_interest = $interest_calc;
             $pack->withdrwal_fee = env('WD_FEE');
             $pack->period = $req->input('period');

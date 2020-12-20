@@ -28,7 +28,7 @@
                                                     <th>{{ __('Días transcurridos') }}</th>
                                                     <th>{{ __('Status') }}</th>
                                                     <th>{{ __('Ganancias') }}</th>
-                                                    <th>{{ __('Descripción') }}</th>
+                                                    <th>{{ __('Propósito') }}</th>
                                                     <th>{{ __('Retirar') }}</th>
                                                 </tr>
                                             </thead>
@@ -77,7 +77,7 @@
                                                       
 
                                                                 @if($in->description == Null)
-                                                            <a href="javascript:void(0)" onclick="descriptioninj('{{$in->id}}')">Agregar descripción</a>
+                                                            <a href="javascript:void(0)" onclick="descriptioninj('{{$in->id}}')">Agregar propósito</a>
                                                                @else
                                                             <a  class="des-after" href="javascript:void(0)" onclick="descriptioninj('{{$in->id}}')">{{$in->description}}</a>
                                                             @endif
@@ -244,14 +244,14 @@ $('#div_inyect').show();
       </div>
       <div class="pop_msg_contnt">
         <p align="center" class="color_blue_b">
-            {{ __('Agrega una descripción para identificar tu inyección.') }} <b>
+            {{ __('Agrega un propósito para identificar tu inyección.') }} <b>
         </p>
         <form  action="/user/inject/description" method="post">
             <div class="form-group" align="left">
               <br>
               <input type="hidden" class="form-control" name="_token" value="{{csrf_token()}}">
               <input id="inj_id" type="hidden" class="form-control" name="id" value="">
-              <input type="text" class="form-control" name="description" placeholder="Agregar descripción, no más de 25 carácteres" required>
+              <input type="text" class="form-control" name="description" placeholder="Agregar propósito, no más de 25 carácteres" required>
             </div>
 
             <div class="form-group">

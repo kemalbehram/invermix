@@ -685,7 +685,7 @@ class userController extends Controller
 
         }else{
           $descript = investment::where('id', $req->id)->update(['description' => $req->description]);
-          Session::put('status', "Descripción agregada.");
+          Session::put('status', "Propósito agregado.");
           Session::put('msgType', "suc");
           return back() ;
         }
@@ -2852,7 +2852,7 @@ class userController extends Controller
 
         }else{
           $descript = inyects::where('id', $req->id)->update(['description' => $req->description]);
-          Session::put('status', "Descripción agregada.");
+          Session::put('status', "Propósito agregado.");
           Session::put('msgType', "suc");
           return back() ;
         }

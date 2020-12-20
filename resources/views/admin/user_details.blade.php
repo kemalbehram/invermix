@@ -369,7 +369,7 @@
                                                   <div class="form-group">
                                                     <h3></h3>
                                                     <p>
-                                                      {{ __('Para clientes cuya inversión sea superior a RD$500,000 o equivalente en dolares.') }}
+                                                      {{ __('Para clientes cuya inversión sea superior a RD$500,000 o equivalente en dólares.') }}
                                                     </p>
                                                     <input type="file" class="form-control" name="utility_doc">
                                                   </div>

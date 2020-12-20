@@ -172,7 +172,7 @@
 										@endif
 
 										<a class="dropdown-item" href="/admin/manage/packages">
-											<span class="fa fa-briefcase"></span>&nbsp; Modalidades
+											<span class="fa fa-briefcase"></span>&nbsp; Planes
                                         </a>
                                         <!-- <a class="dropdown-item" href="/admin/manage/packages">
 											<span class="fa fa-briefcase"></span>&nbsp; Compañías
@@ -303,7 +303,7 @@
 						<li class="nav-item">
 					    	<a href="/admin/manage/packages">
 								<i class="fa fa-briefcase"></i>
-								<p> Modalidades de Inversión </p>
+								<p> Planes de Inversión </p>
 							</a>
                         </li>
 

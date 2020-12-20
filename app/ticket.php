@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class ticket extends Model
 {
     protected $table="ticket";
-    protected $fillable = ['ticket_id', 'user_id', 'title', 'msg', 'status', 'state'];
+    protected $fillable = ['ticket_id', 'user_id', 'title', 'msg', 'status', 'state', 'category'];
 
     public function comments(){
     	return $this->hasMany('App\comments', 'ticket_id');

@@ -21,7 +21,7 @@
                                         <table id="basic-datatables" class="display table table-hover" >
                                             <thead>
                                                 <tr>
-                                                    <th>{{ __('Modalidad') }}</th>
+                                                    <th>{{ __('Plan') }}</th>
                                                     <th>{{ __('Capital') }}</th>
                                                     <th>{{ __('Fecha de inversión') }}</th>
                                                     <th>{{ __('Hasta') }}</th>

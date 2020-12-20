@@ -472,8 +472,6 @@ class userController extends Controller
 
   public function invest(Request $req)
   {
-    //   dd($req->currency);
-    //   die();
 
       $user = Auth::User();
 
@@ -1783,18 +1781,21 @@ class userController extends Controller
 
   public function create_ticket(Request $req)
   {
+ 
+
     $user = Auth::User();
     if(!empty($user))
     {
       $validator = Validator::make($req->all(), [
         'title' => 'string|max:499',
-        'msg' => 'string'
+        'msg' => 'string',
+        'category' => 'required|string'
       ]);
 
       if($validator->fails())
       {
         return back()->With([
-          'toast_msg' => 'Ticket not created! Error'.$validator->errors()->first(),
+          'toast_msg' => 'Ticket no creado! Error'.$validator->errors()->first(),
           'toast_type' => 'err'
         ]);
       }
@@ -1804,18 +1805,44 @@ class userController extends Controller
           'user_id' => $user->id,
           'title' => $req->input('title'),
           'msg' => $req->input('msg'),
-          'status' => 1
+          'status' => 1,
+          'category' => $req->category
         ]);
-        $ticket->save();
 
-        $maildata = ['email' => $user->email, 'username' => $user->username];
+        // $ticket->save();
 
-        Mail::send('mail.user_tickect_msg', ['md' => $maildata], function($msg) use ($maildata){
-            $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-            $msg->to(env('SUPPORT_EMAIL'));
-            $msg->subject('Ticket Message');
-        });
+        if($req->category == 'Idea de Proyecto'){
 
+          $maildata = ['email' => $user->email, 'username' => $user->username];
+
+          Mail::send('mail.user_tickect_msg', ['md' => $maildata], function($msg) use ($maildata){
+              $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+              $msg->to('administracion@invermixcapital.com');
+              $msg->subject('Mensaje de Ticket');
+          });
+
+        }elseif($req->category == 'Duda Financiera'){
+
+          $maildata = ['email' => $user->email, 'username' => $user->username];
+
+          Mail::send('mail.user_tickect_msg', ['md' => $maildata], function($msg) use ($maildata){
+              $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+              $msg->to('gerencia@invermixcapital.com');
+              $msg->subject('Mensaje de Ticket');
+          });
+
+
+        }else{
+
+          $maildata = ['email' => $user->email, 'username' => $user->username];
+
+          Mail::send('mail.user_tickect_msg', ['md' => $maildata], function($msg) use ($maildata){
+              $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+              $msg->to(env('SUPPORT_EMAIL'));
+              $msg->subject('Mensaje de Ticket');
+          });
+        }
+       
         // $tickets = ticket::find($user->id);
         return back()->With([
           'toast_msg' => '¡Ticket enviado correctamente! El administrador te atenderá en breve',
@@ -1838,6 +1865,11 @@ class userController extends Controller
       return redirect('/login');
     }
   }
+
+
+
+
+
   public function open_ticket($id)
   {
     $user = Auth::User();
@@ -1913,7 +1945,8 @@ class userController extends Controller
 
       $validator = Validator::make($req->all(), [
         'ticket_id' => 'required|string',
-        'msg' => 'required|string'
+        'msg' => 'required|string',
+       
       ]);
 
       if($validator->fails())
@@ -2551,7 +2584,7 @@ class userController extends Controller
             // });
 
             $act = new activities;
-            $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." modalidad";
+            $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." plan";
             $act->user_id = $user->id;
             $act->save();
 
@@ -2614,7 +2647,7 @@ class userController extends Controller
             // });
 
             $act = new activities;
-            $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." modalidad";
+            $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." ";
             $act->user_id = $user->id;
             $act->save();
 
@@ -2698,7 +2731,7 @@ class userController extends Controller
               // });
 
               $act = new activities;
-              $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." modalidad";
+              $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." plan";
               $act->user_id = $user->id;
               $act->save();
 
@@ -2761,7 +2794,7 @@ class userController extends Controller
             //   });
 
               $act = new activities;
-              $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." modalidad";
+              $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." plan";
               $act->user_id = $user->id;
               $act->save();
 
@@ -2795,6 +2828,46 @@ class userController extends Controller
       }
 
   }
+
+  public function descriptionInj(Request $req){
+
+    // dd($req);
+    // die();
+
+    $user = Auth::User();
+    
+    if(!empty($user))
+    { 
+      try
+      {
+        $validator = Validator::make($req->all(), [
+          'description' => 'required|string|max:25',
+
+        ]);
+
+        if($validator->fails()){
+          Session::put('msgType', "err");
+          Session::put('status', $validator->errors()->first());
+          return back();
+
+        }else{
+          $descript = inyects::where('id', $req->id)->update(['description' => $req->description]);
+          Session::put('status', "Descripción agregada.");
+          Session::put('msgType', "suc");
+          return back() ;
+        }
+
+  }
+  
+  catch(\Exception $e)
+  {
+    Session::put('status', 'Error al agregar inversión');
+    Session::put('msgType', "err");
+    return back();
+  }
+    }
+
+}
 
 
 

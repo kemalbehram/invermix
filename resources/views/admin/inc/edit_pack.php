@@ -4,7 +4,7 @@
     <div class="col-md-4" align="Center">
       <div class="card mt50">
         <div class="card-header card_header_bg_blue">
-          <h2 class="text-white">Actualizar Modalidad</h2>
+          <h2 class="text-white">Actualizar Plan</h2>
         </div>
         <div id="" class="edit_pack_pad_n30_5 card-body">
           <form action="/admin/edit/packages" method="post">

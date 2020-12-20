@@ -374,7 +374,7 @@ function act_deact_pack(id)
         {
             if(result == 's')
             {
-	            $('#suc').html('Modalidad actualizada.');
+	            $('#suc').html('Plan actualizado.');
 	            $('#suc').show().animate({ width: "30%" }, "1000").delay(2000).animate({ width: "-50px" }, "1000").fadeOut(50);
             }
             else

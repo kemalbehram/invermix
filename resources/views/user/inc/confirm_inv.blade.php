@@ -9,15 +9,18 @@
       </div>
       <div class="pop_msg_contnt">
         <p align="center" class="color_blue_b">
-            {{ __('Estás a punto de invertir en la modalidad ') }} <b><span id="pack_inv"></span></b>{{ __(', cual tiene un período de') }}  <b><span id="period"></span></b>{{ __(' días laborables y tiene un interés total de ') }}  <b><span id="intr"></span></b>%.
+            {{ __('Estás a punto de invertir en la  ') }} <b><span id="pack_inv"></span></b>{{ __(', cual tiene un período de') }}  <b><span id="period"></span></b>{{ __(' días laborables y tiene un interés total de ') }}  <b><span id="intr"></span></b>%.
         </p>
         <form id="userpackinv" action="/user/invest/packages" method="post">
             <div class="form-group" align="left">
               <div class="pop_form_min_max" align="center">
-                <b>{{ __('Inversión Min.:') }} {{$settings->currency}} <span id="min"></span></b> |
+                <b>{{ __('Inversión Min.:') }} {{'RD$'}} <span id="min"></span></b> |
                 <br>
-                <b>{{ __('Inversión Máx.:') }} {{$settings->currency}} <span id="max"></span></b>
+                <b>{{ __('Inversión Máx.:') }} {{'RD$'}} <span id="max"></span></b>
+                <br>
+                <span class="note">O equivalente en dólares</span>
               </div>
+
               <br>
               <label>{{ __('Colocar Monto a Invertir') }}</label>
               <input type="hidden" class="form-control" name="_token" value="{{csrf_token()}}">

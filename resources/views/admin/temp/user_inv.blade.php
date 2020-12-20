@@ -40,7 +40,7 @@
     <table id="basic-datatables" class="display table table-striped table-hover">
         <thead class="web-table">
             <tr>
-               <th> {{ __('Modalidad') }} </th>
+               <th> {{ __('Plan') }} </th>
                <th> {{ __('Capital') }} </th>
                <th> {{ __('Retorno') }} </th>
                <th> {{ __('Fecha de Inversión') }} </th>

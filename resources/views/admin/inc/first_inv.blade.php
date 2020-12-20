@@ -14,7 +14,7 @@
       </div>
       <div class="pop_msg_contnt">
         <p align="center" class="color_blue_b">
-            {{ __('Estás a punto de invertir en la modalidad ') }} <b><span id="pack_inv"></span></b>{{ __(', cual tiene un período de') }}  <b><span id="period"></span></b>{{ __(' días laborables y tiene un interés total de ') }}  <b><span id="intr"></span></b>%.
+            {{ __('Estás a punto de invertir en este plan ') }} <b><span id="pack_inv"></span></b>{{ __(', cual tiene un período de') }}  <b><span id="period"></span></b>{{ __(' días laborables y tiene un interés total de ') }}  <b><span id="intr"></span></b>%.
         </p>
         <form id="userpackinv" action="{{route('first_inv')}}" method="post">
             <div class="form-group" align="left">

@@ -139,6 +139,7 @@ Route::post('/user/add/bank', 'userController@addbank')->middleware('auth');
 Route::post('/user/invest/packages', 'userController@invest')->middleware('auth');
 Route::post('/user/invest/description', 'userController@description')->middleware('auth');
 Route::post('/user/inyect', 'userController@inyect')->middleware('auth');
+Route::post('/user/inject/description', 'userController@descriptionInj')->middleware('auth');
 Route::post('/user/wdraw/earning', 'userController@wd_invest')->middleware('auth');
 Route::post('/user/wdraw/earning/inyect', 'userController@wd_inyect')->middleware('auth');
 Route::post('/user/wallet/wd', 'userController@user_wallet_wd')->middleware('auth');

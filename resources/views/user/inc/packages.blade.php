@@ -10,7 +10,7 @@
                         <div class="col-sm-4">
                             <div class="panel card pack-container" style="" align="center">
                                 <div class="panel-head" style="">
-                                    <h3 class="txt_transform">{{ __('Modalidad ') }} {{$inv->package_name}} </h3>
+                                    <h3 class="txt_transform">{{ __('Plan') }} {{$inv->package_name}} </h3>
                                 </div>
                                 <div class="" align="center" >
                                     <br>
@@ -32,18 +32,18 @@
                                         <h4 class="u_case" >
                                             <strong>{{ __('Inversión Mín.') }}</strong>
                                         </h4>
-                                        <span class="pk_num">{{$settings->currency}} {{$inv->min}}</span>
+                                        <span class="pk_num">{{'RD$'}} {{number_format($inv->min),2}}</span>
                                         <br>
-                                        <span class="apunte">O equivalente en dolares</span>
+                                        <span class="note">O equivalente en dólares</span>
                                         <br>
                                         <br>
                                         <h4 class="u_case">
                                             <strong>{{ __('Inversión Máx.') }}</strong>
                                         </h4>
 
-                                        <span class="pk_num">{{$settings->currency}} {{$inv->max}}</span>
+                                        <span class="pk_num">{{'RD$'}} {{number_format($inv->max),2}}</span>
                                         <br>
-                                        <span class="apunte">O equivalente en dolares</span>
+                                        <span class="note">O equivalente en dólares</span>
 
                                 </div>
 

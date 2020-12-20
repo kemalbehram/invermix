@@ -1062,3 +1062,10 @@ a{
 	font-size: 15px;
   
   }
+
+  .note {
+	color:rgb(211, 123, 55) !important;
+	font-style: oblique;
+	font-size: 13px;
+  
+  }

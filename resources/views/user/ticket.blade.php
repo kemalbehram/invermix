@@ -25,6 +25,7 @@
                                                 <tr>
                                                     <th>{{ __('Ticket ID') }}</th>
                                                     <th>{{ __('Título') }}</th>
+                                                    <th>{{ __('Categoría') }}</th>
                                                     <th>{{ __('Status') }}</th>
                                                     <th>{{ __('Acción') }}</th>
                                                     <!-- <th>{{ __('Status') }}</th>                                   -->
@@ -37,6 +38,7 @@
                                                         <tr>
                                                             <td>{{$ticket->ticket_id}}</td>
                                                             <td>{{$ticket->title}}</td>
+                                                            <td>{{$ticket->category}}</td>
                                                             <td>
                                                                 @if($ticket->status == 0)
                                                                     {{__('Cerrado')}}
@@ -99,6 +101,15 @@
                   <div class="modal-body">
                     <form class="form-horizontal" method="POST" role="form" action="{{ route('ticket.create') }}" >
                         @csrf
+                        
+                        <div class="form-group">
+                        <label class="control-label">{{ __('Categoría') }}</label>
+                                      <select class="form-control" id="currency" name="category" required>
+                                      <option value="Soporte Técnico" name="category">Soporte Técnico</option>
+                                        <option value="Duda Financiera" name="category">Duda Financiera</option>
+                                        <option value="Idea de Proyecto" name="ccategory">Idea de Proyecto</option>
+                                        </select>
+                       </div>
                         <div class="form-group {{ $errors->has('amount') ? ' has-error' : '' }}">
                             <label class="control-label">{{ __('Título') }}</label>
                             <div class="input-group">

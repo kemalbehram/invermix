@@ -12,7 +12,7 @@
                             <div class="card">
                                 <div class="card-header card_header_bg_blue">
                                     <div class="card-head-row card-tools-still-right">
-                                        <h4 class="card-title text-white"> <i class="fas fa-briefcase"></i> {{ __('Modalidades de Inversión') }} </h4>
+                                        <h4 class="card-title text-white"> <i class="fas fa-briefcase"></i> {{ __('Planes de Inversión') }} </h4>
                                         <div class="card-tools">
                                             <a href="/admin/create/package" class="btn btn-default"><i class="fa fa-plus"></i> {{ __('Añadir') }} </a>
                                         </div>

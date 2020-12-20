@@ -12,7 +12,7 @@
                                 <div class="card-header card_header_bg_blue" >
                                     <div class="card-head-row card-tools-still-right">
                                         <h4 class="card-title text-white">
-                                            <i class="fas fa-plus"></i>{{ __('Añadir Modalidad de Inversión') }}
+                                            <i class="fas fa-plus"></i>{{ __('Añadir Plan de Inversión') }}
                                         </h4>
                                     </div>
                                 </div>
@@ -21,8 +21,8 @@
                                        @csrf()
                                         <div class="form-group row">
                                             <div class="col-sm-12">
-                                                <label for="package_name">{{ __('Nombre Modalidad') }}</label>
-                                                <input id="package_name" type="text" class="regTxtBox" name="package_name" value="" required autocomplete="package_name" autofocus placeholder="Nombre modalidad de inversión">
+                                                <label for="package_name">{{ __('Nombre Plan') }}</label>
+                                                <input id="package_name" type="text" class="regTxtBox" name="package_name" value="" required autocomplete="package_name" autofocus placeholder="Nombre plan de inversión">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -37,7 +37,7 @@
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-12">
-                                                <label for="daily_interest">{{ __('Interés de la Modalidad (%)') }}</label>
+                                                <label for="daily_interest">{{ __('Interés de la Plan (%)') }}</label>
                                                 <input id="daily_interest" step="0.1" type="number" class="regTxtBox" name="interest" value="" required autocomplete="daily_interest" autofocus placeholder="Interés porcentual para todo el período de inversión">
                                             </div>
                                         </div>

@@ -2295,14 +2295,14 @@ public function admAddnew(Request $req)
       {
         ticket::where('id', $id)->update(['status' => 0]);
         return back()->with([
-          'toast_msg' => 'Ticket closed successfully!',
+          'toast_msg' => '¡Ticket cerrado con éxito!',
           'toast_type' => 'suc'
         ]);
       }
       catch (\Exception $e)
       {
         return back()->with([
-          'toast_msg' => 'Error occured!',
+          'toast_msg' => '¡Ocurrió un error!',
           'toast_type' => 'err'
         ]);
       }

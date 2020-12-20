@@ -21,13 +21,14 @@
                                         <table id="basic-datatables" class="display table table-hover" >
                                             <thead>
                                                 <tr>
-                                                    <th>{{ __('Modalidad') }}</th>
+                                                    <th>{{ __('Plan') }}</th>
                                                     <th>{{ __('Capital') }}</th>
                                                     <th>{{ __('Fecha de inversión') }}</th>
                                                     <th>{{ __('Hasta') }}</th>
                                                     <th>{{ __('Días transcurridos') }}</th>
                                                     <th>{{ __('Status') }}</th>
                                                     <th>{{ __('Ganancias') }}</th>
+                                                    <th>{{ __('Descripción') }}</th>
                                                     <th>{{ __('Retirar') }}</th>
                                                 </tr>
                                             </thead>
@@ -71,6 +72,17 @@
                                                             <td>{{$totalDays}}</td>
                                                             <td>{{$in->status}}</td>
                                                             <td>{{$in->currency}} {{$ern}} </td>
+                                                            <td>
+
+                                                      
+
+                                                                @if($in->description == Null)
+                                                            <a href="javascript:void(0)" onclick="descriptioninj('{{$in->id}}')">Agregar descripción</a>
+                                                               @else
+                                                            <a  class="des-after" href="javascript:void(0)" onclick="descriptioninj('{{$in->id}}')">{{$in->description}}</a>
+                                                            @endif
+                                                            </td>
+
                                                             <td>
                                                                 <a title="Retirar" href="javascript:void(0)" class="btn btn-info" onclick="inywd('pack', '{{$in->id}}', '{{$ern}}', '{{ $withdrawable }}', '{{$Edays}}', '{{$ended}}')">
                                                                     <i class="fas fa-arrow-down"></i>
@@ -140,7 +152,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title"> Modalidades Disponibles</div>
+                                    <div class="card-title"> Planes Disponibles</div>
                                 </div>
                                 <div class="card-body pb-0">
                                     @include('user.inc.packages')
@@ -196,30 +208,84 @@
             $('#div_inyect').hide();
           });
         </script>
-        <!-- end close btn -->
-      </div>
 
-    </div>
+<script type="text/javascript">
 
-
-    <script type="text/javascript">
-
-    function inywd(p,id, earn, w_able, days, ended)
+function inywd(p,id, earn, w_able, days, ended)
 {
-    // alert(id);
-    $('#pack_type').val(p);
-	$('#earned').text(earn);
-	$('#days').text(days);
-	$('#inv_id').val(id);
-	$('#ended').val(ended);
-	$('#withdrawable_amt').val(w_able);
-	$('#div_inyect').show();
+// alert(id);
+$('#pack_type').val(p);
+$('#earned').text(earn);
+$('#days').text(days);
+$('#inv_id').val(id);
+$('#ended').val(ended);
+$('#withdrawable_amt').val(w_able);
+$('#div_inyect').show();
 
 }
 
 </script>
 
+        <!-- end close btn -->
+      </div>
+
+    </div>
+
+    </div>
+
+
+
+    <div id="popDescriptionInj" class="container pop_invest_cont" >
+  <div class="row wd_row_pad" >
+    <div class="col-md-4">&emps;</div>
+    <div class="col-md-4 card pop_invest_col" align="center">
+      <div class="card-header" style="">
+   
+      </div>
+      <div class="pop_msg_contnt">
+        <p align="center" class="color_blue_b">
+            {{ __('Agrega una descripción para identificar tu inyección.') }} <b>
+        </p>
+        <form  action="/user/inject/description" method="post">
+            <div class="form-group" align="left">
+              <br>
+              <input type="hidden" class="form-control" name="_token" value="{{csrf_token()}}">
+              <input id="inj_id" type="hidden" class="form-control" name="id" value="">
+              <input type="text" class="form-control" name="description" placeholder="Agregar descripción, no más de 25 carácteres" required>
+            </div>
+
+            <div class="form-group">
+                <button class="collb btn btn-info">{{ __('Agregar') }}</button>
+                <span style="">
+                  <a id="popDescriptionInj_close" href="javascript:void(0)" class="btn btn-danger">{{ __('Cancelar') }}</a>
+                </span>
+                <br><br>
+            </div>
+        </form>
+
+      </div>
+      <!-- close btn -->
+      <script type="text/javascript">
+        $('#popDescriptionInj_close').click( function(){
+          $('#popDescriptionInj').hide();
+        });
+</script>
+      <!-- end close btn -->
+    </div>
   </div>
+
+  <script type="text/javascript">
+function descriptioninj(id)
+{
+    $('#inj_id').val(id);
+    $('#popDescriptionInj').show();
+}
+</script>
+
+</div>
+
+
+
 
     @include('user.inc.confirm_inv')
     @include('user.inc.withdrawal')

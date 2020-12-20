@@ -22,7 +22,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>{{ __('Fecha') }}</th>
-                                                    <th>{{ __('Modalidad') }}</th>
+                                                    <th>{{ __('Plan') }}</th>
                                                     <th>{{ __('Capital') }}</th>
                                                     <th>{{ __('Monto Retirado/Depositado') }}</th>
                                                     <th>{{ __('Status') }}</th>
@@ -70,7 +70,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>{{ __('Fecha') }}</th>
-                                                    <th>{{ __('Modalidad') }}</th>
+                                                    <th>{{ __('Plan) }}</th>
                                                     <th>{{ __('Capital') }}</th>
                                                     <th>{{ __('Monto Retirado/Depositado') }}</th>
                                                     <th>{{ __('Status') }}</th>

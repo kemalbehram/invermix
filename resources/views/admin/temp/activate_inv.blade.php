@@ -47,7 +47,7 @@
               <br>
               <div class="input-group">
                 <div class="input-group-prepend " >
-                  <span class="input-group-text " ><i class=""></i>Modalidad</span>
+                  <span class="input-group-text " ><i class=""></i>Plan</span>
                 </div>
                 <input id="package" type="text" name="package" class="form-control" name="package" placeholder="Capital de apertura" required readonly>
                 <div class="input-group-append " >

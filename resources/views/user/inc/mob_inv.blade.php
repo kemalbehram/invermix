@@ -2,7 +2,7 @@
 <div class="alert alert-info inv_alert_cont" >
     <div class="row inv_alert_top_row">
         <div class="col-xs-12 pad_top_5" align="center" >
-            <h4 class="u_case">{{ __('Modalidad') }}: {{$in->package}}</h4>
+            <h4 class="u_case">{{ __('Plan') }}: {{$in->package}}</h4>
 
         </div>
     </div>

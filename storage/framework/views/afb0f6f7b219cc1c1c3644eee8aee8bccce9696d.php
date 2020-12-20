@@ -88,7 +88,7 @@
 								</li>
 
 								<li class="nav-item">
-									<a class="nav-link" href="{{route('login')}}" >
+									<a class="nav-link" href="<?php echo e(route('login')); ?>" >
                                         <button class="btn btn-outline-primary button-enter">Entrar<i class="fas fas fa-sign-in-alt pl-1"></i></button>
 
 										<div class="mr-hover-effect"></div>
@@ -294,7 +294,7 @@
 
                             ?>
 
-                            <div class="counter">{{count($musers)}}</div>
+                            <div class="counter"><?php echo e(count($musers)); ?></div>
                             </div>
 
 							<p class="text">
@@ -308,7 +308,7 @@
                             <i class="flaticon-verified"></i>
 							</div>
 							<div class="counter-wrapper">
-							<span>+</span>	<div class="counter">{{count($investment)}}</div>
+							<span>+</span>	<div class="counter"><?php echo e(count($investment)); ?></div>
 							</div>
 							<p class="text">
 								Inversiones
@@ -905,7 +905,7 @@
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="contact-form-wrapper">
-						<form action="{{route('contactform')}}"  method="post" >
+						<form action="<?php echo e(route('contactform')); ?>"  method="post" >
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group">
@@ -1073,3 +1073,4 @@
 </body>
 
 </html>
+<?php /**PATH /Applications/MAMP/htdocs/invermix/resources/views/landing/landing.blade.php ENDPATH**/ ?>

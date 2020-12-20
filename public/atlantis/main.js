@@ -235,11 +235,13 @@ function inyect(packa_id, id )
 
 
 
-function edit_pack(id, min, max, interest, wd_fee, token, cur)
+function edit_pack(id, min, max, mindol, maxdol, interest, wd_fee, token, cur)
 {
 	$('#p_id').val(id);
 	$('#min').val(min);
-	$('#max').val(max);
+    $('#max').val(max);
+    $('#mindol').val(mindol);
+	$('#maxdol').val(maxdol);
 	$('#interest').val(interest);
 	$('#fee').val(wd_fee);
 	$('#token').val(token);

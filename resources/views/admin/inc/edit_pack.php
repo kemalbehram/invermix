@@ -14,29 +14,39 @@
               </div>
               <div class="input-group">
                 <div class="input-group-prepend " >
-                  <span class="input-group-text " ><i class=""></i>Min.</span>
+                  <span class="input-group-text " ><i class=""></i>Min. RD$</span>
                 </div>
-                <input id="min" type="text" class="form-control" name="min" placeholder="Enter Min amount to invest" required>
-                <div class="input-group-append " >
-                  <span class="input-group-text pack_edit_cur" ><i class=""></i></span>
-                </div>
+                <input id="min" type="text" class="form-control" name="min" placeholder="Coloca monto mínimo para invertir en pesos dominicanos" required>
               </div>
               <br>
               <div class="input-group">
                 <div class="input-group-prepend " >
-                  <span class="input-group-text "><i class=""></i>Max.</span>
+                  <span class="input-group-text "><i class=""></i>Max. RD$</span>
                 </div>
-                <input id="max" type="text" class="form-control" name="max" placeholder="Enter Max amount to invest" required>
-                <div class="input-group-append " >
-                  <span class="input-group-text pack_edit_cur" ><i class=""></i></span>
+                <input id="max" type="text" class="form-control" name="max" placeholder="Coloca monto máximo para invertir en pesos dominicanos" required>
+  
+              </div>
+              <br>
+              <div class="input-group">
+                <div class="input-group-prepend " >
+                  <span class="input-group-text " ><i class=""></i>Min. US$</span>
                 </div>
+                <input id="mindol" type="text" class="form-control" name="mindol" placeholder="Coloca monto mínimo para invertir en dólares estadounidentes" required>
+              </div>
+              <br>
+              <div class="input-group">
+                <div class="input-group-prepend " >
+                  <span class="input-group-text "><i class=""></i>Max. US$</span>
+                </div>
+                <input id="maxdol" type="text" class="form-control" name="maxdol" placeholder="Coloca monto máximo para invertir en dólares estadounidentes" required>
+      
               </div>
               <br>
               <div class="input-group">
                 <div class="input-group-prepend " >
                   <span class="input-group-text "><i class=""></i>Interés</span>
                 </div>
-                  <input id="interest" type="text" class="form-control" name="interest" placeholder="Interest for the period of investment" required>
+                  <input id="interest" type="text" class="form-control" name="interest" placeholder="Intereses para la inversión" required>
                 <div class="input-group-append " >
                   <span class="input-group-text " ><i class="fa fa-percent"></i></span>
                 </div>

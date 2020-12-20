@@ -1225,6 +1225,8 @@ public function rejectWD_INJ($id)
         $pack->min = $req->input('min');
         $pack->currency = $this->settings->currency;
         $pack->max = $req->input('max');
+        $pack->mindol = $req->input('mindol');
+        $pack->maxdol = $req->input('maxdol');
         $pack->daily_interest = ($req->input('interest') / 100)/$pack->period;
         // $pack->withdrwal_fee = ($req->input('fee'))/100;
         $pack->save();

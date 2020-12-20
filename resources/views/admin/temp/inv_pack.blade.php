@@ -36,7 +36,7 @@
 
                                 <td>
                                     @if($adm->role == 3 || $adm->role == 2)
-                                        <a id="{{$dep->id}}" title="Edit Package" href="javascript:void(0)" onclick="edit_pack(this.id, '{{$dep->min}}', '{{$dep->max}}', '{{$dep->daily_interest*$dep->period*100}}', '{{$dep->withdrwal_fee}}', '{{csrf_token()}}', '{{$dep->currency}}')">
+                                        <a id="{{$dep->id}}" title="Edit Package" href="javascript:void(0)" onclick="edit_pack(this.id, '{{$dep->min}}', '{{$dep->max}}', '{{$dep->mindol}}', '{{$dep->maxdol}}', '{{$dep->daily_interest*$dep->period*100}}', '{{$dep->withdrwal_fee}}', '{{csrf_token()}}', '{{$dep->currency}}')">
                                             <span><i class="fa fa-edit btn btn-warning"></i></span>
                                         </a>
                                         <a id="{{$dep->id}}" title="Delete Package" href="javascript:void(0)" onclick="load_get_ajax('/admin/delete/pack/{{$dep->id}}', this.id, 'admDeleteMsg') ">

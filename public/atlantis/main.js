@@ -739,12 +739,12 @@ function s_2fa(opr)
             }
             if(result.msg == 'exist')
             {
-                $('#err').html('Two factor authentication is active');
+                $('#err').html('Autenticación en dos pasos ya está activa');
                 $('#err').show().animate({ width: "30%" }, "1000").delay(2000).animate({ width: "-50px" }, "1000").fadeOut(50);
             }
             if(result.msg == 'disable')
             {
-                $('#err').html('Two factor authentication is not active');
+                $('#err').html('Autenticación en dos pasos no está activa');
                 $('#err').show().animate({ width: "30%" }, "1000").delay(2000).animate({ width: "-50px" }, "1000").fadeOut(50);
             }
         },

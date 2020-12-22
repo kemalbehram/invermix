@@ -1,8 +1,8 @@
 			<footer class="foot" style="background-color: <?php echo e($settings->footer_color); ?>">
-				<div class="container-fluid">					
+				<div class="container-fluid">
 					<div class="copyright" align="center">
 					    Copyright &#169; <a href="/"><?php echo e($settings->site_title); ?></a> <?php echo e(date("Y")); ?>. All Rights Reserved.
-					</div>				
+					</div>
 				</div>
 			</footer>
 		</div>
@@ -23,17 +23,18 @@
 
 	<?php echo $__env->make('user.inc.alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-	<?php if(Session::has('status')  && Session::get('msgType') == 'suc'): ?>         
+	<?php if(Session::has('status')  && Session::get('msgType') == 'suc'): ?>
 	    <script type="text/javascript">
-	    	$('#suc').html("<?php echo e(Session::get('status')); ?>");            
+	    	$('#suc').html("<?php echo e(Session::get('status')); ?>");
 	        $('#suc').show().animate({ width: "50%" }, "1000").delay(10000).fadeOut(100);
 	    </script>
 	    <?php echo e(Session::forget('status')); ?>
 
-	    <?php echo e(Session::forget('msgType')); ?>         
-	<?php elseif(Session::has('status')  && Session::get('msgType') == 'err'): ?>        
+	    <?php echo e(Session::forget('msgType')); ?>
+
+	<?php elseif(Session::has('status')  && Session::get('msgType') == 'err'): ?>
 	    <script type="text/javascript">
-	        $('#err').html("<?php echo e(Session::get('status')); ?>");            
+	        $('#err').html("<?php echo e(Session::get('status')); ?>");
 	        $('#err').show().animate({ width: "50%" }, "1000").delay(10000).fadeOut(100);
 	    </script>
 	    <?php echo e(Session::forget('status')); ?>
@@ -43,7 +44,7 @@
 	<?php endif; ?>
 
 	<!--   Core JS Files   -->
-	
+
 
 	<script src="/atlantis/js/core/popper.min.js"></script>
 	<script src="/atlantis/js/core/bootstrap.min.js"></script>
@@ -86,7 +87,7 @@
 	<!-- <script src="/atlantis/js/demo.js"></script>	 -->
 	<script src="/atlantis/js/moment.js"></script>
 	<script src="/atlantis/main.js"></script>
-	
+
 	<script>
 		Circles.create({
 			id:'circles-1',
@@ -121,10 +122,10 @@
 		Circles.create({
 			id:'circles-3',
 			radius:45,
-			value:'<?php echo e(count($refs)); ?>',
+			value:'<?php echo e(count($actIny)); ?>',
 			maxValue:100,
 			width:7,
-			text: '<?php echo e(count($refs)); ?>',
+			text: '<?php echo e(count($actIny)); ?>',
 			colors:['#f1f1f1', '#F25961'],
 			duration:400,
 			wrpClass:'circles-wrp',
@@ -194,35 +195,35 @@
 			lineWidth: '2',
 			lineColor: '#ffa534',
 			fillColor: 'rgba(255, 165, 52, .14)'
-		});	
+		});
 
 	</script>
 
 	<script type="text/javascript">
-		
+
 		var inv_dates = [];
 		var inv_vals = [];
 
 		var inv = '<?php echo json_encode($myInv); ?>' ;
-		var js_inv = JSON.parse(inv);		
-		
+		var js_inv = JSON.parse(inv);
+
 		$.each( js_inv, function( k, val ) {
 	        // $('#prnt').append(', ' +ky+": "+val['created_at']);
 	        var dt = moment(new Date(val['created_at'])).format('MM/YY'); //new Date(val['created_at']);
 	        inv_dates[k] = dt; // dt.getMonth() + '/'+ dt.getFullYear();
 	        inv_vals[k] = val['capital'];
-	    }); 
+	    });
 
 		var ctx2 = document.getElementById('statisticsChart2').getContext('2d');
 
 		var statisticsChart2 = new Chart(ctx2, {
 			type: 'line',
 			data: {
-				labels: inv_dates, //["Jan", "Feb", "Mar"], 
-				datasets: 
-				[ 
+				labels: inv_dates, //["Jan", "Feb", "Mar"],
+				datasets:
+				[
 					{
-						label: "Investment Stats",
+						label: "Estadísticas de Inversión",
 						borderColor: '#08C',
 						pointBackgroundColor: 'rgba(0, 84, 180, 0.6)',
 						pointRadius: 0,
@@ -230,13 +231,13 @@
 						legendColor: '#08C',
 						fill: true,
 						borderWidth: 2,
-						data: inv_vals //[154, 184, 175] 
-					} 
-					
+						data: inv_vals //[154, 184, 175]
+					}
+
 				]
 			},
 			options : {
-				responsive: true, 
+				responsive: true,
 				maintainAspectRatio: false,
 				legend: {
 					display: false
@@ -275,35 +276,35 @@
 							fontStyle: "500"
 						}
 					}]
-				}, 
-				legendCallback: function(chart) { 
-					var text = []; 
-					text.push('<ul class="' + chart.id + '-legend html-legend">'); 
-					for (var i = 0; i < chart.data.datasets.length; i++) { 
-						text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>'); 
-						if (chart.data.datasets[i].label) { 
-							text.push(chart.data.datasets[i].label); 
-						} 
-						text.push('</li>'); 
-					} 
-					text.push('</ul>'); 
-					return text.join(''); 
-				}  
+				},
+				legendCallback: function(chart) {
+					var text = [];
+					text.push('<ul class="' + chart.id + '-legend html-legend">');
+					for (var i = 0; i < chart.data.datasets.length; i++) {
+						text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>');
+						if (chart.data.datasets[i].label) {
+							text.push(chart.data.datasets[i].label);
+						}
+						text.push('</li>');
+					}
+					text.push('</ul>');
+					return text.join('');
+				}
 			}
 		});
 
 		var inv_dates = [];
 		var inv_vals = [];
 
-		var inv = '<?php echo json_encode($wd); ?>' ;
-		var js_inv = JSON.parse(inv);		
-		
+		var inv = '<?php echo json_encode($myInv); ?>' ;
+		var js_inv = JSON.parse(inv);
+
 		$.each( js_inv, function( k, val ) {
 	        // $('#prnt').append(', ' +ky+": "+val['created_at']);
 	        var dt = moment(new Date(val['created_at'])).format('MM/YY'); //new Date(val['created_at']);
 	        inv_dates[k] = dt; // dt.getMonth() + '/'+ dt.getFullYear();
-	        inv_vals[k] = val['amount'];
-	    }); 
+	        inv_vals[k] = val['w_amt'];
+	    });
 
 		var ctx = document.getElementById('wd_stats').getContext('2d');
 
@@ -311,11 +312,11 @@
 			type: 'line',
 			scaleFontColor: '#CCC',
 			data: {
-				labels: inv_dates, //["Jan", "Feb", "Mar"], 
-				datasets: 
-				[ 
+				labels: inv_dates, //["Jan", "Feb", "Mar"],
+				datasets:
+				[
 					{
-						label: "Withdrawal Stats",
+						label: "Estadísticas de Retiros",
 						borderColor: '#FFF',
 						pointBackgroundColor: 'rgba(243, 84, 93, 0.6)',
 						pointRadius: 0,
@@ -323,13 +324,13 @@
 						legendColor: '#CCC',
 						fill: true,
 						borderWidth: 2,
-						data: inv_vals //[154, 184, 175] 
-					} 
-					
+						data: inv_vals //[154, 184, 175]
+					}
+
 				]
 			},
-			options : {				
-				responsive: true, 
+			options : {
+				responsive: true,
 				maintainAspectRatio: false,
 				legend: {
 					display: false
@@ -353,7 +354,7 @@
 							beginAtZero: false,
 							maxTicksLimit: 5,
 							padding: 10,
-							fontColor: "#CCC",							
+							fontColor: "#CCC",
 						},
 						gridLines: {
 							drawTicks: false,
@@ -373,24 +374,24 @@
 							fontColor: "#CCC",
 						}
 					}]
-				}, 
-				legendCallback: function(chart) { 
-					var text = []; 
-					text.push('<ul class="' + chart.id + '-legend html-legend">'); 
-					for (var i = 0; i < chart.data.datasets.length; i++) { 
-						text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>'); 
-						if (chart.data.datasets[i].label) { 
-							text.push(chart.data.datasets[i].label); 
-						} 
-						text.push('</li>'); 
-					} 
-					text.push('</ul>'); 
-					return text.join(''); 
-				}  
+				},
+				legendCallback: function(chart) {
+					var text = [];
+					text.push('<ul class="' + chart.id + '-legend html-legend">');
+					for (var i = 0; i < chart.data.datasets.length; i++) {
+						text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>');
+						if (chart.data.datasets[i].label) {
+							text.push(chart.data.datasets[i].label);
+						}
+						text.push('</li>');
+					}
+					text.push('</ul>');
+					return text.join('');
+				}
 			}
 		});
 
-		
+
 	</script>
 
 	<script >
@@ -452,7 +453,7 @@
         	});
 
         });
-    </script> 
+    </script>
 
     <?php if(Session::has('bank_dep_result') && Session::get('bank_dep_result') == 'suc' ): ?>
     	<script type="text/javascript">
@@ -472,5 +473,5 @@
             $('#suc').show().animate({ width: "30%" }, "1000").delay(10000).fadeOut(100);
 		</script>
 	<?php endif; ?>
-	
+
 <?php /**PATH /Applications/MAMP/htdocs/invermix/resources/views/layouts/atlantis/footer.blade.php ENDPATH**/ ?>

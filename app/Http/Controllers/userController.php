@@ -473,6 +473,9 @@ class userController extends Controller
   public function invest(Request $req)
   {
 
+    // dd($req->currency);
+    // dd();
+
       $user = Auth::User();
 
       if($this->st->investment != 1 )
@@ -497,7 +500,6 @@ class userController extends Controller
       }
 
 
-
       if(!empty($user))
       {
 
@@ -507,20 +509,25 @@ class userController extends Controller
           $pack = packages::find($req->input('p_id'));
 
 
+          if($req->currency == 'RD$')
+          {
+
           if($capital > $pack->max)
           {
-            Session::put('status', 'El capital de entrada es mayor que la inversión máxima.');
+
+            Session::put('status', 'El capital de entrada es mayor que la inversión máxima permitida para este plan.');
             Session::put('msgType', "err");
             return back();
           }
 
           if($capital < $pack->min)
           {
-            Session::put('status', 'El capital de entrada es menos que la inversión mínima.');
+            Session::put('status', 'El capital de entrada es menor que la inversión mínima permitida para este plan.');
             Session::put('msgType', "err");
             return back();
           }
 
+          
           if($capital >= $pack->min && $capital <= $pack->max)
           {
             $inv = new investment;
@@ -555,69 +562,6 @@ class userController extends Controller
 
             $inv->save();
 
-            if(!empty($user->referal))
-            {
-              $ref_bonuses = ref_set::all();
-
-              if(env('REF_TYPE') == 'Once')
-              {
-                $ref_cnt = env('REF_LEVEL_CNT');
-                $new_ref_user = $user->referal;
-                $itr_cnt = 0;
-
-                $refExist = ref::where('user_id', $user->id)->get();
-                if(count($refExist) == 0)
-                {
-                  $ref = new ref;
-                  $ref->user_id = $user->id;
-                  $ref->username = $user->referal;
-                  // $ref->referral = 0;
-                  $ref->wdr = 0;
-                  $ref->currency = env('CURRENCY');
-                  $ref->amount = $capital * $ref_bonuses[0]->val;
-                  $ref->save();
-
-                  while ($itr_cnt <= $ref_cnt-1)
-                  {
-                    $refUser = User::where('username', $new_ref_user)->get();
-                    if(count($refUser) > 0)
-                    {
-                      $refUser[0]->ref_bal += $capital * $ref_bonuses[$itr_cnt]->val;
-                      $new_ref_user = $refUser[0]->referal;
-                      $refUser[0]->save();
-                    }
-                    $itr_cnt += 1;
-                    if(env('REF_SYSTEM') == 'Single_level')
-                    {
-                      break;
-                    }
-                  }
-
-                }
-
-              }
-              if(env('REF_TYPE') == 'Continous')
-              {
-                $ref_cnt = env('REF_LEVEL_CNT');
-                $new_ref_user = $user->referal;
-                $itr_cnt = 0;
-
-                while ($itr_cnt <= $ref_cnt-1) {
-                  $refUser = User::where('username', $new_ref_user)->get();
-                  if(count($refUser) > 0)
-                  {
-                    $refUser[0]->ref_bal += $capital * $ref_bonuses[$itr_cnt]->val;
-                    $refUser[0]->save();
-                    $new_ref_user = $refUser[0]->referal;
-                  }
-                  $itr_cnt += 1;
-                  if(env('REF_SYSTEM') == 'Single_level')
-                  {
-                    break;
-                  }
-                }
-              }
-            }
 
             // $maildata = ['email' => $user->email, 'username' => $user->username];
             // Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
@@ -641,6 +585,90 @@ class userController extends Controller
             Session::put('status', "Inversión enviada para su aprobación.");
             Session::put('msgType', "suc");
             return back() ;
+
+          }
+
+          
+        }elseif($req->currency == 'US$')
+
+          {
+
+          if($capital > $pack->maxdol)
+          {
+    
+            Session::put('status', 'El capital de entrada es mayor que la inversión máxima permitida para este plan');
+            Session::put('msgType', "err");
+            return back();
+          }
+
+          if($capital < $pack->mindol)
+          {
+
+            Session::put('status', 'El capital de entrada es menor que la inversión mínima permitida para este plan.');
+            Session::put('msgType', "err");
+            return back();
+          }
+
+          
+          if($capital >= $pack->mindol && $capital <= $pack->maxdol)
+          {
+            $inv = new investment;
+            $inv->capital = $capital;
+            $inv->user_id = $user->id;
+            $inv->usn = $user->username;
+            $inv->package = $pack->package_name;
+            $inv->date_invested = date("d-m-Y");
+            $inv->period = $pack->period;
+            $inv->days_interval = $pack->days_interval;
+            $inv->i_return = (round($capital*$pack->daily_interest*$pack->period,2));
+            $inv->interest = $pack->daily_interest;
+
+            $dt = strtotime(date('Y-m-d'));
+            $days = $pack->period;
+
+            while ($days > 0)
+            {
+                $dt    +=   86400   ;
+                $actualDate = date('Y-m-d', $dt);
+                $days--;
+            }
+
+            $inv->package_id = $pack->id;
+            $inv->currency = $req->currency;
+            $inv->end_date = $actualDate;
+            $inv->last_wd = date("Y-m-d");
+            $inv->status = 'Pendiente';
+
+            $user->wallet -= $capital;
+            $user->save();
+
+            $inv->save();
+
+
+            // $maildata = ['email' => $user->email, 'username' => $user->username];
+            // Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            //     $msg->to($maildata['email']);
+            //     $msg->subject('User Investment');
+            // });
+
+            // $maildata = ['email' => $user->email, 'username' => $user->username];
+            // Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            //     $msg->to(env('SUPPORT_EMAIL'));
+            //     $msg->subject('User Investment');
+            // });
+
+            $act = new activities;
+            $act->action = "User Invested ".$capital." in ".$pack->package_name." package";
+            $act->user_id = $user->id;
+            $act->save();
+
+            Session::put('status', "Inversión enviada para su aprobación.");
+            Session::put('msgType', "suc");
+            return back() ;
+            }
+
           }
           else
           {

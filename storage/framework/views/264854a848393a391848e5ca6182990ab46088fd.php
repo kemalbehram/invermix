@@ -3,6 +3,7 @@
 <?php ($dt = $user_data['dt']); ?>
 
 <?php $__env->startSection('content'); ?>
+
         <div class="main-panel">
             <div class="content">
                 <?php echo $__env->make('admin.atlantis.main_bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -14,23 +15,23 @@
                             <div class="card">
                                 <div class="card-header card_header_bg_blue" >
                                     <div class="card-head-row card-tools-still-right">
-                                        <h4 class="card-title text-white"> <?php echo e(__('User Details')); ?> </h4>
+                                        <h4 class="card-title text-white"> <?php echo e(__('Detalles Cliente')); ?> </h4>
                                         <div class="card-tools">
-                                            <a href="/admin/block/user/<?php echo e($user->id); ?>" > 
+                                            <a href="/admin/block/user/<?php echo e($user->id); ?>" >
                                                 <span class=""><i class="fa fa-ban btn btn-warning" ></i></span>
                                             </a>
-                                            <a href="/admin/activate/user/<?php echo e($user->id); ?>" > 
+                                            <a href="/admin/activate/user/<?php echo e($user->id); ?>" >
                                                 <span><i class="fa fa-check btn btn-success"></i></span>
                                             </a>
                                             <?php if($adm->role != 1): ?>
-                                                <a href="/admin/delete/user/<?php echo e($user->id); ?>" > 
+                                                <a href="/admin/delete/user/<?php echo e($user->id); ?>" >
                                                     <span class=""><i class="fa fa-times btn btn-danger"></i></span>
                                                 </a>
                                             <?php endif; ?>
-                                        </div>                                                                             
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card-body">                                    
+                                <div class="card-body">
                                     <div class="row pad_top_20">
                                         <div class="col-lg-6">
                                             <div class="form-group" align="center">
@@ -40,153 +41,153 @@
                                                     <img class="img-responsive" src="/img/profile/<?php echo e($user->img); ?>" width="200px" height="200px">
                                                 <?php endif; ?>
                                             </div>
-                                        </div>  
+                                        </div>
                                         <div class="col-lg-6">
                                             <div class="card full-height">
                                                 <div class="card-body">
                                                     <div class="card-title">
-                                                        <h2 class="text-success"> <?php echo e(__('Account Summary')); ?> </h2>
+                                                        <h2 class="text-success"> <?php echo e(__('Resumen de la cuenta')); ?> </h2>
                                                     </div>
                                                     <hr>
                                                     <div class="row py-3 <?php if($adm->role < 2): ?> <?php echo e(blur_cnt); ?><?php endif; ?> position_relative">
                                                         <div class="col-md-6 d-flex flex-column justify-content-around">
-                                                            <div class="border_btm_1">
+                                                            <!-- <div class="border_btm_1">
                                                                 <h4 class="fw-bold  text-info op-8"> <?php echo e(__('Wallet Balance')); ?> </h4>
                                                                 <h3 class="fw-bold"><?php echo e($settings->currency); ?> <?php echo e(round($user->wallet,2)); ?></h3>
                                                                 <div class="colhd margin_top_n10 font_10">&emsp;</div>
-                                                            </div>                      
-                                                          <div class="clearfix"><br></div>                      
-                                                            <div>                           
+                                                            </div> -->
+                                                          <div class="clearfix"><br></div>
+                                                            <!-- <div>
                                                                 <h4 class="fw-bold text-info op-8"> <?php echo e(__('Referral Bonus')); ?> </h4>
                                                                 <h3 class="fw-bold"><?php echo e($settings->currency); ?> <?php echo e(round ($user->ref_bal, 2)); ?></h3>
                                                                 <div class="colhd margin_top_n10 font_10 ">&emsp;</div>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
 
                                                         <div class="col-md-6">
                                                             <div class="border_btm_1" >
-                                                                <h4 class="fw-bold text-info op-8"> <?php echo e(__('Date Created')); ?> </h4>
+                                                                <h4 class="fw-bold text-info op-8"> <?php echo e(__('Fecha de creacion')); ?> </h4>
                                                                 <?php echo e($dt->format('Y-m-d')); ?>
 
-                                                                <div class="colhd margin_top_n10 font_10">&emsp;</div> 
-                                                                <br>    
+                                                                <div class="colhd margin_top_n10 font_10">&emsp;</div>
+                                                                <br>
                                                             </div>
-                                                            <div class="clearfix"><br></div> 
+                                                            <div class="clearfix"><br></div>
                                                             <div>
-                                                                <h4 class="fw-bold text-info op-8"> <?php echo e(__('Status')); ?> </h4>       
+                                                                <h4 class="fw-bold text-info op-8"> <?php echo e(__('Status')); ?> </h4>
                                                                 <span class="fa fa-circle" style="color: green;"></span>
                                                                 <span class="">
-                                                                <?php if($user->status == 1 || $user->status == 'Active'): ?> 
-                                                                    Active
-                                                                <?php elseif($user->status == 2 || $user->status == 'Blocked'): ?> 
-                                                                    Blocked
-                                                                <?php elseif($user->status == 0 || $user->status == 'Inactive'): ?> 
-                                                                    Not Active
+                                                                <?php if($user->status == 1 || $user->status == 'Active'): ?>
+                                                                    Activo
+                                                                <?php elseif($user->status == 2 || $user->status == 'Blocked'): ?>
+                                                                    Bloqueado
+                                                                <?php elseif($user->status == 0 || $user->status == 'Inactive'): ?>
+                                                                    Inactivo
                                                                 <?php endif; ?>
-                                                                </span> 
-                                                               
-                                                                <div class="colhd margin_top_n10 font_10" >&emsp;</div> 
-                                                                <br>    
+                                                                </span>
+
+                                                                <div class="colhd margin_top_n10 font_10" >&emsp;</div>
+                                                                <br>
                                                             </div>
 
                                                         </div>
 
-                                                    </div>             
+                                                    </div>
                                                 </div>
-                                            </div>                                            
-                                            
-                                        </div>                               
-                                        
+                                            </div>
+
+                                        </div>
+
                                     </div>
 
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label> <?php echo e(__('First Name')); ?> </label>
+                                                <label> <?php echo e(__('Nombres')); ?> </label>
                                                 <input id="adr" type="text" value="<?php echo e(ucfirst($user->firstname)); ?>" class="form-control" name="fname" readonly>
                                             </div>
-                                        </div>  
+                                        </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label> <?php echo e(__('Last Name')); ?> </label>
+                                                <label> <?php echo e(__('Apellidos')); ?> </label>
                                                 <input id="adr" type="text" value="<?php echo e(ucfirst($user->lastname)); ?>" class="form-control" name="lname" readonly>
                                             </div>
-                                        </div>                               
-                                        
+                                        </div>
+
                                     </div>
 
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label> <?php echo e(__('Email Address')); ?> </label>
-                                                <div class="input-group">                                                       
+                                                <label> <?php echo e(__('Correo Electrónico')); ?> </label>
+                                                <div class="input-group">
                                                     <input id="email" type="email" value="<?php echo e($user->email); ?>" class="form-control" name="email">
                                                 </div>
-                                                
+
                                             </div>
-                                        </div>     
+                                        </div>
 
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label> <?php echo e(__('Username')); ?> </label>
-                                                <div class="input-group">                                                       
+                                                <label> <?php echo e(__('Usuario')); ?> </label>
+                                                <div class="input-group">
                                                     <input id="usn" type="text" value="<?php echo e($user->username); ?>" class="form-control" name="usn" readonly>
                                                 </div>
-                                                
+
                                             </div>
-                                        </div>                                             
-                                        
-                                    </div>   
+                                        </div>
+
+                                    </div>
 
                                     <form class="" method="post" action="/admin/update/user/profile">
-                                        
+
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                                     <input type="hidden" name="uid" value="<?php echo e($user->id); ?>">
-                                                    <label> <?php echo e(__('Country')); ?> </label>
+                                                    <label> <?php echo e(__('País')); ?> </label>
                                                     <select id="country" class="form-control" name="country" >
-                                                        <?php 
+                                                        <?php
                                                             $country = App\country::orderby('name', 'asc')->get();
                                                         ?>
                                                         <?php ($phn_code = ''); ?>
-                                                        <?php $__currentLoopData = $country; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>                                                           
+                                                        <?php $__currentLoopData = $country; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                             <?php if($c->id == $user->country): ?>
                                                                 <?php ($cs = $c->id); ?>
                                                                 <?php ($phn_code = $c->phonecode); ?>
                                                                 <?php echo e('selected'); ?>
 
                                                                 <option selected  value="<?php echo e($c->id); ?>"><?php echo e($c->name); ?></option>
-                                                             
+
                                                             <?php else: ?>
                                                                 <option value="<?php echo e($c->id); ?>"><?php echo e($c->name); ?></option>
                                                             <?php endif; ?>
                                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                         <?php if(!isset($cs)): ?>
-                                                                <option selected disabled>Select Country</option>
+                                                                <option selected disabled>Seleccionar País</option>
                                                         <?php endif; ?>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                  <div class="form-group">
-                                                    <label> <?php echo e(__('State/Province')); ?> </label>
+                                                    <label> <?php echo e(__('Estado/Provincia')); ?> </label>
                                                     <select  id="states" class="form-control" name="state" required>
                                                         <?php if(isset($cs)): ?>
-                                                            <?php 
+                                                            <?php
                                                                 $st = App\states::where('id', $user->state)->get();
                                                             ?>
                                                             <?php if(count($st) > 0): ?>
                                                                 <option selected value="<?php echo e($st[0]->id); ?>"><?php echo e($st[0]->name); ?></option>
                                                             <?php else: ?>
-                                                                <option selected disabled>Select State</option>
+                                                                <option selected disabled>Seleccionar provincia</option>
                                                             <?php endif; ?>
-                                                            
+
                                                         <?php else: ?>
-                                                           <option selected disabled>Select State</option>
-                                                        <?php endif; ?>                                                           
-                                                    </select>                                                        
+                                                           <option selected disabled>Seleccionar provincia</option>
+                                                        <?php endif; ?>
+                                                    </select>
                                                 </div>
                                             </div>
 
@@ -194,14 +195,14 @@
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label> <?php echo e(__('Address')); ?> </label>
+                                                    <label> <?php echo e(__('Dirección')); ?> </label>
                                                     <input id="adr" type="text" class="form-control" value="<?php echo e($user->address); ?>" name="adr" required>
                                                 </div>
-                                            </div>  
+                                            </div>
 
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label> <?php echo e(__('Phone')); ?> </label>
+                                                    <label> <?php echo e(__('Teléfono')); ?> </label>
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                             <span id="countryCode" class="input-group-text">
@@ -212,21 +213,21 @@
                                                                     +1
                                                                 <?php endif; ?>
                                                             </span>
-                                                        </div>                                                        
+                                                        </div>
                                                         <input id="cCode" type="hidden" class="form-control" name="cCode" required>
                                                         <input id="phone" type="text" class="form-control" value="<?php echo e(str_replace('+'.$phn_code,'',$user->phone)); ?>" name="phone" required>
                                                     </div>
-                                                    
+
                                                 </div>
-                                            </div>                                             
-                                            
-                                        </div>   
+                                            </div>
+
+                                        </div>
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="form-group">
-                                                       <button class="collb btn btn-info"> <?php echo e(__('Save')); ?> </button>
+                                                       <button class="collb btn btn-info"> <?php echo e(__('Guardar')); ?> </button>
                                                 </div>
-                                            </div>              
+                                            </div>
                                         </div>
                                     </form>
 
@@ -239,34 +240,274 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title"> <?php echo e(__('Reset User Password')); ?> </div>
+                                    <div class="card-title"> <?php echo e(__('Restablecer Contraseña Cliente')); ?> </div>
                                 </div>
                                 <div class="card-body pb-0">
                                     <form class="" method="post" action="/admin/change/user/pwd">
                                         <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                         <input type="hidden" name="uid" value="<?php echo e($user->id); ?>">
                                         <div class="form-group">
-                                            <label> <?php echo e(__('New Password')); ?> </label>
-                                            <input type="password" class="form-control" name="newpwd" placeholder="New Password" required>
+                                            <label> <?php echo e(__('Nueva Contraseña')); ?> </label>
+                                            <input type="password" class="form-control" name="newpwd" placeholder="Nueva Contraseña" required>
                                         </div>
                                         <div class="form-group">
-                                            <label> <?php echo e(__('Confirm Password')); ?> </label>
-                                            <input type="password" class="form-control" name="cpwd" placeholder="Confirm Password" required>
+                                            <label> <?php echo e(__('Confirmar Contraseña')); ?> </label>
+                                            <input type="password" class="form-control" name="cpwd" placeholder="Confirmar Contraseña" required>
                                         </div>
                                             <div class="form-group" align="left">
-                                               <button class="collb btn btn-info"> <?php echo e(__('Save')); ?> </button>
+                                               <button class="collb btn btn-info"> <?php echo e(__('Guardar')); ?> </button>
                                             </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
 
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title"> <?php echo e(__('User Investment')); ?> </div>
+                                    <div class="card-title"> <?php echo e(__('Primera Inversión Cliente')); ?> </div>
+                                </div>
+                                <?php
+                                                 $myinv = App\investment::where('user_id', $user->id)->get();
+                                            ?>
+                                <?php if(count($myinv) == 0): ?>
+                                <div class="card-body pb-0">
+                                    <?php echo $__env->make('user.inc.packages', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                </div>
+                                <?php else: ?>
+                                <div class="card-body pb-0">
+                                    <h3><em>Ya el cliente tiene inversiones</em></h3>
+                                </div>
+
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php echo $__env->make('admin.inc.first_inv', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                     <?php echo $__env->make('user.inc.withdrawal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+
+                    <!-- KYC -->
+                    <div class="row">
+                                <form id="id_verify" class="" method="post" action="<?php echo e(route('kyc_upload_admin')); ?>" enctype="multipart/form-data">
+                                  <div class="row form-group">
+                                    <div class="col-sm-6">
+                                      <div class="card">
+                                        <div class="card-header">
+                                            <div class="card-title"><?php echo e(__('Conoce tu Cliente')); ?></div>
+                                        </div>
+                                        <div class="card-body">
+
+                                          <div class="row">
+                                            <div class="col-lg-12">
+                                                <div id="selfie" class="">
+                                                  <div class="form-group" align="center">
+
+                                                  </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                  <h3><?php echo e(__('Documento de Identidad')); ?></h3>
+                                                  <p>
+                                                    <?php echo e(__('Documentos válidos son: Cédula, Pasaporte y Licencia de Conducir')); ?>
+
+                                                  </p>
+                                                </div>
+                                                <div class="form-group mt-4">
+                                                  <label>Tipo de Identificación</label>
+                                                  <select id="card_select" name="cardtype" class="form-control">
+                                                    <option selected disabled >Seleccionar</option>
+                                                    <option value="cedula">Cédula</option>
+                                                    <option value="pasaporte">Pasaporte</option>
+                                                    <option value="licencia">Licencia de Conducir</option>
+                                                  </select>
+                                                </div>
+                                                <hr>
+                                                <div id="card_cont" class="cont_display_none">
+                                                  <div class="form-group mt-3">
+                                                    <label>Tarjeta Frontal</label>
+                                                    <br>
+                                                    <img src="/img/id_temp_front.png" class="img_card_temp" width="100%">
+                                                    <input type="file" class="form-control upload_inp mt-2" name="id_front" >
+                                                    <input type="hidden" name="uid" value="<?php echo e($user->id); ?>">
+                                                    <input type="hidden" name="username" value="<?php echo e($user->username); ?>">
+                                                  </div>
+
+                                                  <hr>
+                                                  <div class="form-group mt-3">
+                                                    <label>Tarjeta Trasera</label>
+                                                    <br>
+                                                    <img src="/img/id_tem_bac.png" class="img_card_temp" width="100%">
+                                                    <input type="file" class="form-control mt-2" name="id_back" >
+                                                  </div>
+                                                </div>
+
+                                                <div id="pass_cont" class="cont_display_none">
+                                                  <div class="form-group">
+                                                    <label>Pasaporte Frontal</label>
+                                                    <br>
+                                                    <img src="/img/id_temp_front.png" class="img_card_temp" width="100%">
+                                                    <input type="file" class="form-control upload_inp mt-2" name="pas_id_front" >
+                                                  </div>
+                                                </div>
+
+                                            </div>
+                                          </div>
+
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                      <div class="card">
+                                        <div class="card-header">
+                                          <div class="card-title"><?php echo e(__('Formulario Conoce tu Cliente')); ?></div>
+                                        </div>
+                                        <div class="card-body">
+                                          <div class="row">
+                                            <div class="row">
+                                              <div class="col-lg-12">
+
+                                                  <div class="form-group">
+                                                    <h3></h3>
+                                                    <p>
+                                                      <?php echo e(__('Para clientes cuya inversión sea superior a RD$500,000 o equivalente en dólares.')); ?>
+
+                                                    </p>
+                                                    <input type="file" class="form-control" name="utility_doc">
+                                                  </div>
+
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                        </div>
+                                      </div>
+
+                                    </div>
+
+                                    <div class="col-sm-12 mt-5">
+                                      <div class="form-group">
+                                        <button class="collcc btn btn-info float-right"><?php echo e(__('Guardar')); ?></button>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </form>
+
+                            </div>
+                            <!-- End of KYC -->
+
+                            <div class="row">
+                        <div class="col-md-12">
+                        <div class="card">
+                                    <div class="card-header">
+                                        <div class="card-title"><?php echo e(__('Cuenta de Banco')); ?></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <form class="" method="post" action="<?php echo e(route('add_bank')); ?>">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label><?php echo e(__('Nombre Banco')); ?></label>
+                                                        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                                                        <input type="hidden" name="uid" value="<?php echo e($user->id); ?>">
+                                                        <input type="text" class="form-control" name="bname" required placeholder="Nombre Banco">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label><?php echo e(__('Número de Cuenta')); ?></label>
+                                                        <input type="text" class="form-control" name="actNo"  required placeholder="Número de Cuenta">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label><?php echo e(__('Nombre Cuenta')); ?></label>
+                                                        <input type="text" class="form-control" name="act_name" required placeholder="Nombre Cuenta">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <button class="collcc btn btn-info"><?php echo e(__('Guardar')); ?></button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                  </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title"> <?php echo e(__('Cuentas de Bancos del Cliente')); ?> </div>
+                                </div>
+                                <div class="card-body pb-0 table-responsive">
+                                    <table  id="" class="display table table-stripped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th> <?php echo e(__('Nombre Banco')); ?> </th>
+                                                <th> <?php echo e(__('Número de Cuenta')); ?> </th>
+                                                <th> <?php echo e(__('Nombre de Cuenta')); ?> </th>
+                                                <th data-field="company" >Acciones</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th> <?php echo e(__('Nombre Banco')); ?> </th>
+                                                <th> <?php echo e(__('Número de Cuenta')); ?> </th>
+                                                <th> <?php echo e(__('Nombre de Cuenta')); ?> </th>
+                                                <th data-field="company" >Acciones</th>
+
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <?php
+                                                 $mybanks = App\banks::where('user_id', $user->id)->get();
+                                            ?>
+                                            <?php if(count($mybanks) > 0): ?>
+                                                <?php $__currentLoopData = $mybanks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bank): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <tr>
+                                                        <td><?php echo e($bank->Bank_Name); ?></td>
+                                                        <td><?php echo e($bank->Account_name); ?></td>
+                                                        <td><?php echo e($bank->Account_number); ?></td>
+                                                        <td>
+                                                                <a class="btn btn-danger" href="/view/userdetails/remove/bankaccount/<?php echo e($bank->id); ?>" title="Remove">
+                                                                    <i class="fa fa-times"></i>
+                                                                </a>
+                                                        </td>
+
+                                                    </tr>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                    <br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title"> <?php echo e(__('Inversiones Usuario')); ?> </div>
                                 </div>
                                 <div class="card-body pb-0">
                                     <?php echo $__env->make('admin.temp.user_inv', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -280,7 +521,7 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title"> <?php echo e(__('Withdrawal History')); ?> </div>
+                                    <div class="card-title"> <?php echo e(__('Historial de Retiros')); ?> </div>
                                 </div>
                                 <div class="card-body pb-0 table-responsive">
                                     <?php echo $__env->make('admin.temp.user_wd_history', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -288,7 +529,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="card-title"> <?php echo e(__('Referrals')); ?> </div>
@@ -298,58 +539,10 @@
                                     <br><br>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="card-title"> <?php echo e(__('Bank Accounts')); ?> </div>
-                                </div>
-                                <div class="card-body pb-0 table-responsive">
-                                    <table  id="" class="display table table-stripped table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th> <?php echo e(__('Bank Name')); ?> </th>
-                                                <th> <?php echo e(__('Acount Number')); ?> </th>
-                                                <th> <?php echo e(__('Acount Name')); ?> </th>
-                                                <th> <?php echo e(__('Actions')); ?> </th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th> <?php echo e(__('Bank Name')); ?> </th>
-                                                <th> <?php echo e(__('Acount Number')); ?> </th>
-                                                <th> <?php echo e(__('Acount Name')); ?> </th>
-                                                <th> <?php echo e(__('Actions')); ?> </th>
-                                            </tr>
-                                        </tfoot>
-                                        <tbody>
-                                            <?php 
-                                                 $mybanks = App\banks::where('user_id', $user->id)->get();
-                                            ?>
-                                            <?php if(count($mybanks) > 0): ?>
-                                                <?php $__currentLoopData = $mybanks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bank): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <tr>
-                                                        <td><?php echo e($bank->Bank_Name); ?></td>
-                                                        <td><?php echo e($bank->Account_name); ?></td>
-                                                        <td><?php echo e($bank->Account_number); ?></td>
-                                                        <td>
-                                                        </td>
-                                                    </tr>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                            <?php endif; ?>
-                                        </tbody>
-                                    </table>
-                                    <br><br>
-                                </div>
-                            </div>
-                        </div>                        
-                    </div>         
-                    
                 </div>
             </div>
 <?php $__env->stopSection(); ?>
-            
+
 <?php echo $__env->make('admin.atlantis.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/MAMP/htdocs/invermix/resources/views/admin/user_details.blade.php ENDPATH**/ ?>

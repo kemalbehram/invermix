@@ -2706,6 +2706,24 @@ else
           $pack = packages::find($req->input('p_id'));
 
 
+          if($req->currency == 'RD$')
+          {
+            if($capital > $pack->max)
+            {
+  
+              Session::put('status', 'El capital de entrada es mayor que la inversión máxima permitida para este plan.');
+              Session::put('msgType', "err");
+              return back();
+            }
+  
+            if($capital < $pack->min)
+            {
+              Session::put('status', 'El capital de entrada es menor que la inversión mínima permitida para este plan.');
+              Session::put('msgType', "err");
+              return back();
+            }
+
+            
           if($capital >= $pack->min && $capital <= $pack->max)
           {
             $inv = new investment;
@@ -2740,10 +2758,84 @@ else
 
             $inv->save();
 
+            $adm = Session::get('adm');
+            $act = new adminLog;
+            $act->admin = $adm->email;
+            $act->action = "Primera inversión del cliente creada. Investment id: ".$id;
+            $act->save();
+
             Session::put('status', "Inversión aplicada al cliente exitosamente.");
             Session::put('msgType', "suc");
             return back() ;
+
+            }
+
+          }elseif($req->currency == 'US$')
+
+          {
+
+          if($capital > $pack->maxdol)
+          {
+    
+            Session::put('status', 'El capital de entrada es mayor que la inversión máxima permitida para este plan');
+            Session::put('msgType', "err");
+            return back();
           }
+
+          if($capital < $pack->mindol)
+          {
+
+            Session::put('status', 'El capital de entrada es menor que la inversión mínima permitida para este plan.');
+            Session::put('msgType', "err");
+            return back();
+          }
+   
+          if($capital >= $pack->mindol && $capital <= $pack->maxdol)
+          {
+            $inv = new investment;
+            $inv->capital = $capital;
+            $inv->user_id = $req->uid;
+            $inv->usn = $req->username;
+            $inv->package = $pack->package_name;
+            $inv->date_invested = date("d-m-Y");
+            $inv->period = $pack->period;
+            $inv->days_interval = $pack->days_interval;
+            $inv->i_return = (round($capital*$pack->daily_interest*$pack->period,2));
+            $inv->interest = $pack->daily_interest;
+
+            $dt = strtotime(date('Y-m-d'));
+            $days = $pack->period;
+
+            while ($days > 0)
+            {
+                $dt    +=   86400   ;
+                $actualDate = date('Y-m-d', $dt);
+                $days--;
+            }
+
+            $inv->package_id = $pack->id;
+            $inv->currency = $req->currency;
+            $inv->end_date = $actualDate;
+            $inv->last_wd = date("Y-m-d");
+            $inv->status = 'Activa';
+
+            // $user->wallet -= $capital;
+            // $user->save();
+
+            $inv->save();
+
+            $adm = Session::get('adm');
+            $act = new adminLog;
+            $act->admin = $adm->email;
+            $act->action = "Primera inversión del cliente creada. Investment id: ".$id;
+            $act->save();
+
+            Session::put('status', "Inversión aplicada al cliente exitosamente.");
+            Session::put('msgType', "suc");
+            return back() ;
+
+           }
+        }
           else
           {
             Session::put('status', "¡Monto invalido! Intenta nuevamente.");

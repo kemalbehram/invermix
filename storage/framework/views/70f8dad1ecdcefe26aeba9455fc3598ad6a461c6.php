@@ -1,33 +1,33 @@
 <?php $__env->startSection('content'); ?>
 <body>
     <div style="">
-        <img src="/img/adult.jpg" class="fixedOverlayIMG">         
+        <img src="/img/adult.jpg" class="fixedOverlayIMG">
         <div class="fixedOeverlayBG"></div>
         <div class="">
             <div class="row admin_login_row">
                 <div class="col-md-6 position_relative" >
                     <div class="admin_login_title" align="center">
                         <img src="/img/<?php echo e($settings->site_logo); ?>" alt="<?php echo e($settings->site_title); ?>" class="login_logo">
-                        <h1><?php echo e($settings->site_title); ?></h1> 
-                        <p>                                                       
-                            <h4> <?php echo e(__('Login to manage website')); ?> </h4>
+                        <h1><?php echo e($settings->site_title); ?></h1>
+                        <p>
+                            <h4> <?php echo e(__('Inicar Sesión como Administrador')); ?> </h4>
                         </p>
-                    </div>                    
+                    </div>
                 </div>
                 <div class="col-md-6 bg_white">
                     <div class="login_fixed_panel">
                         <div class="row">
                             <div class="col-md-12" >
-                                <div style="">                        
+                                <div style="">
                                     <div class="panel" align="center">
                                         <img src="/img/<?php echo e($settings->site_logo); ?>" alt="<?php echo e($settings->site_title); ?>" class="login_logo">
                                         <br><br>
-                                        <h4 align="center"> <?php echo e(__('Admin Login')); ?> </h4> 
-                                        <div id="errMsg" class="card-header alert alert-danger cont_display_none" align="center">         
+                                        <h4 align="center"> <?php echo e(__('Iniciar Sesión Admin')); ?> </h4>
+                                        <div id="errMsg" class="card-header alert alert-danger cont_display_none" align="center">
                                         </div>
 
-                                        <?php if(Session::has('err2') ): ?>         
-                                            <script type="text/javascript">            
+                                        <?php if(Session::has('err2') ): ?>
+                                            <script type="text/javascript">
                                                 $('#errMsg').html("<?php echo e(Session::get('err2')); ?>");
                                                 $('#errMsg').show();
                                             </script>
@@ -36,7 +36,7 @@
                                         <?php endif; ?>
 
                                         <div class="panel-body" style="">
-                                            <form method="POST" action="/dhadmin/login">                        
+                                            <form method="POST" action="/dhadmin/login">
                                                 <input id="csrf" type="hidden"  name="_token" value="<?php echo e(csrf_token()); ?>" >
                                                 <div class="form-group row">
                                                     <label for="email" class=" col-form-label text-md-right"><?php echo e(__('E-Mail Address')); ?></label>
@@ -107,8 +107,8 @@ unset($__errorArgs, $__bag); ?>
                                                         <button type="submit" class="btn btn-primary">
                                                             <?php echo e(__('Login')); ?>
 
-                                                        </button>                               
-                                                    </div>                            
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>

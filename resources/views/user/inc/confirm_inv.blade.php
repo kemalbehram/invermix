@@ -13,14 +13,15 @@
         </p>
         <form id="userpackinv" action="/user/invest/packages" method="post">
             <div class="form-group" align="left">
-              <div class="pop_form_min_max" align="center">
+            <div class="pop_form_min_max" align="center">
                 <b>{{ __('Inversión Min.:') }} {{'RD$'}} <span id="min"></span></b> |
-                <br>
                 <b>{{ __('Inversión Máx.:') }} {{'RD$'}} <span id="max"></span></b>
-                <br>
-                <span class="note">O equivalente en dólares</span>
               </div>
-
+              <br>
+              <div class="pop_form_min_max" align="center">
+                <b>{{ __('Inversión Min.:') }} {{'US$'}} <span id="mindol"></span></b> |
+                <b>{{ __('Inversión Máx.:') }} {{'US$'}} <span id="maxdol"></span></b>
+              </div>
               <br>
               <label>{{ __('Colocar Monto a Invertir') }}</label>
               <input type="hidden" class="form-control" name="_token" value="{{csrf_token()}}">

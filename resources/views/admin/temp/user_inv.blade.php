@@ -92,8 +92,8 @@
                         <td>{{$in->package}}</td>
                         <td>{{number_format($in->capital) ,2}}</td>
                         <td>{{number_format($in->i_return) ,2}}</td>
-                        <td>{{$in->date_invested}}</td>
-                        <td>{{$in->end_date}}</td>
+                        <td>{{date('d/m/Y', strtotime($in->date_invested))}}</td>
+                        <td>{{date('d/m/Y', strtotime($in->end_date))}}</td>
                         <td>
                             @if($in->status != 'Retirado')
                                 {{$totalDays}}
@@ -185,7 +185,7 @@
                                 {{ __('Started:') }}
                             </div>
                             <div class="col-xs-6">
-                                {{$in->date_invested}}
+                                {{date('d/m/Y', strtotime($in->date_invested))}}
                             </div>
                         </div>
                         <div class="row" style="">
@@ -193,7 +193,7 @@
                                 {{ __('Ending:') }}
                             </div>
                             <div class="col-xs-6">
-                                {{$in->end_date}}
+                                {{date('d/m/Y', strtotime($in->end_date))}}
                             </div>
                         </div>
                         <div class="row" style="">

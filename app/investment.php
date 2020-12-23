@@ -15,4 +15,9 @@ class investment extends Model
 
         return $this->hasMany('App\inyects', 'id');
     }
+
+    public function users(){
+
+        return $this->belongsTo('App\User', 'id');
+    }
 }

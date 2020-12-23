@@ -205,7 +205,7 @@ function wd(p,id, earn, w_able, days, ended)
     $('#pack_type').val(p);
 	$('#earned').text(earn);
 	$('#days').text(days);
-	$('#inv_id').val(id);
+	$('#id').val(id);
 	$('#ended').val(ended);
 	$('#withdrawable_amt').val(w_able);
 	$('#div_withdrawal').show();
@@ -744,7 +744,7 @@ function s_2fa(opr)
             }
             if(result.msg == 'disable')
             {
-                $('#err').html('Autenticación en dos pasos no está activa');
+                $('#err').html('Autenticación en dos pasos no activa');
                 $('#err').show().animate({ width: "30%" }, "1000").delay(2000).animate({ width: "-50px" }, "1000").fadeOut(50);
             }
         },

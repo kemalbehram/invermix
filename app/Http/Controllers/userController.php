@@ -732,112 +732,145 @@ class userController extends Controller
 
   public function wd_invest(Request $req)
   {
+   
+    $user = Auth::User();
+  
+    if($user->status == 'pending' || $user->status == 0 )
+    {
+      Session::put('msgType', "err");
+      Session::put('status', '¡Cuenta no activada! Póngase en contacto con el servicio de asistencia.');
+      return redirect('/login');
+    }
 
-            //  dd($req);
-            //   die();
-      $user = Auth::User();
+    if($user->status == 'Blocked' || $user->status == 2 )
+    {
+      Session::put('msgType', "err");
+      Session::put('status', '¡Cuenta bloqueada! Póngase en contacto con el servicio de asistencia.');
+      return redirect('/login');
+    }
 
-      if($user->status == 'pending' || $user->status == 0 )
+
+    if(!empty($user))
+    {
+
+      try
       {
-        Session::put('msgType', "err");
-        Session::put('status', '¡Cuenta no activada! Póngase en contacto con soporte.');
-        return redirect('/login');
-      }
 
-      if($user->status == 'Blocked' || $user->status == 2 )
-      {
-        Session::put('msgType', "err");
-        Session::put('status', '¡Cuenta bloqueada! Póngase en contacto con el servicio de asistencia.');
-        return redirect('/login');
-      }
+        $amt = $req->input('amt');
 
-
-      if(!empty($user))
-      {
-
-        try
+        if($req->input('pack_type') == 'xpack')
         {
+            $pack = xpack_inv::find($req->input('p_id'));
+        }
+        else
+        {
+            $pack = investment::find($req->input('p_id'));
 
-          $amt = $req->input('amt');
+        }
 
-          if($req->input('pack_type') == 'xpack')
+        if($pack->status == 'Pendiente')
+        {
+        Session::put('msgType', "err");
+        Session::put('status', 'Inyeccion no ha sido aprobada aún, debe solicitar la aprobación de la misma.');
+        return back();
+      }
+
+        if($amt <= 0)
+        {
+        
+          Session::put('msgType', "err");
+          Session::put('status', 'Fechas de retiro no cumplida/ Monto inválido/ Inversión expirada');
+          return back();
+      }
+
+        if($req->input('ended') == 'yes')
+        {
+         
+          if($pack->wd_status != 'Depositado')
           {
-              $pack = xpack_inv::find($req->input('p_id'));
-          }
-          else
-          {
-              $pack = investment::find($req->input('p_id'));
+          $user->wallet += $pack->capital;
+          $user->save();
 
-          }
+           }
+          //  dd($pack);
+          //  die();
 
+          $wd = new withdrawal;
+          $wd->user_id = $user->id;
+          $wd->usn = $user->username;
+          $wd->package = $pack->package;
+          $wd->invest_id = $pack->id;
+          $wd->amount = intval($req->input('amt'));
+          // $wd->account = $user->bank_account;
+          $wd->w_date = date('Y-m-d');
+          $wd->currency = $pack->currency;
+          $wd->save();
 
-          if($amt <= 0)
-          {
-            Session::put('msgType', "err");
-            Session::put('status', 'Fecha de retiro no cumplida/ Monto inválido/ Inversión expirada');
-            return back();
-          }
+          
 
-          if($req->input('ended') == 'yes')
-          {
-            if($pack->wd_status != 'Solicitado')
-            {
-                $user->wallet += $pack->capital;
-                $user->save();
-            }
-            $pack->last_wd = $pack->end_date;
-            $pack->wd_status = 'Solicitado';
-            $pack->status = 'Retiro Solicitado';
-
-          }
-          else
-          {
-
-            $dt = strtotime($pack->last_wd);
-            $days = $pack->days_interval;
-
-            while ($days > 0)
-            {
-              $dt    +=   86400   ;
-              $actualDate = date('Y-m-d', $dt);
-              // if (date('N', $dt) < 6)
-              // {
-                  $days--;
-              //}
-            }
-            $pack->last_wd = $actualDate;
-          }
-
+          $pack->last_wd = $pack->end_date;
+          $pack->wd_status = 'Solicitado';
+          $pack->status = 'Retiro Solicitado';
           $pack->w_amt += $amt;
           $pack->save();
-
-          $usr = User::find($user->id);
-          $usr->wallet += $amt;
-          $usr->save();
-
+  
           $act = new activities;
-          $act->action = "User withdrawn to wallet from ".$pack->package.'package. package id: '.$pack->id;
+          $act->action = "Cliente retiró desde ".$pack->package. 'package. package id: '.$pack->id;
           $act->user_id = $user->id;
           $act->save();
 
-          Session::put('status', 'Retiro de inversión solicitada, la cantidad solicitada se depositará en su cuenta.');
-          Session::put('msgType', "suc");
-          return back();
+        //     $maildata = ['email' => $user->email, 'username' => $user->username];
+       //     Mail::send('mail.wd_notification', ['md' => $maildata], function($msg) use ($maildata){
+       //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+       //     $msg->to($maildata['email']);
+       //     $msg->subject('Withdrawal Notification');
+       // });
+
+       //     $maildata = ['email' => $user->email, 'username' => $user->username];
+       //     Mail::send('mail.admin_wd_notification', ['md' => $maildata], function($msg) use ($maildata){
+       //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+       //     $msg->to('gerencia@invermixcapital.com');
+       //     $msg->subject('Notificación de Solicitud de Retiro en Inyecciones');
+       // });
+
+       Session::put('status', 'Retiro solicitado, cuando sea acutalizado será notificado');
+       Session::put('msgType', "suc");
+       return back();
 
         }
-        catch(\Exception $e)
+        else
         {
-          Session::put('status', 'Error al enviar su retiro');
-          Session::put('msgType', "err");
-          return back();
+
+          $dt = strtotime($pack->last_wd);
+          $days = $pack->days_interval;
+
+          while ($days > 0)
+          {
+            $dt    +=   86400   ;
+            $actualDate = date('Y-m-d', $dt);
+            // if (date('N', $dt) < 6)
+            // {
+                $days--;
+            //}
+          }
+          $pack->last_wd = $actualDate;
         }
 
+
       }
-      else
+      catch(\Exception $e)
       {
-        return redirect('/');
+        Session::put('status', 'Error al enviar su retiro');
+        Session::put('msgType', "err");
+        return back();
       }
-  }
+
+    }
+    else
+    {
+      return redirect('/');
+    }
+}
 
 
 
@@ -2587,7 +2620,7 @@ class userController extends Controller
 
 
             $inv->package_id = $pack->id;
-            $inv->currency = $this->st->currency;
+            $inv->currency = $invest->currency;
             $inv->end_date =  $actualDate;
             $inv->last_wd = date("Y-m-d");
             $inv->status = 'Pendiente';
@@ -2651,7 +2684,7 @@ class userController extends Controller
 
 
             $inv->package_id = $pack->id;
-            $inv->currency = $this->st->currency;
+            $inv->currency = $invest->currency;
             $inv->end_date =  $actualDate;
             $inv->last_wd = date("Y-m-d");
             $inv->status = 'Pendiente';
@@ -2734,7 +2767,7 @@ class userController extends Controller
 
 
               $inv->package_id = $pack->id;
-              $inv->currency = $this->st->currency;
+              $inv->currency = $invest->currency;
               $inv->end_date =  $actualDate;
               $inv->last_wd = date("Y-m-d");
               $inv->status = 'Pendiente';
@@ -2797,7 +2830,7 @@ class userController extends Controller
 
 
               $inv->package_id = $pack->id;
-              $inv->currency = $this->st->currency;
+              $inv->currency = $invest->currency; 
               $inv->end_date =  $actualDate;
               $inv->last_wd = date("Y-m-d");
               $inv->status = 'Pendiente';
@@ -2903,8 +2936,9 @@ class userController extends Controller
 
   public function wd_inyect(Request $req)
   {
-      $user = Auth::User();
 
+      $user = Auth::User();
+  
       if($user->status == 'pending' || $user->status == 0 )
       {
         Session::put('msgType', "err");
@@ -2938,30 +2972,72 @@ class userController extends Controller
 
           }
 
-        //   if($pack->status = 'active')
-        //   {
-        //   Session::put('msgType', "err");
-        //   Session::put('status', 'Inyeccion no ha sido aprobada aún, debe solicitar la aprobación de la misma.');
-        //   return back();
-        // }
+          if($pack->status == 'Pendiente')
+          {
+          Session::put('msgType', "err");
+          Session::put('status', 'Inyeccion no ha sido aprobada aún, debe solicitar la aprobación de la misma.');
+          return back();
+        }
 
           if($amt <= 0)
           {
+          
             Session::put('msgType', "err");
             Session::put('status', 'Fechas de retiro no cumplida/ Monto inválido/ Inversión expirada');
             return back();
         }
+
           if($req->input('ended') == 'yes')
           {
-            if($pack->wd_status != 'Solicitado')
+
+            if($pack->wd_status != 'Depositado')
             {
-                $user->wallet += $pack->capital;
-                $user->save();
-            }
+
+            $user->wallet += $pack->capital;
+            $user->save();
+
+             }
+
+            $wd = new withdrawal;
+            $wd->user_id = $user->id;
+            $wd->usn = $user->username;
+            $wd->package = $pack->package;
+            $wd->invest_id = $pack->id;
+            $wd->amount = intval($req->input('amt'));
+            // $wd->account = $user->bank_account;
+            $wd->w_date = date('Y-m-d');
+            $wd->currency = $pack->currency;
+            $wd->save();
+
             $pack->last_wd = $pack->end_date;
             $pack->wd_status = 'Solicitado';
             $pack->status = 'Retiro Solicitado';
-
+            $pack->w_amt += $amt;
+            $pack->save();
+    
+            $act = new activities;
+            $act->action = "Cliente retiró desde ".$pack->package. 'package. package id: '.$pack->id;
+            $act->user_id = $user->id;
+            $act->save();
+ 
+          //     $maildata = ['email' => $user->email, 'username' => $user->username];
+         //     Mail::send('mail.wd_notification', ['md' => $maildata], function($msg) use ($maildata){
+         //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+         //     $msg->to($maildata['email']);
+         //     $msg->subject('Withdrawal Notification');
+         // });
+ 
+         //     $maildata = ['email' => $user->email, 'username' => $user->username];
+         //     Mail::send('mail.admin_wd_notification', ['md' => $maildata], function($msg) use ($maildata){
+         //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+         //     $msg->to('gerencia@invermixcapital.com');
+         //     $msg->subject('Notificación de Solicitud de Retiro en Inyecciones');
+         // });
+ 
+         Session::put('status', 'Retiro solicitado, cuando sea acutalizado será notificado');
+         Session::put('msgType', "suc");
+         return back();
+ 
           }
           else
           {
@@ -2981,49 +3057,6 @@ class userController extends Controller
             $pack->last_wd = $actualDate;
           }
 
-          $pack->w_amt += $amt;
-          $pack->save();
-
-          $usr = User::find($user->id);
-          $usr->wallet += $amt;
-          $usr->save();
-
-          $act = new activities;
-          $act->action = "Cliente retiró desde ".$pack->package.'package. package id: '.$pack->id;
-          $act->user_id = $user->id;
-          $act->save();
-
-        // $wd = new withdrawal;
-        // $wd->user_id = $user->id;
-        // $wd->usn = $user->username;
-        // $wd->package = $req->input('package_name');
-        // $wd->invest_id = $req->input('inyect_id');
-        // $wd->amount = intval($req->input('amt'));
-        // $wd->account = $user->bank_account;
-        // $wd->w_date = date('Y-m-d');
-        // $wd->currency = $user->currency;
-        // $wd->charges = $charge = intval($req->input('amt'))*env('WD_FEE');
-        // $wd->recieving = intval($req->input('amt'))-$charge;
-        // $wd->save();
-
-
-        // $maildata = ['email' => $user->email, 'username' => $user->username];
-        // Mail::send('mail.wd_notification', ['md' => $maildata], function($msg) use ($maildata){
-        //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-        //     $msg->to($maildata['email']);
-        //     $msg->subject('Withdrawal Notification');
-        // });
-
-        // $maildata = ['email' => $user->email, 'username' => $user->username];
-        // Mail::send('mail.admin_wd_notification', ['md' => $maildata], function($msg) use ($maildata){
-        //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-        //     $msg->to(env('SUPPORT_EMAIL'));
-        //     $msg->subject('Withdrawal Notification');
-        // });
-
-          Session::put('status', 'Retiro solicitado, cuando sea acutalizado será notificado');
-          Session::put('msgType', "suc");
-          return back();
 
         }
         catch(\Exception $e)
@@ -3039,6 +3072,8 @@ class userController extends Controller
         return redirect('/');
       }
   }
+
+
 
   public function contactform(Request $request){
 
@@ -3068,7 +3103,7 @@ class userController extends Controller
 
      }
 
-     Session::put('status', 'Retiro solicitado, cuando sea acutalizado será notificado');
+     Session::put('status', 'Mensaje enviado, será contactado lo más pronto posible.');
      Session::put('msgType', "suc");
      return back();
 

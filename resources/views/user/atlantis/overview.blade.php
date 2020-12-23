@@ -59,11 +59,12 @@
 						<!-- <a id="wd_bal" title="Click to withdraw" href="javascript:void(0)" > -->
                         <a href="#">
 							<div class="border_btm">
-								<h4 class="fw-bold text-uppercase text-success op-8">{{ __('Inyecciones') }}</h4>
-								<h3 class="fw-bold">${{ number_format( Auth::user()->inyects->sum('capital')), 2 }}</h3>
+								<h4 class="fw-bold text-uppercase text-success op-8">{{ __('Inversiones RD$') }}</h4>
+								<h3 class="fw-bold">${{ number_format( Auth::user()->invests->where('currency', '==', 'RD$')->sum('capital')), 2 }}</h3>
 								<!-- <div class="colhd margin_n10">{{ __('Click para inyectar al capital') }}</div> -->
 								<br>
-							</div>
+              </div>
+              <br>
 						</a>
 						<!-- {{-- <div class="clearfix"><br></div>
 						<a id="wd_ref_bal" title="Click to withdraw" href="javascript:void(0)">
@@ -74,8 +75,17 @@
 								<br>
 							</div>
 						</a> --}} -->
-					</div>
+          </div>
 
+          <div class="col-md-6">
+            <a href="#">
+  						<div class="border_btm">
+								<h4 class="fw-bold text-uppercase text-success op-8">{{ __('Inversiones US$') }}</h4>
+								<h3 class="fw-bold">${{ number_format( Auth::user()->invests->where('currency', '==', 'US$')->sum('capital')), 2 }}</h3>
+								<!-- <div class="colhd margin_n10">{{ __('Click para inyectar al capital') }}</div> -->
+								<br>
+							</div>
+<!-- 
 					<div class="col-md-6">
             <a href="#">
   						<div class="border_btm">
@@ -85,7 +95,7 @@
   							<br>
   						</div>
 						</a>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

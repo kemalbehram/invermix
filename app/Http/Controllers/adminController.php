@@ -1154,7 +1154,7 @@ public function rejectWD_INJ($id)
         if($usr->wd_status == 'Depositado')
         {
           return back()->with([
-            'toast_msg' => '¡Retiro ya depositado!',
+            'toast_msg' => '¡Retiro ya fue depositado anteriormente!',
             'toast_type' => 'err'
           ]);
         }

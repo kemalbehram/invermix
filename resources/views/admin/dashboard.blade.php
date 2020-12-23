@@ -104,7 +104,7 @@
                                                                         <td>
                                                                             {{ $log->action }}
                                                                         </td>
-                                                                        <td>{{ $log->created_at }}</td>
+                                                                        <td>{{ date('d/m/Y H:i:s', strtotime($log->created_at)) }}</td>
                                                                     </tr>
                                                                 @endforeach
                                                             </tbody>

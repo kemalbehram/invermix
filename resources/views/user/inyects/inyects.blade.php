@@ -23,11 +23,12 @@
                                                 <tr>
                                                     <th>{{ __('Plan') }}</th>
                                                     <th>{{ __('Capital') }}</th>
+                                                    <th>{{ __('Retorno') }}</th>
                                                     <th>{{ __('Fecha de inversión') }}</th>
                                                     <th>{{ __('Hasta') }}</th>
                                                     <th>{{ __('Días transcurridos') }}</th>
                                                     <th>{{ __('Status') }}</th>
-                                                    <th>{{ __('Ganancias') }}</th>
+                                                    <th>{{ __('Acumulado') }}</th>
                                                     <th>{{ __('Propósito') }}</th>
                                                     <th>{{ __('Retirar') }}</th>
                                                 </tr>
@@ -67,8 +68,9 @@
                                                         <tr class="">
                                                             <td>{{$in->package}}</td>
                                                             <td>{{($in->currency)}} {{$in->capital}}</td>
-                                                            <td>{{$in->date_inyected}}</td>
-                                                            <td>{{$in->end_date}}</td>
+                                                            <td>{{($in->currency)}} {{$in->i_return}}</td>
+                                                            <td>{{date('d/m/Y', strtotime($in->date_inyected))}}</td>
+                                                            <td>{{date('d/m/Y', strtotime($in->end_date))}}</td>
                                                             <td>{{$totalDays}}</td>
                                                             <td>{{$in->status}}</td>
                                                             <td>{{$in->currency}} {{$ern}} </td>

@@ -51,7 +51,7 @@
                                 <td>{{$dep->usn}}</td>
                                 <td>{{$dep->currency}} {{number_format($dep->capital), 2}}</td>
                                 <td><b>{{$dep->currency}} {{number_format($dep->i_return), 2}}</b></td>
-                                <td>{{substr($dep->created_at, 0, 10)}}</td>
+                                <td>{{date('d/m/Y', strtotime($dep->created_at))}}</td>
                                 <td>{{$dep->wd_status}}</td>
                             </tr>
                         @endforeach

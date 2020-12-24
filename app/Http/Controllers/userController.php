@@ -792,8 +792,7 @@ class userController extends Controller
           $user->save();
 
            }
-          //  dd($pack);
-          //  die();
+         
 
           $wd = new withdrawal;
           $wd->user_id = $user->id;
@@ -807,17 +806,16 @@ class userController extends Controller
           $wd->save();
 
           
-
+         
           $pack->last_wd = $pack->end_date;
           $pack->wd_status = 'Solicitado';
           $pack->status = 'Retiro Solicitado';
           $pack->w_amt += $amt;
           $pack->save();
-  
-          $act = new activities;
-          $act->action = "Cliente retiró desde ".$pack->package. 'package. package id: '.$pack->id;
-          $act->user_id = $user->id;
-          $act->save();
+
+          // dd('holass');
+          // die();
+
 
             $maildata = ['email' => $user->email, 'username' => $user->username];
            Mail::send('mail.wd_notification', ['md' => $maildata], function($msg) use ($maildata){
@@ -830,8 +828,13 @@ class userController extends Controller
            Mail::send('mail.admin_wd_notification', ['md' => $maildata], function($msg) use ($maildata){
            $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
            $msg->to('dynamiscreatives@gmail.com');
-           $msg->subject('Notificación de Solicitud de Retiro en Inyecciones');
+           $msg->subject('Notificación de Solicitud de Retiro en Inversiones');
        });
+
+      $act = new activities;
+      $act->action = "Cliente retiró desde ".$pack->package. 'package. package id: '.$pack->id;
+      $act->user_id = $user->id;
+      $act->save();
 
        Session::put('status', 'Retiro solicitado, cuando sea acutalizado será notificado');
        Session::put('msgType', "suc");
@@ -2592,8 +2595,6 @@ class userController extends Controller
           if($invest->package_id == 5 && $capital  >= 20)
           {
 
-            //   dd('Dolar, Inverflex, mayor que 20');
-            //   die();
 
             $inv = new inyects;
             $inv->capital = $capital;
@@ -2606,14 +2607,14 @@ class userController extends Controller
             $inv->days_interval = $pack->days_interval;
             $inv->i_return = (round($capital*$pack->daily_interest*$pack->period,2));
             $inv->interest = $pack->daily_interest;
-            // $no = 0;
+            
             $dt = strtotime(date('Y-m-d'));
             $days = $pack->period;
 
             while ($days > 0)
             {
                 $dt    +=   86400   ;
-                // $actualDate = ;
+               
                 $actualDate = date($invest->end_date, $dt) ;
                 $days--;
             }
@@ -2658,8 +2659,6 @@ class userController extends Controller
             elseif($req->packa_id != 5 && $capital  >= 100)
             {
 
-            // dd('Dolar, Diferente a Inverflex, mayor que 100');
-            // die();
 
             $inv = new inyects;
             $inv->capital = $capital;
@@ -2693,6 +2692,7 @@ class userController extends Controller
             $user->save();
             $inv->save();
 
+            $maildata = ['email' => $user->email, 'username' => $user->username];
             Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
               $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
               $msg->to($maildata['email']);
@@ -2738,9 +2738,7 @@ class userController extends Controller
 
             if($invest->package_id == 5 && $capital  >= 1000)
             {
-                // dd('Peso dominicano, Inverflex, mayor que 1000');
-                // die();
-
+ 
               $inv = new inyects;
               $inv->capital = $capital;
               $inv->invest_id = $invest_id;
@@ -2752,14 +2750,14 @@ class userController extends Controller
               $inv->days_interval = $pack->days_interval;
               $inv->i_return = (round($capital*$pack->daily_interest*$pack->period,2));
               $inv->interest = $pack->daily_interest;
-              // $no = 0;
+              
               $dt = strtotime(date('Y-m-d'));
               $days = $pack->period;
 
               while ($days > 0)
               {
                   $dt    +=   86400   ;
-                  // $actualDate = ;
+                  
                   $actualDate = date($invest->end_date, $dt) ;
                   $days--;
               }
@@ -2776,6 +2774,7 @@ class userController extends Controller
 
               $inv->save();
 
+              $maildata = ['email' => $user->email, 'username' => $user->username];
               Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
                 $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
                 $msg->to($maildata['email']);
@@ -2802,9 +2801,7 @@ class userController extends Controller
           }
               elseif($req->packa_id != 5 && $capital >= 5000)
               {
-                // dd('Peso dominicano, Diferente Inverflex, mayor que 5000');
-                // die();
-
+             
               $inv = new inyects;
               $inv->capital = $capital;
               $inv->invest_id = $invest_id;
@@ -2838,6 +2835,7 @@ class userController extends Controller
 
               $inv->save();
 
+              $maildata = ['email' => $user->email, 'username' => $user->username];
               Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
                 $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
                 $msg->to($maildata['email']);
@@ -2864,8 +2862,7 @@ class userController extends Controller
             }
           else
           {
-                // dd('Este es else');
-                // die();
+       
             Session::put('status', "¡Monto invalido! Intenta nuevamente.");
             Session::put('msgType', "err");
             return back();
@@ -3017,6 +3014,7 @@ class userController extends Controller
             $act->user_id = $user->id;
             $act->save();
  
+            $maildata = ['email' => $user->email, 'username' => $user->username];
             Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
               $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
               $msg->to($maildata['email']);

@@ -3014,19 +3014,7 @@ class userController extends Controller
             $act->user_id = $user->id;
             $act->save();
 
-            $maildata = ['email' => $user->email, 'username' => $user->username];
-          Mail::send('mail.wd_notification', ['md' => $maildata], function($msg) use ($maildata){
-              $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-              $msg->to($maildata['email']);
-              $msg->subject('Notificación de retiro del cliente');
-          });
-
-          $maildata = ['email' => $user->email, 'username' => $user->username];
-          Mail::send('mail.wd_notification', ['md' => $maildata], function($msg) use ($maildata){
-              $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-              $msg->to($maildata['email']);
-              $msg->subject('Notificación de retiro del cliente');
-          });
+            
  
           //   $maildata = ['email' => $user->email, 'username' => $user->username];
           //   Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){

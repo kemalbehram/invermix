@@ -929,7 +929,7 @@ public function activateInv(Request $request)
       catch(\Exception $e)
       {
         return back()->with([
-          'toast_msg' => '¡Error al actualizar el registro! ¡Inténtalo de nuevo!',
+          'toast_msg' => '¡Registro actualizado, correo no enviado,Inténtalo de nuevo!',
           'toast_type' => 'err'
         ]);
       }
@@ -2610,8 +2610,8 @@ if(Session::has('adm') && !empty(Session::get('adm')))
         'fname' => 'required|string|max:50',
         'lname' => 'required|string|max:50',
         'email' => 'required|email|unique:users',
-        'username' => 'required|string|max:12|unique:users',
-        'password' => 'required|string'
+        'username' => 'required|string|max:20|unique:users',
+        'password' => 'required|confirmed|string'
     ]);
 
     if($val->fails())

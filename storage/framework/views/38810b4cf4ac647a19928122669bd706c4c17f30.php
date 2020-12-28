@@ -92,8 +92,8 @@
                         <td><?php echo e($in->package); ?></td>
                         <td><?php echo e(number_format($in->capital) ,2); ?></td>
                         <td><?php echo e(number_format($in->i_return) ,2); ?></td>
-                        <td><?php echo e($in->date_invested); ?></td>
-                        <td><?php echo e($in->end_date); ?></td>
+                        <td><?php echo e(date('d/m/Y', strtotime($in->date_invested))); ?></td>
+                        <td><?php echo e(date('d/m/Y', strtotime($in->end_date))); ?></td>
                         <td>
                             <?php if($in->status != 'Retirado'): ?>
                                 <?php echo e($totalDays); ?>
@@ -192,7 +192,7 @@
 
                             </div>
                             <div class="col-xs-6">
-                                <?php echo e($in->date_invested); ?>
+                                <?php echo e(date('d/m/Y', strtotime($in->date_invested))); ?>
 
                             </div>
                         </div>
@@ -202,7 +202,7 @@
 
                             </div>
                             <div class="col-xs-6">
-                                <?php echo e($in->end_date); ?>
+                                <?php echo e(date('d/m/Y', strtotime($in->end_date))); ?>
 
                             </div>
                         </div>

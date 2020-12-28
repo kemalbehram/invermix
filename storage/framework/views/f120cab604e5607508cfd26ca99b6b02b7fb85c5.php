@@ -20,7 +20,7 @@
                     <tr> 
                                 <td><?php echo e($dep->currency); ?> <?php echo e($dep->capital); ?></td>
                                 <td><b><?php echo e($dep->currency); ?> <?php echo e($dep->i_return); ?></b></td>
-                                <td><?php echo e(substr($dep->created_at, 0, 10)); ?></td>
+                                <td><?php echo e(date('d/m/Y', strtotime($dep->created_at))); ?></td>
                                 <td><?php echo e($dep->wd_status); ?></td>                   
                     </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

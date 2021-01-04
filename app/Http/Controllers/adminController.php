@@ -2719,7 +2719,7 @@ else
             $adm = Session::get('adm');
             $act = new adminLog;
             $act->admin = $adm->email;
-            $act->action = "Primera inversión del cliente creada. Investment id: ".$id;
+            $act->action = "Primera inversión del cliente creada. Investment id: ".$inv->id;
             $act->save();
 
             Session::put('status', "Inversión aplicada al cliente exitosamente.");
@@ -2785,7 +2785,7 @@ else
             $adm = Session::get('adm');
             $act = new adminLog;
             $act->admin = $adm->email;
-            $act->action = "Primera inversión del cliente creada. Investment id: ".$id;
+            $act->action = "Primera inversión del cliente creada. Investment id: ".$inv->id;
             $act->save();
 
             Session::put('status', "Inversión aplicada al cliente exitosamente.");
@@ -2793,7 +2793,7 @@ else
             return back() ;
 
            }
-        }
+         }
           else
           {
             Session::put('status', "¡Monto invalido! Intenta nuevamente.");

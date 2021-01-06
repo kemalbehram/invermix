@@ -67,15 +67,16 @@
                                                         ?>
                                                         <tr class="">
                                                             <td>{{$in->package}}</td>
-                                                            <td>{{($in->currency)}} {{$in->capital}}</td>
-                                                            <td>{{$in->date_invested}}</td>
-                                                            <td>{{$in->end_date}}</td>
+                                                            <td>{{($in->currency)}} {{number_format($in->capital),2}}</td>
+                                                            <td>{{($in->currency)}} {{number_format($in->i_return),2}}</td>
+                                                            <td>{{date('d/m/Y', strtotime($in->date_invested))}}</td>
+                                                            <td>{{date('d/m/Y', strtotime($in->end_date))}}</td>
                                                             <td>{{$totalDays}}</td>
                                                             <td>{{$in->status}}</td>
-                                                            <td>{{$in->currency}} {{$ern}} </td>
+                                                            <td>{{$in->currency}} {{number_format($ern),2}} </td>
                                                             <td>
 
-                                                      
+
 
                                                                 @if($in->description == Null)
                                                             <a href="javascript:void(0)" onclick="description('{{$in->id}}')">Agregar propósito</a>
@@ -167,7 +168,7 @@
                         </div>
                     </div>
                 </div>
-        
+
             </div>
 
             <div id="popDescription" class="container pop_invest_cont" >
@@ -175,7 +176,7 @@
     <div class="col-md-4">&emps;</div>
     <div class="col-md-4 card pop_invest_col" align="center">
       <div class="card-header" style="">
-   
+
       </div>
       <div class="pop_msg_contnt">
         <p align="center" class="color_blue_b">

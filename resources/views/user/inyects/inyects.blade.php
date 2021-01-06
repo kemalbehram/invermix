@@ -67,13 +67,13 @@
                                                         ?>
                                                         <tr class="">
                                                             <td>{{$in->package}}</td>
-                                                            <td>{{($in->currency)}} {{$in->capital}}</td>
-                                                            <td>{{($in->currency)}} {{$in->i_return}}</td>
+                                                            <td>{{($in->currency)}} {{number_format($in->capital),2}}</td>
+                                                            <td>{{($in->currency)}} {{number_format($in->i_return),2}}</td>
                                                             <td>{{date('d/m/Y', strtotime($in->date_inyected))}}</td>
                                                             <td>{{date('d/m/Y', strtotime($in->end_date))}}</td>
                                                             <td>{{$totalDays}}</td>
                                                             <td>{{$in->status}}</td>
-                                                            <td>{{$in->currency}} {{$ern}} </td>
+                                                            <td>{{$in->currency}} {{number_format($ern),2}} </td>
                                                             <td>
 
                                                       

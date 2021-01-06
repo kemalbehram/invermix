@@ -23,6 +23,7 @@
                                                 <tr>
                                                     <th>{{ __('Plan') }}</th>
                                                     <th>{{ __('Capital') }}</th>
+                                                    <th>{{ __('Retorno') }}</th>
                                                     <th>{{ __('Fecha de inversión') }}</th>
                                                     <th>{{ __('Hasta') }}</th>
                                                     <th>{{ __('Días transcurridos') }}</th>

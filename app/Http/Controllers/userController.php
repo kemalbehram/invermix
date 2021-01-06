@@ -472,8 +472,6 @@ class userController extends Controller
 
   public function invest(Request $req)
   {
-      dd($req);
-      die();
 
       $user = Auth::User();
 

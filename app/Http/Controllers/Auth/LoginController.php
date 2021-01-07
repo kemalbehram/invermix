@@ -77,7 +77,7 @@ class LoginController extends Controller
             Mail::send('mail.loginNotification', ['md' => $maildata], function($msg) use ($maildata){
                 $msg->from(env('MAIL_USERNAME'), $this->st->site_title);
                 $msg->to($maildata['email']);
-                $msg->subject('Inicio de sesión de cuenta de cliente');
+                $msg->subject('User Account login');
             });
         }
         catch(\Exception $e)
@@ -85,6 +85,11 @@ class LoginController extends Controller
             
         }
 
+        // $user = Auth::User();
+        // if($user->sec_2fa_status == 1)
+        // {
+        //     return redirect()->route('user.login2fa');
+        // }
 
         return '/'.$user->username.'/dashboard';
     

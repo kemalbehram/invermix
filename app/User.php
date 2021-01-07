@@ -64,8 +64,4 @@ class User extends Authenticatable
         return $this->hasMany('App\inyects', 'user_id');
     }
 
-    public function invests(){
-        return $this->hasMany('App\investment', 'user_id');
-    }
-
 }

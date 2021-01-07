@@ -473,9 +473,6 @@ class userController extends Controller
   public function invest(Request $req)
   {
 
-    // dd($req->currency);
-    // dd();
-
       $user = Auth::User();
 
       if($this->st->investment != 1 )
@@ -500,34 +497,32 @@ class userController extends Controller
       }
 
 
+
       if(!empty($user))
       {
 
         try
         {
+            if($req->currency == 'RD$'){
+
           $capital = $req->input('capital');
           $pack = packages::find($req->input('p_id'));
 
 
-          if($req->currency == 'RD$')
-          {
-
           if($capital > $pack->max)
           {
-
-            Session::put('status', 'El capital de entrada es mayor que la inversión máxima permitida para este plan.');
+            Session::put('status', 'El capital de entrada es mayor que la inversión máxima.');
             Session::put('msgType', "err");
             return back();
           }
 
           if($capital < $pack->min)
           {
-            Session::put('status', 'El capital de entrada es menor que la inversión mínima permitida para este plan.');
+            Session::put('status', 'El capital de entrada es menos que la inversión mínima.');
             Session::put('msgType', "err");
             return back();
           }
 
-          
           if($capital >= $pack->min && $capital <= $pack->max)
           {
             $inv = new investment;
@@ -562,21 +557,6 @@ class userController extends Controller
 
             $inv->save();
 
-
-            $maildata = ['email' => $user->email, 'username' => $user->username];
-            Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-                $msg->to($maildata['email']);
-                $msg->subject('Inversión de Cliente');
-            });
-
-            $maildata = ['email' => $user->email, 'username' => $user->username];
-            Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-                $msg->to('dynamiscreatives@gmail.com');
-                $msg->subject('Inversión de Cliente');
-            });
-
             $act = new activities;
             $act->action = "User Invested ".$capital." in ".$pack->package_name." package";
             $act->user_id = $user->id;
@@ -585,91 +565,103 @@ class userController extends Controller
             Session::put('status', "Inversión enviada para su aprobación.");
             Session::put('msgType', "suc");
             return back() ;
+        }
 
-          }
+            // $maildata = ['email' => $user->email, 'username' => $user->username];
+            // Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            //     $msg->to($maildata['email']);
+            //     $msg->subject('User Investment');
+            // });
 
-          
-        }elseif($req->currency == 'US$')
+            // $maildata = ['email' => $user->email, 'username' => $user->username];
+            // Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            //     $msg->to(env('SUPPORT_EMAIL'));
+            //     $msg->subject('User Investment');
+            // });
 
-          {
 
-          if($capital > $pack->maxdol)
-          {
-    
-            Session::put('status', 'El capital de entrada es mayor que la inversión máxima permitida para este plan');
-            Session::put('msgType', "err");
-            return back();
-          }
+          }elseif($req->currency == 'US$'){
 
-          if($capital < $pack->mindol)
-          {
+            $capital = $req->input('capital');
+            $pack = packages::find($req->input('p_id'));
 
-            Session::put('status', 'El capital de entrada es menor que la inversión mínima permitida para este plan.');
-            Session::put('msgType', "err");
-            return back();
-          }
 
-          
-          if($capital >= $pack->mindol && $capital <= $pack->maxdol)
-          {
-            $inv = new investment;
-            $inv->capital = $capital;
-            $inv->user_id = $user->id;
-            $inv->usn = $user->username;
-            $inv->package = $pack->package_name;
-            $inv->date_invested = date("d-m-Y");
-            $inv->period = $pack->period;
-            $inv->days_interval = $pack->days_interval;
-            $inv->i_return = (round($capital*$pack->daily_interest*$pack->period,2));
-            $inv->interest = $pack->daily_interest;
-
-            $dt = strtotime(date('Y-m-d'));
-            $days = $pack->period;
-
-            while ($days > 0)
+            if($capital > $pack->maxdol)
             {
-                $dt    +=   86400   ;
-                $actualDate = date('Y-m-d', $dt);
-                $days--;
+              Session::put('status', 'El capital de entrada es mayor que la inversión máxima.');
+              Session::put('msgType', "err");
+              return back();
             }
 
-            $inv->package_id = $pack->id;
-            $inv->currency = $req->currency;
-            $inv->end_date = $actualDate;
-            $inv->last_wd = date("Y-m-d");
-            $inv->status = 'Pendiente';
-
-            $user->wallet -= $capital;
-            $user->save();
-
-            $inv->save();
-
-            $maildata = ['email' => $user->email, 'username' => $user->username];
-            Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-                $msg->to($maildata['email']);
-                $msg->subject('Inversión de Cliente');
-            });
-
-            $maildata = ['email' => $user->email, 'username' => $user->username];
-            Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-                $msg->to('dynamiscreatives@gmail.com');
-                $msg->subject('Inversión de Cliente');
-            });
-
-
-            $act = new activities;
-            $act->action = "User Invested ".$capital." in ".$pack->package_name." package";
-            $act->user_id = $user->id;
-            $act->save();
-
-            Session::put('status', "Inversión enviada para su aprobación.");
-            Session::put('msgType', "suc");
-            return back() ;
+            if($capital < $pack->mindol)
+            {
+              Session::put('status', 'El capital de entrada es menos que la inversión mínima.');
+              Session::put('msgType', "err");
+              return back();
             }
 
+            if($capital >= $pack->min && $capital <= $pack->max)
+            {
+              $inv = new investment;
+              $inv->capital = $capital;
+              $inv->user_id = $user->id;
+              $inv->usn = $user->username;
+              $inv->package = $pack->package_name;
+              $inv->date_invested = date("d-m-Y");
+              $inv->period = $pack->period;
+              $inv->days_interval = $pack->days_interval;
+              $inv->i_return = (round($capital*$pack->daily_interest*$pack->period,2));
+              $inv->interest = $pack->daily_interest;
+
+              $dt = strtotime(date('Y-m-d'));
+              $days = $pack->period;
+
+              while ($days > 0)
+              {
+                  $dt    +=   86400   ;
+                  $actualDate = date('Y-m-d', $dt);
+                  $days--;
+              }
+
+              $inv->package_id = $pack->id;
+              $inv->currency = $req->currency;
+              $inv->end_date = $actualDate;
+              $inv->last_wd = date("Y-m-d");
+              $inv->status = 'Pendiente';
+
+              $user->wallet -= $capital;
+              $user->save();
+
+              $inv->save();
+
+              $act = new activities;
+              $act->action = "User Invested ".$capital." in ".$pack->package_name." package";
+              $act->user_id = $user->id;
+              $act->save();
+
+              Session::put('status', "Inversión enviada para su aprobación.");
+              Session::put('msgType', "suc");
+              return back() ;
           }
+
+              // $maildata = ['email' => $user->email, 'username' => $user->username];
+              // Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+              //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+              //     $msg->to($maildata['email']);
+              //     $msg->subject('User Investment');
+              // });
+
+              // $maildata = ['email' => $user->email, 'username' => $user->username];
+              // Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+              //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+              //     $msg->to(env('SUPPORT_EMAIL'));
+              //     $msg->subject('User Investment');
+              // });
+
+
+            }
           else
           {
             Session::put('status', "¡Monto invalido! Intenta nuevamente.");
@@ -696,9 +688,9 @@ class userController extends Controller
   public function description(Request $req){
 
     $user = Auth::User();
-    
+
     if(!empty($user))
-    { 
+    {
       try
       {
         $validator = Validator::make($req->all(), [
@@ -719,7 +711,7 @@ class userController extends Controller
         }
 
   }
-  
+
   catch(\Exception $e)
   {
     Session::put('status', 'Error al agregar inversión');
@@ -732,148 +724,112 @@ class userController extends Controller
 
   public function wd_invest(Request $req)
   {
-   
-    $user = Auth::User();
-  
-    if($user->status == 'pending' || $user->status == 0 )
-    {
-      Session::put('msgType', "err");
-      Session::put('status', '¡Cuenta no activada! Póngase en contacto con el servicio de asistencia.');
-      return redirect('/login');
-    }
 
-    if($user->status == 'Blocked' || $user->status == 2 )
-    {
-      Session::put('msgType', "err");
-      Session::put('status', '¡Cuenta bloqueada! Póngase en contacto con el servicio de asistencia.');
-      return redirect('/login');
-    }
+            //  dd($req);
+            //   die();
+      $user = Auth::User();
+
+      if($user->status == 'pending' || $user->status == 0 )
+      {
+        Session::put('msgType', "err");
+        Session::put('status', '¡Cuenta no activada! Póngase en contacto con soporte.');
+        return redirect('/login');
+      }
+
+      if($user->status == 'Blocked' || $user->status == 2 )
+      {
+        Session::put('msgType', "err");
+        Session::put('status', '¡Cuenta bloqueada! Póngase en contacto con el servicio de asistencia.');
+        return redirect('/login');
+      }
 
 
-    if(!empty($user))
-    {
-
-      try
+      if(!empty($user))
       {
 
-        $amt = $req->input('amt');
-
-        if($req->input('pack_type') == 'xpack')
+        try
         {
-            $pack = xpack_inv::find($req->input('p_id'));
-        }
-        else
-        {
-            $pack = investment::find($req->input('p_id'));
 
-        }
+          $amt = $req->input('amt');
 
-        if($pack->status == 'Pendiente')
-        {
-        Session::put('msgType', "err");
-        Session::put('status', 'Inyeccion no ha sido aprobada aún, debe solicitar la aprobación de la misma.');
-        return back();
-      }
-
-        if($amt <= 0)
-        {
-        
-          Session::put('msgType', "err");
-          Session::put('status', 'Fechas de retiro no cumplida/ Monto inválido/ Inversión expirada');
-          return back();
-      }
-
-        if($req->input('ended') == 'yes')
-        {
-         
-          if($pack->wd_status != 'Depositado')
+          if($req->input('pack_type') == 'xpack')
           {
-          $user->wallet += $pack->capital;
-          $user->save();
+              $pack = xpack_inv::find($req->input('p_id'));
+          }
+          else
+          {
+              $pack = investment::find($req->input('p_id'));
 
-           }
-         
+          }
 
-          $wd = new withdrawal;
-          $wd->user_id = $user->id;
-          $wd->usn = $user->username;
-          $wd->package = $pack->package;
-          $wd->invest_id = $pack->id;
-          $wd->amount = intval($req->input('amt'));
-          // $wd->account = $user->bank_account;
-          $wd->w_date = date('Y-m-d');
-          $wd->currency = $pack->currency;
-          $wd->save();
 
-          
-         
-          $pack->last_wd = $pack->end_date;
-          $pack->wd_status = 'Solicitado';
-          $pack->status = 'Retiro Solicitado';
+          if($amt <= 0)
+          {
+            Session::put('msgType', "err");
+            Session::put('status', 'Fecha de retiro no cumplida/ Monto inválido/ Inversión expirada');
+            return back();
+          }
+
+          if($req->input('ended') == 'yes')
+          {
+            if($pack->wd_status != 'Solicitado')
+            {
+                $user->wallet += $pack->capital;
+                $user->save();
+            }
+            $pack->last_wd = $pack->end_date;
+            $pack->wd_status = 'Solicitado';
+            $pack->status = 'Retiro Solicitado';
+
+          }
+          else
+          {
+
+            $dt = strtotime($pack->last_wd);
+            $days = $pack->days_interval;
+
+            while ($days > 0)
+            {
+              $dt    +=   86400   ;
+              $actualDate = date('Y-m-d', $dt);
+              // if (date('N', $dt) < 6)
+              // {
+                  $days--;
+              //}
+            }
+            $pack->last_wd = $actualDate;
+          }
+
           $pack->w_amt += $amt;
           $pack->save();
 
-          // dd('holass');
-          // die();
+          $usr = User::find($user->id);
+          $usr->wallet += $amt;
+          $usr->save();
 
+          $act = new activities;
+          $act->action = "User withdrawn to wallet from ".$pack->package.'package. package id: '.$pack->id;
+          $act->user_id = $user->id;
+          $act->save();
 
-      //       $maildata = ['email' => $user->email, 'username' => $user->username];
-      //      Mail::send('mail.wd_notification', ['md' => $maildata], function($msg) use ($maildata){
-      //      $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-      //      $msg->to($maildata['email']);
-      //      $msg->subject('Notificación de Retiro');
-      //  });
-
-      //      $maildata = ['email' => $user->email, 'username' => $user->username];
-      //      Mail::send('mail.admin_wd_notification', ['md' => $maildata], function($msg) use ($maildata){
-      //      $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-      //      $msg->to('dynamiscreatives@gmail.com');
-      //      $msg->subject('Notificación de Solicitud de Retiro en Inversiones');
-      //  });
-
-      $act = new activities;
-      $act->action = "Cliente retiró desde ".$pack->package. 'package. package id: '.$pack->id;
-      $act->user_id = $user->id;
-      $act->save();
-
-       Session::put('status', 'Retiro solicitado, cuando sea acutalizado será notificado');
-       Session::put('msgType', "suc");
-       return back();
+          Session::put('status', 'Retiro de inversión solicitada, la cantidad solicitada se depositará en su cuenta.');
+          Session::put('msgType', "suc");
+          return back();
 
         }
-        else
+        catch(\Exception $e)
         {
-
-          $dt = strtotime($pack->last_wd);
-          $days = $pack->days_interval;
-
-          while ($days > 0)
-          {
-            $dt    +=   86400   ;
-            $actualDate = date('Y-m-d', $dt);
-            // if (date('N', $dt) < 6)
-            // {
-                $days--;
-            //}
-          }
-          $pack->last_wd = $actualDate;
+          Session::put('status', 'Error al enviar su retiro');
+          Session::put('msgType', "err");
+          return back();
         }
 
-
       }
-      catch(\Exception $e)
+      else
       {
-        Session::put('status', 'Error al enviar su retiro');
-        Session::put('msgType', "err");
-        return back();
+        return redirect('/');
       }
-
-    }
-    else
-    {
-      return redirect('/');
-    }
-}
+  }
 
 
 
@@ -948,14 +904,14 @@ class userController extends Controller
           Mail::send('mail.wd_notification', ['md' => $maildata], function($msg) use ($maildata){
               $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
               $msg->to($maildata['email']);
-              $msg->subject('Notificación de Retiro');
+              $msg->subject('Withdrawal Notification');
           });
 
           $maildata = ['email' => $user->email, 'username' => $user->username];
           Mail::send('mail.admin_wd_notification', ['md' => $maildata], function($msg) use ($maildata){
               $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-              $msg->to('dynamiscreatives@gmail.com');
-              $msg->subject('Notificación de Retiro');
+              $msg->to(env('SUPPORT_EMAIL'));
+              $msg->subject('Withdrawal Notification');
           });
 
           $wd_fee = env("WD_FEE")*100;
@@ -1064,14 +1020,14 @@ class userController extends Controller
           Mail::send('mail.wd_notification', ['md' => $maildata], function($msg) use ($maildata){
               $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
               $msg->to($maildata['email']);
-              $msg->subject('Notificación de retiro del cliente');
+              $msg->subject('User Withdrawal Notification');
           });
 
           $maildata = ['email' => $user->email, 'username' => $user->username];
           Mail::send('mail.wd_notification', ['md' => $maildata], function($msg) use ($maildata){
               $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
               $msg->to(env('SUPPORT_EMAIL'));
-              $msg->subject('Notificación de retiro del cliente');
+              $msg->subject('User Withdrawal Notification');
           });
 
           Session::put('status', 'Referral Withdrawal Successful, Please Allow up to 10 Business Days for Payment Processing');
@@ -1357,11 +1313,11 @@ class userController extends Controller
               Mail::send('mail.pwd_req', ['md' => $maildata], function($msg) use ($maildata){
                   $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
                   $msg->to($maildata['email']);
-                  $msg->subject('Restablecer Contraseña');
+                  $msg->subject('Password Reset');
               });
 
               Session::forget('pwd_rst_suc');
-              Session::put('status', 'Enlace de restablecimiento de contraseña enviado al correo electrónico. Inténtelo de nuevo si no lo recibe.');
+              Session::put('status', 'Enlace de restablecimiento de contraseña enviado al correo electrónico. Inténtelo de nuevo después de algunas veces si no lo recibe.');
               Session::put('msgType', "suc");
               return back();
 
@@ -1807,13 +1763,13 @@ class userController extends Controller
         Mail::send('mail.user_deposit_notification', ['md' => $maildata], function($msg) use ($maildata){
             $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
             $msg->to($maildata['email']);
-            $msg->subject('Notificación de Déposito');
+            $msg->subject('User Deposit Notification');
         });
 
         Mail::send('mail.admin_deposit_notification', ['md' => $maildata], function($msg) use ($maildata){
             $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
             $msg->to(env('SUPPORT_EMAIL'));
-            $msg->subject('Notificación de Déposito de Cliente');
+            $msg->subject('User Deposit Notification');
         });
 
         return back()->With(['toast_msg' => 'Deposit saved! Please also submit details of deposit transaction to moderators to speed up funding your wallet via '.env('BANK_DEPOSIT_EMAIL'), 'toast_type' => 'suc']);
@@ -1845,7 +1801,7 @@ class userController extends Controller
 
   public function create_ticket(Request $req)
   {
- 
+
 
     $user = Auth::User();
     if(!empty($user))
@@ -1891,7 +1847,7 @@ class userController extends Controller
 
           Mail::send('mail.user_tickect_msg', ['md' => $maildata], function($msg) use ($maildata){
               $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-              $msg->to('dynamiscreatives@gmail.com');
+              $msg->to('gerencia@invermixcapital.com');
               $msg->subject('Mensaje de Ticket');
           });
 
@@ -1906,7 +1862,7 @@ class userController extends Controller
               $msg->subject('Mensaje de Ticket');
           });
         }
-       
+
         // $tickets = ticket::find($user->id);
         return back()->With([
           'toast_msg' => '¡Ticket enviado correctamente! El administrador te atenderá en breve',
@@ -2010,7 +1966,7 @@ class userController extends Controller
       $validator = Validator::make($req->all(), [
         'ticket_id' => 'required|string',
         'msg' => 'required|string',
-       
+
       ]);
 
       if($validator->fails())
@@ -2036,7 +1992,7 @@ class userController extends Controller
         Mail::send('mail.user_tickect_msg', ['md' => $maildata], function($msg) use ($maildata){
             $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
             $msg->to(env('SUPPORT_EMAIL'));
-            $msg->subject('Mensaje Ticket');
+            $msg->subject('Ticket Message');
         });
 
         return json_encode([
@@ -2116,13 +2072,13 @@ class userController extends Controller
     Mail::send('mail.user_deposit_notification', ['md' => $maildata], function($msg) use ($maildata){
         $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
         $msg->to($maildata['email']);
-        $msg->subject('Notificación de depósito de usuario');
+        $msg->subject('User Deposit Notification');
     });
 
     Mail::send('mail.admin_deposit_notification', ['md' => $maildata], function($msg) use ($maildata){
         $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
         $msg->to(env('SUPPORT_EMAIL'));
-        $msg->subject('Notificación de depósito de usuario');
+        $msg->subject('User Deposit Notification');
     });
 
     return redirect()->route('wallet')->with([
@@ -2595,6 +2551,8 @@ class userController extends Controller
           if($invest->package_id == 5 && $capital  >= 20)
           {
 
+            //   dd('Dolar, Inverflex, mayor que 20');
+            //   die();
 
             $inv = new inyects;
             $inv->capital = $capital;
@@ -2607,21 +2565,21 @@ class userController extends Controller
             $inv->days_interval = $pack->days_interval;
             $inv->i_return = (round($capital*$pack->daily_interest*$pack->period,2));
             $inv->interest = $pack->daily_interest;
-            
+            // $no = 0;
             $dt = strtotime(date('Y-m-d'));
             $days = $pack->period;
 
             while ($days > 0)
             {
                 $dt    +=   86400   ;
-               
+                // $actualDate = ;
                 $actualDate = date($invest->end_date, $dt) ;
                 $days--;
             }
 
 
             $inv->package_id = $pack->id;
-            $inv->currency = $invest->currency;
+            $inv->currency = $this->st->currency;
             $inv->end_date =  $actualDate;
             $inv->last_wd = date("Y-m-d");
             $inv->status = 'Pendiente';
@@ -2631,19 +2589,19 @@ class userController extends Controller
 
             $inv->save();
 
-                  $maildata = ['email' => $user->email, 'username' => $user->username];
-            Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-                $msg->to($maildata['email']);
-                $msg->subject('Inyección de Cliente');
-            });
+                  // $maildata = ['email' => $user->email, 'username' => $user->username];
+            // Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            //     $msg->to($maildata['email']);
+            //     $msg->subject('User Investment');
+            // });
 
-            $maildata = ['email' => $user->email, 'username' => $user->username];
-            Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-                $msg->to('dynamiscreatives@gmail.com');
-                $msg->subject('Inyección de Cliente');
-            });
+            // $maildata = ['email' => $user->email, 'username' => $user->username];
+            // Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            //     $msg->to(env('SUPPORT_EMAIL'));
+            //     $msg->subject('User Investment');
+            // });
 
             $act = new activities;
             $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." plan";
@@ -2659,6 +2617,8 @@ class userController extends Controller
             elseif($req->packa_id != 5 && $capital  >= 100)
             {
 
+            // dd('Dolar, Diferente a Inverflex, mayor que 100');
+            // die();
 
             $inv = new inyects;
             $inv->capital = $capital;
@@ -2683,7 +2643,7 @@ class userController extends Controller
 
 
             $inv->package_id = $pack->id;
-            $inv->currency = $invest->currency;
+            $inv->currency = $this->st->currency;
             $inv->end_date =  $actualDate;
             $inv->last_wd = date("Y-m-d");
             $inv->status = 'Pendiente';
@@ -2692,19 +2652,19 @@ class userController extends Controller
             $user->save();
             $inv->save();
 
-            $maildata = ['email' => $user->email, 'username' => $user->username];
-            Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-              $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-              $msg->to($maildata['email']);
-              $msg->subject('Inyección de Cliente');
-          });
+                // $maildata = ['email' => $user->email, 'username' => $user->username];
+            // Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            //     $msg->to($maildata['email']);
+            //     $msg->subject('User Investment');
+            // });
 
-          $maildata = ['email' => $user->email, 'username' => $user->username];
-          Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-              $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-              $msg->to('dynamiscreatives@gmail.com');
-              $msg->subject('Inyección de Cliente');
-          });
+            // $maildata = ['email' => $user->email, 'username' => $user->username];
+            // Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            //     $msg->to(env('SUPPORT_EMAIL'));
+            //     $msg->subject('User Investment');
+            // });
 
             $act = new activities;
             $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." ";
@@ -2738,7 +2698,9 @@ class userController extends Controller
 
             if($invest->package_id == 5 && $capital  >= 1000)
             {
- 
+                // dd('Peso dominicano, Inverflex, mayor que 1000');
+                // die();
+
               $inv = new inyects;
               $inv->capital = $capital;
               $inv->invest_id = $invest_id;
@@ -2750,21 +2712,21 @@ class userController extends Controller
               $inv->days_interval = $pack->days_interval;
               $inv->i_return = (round($capital*$pack->daily_interest*$pack->period,2));
               $inv->interest = $pack->daily_interest;
-              
+              // $no = 0;
               $dt = strtotime(date('Y-m-d'));
               $days = $pack->period;
 
               while ($days > 0)
               {
                   $dt    +=   86400   ;
-                  
+                  // $actualDate = ;
                   $actualDate = date($invest->end_date, $dt) ;
                   $days--;
               }
 
 
               $inv->package_id = $pack->id;
-              $inv->currency = $invest->currency;
+              $inv->currency = $this->st->currency;
               $inv->end_date =  $actualDate;
               $inv->last_wd = date("Y-m-d");
               $inv->status = 'Pendiente';
@@ -2774,19 +2736,19 @@ class userController extends Controller
 
               $inv->save();
 
-              $maildata = ['email' => $user->email, 'username' => $user->username];
-              Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-                $msg->to($maildata['email']);
-                $msg->subject('Inyección de Cliente');
-            });
+                    // $maildata = ['email' => $user->email, 'username' => $user->username];
+              // Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+              //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+              //     $msg->to($maildata['email']);
+              //     $msg->subject('User Investment');
+              // });
 
-            $maildata = ['email' => $user->email, 'username' => $user->username];
-            Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-                $msg->to('dynamiscreatives@gmail.com');
-                $msg->subject('Inyección de Cliente');
-            });
+              // $maildata = ['email' => $user->email, 'username' => $user->username];
+              // Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+              //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+              //     $msg->to(env('SUPPORT_EMAIL'));
+              //     $msg->subject('User Investment');
+              // });
 
               $act = new activities;
               $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." plan";
@@ -2801,7 +2763,9 @@ class userController extends Controller
           }
               elseif($req->packa_id != 5 && $capital >= 5000)
               {
-             
+                // dd('Peso dominicano, Diferente Inverflex, mayor que 5000');
+                // die();
+
               $inv = new inyects;
               $inv->capital = $capital;
               $inv->invest_id = $invest_id;
@@ -2825,7 +2789,7 @@ class userController extends Controller
 
 
               $inv->package_id = $pack->id;
-              $inv->currency = $invest->currency; 
+              $inv->currency = $this->st->currency;
               $inv->end_date =  $actualDate;
               $inv->last_wd = date("Y-m-d");
               $inv->status = 'Pendiente';
@@ -2835,19 +2799,19 @@ class userController extends Controller
 
               $inv->save();
 
-              $maildata = ['email' => $user->email, 'username' => $user->username];
-              Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-                $msg->to($maildata['email']);
-                $msg->subject('Inyección de Cliente');
-            });
+            //       $maildata = ['email' => $user->email, 'username' => $user->username];
+            //   Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+            //       $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            //       $msg->to($maildata['email']);
+            //       $msg->subject('User Investment');
+            //   });
 
-            $maildata = ['email' => $user->email, 'username' => $user->username];
-            Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-                $msg->to('dynamiscreatives@gmail.com');
-                $msg->subject('Inyección de Cliente');
-            });
+            //   $maildata = ['email' => $user->email, 'username' => $user->username];
+            //   Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+            //       $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+            //       $msg->to(env('SUPPORT_EMAIL'));
+            //       $msg->subject('User Investment');
+            //   });
 
               $act = new activities;
               $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." plan";
@@ -2862,7 +2826,8 @@ class userController extends Controller
             }
           else
           {
-       
+                // dd('Este es else');
+                // die();
             Session::put('status', "¡Monto invalido! Intenta nuevamente.");
             Session::put('msgType', "err");
             return back();
@@ -2890,9 +2855,9 @@ class userController extends Controller
     // die();
 
     $user = Auth::User();
-    
+
     if(!empty($user))
-    { 
+    {
       try
       {
         $validator = Validator::make($req->all(), [
@@ -2913,7 +2878,7 @@ class userController extends Controller
         }
 
   }
-  
+
   catch(\Exception $e)
   {
     Session::put('status', 'Error al agregar inversión');
@@ -2930,9 +2895,8 @@ class userController extends Controller
 
   public function wd_inyect(Request $req)
   {
-
       $user = Auth::User();
-  
+
       if($user->status == 'pending' || $user->status == 0 )
       {
         Session::put('msgType', "err");
@@ -2966,74 +2930,30 @@ class userController extends Controller
 
           }
 
-          if($pack->status == 'Pendiente')
-          {
-          Session::put('msgType', "err");
-          Session::put('status', 'Inyeccion no ha sido aprobada aún, debe solicitar la aprobación de la misma.');
-          return back();
-        }
+        //   if($pack->status = 'active')
+        //   {
+        //   Session::put('msgType', "err");
+        //   Session::put('status', 'Inyeccion no ha sido aprobada aún, debe solicitar la aprobación de la misma.');
+        //   return back();
+        // }
 
           if($amt <= 0)
           {
-          
             Session::put('msgType', "err");
             Session::put('status', 'Fechas de retiro no cumplida/ Monto inválido/ Inversión expirada');
             return back();
         }
-
           if($req->input('ended') == 'yes')
           {
-
-            if($pack->wd_status != 'Depositado')
+            if($pack->wd_status != 'Solicitado')
             {
-
-            $user->wallet += $pack->capital;
-            $user->save();
-
-             }
-
-            $wd = new withdrawal;
-            $wd->user_id = $user->id;
-            $wd->usn = $user->username;
-            $wd->package = $pack->package;
-            $wd->invest_id = $pack->id;
-            $wd->amount = intval($req->input('amt'));
-            // $wd->account = $user->bank_account;
-            $wd->w_date = date('Y-m-d');
-            $wd->currency = $pack->currency;
-            $wd->save();
-
+                $user->wallet += $pack->capital;
+                $user->save();
+            }
             $pack->last_wd = $pack->end_date;
             $pack->wd_status = 'Solicitado';
             $pack->status = 'Retiro Solicitado';
-            $pack->w_amt += $amt;
-            $pack->save();
-    
-            $act = new activities;
-            $act->action = "Cliente retiró desde ".$pack->package. 'package. package id: '.$pack->id;
-            $act->user_id = $user->id;
-            $act->save();
 
-            
- 
-          //   $maildata = ['email' => $user->email, 'username' => $user->username];
-          //   Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-          //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-          //     $msg->to($maildata['email']);
-          //     $msg->subject('Inyección de Cliente');
-          // });
-
-          // $maildata = ['email' => $user->email, 'username' => $user->username];
-          // Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-          //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-          //     $msg->to('dynamiscreatives@gmail.com');
-          //     $msg->subject('Inyección de Cliente');
-          // });
- 
-         Session::put('status', 'Retiro solicitado, cuando sea acutalizado será notificado');
-         Session::put('msgType', "suc");
-         return back();
- 
           }
           else
           {
@@ -3053,6 +2973,49 @@ class userController extends Controller
             $pack->last_wd = $actualDate;
           }
 
+          $pack->w_amt += $amt;
+          $pack->save();
+
+          $usr = User::find($user->id);
+          $usr->wallet += $amt;
+          $usr->save();
+
+          $act = new activities;
+          $act->action = "Cliente retiró desde ".$pack->package.'package. package id: '.$pack->id;
+          $act->user_id = $user->id;
+          $act->save();
+
+        // $wd = new withdrawal;
+        // $wd->user_id = $user->id;
+        // $wd->usn = $user->username;
+        // $wd->package = $req->input('package_name');
+        // $wd->invest_id = $req->input('inyect_id');
+        // $wd->amount = intval($req->input('amt'));
+        // $wd->account = $user->bank_account;
+        // $wd->w_date = date('Y-m-d');
+        // $wd->currency = $user->currency;
+        // $wd->charges = $charge = intval($req->input('amt'))*env('WD_FEE');
+        // $wd->recieving = intval($req->input('amt'))-$charge;
+        // $wd->save();
+
+
+        // $maildata = ['email' => $user->email, 'username' => $user->username];
+        // Mail::send('mail.wd_notification', ['md' => $maildata], function($msg) use ($maildata){
+        //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+        //     $msg->to($maildata['email']);
+        //     $msg->subject('Withdrawal Notification');
+        // });
+
+        // $maildata = ['email' => $user->email, 'username' => $user->username];
+        // Mail::send('mail.admin_wd_notification', ['md' => $maildata], function($msg) use ($maildata){
+        //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+        //     $msg->to(env('SUPPORT_EMAIL'));
+        //     $msg->subject('Withdrawal Notification');
+        // });
+
+          Session::put('status', 'Retiro solicitado, cuando sea acutalizado será notificado');
+          Session::put('msgType', "suc");
+          return back();
 
         }
         catch(\Exception $e)
@@ -3068,8 +3031,6 @@ class userController extends Controller
         return redirect('/');
       }
   }
-
-
 
   public function contactform(Request $request){
 
@@ -3099,7 +3060,7 @@ class userController extends Controller
 
      }
 
-     Session::put('status', 'Mensaje enviado, será contactado lo más pronto posible.');
+     Session::put('status', 'Retiro solicitado, cuando sea acutalizado será notificado');
      Session::put('msgType', "suc");
      return back();
 

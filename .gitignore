@@ -11,5 +11,3 @@ documentation/
 /public/hot
 /public/storage
 /public/uploads/
-storage/framework/sessions/
-.env

@@ -84,8 +84,8 @@
                     <td>{{$in->package}}</td>
                     <td>{{$in->currency}}{{number_format($in->capital), 2}}</td>
                     <td>{{$in->currency}}{{number_format(round ($in->i_return, 2), 2 )}}</td>
-                    <td>{{date('d/m/Y', strtotime($in->created_at))}}</td>
-                    <td>{{date('d/m/Y', strtotime($in->end_date))}}</td>
+                    <td>{{$in->created_at->format('d-m-Y')}}</td>
+                    <td>{{$in->end_date}}</td>
                     <td>
                         @if($in->status != 'Retirado')
                             {{$totalDays}}

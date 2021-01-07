@@ -8,7 +8,7 @@
     <div class="col-md-4">&emps;</div>
     <div class="col-md-4 card pop_invest_col" align="center">
       <div class="card-header" style="">
-        <h3><b>{{ __('') }}</b></h3>
+        <h3><b>{{ __('Inversión Inicial') }}</b></h3>
         {{-- <h5>{{ __('Wallet Balance:') }} <b>{{$settings->currency}} <span id="WalletBal"></span></b></h5> --}}
         <hr>
       </div>
@@ -19,13 +19,8 @@
         <form id="userpackinv" action="{{route('first_inv')}}" method="post">
             <div class="form-group" align="left">
               <div class="pop_form_min_max" align="center">
-                <b>{{ __('Inversión Min.:') }} {{'RD$'}} <span id="min"></span></b> |
-                <b>{{ __('Inversión Máx.:') }} {{'RD$'}} <span id="max"></span></b>
-              </div>
-              <br>
-              <div class="pop_form_min_max" align="center">
-                <b>{{ __('Inversión Min.:') }} {{'US$'}} <span id="mindol"></span></b> |
-                <b>{{ __('Inversión Máx.:') }} {{'US$'}} <span id="maxdol"></span></b>
+                <b>{{ __('Inversión Min.:') }} {{$settings->currency}} <span id="min"></span></b> |
+                <b>{{ __('Inversión Máx.:') }} {{$settings->currency}} <span id="max"></span></b>
               </div>
               <br>
               <label>{{ __('Colocar Monto a Invertir') }}</label>

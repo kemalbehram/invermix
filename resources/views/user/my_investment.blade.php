@@ -28,7 +28,7 @@
                                                     <th>{{ __('Hasta') }}</th>
                                                     <th>{{ __('Días transcurridos') }}</th>
                                                     <th>{{ __('Status') }}</th>
-                                                    <th>{{ __('Acumulado') }}</th>
+                                                    <th>{{ __('Ganancias') }}</th>
                                                     <th>{{ __('Propósito') }}</th>
                                                     <th>{{ __('Retirar') }}</th>
                                                     <th>{{ __('Inyectar') }}</th>
@@ -77,7 +77,7 @@
                                                             <td>{{$in->currency}} {{number_format($ern),2}} </td>
                                                             <td>
 
-                                                      
+
 
                                                                 @if($in->description == Null)
                                                             <a href="javascript:void(0)" onclick="description('{{$in->id}}')">Agregar propósito</a>
@@ -169,7 +169,7 @@
                         </div>
                     </div>
                 </div>
-        
+
             </div>
 
             <div id="popDescription" class="container pop_invest_cont" >
@@ -177,7 +177,7 @@
     <div class="col-md-4">&emps;</div>
     <div class="col-md-4 card pop_invest_col" align="center">
       <div class="card-header" style="">
-   
+
       </div>
       <div class="pop_msg_contnt">
         <p align="center" class="color_blue_b">

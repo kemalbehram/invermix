@@ -36,7 +36,7 @@
                                                 @if(count($activities) > 0 )
                                                     @foreach($activities as $activity)
                                                         <tr>
-                                                            <td>{{date('d/m/Y H:i:s', strtotime($activity->created_at))}}</td>
+                                                            <td>{{$activity->created_at}}</td>
                                                             <td>{{$activity->package}}</td>
                                                             <td>{{number_format($activity->capital), 2}}</td>
                                                             <td>{{$activity->currency.' '.number_format($activity->w_amt), 2}}</td>
@@ -70,7 +70,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>{{ __('Fecha') }}</th>
-                                                    <th>{{ __('Plan') }}</th>
+                                                    <th>{{ __('Plan) }}</th>
                                                     <th>{{ __('Capital') }}</th>
                                                     <th>{{ __('Monto Retirado/Depositado') }}</th>
                                                     <th>{{ __('Status') }}</th>
@@ -84,7 +84,7 @@
                                                 @if(count($activities) > 0 )
                                                     @foreach($activities as $activity)
                                                         <tr>
-                                                            <td>{{date('d/m/Y H:i:s', strtotime($activity->created_at))}}</td>
+                                                            <td>{{$activity->created_at}}</td>
                                                             <td>{{$activity->package}}</td>
                                                             <td>{{number_format($activity->capital), 2}}</td>
                                                             <td>{{$activity->currency.' '.number_format($activity->w_amt), 2}}</td>

@@ -443,6 +443,44 @@ class adminController extends Controller
 
   }
 
+//   public function activateInv($id)
+//   {
+//     if(Session::has('adm') && !empty(Session::get('adm')))
+//     {
+
+//       try
+//       {
+//         $usr = investment::find($id);
+//         $usr->status = 'Activa';
+//         $usr->save();
+
+//         $adm = Session::get('adm');
+//         $act = new adminLog;
+//         $act->admin = $adm->email;
+//         $act->action = "Inversión de usuario activada. Inversión id: ".$id;
+//         $act->save();
+
+//         Session::put('status', "Successful");
+//         Session::put('msgType', "suc");
+//         return back(); //
+
+//       }
+//       catch(\Exception $e)
+//       {
+//         Session::put('status', "¡Error al actualizar el registro! Inténtalo de nuevo");
+//         Session::put('msgType', "err");
+//         return back();
+//       }
+
+
+//     }
+//     else
+//     {
+//       return redirect('/');
+//     }
+
+//   }
+
 
 
 public function activateInv(Request $request)
@@ -929,7 +967,7 @@ public function activateInv(Request $request)
       catch(\Exception $e)
       {
         return back()->with([
-          'toast_msg' => '¡Registro actualizado, correo no enviado,Inténtalo de nuevo!',
+          'toast_msg' => '¡Error al actualizar el registro! ¡Inténtalo de nuevo!',
           'toast_type' => 'err'
         ]);
       }
@@ -978,15 +1016,6 @@ public function activateInv(Request $request)
         $act->action = "Retiro de usuario aprobado. Id de retiro: ".$id;
         $act->save();
 
-        $maildata = ['email' => $user_act->email ];
-        Mail::send('mail.admin_approve_wd', ['md' => $maildata], function($msg) use ($maildata){
-            $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-            $msg->to($maildata['email']);
-            $msg->subject('Aprobación de retiro');
-        });
-
-
-
         return back()->with([
                 'toast_msg' => 'Aprobado con éxito!',
                 'toast_type' => 'suc'
@@ -994,6 +1023,16 @@ public function activateInv(Request $request)
 
     //     $user_act = User::find($userID);
 
+    //     $maildata = ['email' => $user_act->email ];
+    //     Mail::send('mail.admin_approve_wd', ['md' => $maildata], function($msg) use ($maildata){
+    //         $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+    //         $msg->to($maildata['email']);
+    //         $msg->subject('Aprobación de retiro');
+    //     });
+    //     return back()->with([
+    //     'toast_msg' => 'Aprobado con éxito!',
+    //     'toast_type' => 'suc'
+    //   ]);
 
       }
       catch(\Exception $e)
@@ -1115,7 +1154,7 @@ public function rejectWD_INJ($id)
         if($usr->wd_status == 'Depositado')
         {
           return back()->with([
-            'toast_msg' => '¡Retiro ya fue depositado anteriormente!',
+            'toast_msg' => '¡Retiro ya depositado!',
             'toast_type' => 'err'
           ]);
         }
@@ -1139,20 +1178,23 @@ public function rejectWD_INJ($id)
         $act->action = "Retiro de usuario aprobado. Id de retiro: ".$id;
         $act->save();
 
+        return back()->with([
+                'toast_msg' => 'Aprobado con éxito!',
+                'toast_type' => 'suc'
+              ]);
 
     //     $user_act = User::find($userID);
 
-        $maildata = ['email' => $user_act->email ];
-        Mail::send('mail.admin_approve_wd', ['md' => $maildata], function($msg) use ($maildata){
-            $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-            $msg->to($maildata['email']);
-            $msg->subject('Aprobación de retiro');
-        });
-
-        return back()->with([
-        'toast_msg' => 'Aprobado con éxito!',
-        'toast_type' => 'suc'
-      ]);
+    //     $maildata = ['email' => $user_act->email ];
+    //     Mail::send('mail.admin_approve_wd', ['md' => $maildata], function($msg) use ($maildata){
+    //         $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+    //         $msg->to($maildata['email']);
+    //         $msg->subject('Aprobación de retiro');
+    //     });
+    //     return back()->with([
+    //     'toast_msg' => 'Aprobado con éxito!',
+    //     'toast_type' => 'suc'
+    //   ]);
 
       }
       catch(\Exception $e)
@@ -2320,7 +2362,7 @@ public function admAddnew(Request $req)
         Mail::send('mail.admin_tickect_msg', ['md' => $maildata], function($msg) use ($maildata){
             $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
             $msg->to($maildata['email']);
-            $msg->subject('Mensaje Ticket');
+            $msg->subject('Ticket Message');
         });
 
         return json_encode([
@@ -2610,8 +2652,8 @@ if(Session::has('adm') && !empty(Session::get('adm')))
         'fname' => 'required|string|max:50',
         'lname' => 'required|string|max:50',
         'email' => 'required|email|unique:users',
-        'username' => 'required|string|max:20|unique:users',
-        'password' => 'required|confirmed|string'
+        'username' => 'required|string|max:12|unique:users',
+        'password' => 'required|string'
     ]);
 
     if($val->fails())
@@ -2664,24 +2706,6 @@ else
           $pack = packages::find($req->input('p_id'));
 
 
-          if($req->currency == 'RD$')
-          {
-            if($capital > $pack->max)
-            {
-  
-              Session::put('status', 'El capital de entrada es mayor que la inversión máxima permitida para este plan.');
-              Session::put('msgType', "err");
-              return back();
-            }
-  
-            if($capital < $pack->min)
-            {
-              Session::put('status', 'El capital de entrada es menor que la inversión mínima permitida para este plan.');
-              Session::put('msgType', "err");
-              return back();
-            }
-
-            
           if($capital >= $pack->min && $capital <= $pack->max)
           {
             $inv = new investment;
@@ -2716,84 +2740,10 @@ else
 
             $inv->save();
 
-            $adm = Session::get('adm');
-            $act = new adminLog;
-            $act->admin = $adm->email;
-            $act->action = "Primera inversión del cliente creada. Investment id: ".$inv->id;
-            $act->save();
-
             Session::put('status', "Inversión aplicada al cliente exitosamente.");
             Session::put('msgType', "suc");
             return back() ;
-
-            }
-
-          }elseif($req->currency == 'US$')
-
-          {
-
-          if($capital > $pack->maxdol)
-          {
-    
-            Session::put('status', 'El capital de entrada es mayor que la inversión máxima permitida para este plan');
-            Session::put('msgType', "err");
-            return back();
           }
-
-          if($capital < $pack->mindol)
-          {
-
-            Session::put('status', 'El capital de entrada es menor que la inversión mínima permitida para este plan.');
-            Session::put('msgType', "err");
-            return back();
-          }
-   
-          if($capital >= $pack->mindol && $capital <= $pack->maxdol)
-          {
-            $inv = new investment;
-            $inv->capital = $capital;
-            $inv->user_id = $req->uid;
-            $inv->usn = $req->username;
-            $inv->package = $pack->package_name;
-            $inv->date_invested = date("d-m-Y");
-            $inv->period = $pack->period;
-            $inv->days_interval = $pack->days_interval;
-            $inv->i_return = (round($capital*$pack->daily_interest*$pack->period,2));
-            $inv->interest = $pack->daily_interest;
-
-            $dt = strtotime(date('Y-m-d'));
-            $days = $pack->period;
-
-            while ($days > 0)
-            {
-                $dt    +=   86400   ;
-                $actualDate = date('Y-m-d', $dt);
-                $days--;
-            }
-
-            $inv->package_id = $pack->id;
-            $inv->currency = $req->currency;
-            $inv->end_date = $actualDate;
-            $inv->last_wd = date("Y-m-d");
-            $inv->status = 'Activa';
-
-            // $user->wallet -= $capital;
-            // $user->save();
-
-            $inv->save();
-
-            $adm = Session::get('adm');
-            $act = new adminLog;
-            $act->admin = $adm->email;
-            $act->action = "Primera inversión del cliente creada. Investment id: ".$inv->id;
-            $act->save();
-
-            Session::put('status', "Inversión aplicada al cliente exitosamente.");
-            Session::put('msgType', "suc");
-            return back() ;
-
-           }
-         }
           else
           {
             Session::put('status', "¡Monto invalido! Intenta nuevamente.");

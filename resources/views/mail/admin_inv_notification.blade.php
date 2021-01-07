@@ -4,23 +4,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Notificación de Inversión</title>
+    <title>Investment Notification</title>
 </head>
 <body>
     <div class="row">
         <div class="col-sm-4"></div>
         <div class="col-sm-4" style="border:1px solid #CCC; padding:4%; box-shadow:2px 2px 4px 4px #CCC;">
             <div align="">
-                <img src="https://invermixcapital.com/assets/images/logo-invermix.png" style="height:100px; width:100px;" align="center">
+                <img src="http://{{env('MAIL_SENDER')}}/img/{{$st->site_logo}}" style="height:100px; width:100px;" align="center">
             </div>
-            <h3 align="">Notificación de Inversión</h3>
+            <h3 align="">Investment Notification</h3>
             <p>
-               Hola Admin, <b>{{$md['username']}}</b> ha hecho una inversión en {{env('APP_URL')}}.
+               Hi Admin, <b>{{$md['username']}}</b> has just invested on {{env('APP_URL')}}.
                <br>
-               Presta atención a esta trasancción.            
+               Kindly attend to this transaction.               
             </p>
             <p>
-                <i class="fa fa-certificate">{{env('APP_NAME')}}.
+                <i class="fa fa-certificate">{{env('APP_NAME')}} Investment.
             </p>
         </div>
     </div>

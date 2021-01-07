@@ -34,7 +34,7 @@
                                         </h4>
                                         <span class="pk_num">{{'RD$'}} {{number_format($inv->min),2}}</span>
                                         <br>
-                                        <span class="note">{{'US$'}} {{number_format($inv->mindol),2}}</span>
+                                        <span class="note">O equivalente en dólares</span>
                                         <br>
                                         <br>
                                         <h4 class="u_case">
@@ -43,7 +43,7 @@
 
                                         <span class="pk_num">{{'RD$'}} {{number_format($inv->max),2}}</span>
                                         <br>
-                                        <span class="note">{{'US$'}} {{number_format($inv->maxdol),2}}</span>
+                                        <span class="note">O equivalente en dólares</span>
 
                                 </div>
 
@@ -67,7 +67,7 @@
                                     <p>{{ __('Capital accesible una vez transcurrida la inversión.') }}</p>
                                 </div>
                                 <div class="" align="center">
-                                        <a id="{{$inv->id}}" href="javascript:void(0)" class="collcc btn btn-info" onclick="confirm_inv('{{$inv->id}}', '{{$inv->package_name}}', '{{$inv->period}}', '{{$inv->daily_interest}}', '{{$inv->min}}', '{{$inv->max}}','{{$inv->mindol}}', '{{$inv->maxdol}}',  '{{$user->wallet}}')">
+                                        <a id="{{$inv->id}}" href="javascript:void(0)" class="collcc btn btn-info" onclick="confirm_inv('{{$inv->id}}', '{{$inv->package_name}}', '{{$inv->period}}', '{{$inv->daily_interest}}', '{{$inv->min}}', '{{$inv->max}}', '{{$user->wallet}}')">
                                             {{ __('Invertir') }}
                                         </a>
                                         <br><br>

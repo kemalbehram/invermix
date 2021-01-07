@@ -1,6 +1,6 @@
 <?php
-
-    $actInv = App\investment::where('user_id', $user->id)->where('deleted_at', NULL)->orderby('id', 'desc')->get();
+    
+    $actInv = App\investment::where('user_id', $user->id)->orderby('id', 'desc')->get();
 
     $refs = App\ref::where('username', $user->username)->orderby('id', 'desc')->get();
     $ref_amt = 0;
@@ -10,10 +10,10 @@
     }
     $ref_bal = $ref_amt - $user->ref_bal;
 
-    $totalEarning = 0;
+    $totalEarning = 0;   
     $currentEarning = 0;
     $workingDays = 0;
-
+    
 
     foreach($actInv as $inv)
     {
@@ -36,24 +36,24 @@
 ?>
 
 
-<div class="table-responsive">
+<div class="table-responsive">            
     <table id="basic-datatables" class="display table table-striped table-hover">
         <thead class="web-table">
-            <tr>
-               <th> <?php echo e(__('Plan')); ?> </th>
+            <tr>                
+               <th> <?php echo e(__('Package')); ?> </th>
                <th> <?php echo e(__('Capital')); ?> </th>
-               <th> <?php echo e(__('Retorno')); ?> </th>
-               <th> <?php echo e(__('Fecha de Inversión')); ?> </th>
-               <th> <?php echo e(__('Hasta')); ?> </th>
-               <th> <?php echo e(__('Días transcurridos')); ?> </th>
-               <th> <?php echo e(__('Retirado')); ?> </th>
+               <th> <?php echo e(__('Return')); ?> </th>
+               <th> <?php echo e(__('Date Invested')); ?> </th> 
+               <th> <?php echo e(__('Elapse')); ?> </th>  
+               <th> <?php echo e(__('Days Spent')); ?> </th> 
+               <th> <?php echo e(__('Withdrawn')); ?> </th>  
                <th> <?php echo e(__('Status')); ?> </th>
-               <th> <?php echo e(__('Ganancia')); ?> </th>
+               <th> <?php echo e(__('Earning')); ?> </th>                                   
             </tr>
         </thead>
-
+        
         <tbody class="web-table">
-
+            
             <?php if(count($actInv) > 0 ): ?>
                 <?php $__currentLoopData = $actInv; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $in): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php
@@ -66,7 +66,7 @@
                             $Edays = getWorkingDays($lastWD, $enddate);
                             $ern  = $Edays*$in->interest*$in->capital;
                             $withdrawable = $ern;
-
+                                                                 
                             $totalDays = getWorkingDays($in->date_invested, $in->end_date);
                             $ended = "yes";
 
@@ -82,7 +82,7 @@
                             {
                                 $withdrawable = $in->days_interval*$in->interest*$in->capital;
                             }
-
+                                                           
                             $totalDays = getWorkingDays($in->date_invested, date('Y-m-d'));
                             $ended = "no";
                         }
@@ -90,39 +90,39 @@
                     ?>
                     <tr class="">
                         <td><?php echo e($in->package); ?></td>
-                        <td><?php echo e(number_format($in->capital) ,2); ?></td>
-                        <td><?php echo e(number_format($in->i_return) ,2); ?></td>
-                        <td><?php echo e(date('d/m/Y', strtotime($in->date_invested))); ?></td>
-                        <td><?php echo e(date('d/m/Y', strtotime($in->end_date))); ?></td>
+                        <td><?php echo e($in->capital); ?></td>
+                        <td><?php echo e($in->i_return); ?></td>
+                        <td><?php echo e($in->date_invested); ?></td>
+                        <td><?php echo e($in->end_date); ?></td> 
                         <td>
-                            <?php if($in->status != 'Retirado'): ?>
+                            <?php if($in->status != 'Expired'): ?>
                                 <?php echo e($totalDays); ?>
 
                             <?php else: ?>
                                 0
                             <?php endif; ?>
                         </td>
-                        <td><?php echo e(number_format($in->w_amt) ,2); ?></td>
+                        <td><?php echo e($in->w_amt); ?></td> 
                         <td><?php echo e($in->status); ?></td>
                         <td>
                             <a title="Withdraw" href="javascript:void(0)" onclick="wdnone('<?php echo e($in->id); ?>', '<?php echo e($ern); ?>', '<?php echo e($withdrawable); ?>', '<?php echo e($Edays); ?>', '<?php echo e($ended); ?>')">
-                                <?php echo e($in->currency); ?> <?php echo e($ern); ?>
+                                <?php echo e($user->currency); ?> <?php echo e($ern); ?>
 
                             </a>
-                        </td>
+                        </td>           
                     </tr>
-
-
+                    
+                    
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <?php else: ?>
-
+                
             <?php endif; ?>
         </tbody>
     </table>
 
-
+    
 </div>
-
+    
 <div class="mobile_table container messages-scrollbar" >
             <?php if(count($actInv) > 0 ): ?>
                 <?php $__currentLoopData = $actInv; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $in): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -136,7 +136,7 @@
                             $Edays = getWorkingDays($lastWD, $enddate);
                             $ern  = $Edays*$in->interest*$in->capital;
                             $withdrawable = $ern;
-
+                                                                 
                             $totalDays = getWorkingDays($in->date_invested, $in->end_date);
                             $ended = "yes";
 
@@ -152,64 +152,59 @@
                             {
                                 $withdrawable = $in->days_interval*$in->interest*$in->capital;
                             }
-
+                                                           
                             $totalDays = getWorkingDays($in->date_invested, date('Y-m-d'));
                             $ended = "no";
                         }
 
                     ?>
-
+                        
                     <div class="alert alert-info margin_top_10 pad_top_0 font_14" >
                         <div class="row admin_usr_inv_row" >
                             <div class="col-xs-12 pad_top_5" align="center" >
                                 <h4 class="u_case"> <?php echo e(__('Pakage:')); ?>  <?php echo e($in->package); ?></h4>
-
+                               
                             </div>
-                        </div>
+                        </div> 
                         <div class="row color_blue_9">
                             <div class="col-xs-6">
-                                <?php echo e(__('Capital:')); ?>
-
+                                <?php echo e(__('Capital:')); ?> 
                             </div>
                             <div class="col-xs-6">
                                 <?php echo e($in->capital); ?>
 
                             </div>
-                        </div>
+                        </div> 
                         <div class="row" style="">
                             <div class="col-xs-6">
-                                <?php echo e(__('Return:')); ?>
-
+                                <?php echo e(__('Return:')); ?> 
                             </div>
                             <div class="col-xs-6">
                                 <?php echo e($in->i_return); ?>
 
                             </div>
+                        </div>  
+                        <div class="row" style="">
+                            <div class="col-xs-6">
+                                <?php echo e(__('Started:')); ?> 
+                            </div>
+                            <div class="col-xs-6">
+                                <?php echo e($in->date_invested); ?>
+
+                            </div>
+                        </div> 
+                        <div class="row" style="">
+                            <div class="col-xs-6">
+                                <?php echo e(__('Ending:')); ?> 
+                            </div>
+                            <div class="col-xs-6">
+                                <?php echo e($in->end_date); ?>
+
+                            </div>
                         </div>
                         <div class="row" style="">
                             <div class="col-xs-6">
-                                <?php echo e(__('Started:')); ?>
-
-                            </div>
-                            <div class="col-xs-6">
-                                <?php echo e(date('d/m/Y', strtotime($in->date_invested))); ?>
-
-                            </div>
-                        </div>
-                        <div class="row" style="">
-                            <div class="col-xs-6">
-                                <?php echo e(__('Ending:')); ?>
-
-                            </div>
-                            <div class="col-xs-6">
-                                <?php echo e(date('d/m/Y', strtotime($in->end_date))); ?>
-
-                            </div>
-                        </div>
-                        <div class="row" style="">
-                            <div class="col-xs-6">
-                                <?php echo e(__('Days:')); ?>
-
+                                <?php echo e(__('Days:')); ?> 
                             </div>
                             <div class="col-xs-6">
                                 <?php echo e($totalDays); ?>
@@ -218,24 +213,22 @@
                         </div>
                         <div class="row" style="">
                             <div class="col-xs-6">
-                                <?php echo e(__('Withdrawn:')); ?>
-
+                                <?php echo e(__('Withdrawn:')); ?> 
                             </div>
                             <div class="col-xs-6">
                                 <?php echo e($in->w_amt); ?>
 
                             </div>
-                        </div>
+                        </div> 
                         <div class="row" style="">
                             <div class="col-xs-6">
-                                <?php echo e(__('Status:')); ?>
-
+                                <?php echo e(__('Status:')); ?> 
                             </div>
                             <div class="col-xs-6">
                                 <?php echo e($in->status); ?>
 
                             </div>
-                        </div>
+                        </div> 
                         <div class="row" style="">
                             <br>
                             <div class="col-xs-12" align="center">
@@ -244,11 +237,11 @@
 
                                 </a>
                             </div>
-                        </div>
+                        </div>                                                                     
                     </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <?php else: ?>
-
+                
             <?php endif; ?>
 </div>
 <?php /**PATH /Applications/MAMP/htdocs/invermix/resources/views/admin/temp/user_inv.blade.php ENDPATH**/ ?>

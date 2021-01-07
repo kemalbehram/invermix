@@ -20,7 +20,7 @@
                     <tr> 
                                 <td>{{$dep->currency}} {{$dep->capital}}</td>
                                 <td><b>{{$dep->currency}} {{$dep->i_return}}</b></td>
-                                <td>{{date('d/m/Y', strtotime($dep->created_at))}}</td>
+                                <td>{{substr($dep->created_at, 0, 10)}}</td>
                                 <td>{{$dep->wd_status}}</td>                   
                     </tr>
                 @endforeach

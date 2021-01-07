@@ -10,24 +10,24 @@
                     <div id="prnt"></div>
                     <div class="row">
                        <div class="col-sm-12 card">
-
+                        
                           <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
                             <li class="nav-item">
                               <a class="nav-link active" id="profile-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Perfil</a>
                             </li>
-                          <!-- <li class="nav-item">
+                            <!-- <li class="nav-item">
                               <a class="nav-link" id="bank-tab" data-toggle="pill" href="#bank" role="tab" aria-controls="bank" aria-selected="false">Banks</a>
-                            </li> -->
-                            <!-- <li class="nav-item">
+                            </li>
+                            <li class="nav-item">
                               <a class="nav-link" id="wallet-tab" data-toggle="pill" href="#wallet" role="tab" aria-controls="wallet" aria-selected="false">Wallets</a>
-                            </li> -->
-                            <!-- <li class="nav-item">
+                            </li>
+                            <li class="nav-item">
                               <a class="nav-link" id="kyc-tab" data-toggle="pill" href="#kyc" role="tab" aria-controls="kyc" aria-selected="false">KYC</a>
                             </li> -->
                             <li class="nav-item">
                               <a class="nav-link" id="sec-tab" data-toggle="pill" href="#sec" role="tab" aria-controls="sec" aria-selected="false">Seguridad</a>
                             </li>
-
+                                                        
                           </ul>
 
                           <div class="tab-content" id="pills-tabContent">
@@ -35,14 +35,14 @@
                             <!-- profile panel -->
 
                             <div class="p-5 tab-pane fade show active" id="profile" role="tabpanel" >
-                              <div class=" row form-group">
-
+                              <div class=" row form-group">                                            
+                                                                                                                             
                                 <div class="col-md-4">
                                   <div class="card">
                                       <div class="card-header">
                                           <div class="card-head-row">
                                               <div class="card-title text-center"><?php echo e(__('Avatar')); ?></div>
-                                              <div class="card-tools">
+                                              <div class="card-tools">                                            
                                               </div>
                                           </div>
                                       </div>
@@ -56,7 +56,7 @@
                                                           <?php else: ?>
                                                               <img class="avatar_img" src="/img/profile/<?php echo e($user->img); ?>">
                                                           <?php endif; ?>
-                                                      </a>
+                                                      </a> 
 
                                                       <form id="form_profilepic" action="/user/upload/profile_pic" method="post" enctype="multipart/form-data">
                                                           <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
@@ -64,10 +64,10 @@
                                                       </form>
                                                   </div>
                                                   <br>
-
+                                                  
                                               </div>
                                               <div class="admin-comment-month" align="left" style="font-size: 16px;">
-
+                                                  
                                                   <div align="center"><b> <?php echo e(ucfirst($user->firstname).' '.ucfirst($user->lastname)); ?> </b></div>
                                                   <hr>
 
@@ -76,81 +76,83 @@
                                                       $state = App\states::find($user->state);
                                                   ?>
 
-                                                  <!-- <div align="center" style="">
+                                                  <div align="center" style="">
                                                       <b>Referral link:</b><br>
                                                       <div style="color: #c60; font-size: 13px; word-wrap: break-word;">
                                                           <?php echo e(env('APP_URL').__('/register/').$user->username); ?>
 
                                                       </div>
-                                                      <br>
-                                                  </div> -->
-
+                                                      <br>                                               
+                                                  </div>
+                                                                                 
                                               </div>
-                                          </div>
+                                          </div>                                    
                                       </div>
-                                  </div>
+                                  </div>                                  
                                 </div>
 
-                                <div class="col-md-8">
+                                <div class="col-md-8">                            
                                   <div class="card">
                                       <div class="card-header">
                                           <div class="card-head-row">
-                                              <div class="card-title"><?php echo e(__('Información Perfil')); ?></div>
-                                              <div class="card-tools">
+                                              <div class="card-title"><?php echo e(__('Profile Settings')); ?></div>
+                                              <div class="card-tools">                                            
                                               </div>
                                           </div>
                                       </div>
                                       <div class="card-body pb-0">
                                           <div class="datatable-dashv1-list custom-datatable-overright dashtwo-project-list-data">
-
+                                              <p class="text-danger">
+                                                  Please note: Updating your country for the first time will permanently set currency for your profile.
+                                              </p>
                                               <div class="row">
                                                   <div class="col-lg-6">
                                                       <div class="form-group">
-                                                          <label><?php echo e(__('Nombres')); ?></label>
+                                                          <label><?php echo e(__('First Name')); ?></label>
                                                           <input id="adr" type="text" value="<?php echo e(ucfirst($user->firstname)); ?>" class="form-control" name="fname" readonly>
                                                       </div>
-                                                  </div>
+                                                  </div>  
                                                   <div class="col-lg-6">
                                                       <div class="form-group">
-                                                          <label><?php echo e(__('Apellidos')); ?></label>
+                                                          <label><?php echo e(__('Last Name')); ?></label>
                                                           <input id="adr" type="text" value="<?php echo e(ucfirst($user->lastname)); ?>" class="form-control" name="lname" readonly>
                                                       </div>
-                                                  </div>
-
+                                                  </div>                               
+                                                  
                                               </div>
 
                                               <div class="row">
                                                   <div class="col-lg-6">
                                                       <div class="form-group">
-                                                          <label><?php echo e(__('Correo')); ?></label>
-                                                          <div class="input-group">
+                                                          <label><?php echo e(__('Email Address')); ?></label>
+                                                          <div class="input-group">                                                       
                                                               <input id="email" type="email" value="<?php echo e($user->email); ?>" class="form-control" name="email" readonly>
                                                           </div>
-
+                                                          
                                                       </div>
-                                                  </div>
+                                                  </div>     
 
                                                   <div class="col-lg-6">
                                                       <div class="form-group">
-                                                          <label><?php echo e(__('Nombre de Usuario')); ?></label>
-                                                          <div class="input-group">
+                                                          <label><?php echo e(__('Username')); ?></label>
+                                                          <div class="input-group">                                                       
                                                               <input id="usn" type="text" value="<?php echo e($user->username); ?>" class="form-control" name="usn" readonly>
                                                           </div>
-
+                                                          
                                                       </div>
-                                                  </div>
-
-                                              </div>
+                                                  </div>                                             
+                                                  
+                                              </div>   
 
                                               <form class="" method="post" action="/user/update/profile">
-
+                                                  
                                                   <div class="row">
                                                       <div class="col-lg-6">
                                                           <div class="form-group">
                                                               <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
-                                                              <label><?php echo e(__('País')); ?></label>
-                                                              <select id="country" class="form-control" name="country" readonly>
-                                                                  <?php
+                                                              <label><?php echo e(__('Country')); ?></label>
+                                                              <select id="country" class="form-control" name="country" >
+                                                                  <?php 
                                                                       $country = App\country::orderby('name', 'asc')->get();
                                                                       $phn_code = "";
                                                                   ?>
@@ -174,10 +176,10 @@
                                                       </div>
                                                       <div class="col-lg-6">
                                                            <div class="form-group">
-                                                              <label><?php echo e(__('Estado/Provincia')); ?></label>
-                                                              <select  id="states" class="form-control" name="state" readonly required>
+                                                              <label><?php echo e(__('State/Province')); ?></label>
+                                                              <select  id="states" class="form-control" name="state" required>
                                                                   <?php if(isset($cs)): ?>
-                                                                       <?php
+                                                                       <?php 
                                                                           $st = App\states::where('id', $user->state)->get();
                                                                       ?>
                                                                       <?php if(count($st) > 0): ?>
@@ -185,11 +187,11 @@
                                                                       <?php else: ?>
                                                                           <option selected disabled><?php echo e(__('Select State')); ?></option>
                                                                       <?php endif; ?>
-
+                                                                      
                                                                   <?php else: ?>
                                                                      <option selected disabled><?php echo e(__('Select State')); ?></option>
-                                                                  <?php endif; ?>
-                                                              </select>
+                                                                  <?php endif; ?>                                                           
+                                                              </select>                                                        
                                                           </div>
                                                       </div>
 
@@ -197,14 +199,14 @@
                                                   <div class="row">
                                                       <div class="col-lg-6">
                                                           <div class="form-group">
-                                                              <label><?php echo e(__('Dirección')); ?></label>
-                                                              <input id="adr" type="text" class="form-control" value="<?php echo e($user->address); ?>" name="adr" readonly required>
+                                                              <label><?php echo e(__('Address')); ?></label>
+                                                              <input id="adr" type="text" class="form-control" value="<?php echo e($user->address); ?>" name="adr" required>
                                                           </div>
-                                                      </div>
+                                                      </div>  
 
                                                       <div class="col-lg-6">
-                                                          <div class="form-group" >
-                                                              <label><?php echo e(__('Teléfono')); ?></label>
+                                                          <div class="form-group">
+                                                              <label><?php echo e(__('Phone')); ?></label>
                                                               <div class="input-group">
                                                                   <div class="input-group-prepend">
                                                                       <span id="countryCode" class="input-group-text">
@@ -212,27 +214,27 @@
                                                                               <?php echo e('+'.$phn_code); ?>
 
                                                                           <?php else: ?>
-
+                                                                              
                                                                           <?php endif; ?>
                                                                       </span>
-                                                                  </div>
+                                                                  </div>                                                            
                                                                   <input id="cCode" type="hidden" class="form-control" name="cCode" required>
-                                                                  <input id="phone" type="text" class="form-control" value="<?php echo e(str_replace('+'.$phn_code,'',$user->phone)); ?>" name="phone" required readonly>
+                                                                  <input id="phone" type="text" class="form-control" value="<?php echo e(str_replace('+'.$phn_code,'',$user->phone)); ?>" name="phone" required>
                                                               </div>
-
+                                                              
                                                           </div>
-                                                      </div>
-                                                  </div>
-                                                  <!-- <div class="row">
+                                                      </div>  
+                                                  </div>   
+                                                  <div class="row">
                                                       <div class="col-lg-12">
                                                           <div class="form-group">
-                                                              <button class="collcc btn btn-info"><?php echo e(__('Actualizar Perfil')); ?></button>
+                                                              <button class="collcc btn btn-info"><?php echo e(__('Update Profile')); ?></button>
                                                           </div>
-                                                      </div>
-
-                                                  </div> -->
+                                                      </div>                                                
+                                                      
+                                                  </div>
                                               </form>
-                                          </div>
+                                          </div>                                
                                       </div>
                                   </div>
                                 </div>
@@ -275,8 +277,8 @@
                                                         <label><?php echo e(__('Account Name')); ?></label>
                                                         <input type="text" class="form-control" name="act_name" required placeholder="Account Name">
                                                     </div>
-                                                </div>
-
+                                                </div>                                             
+                                                
                                             </div>
 
                                             <div class="row">
@@ -284,8 +286,8 @@
                                                     <div class="form-group">
                                                         <button class="collcc btn btn-info"><?php echo e(__('Add Bank')); ?></button>
                                                     </div>
-                                                </div>
-
+                                                </div>                                                
+                                                
                                             </div>
                                         </form>
                                     </div>
@@ -299,7 +301,7 @@
                                     <div class="card-body pb-0 table-responsive" >
                                        <table id="basic-datatables" class="display table table-striped table-hover" >
                                             <thead>
-                                                <tr>
+                                                <tr>                                                
                                                     <th data-field="status" data-editable="true"><?php echo e(__('Bank Name')); ?></th>
                                                     <th data-field="phone" data-editable="true"><?php echo e(__('Acount Name')); ?></th>
                                                     <th data-field="date" data-editable="true"><?php echo e(__('Acount Number')); ?></th>
@@ -374,7 +376,7 @@
                                     <div class="card-body pb-0 table-responsive" >
                                        <table id="basic-datatables" class="display table table-striped table-hover" >
                                             <thead>
-                                                <tr>
+                                                <tr>                                                
                                                     <th><?php echo e(__('Coin')); ?></th>
                                                     <th><?php echo e(__('Coin Host')); ?></th>
                                                     <th><?php echo e(__('Wallet Address')); ?></th>
@@ -404,9 +406,9 @@
                                 </div>
                               </div>
                             </div>
-
+                            
                             <!-- End of wallets -->
-
+                            
                             <!-- KYC -->
                             <div class="p-5 tab-pane fade " id="kyc" role="tabpanel" >
                               <?php if(count($kyc) > 0 && $kyc[0]->status == 0): ?>
@@ -415,7 +417,7 @@
                                     <div class="card-header">
                                         <div class="card-head-row">
                                             <div class="card-title"><?php echo e(__('Verification status')); ?></div>
-                                            <div class="card-tools">
+                                            <div class="card-tools">                                            
                                             </div>
                                         </div>
                                     </div>
@@ -423,7 +425,7 @@
                                         <div class="alert alert-warning">
                                           <?php echo e(_('Your verification is under review. You will be notified shortly')); ?>
 
-                                        </div>
+                                        </div>                                  
                                     </div>
                                   </div>
                                 </div>
@@ -433,7 +435,7 @@
                                     <div class="card-header">
                                         <div class="card-head-row">
                                             <div class="card-title"><?php echo e(__('Verification status')); ?></div>
-                                            <div class="card-tools">
+                                            <div class="card-tools">                                            
                                             </div>
                                         </div>
                                     </div>
@@ -441,7 +443,7 @@
                                         <div class="alert alert-success">
                                           <?php echo e(_('You are fully verified')); ?>
 
-                                        </div>
+                                        </div>                                  
                                     </div>
                                   </div>
                                 </div>
@@ -458,8 +460,8 @@
                                           <div class="row">
                                             <div class="col-lg-12">
                                                 <div id="selfie" class="">
-                                                  <div class="form-group" align="center">
-                                                    <h3>Upload Selfie</h3>
+                                                  <div class="form-group" align="center">                                              
+                                                    <h3>Upload Selfie</h3> 
                                                     <hr>
                                                     <p class="text-warning " align="left">
                                                      Take a selfie of yourself holding your ID with your full face clearly shown
@@ -469,18 +471,18 @@
                                                     <!--</p>-->
                                                     <img src="/img/any.png" class="" align="center">
                                                     <input type="file" class="form-control upload_inp mt-2" name="selfie" required>
-                                                  </div>
+                                                  </div>                                                
                                                 </div>
                                                 <hr>
                                                 <div class="form-group">
-                                                  <h3><?php echo e(__('Identity verification')); ?></h3>
+                                                  <h3><?php echo e(__('Identity verification')); ?></h3> 
                                                   <p>
                                                     <?php echo e(__('Valid documents are: Country ID Card, Internattional Passport and Drivers Licence')); ?>
 
-                                                  </p>
+                                                  </p> 
                                                 </div>
-                                                <div class="form-group mt-4">
-                                                  <label>Card Type</label>
+                                                <div class="form-group mt-4">                                              
+                                                  <label>Card Type</label>                                                  
                                                   <select id="card_select" name="cardtype" class="form-control" required="required">
                                                     <option selected disabled >Select ID type</option>
                                                     <option value="idcard_op">Country/State ID</option>
@@ -490,37 +492,37 @@
                                                 </div>
                                                 <hr>
                                                 <div id="card_cont" class="cont_display_none">
-                                                  <div class="form-group mt-3">
-                                                    <label>Card Front</label>
+                                                  <div class="form-group mt-3">                                              
+                                                    <label>Card Front</label> 
                                                     <br>
-                                                    <img src="/img/id_temp_front.png" class="img_card_temp" width="100%">
+                                                    <img src="/img/id_temp_front.png" class="img_card_temp" width="100%">                                                 
                                                     <input type="file" class="form-control upload_inp mt-2" name="id_front" >
                                                   </div>
 
                                                   <hr>
-                                                  <div class="form-group mt-3">
+                                                  <div class="form-group mt-3">                                              
                                                     <label>Card Back</label>
                                                     <br>
-                                                    <img src="/img/id_tem_bac.png" class="img_card_temp" width="100%">
+                                                    <img src="/img/id_tem_bac.png" class="img_card_temp" width="100%">                                                   
                                                     <input type="file" class="form-control mt-2" name="id_back" >
                                                   </div>
                                                 </div>
-
+                                                
                                                 <div id="pass_cont" class="cont_display_none">
-                                                  <div class="form-group">
-                                                    <label>Passport Front</label>
+                                                  <div class="form-group">                                              
+                                                    <label>Passport Front</label> 
                                                     <br>
-                                                    <img src="/img/id_temp_front.png" class="img_card_temp" width="100%">
+                                                    <img src="/img/id_temp_front.png" class="img_card_temp" width="100%">                                                  
                                                     <input type="file" class="form-control upload_inp mt-2" name="pas_id_front" >
-                                                  </div>
+                                                  </div>                                                
                                                 </div>
-
+                                              
                                             </div>
                                           </div>
 
                                         </div>
                                       </div>
-                                    </div>
+                                    </div> 
 
                                     <div class="col-sm-6">
                                       <div class="card">
@@ -531,13 +533,13 @@
                                           <div class="row">
                                             <div class="row">
                                               <div class="col-lg-12">
-
+                                                
                                                   <div class="form-group">
-                                                    <h3></h3>
+                                                    <h3></h3> 
                                                     <p>
                                                       <?php echo e(__('Valid documents are: Utility bill and Bank statement')); ?>
 
-                                                    </p>
+                                                    </p>                                                   
                                                     <input type="file" class="form-control" name="utility_doc" required >
                                                   </div>
 
@@ -547,8 +549,8 @@
 
                                         </div>
                                       </div>
-
-                                    </div>
+                                          
+                                    </div> 
 
                                     <div class="col-sm-12 mt-5">
                                       <div class="form-group">
@@ -570,23 +572,23 @@
                                 <div class="col-sm-6">
                                   <div class="card">
                                     <div class="card-header">
-                                        <div class="card-title"><?php echo e(__('Seguridad Doble Factor')); ?></div>
+                                        <div class="card-title"><?php echo e(__('2FA Security')); ?></div>
                                     </div>
                                     <div class="card-body">
-
+                                        
                                       <div class="row">
                                           <div id="sec_enable_div" class="col-lg-12">
                                             <div class="form-group ">
                                               <div>
-                                                <label><?php echo e(__('Habilitar/Deshabilitar')); ?></label>
+                                                <label><?php echo e(__('Enable/Disable')); ?></label>
                                               </div>
-
+                                                
                                               <div class="btn-group btn-group-toggle btn-lg p-0 ">
                                                 <label class="btn <?php if($user->sec_2fa_status == 1): ?><?php echo e(__('btn-success text-white')); ?><?php else: ?><?php echo e(__('btn_grey')); ?><?php endif; ?>" onclick="s_2fa('enable')">
-                                                  <input type="radio" name="options" autocomplete="off" > Habilitar
-                                                </label>
+                                                  <input type="radio" name="options" autocomplete="off" > Enable
+                                                </label>                                                    
                                                 <label class="btn <?php if($user->sec_2fa_status == 1): ?><?php echo e(__('btn_grey')); ?><?php else: ?><?php echo e(__('btn-success text-white')); ?><?php endif; ?>" onclick="s_2fa('disable')">
-                                                  <input type="radio" name="options" autocomplete="off" > Deshabilitar
+                                                  <input type="radio" name="options" autocomplete="off" > Disable
                                                 </label>
                                               </div>
                                               <div class="width_100per float-right">
@@ -594,7 +596,7 @@
                                                   <?php echo e(__('Estado actual: ')); ?> <?php if($user->sec_2fa_status == 1): ?><?php echo e(__('Habilitado')); ?><?php else: ?><?php echo e(__('Deshabilitado')); ?><?php endif; ?>
                                                 </small>
                                               </div>
-
+                                                  
                                             </div>
                                           </div>
 
@@ -611,7 +613,7 @@
                                                   <p>
                                                   Escanee el CÓDIGO QR con la aplicación Google Authenticator e ingrese el código que se muestra en el cuadro a continuación.
                                                   </p>
-                                                </div>
+                                                </div> 
                                                 <form action="<?php echo e(route('user2fa.verify_2fa')); ?>" method="post">
                                                   <div class="form-group">
                                                     <input type="text" class="form-control" name="fa_code" required placeholder="6-digit OTP">
@@ -620,7 +622,7 @@
                                                   <div class="form-group">
                                                     <button class="collcc btn btn-info"><?php echo e(__('Activar')); ?></button>
                                                   </div>
-                                                </form>
+                                                </form>                                        
                                                 <br>
                                               </div>
                                             </div>
@@ -629,14 +631,14 @@
                                           <div class="col-sm-12">
                                             <div id="google_2fa_disable" class="cont_display_none ">
                                               <div class="card-header">
-                                                  <div class="card-title"><?php echo e(__('Verificar SDF')); ?></div>
+                                                  <div class="card-title"><?php echo e(__('Verify OTP')); ?></div>
                                               </div>
                                               <div id="qrcode_2fa_div" class="card-body pb-0 table-responsive text-center" >
                                                 <div class="form-group">
                                                   <p>
                                                     Pleaae enter Google Authenticator OTP.
                                                   </p>
-                                                </div>
+                                                </div> 
                                                 <form action="<?php echo e(route('user2fa.disable_2fa')); ?>" method="post">
                                                   <div class="form-group">
                                                     <input type="text" class="form-control" name="fa_otp" required placeholder="6-digit OTP">
@@ -644,14 +646,14 @@
                                                   <div class="form-group">
                                                     <button class="collcc btn btn-info"><?php echo e(__('Disable')); ?></button>
                                                   </div>
-                                                </form>
+                                                </form>                                        
                                                 <br>
                                               </div>
                                             </div>
                                           </div>
-
+                                         
                                       </div>
-
+                                        
                                     </div>
                                   </div>
                                 </div>
@@ -661,7 +663,7 @@
                                     <div class="card-header">
                                         <div class="card-head-row">
                                             <div class="card-title"><?php echo e(__('Cambiar Contraseña')); ?></div>
-                                            <div class="card-tools">
+                                            <div class="card-tools">                                            
                                             </div>
                                         </div>
                                     </div>
@@ -683,7 +685,7 @@
                                             <div class="form-group" align="">
                                                <button class="collcc btn btn-info"><?php echo e(__('Actualizar')); ?></button>
                                             </div>
-                                        </form>
+                                        </form>                                    
                                     </div>
                                   </div>
                                 </div>
@@ -700,5 +702,4 @@
             </div>
              <?php echo $__env->make('user.inc.confirm_inv', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
-
 <?php echo $__env->make('layouts.atlantis.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/MAMP/htdocs/invermix/resources/views/user/profile.blade.php ENDPATH**/ ?>

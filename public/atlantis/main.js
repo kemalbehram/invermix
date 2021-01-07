@@ -4,7 +4,7 @@ var p_min = 0;
 var p_max = 0;
 
 
-function confirm_inv(id, pn, p, di, min, max, mindol, maxdol, wallet)
+function confirm_inv(id, pn, p, di, min, max, wallet)
 {
 	p_min = min;
 	p_max = max;
@@ -14,9 +14,7 @@ function confirm_inv(id, pn, p, di, min, max, mindol, maxdol, wallet)
 	$('#period').text(p);
 	$('#intr').text(Math.fround(di*p*100).toFixed(2));
 	$('#min').text(formatNumber(min));
-    $('#max').text(formatNumber(max));
-    $('#mindol').text(formatNumber(mindol));
-	$('#maxdol').text(formatNumber(maxdol));
+	$('#max').text(formatNumber(max));
 	$('#p_id').val(id);
 
 	$('#popInvest').show();
@@ -205,7 +203,7 @@ function wd(p,id, earn, w_able, days, ended)
     $('#pack_type').val(p);
 	$('#earned').text(earn);
 	$('#days').text(days);
-	$('#id').val(id);
+	$('#inv_id').val(id);
 	$('#ended').val(ended);
 	$('#withdrawable_amt').val(w_able);
 	$('#div_withdrawal').show();
@@ -739,12 +737,12 @@ function s_2fa(opr)
             }
             if(result.msg == 'exist')
             {
-                $('#err').html('Autenticación en dos pasos ya está activa');
+                $('#err').html('Two factor authentication is active');
                 $('#err').show().animate({ width: "30%" }, "1000").delay(2000).animate({ width: "-50px" }, "1000").fadeOut(50);
             }
             if(result.msg == 'disable')
             {
-                $('#err').html('Autenticación en dos pasos no activa');
+                $('#err').html('Two factor authentication is not active');
                 $('#err').show().animate({ width: "30%" }, "1000").delay(2000).animate({ width: "-50px" }, "1000").fadeOut(50);
             }
         },

@@ -1,8 +1,6 @@
 /node_modules
 /storage/*.key
 /vendor
-.env
-.env.backup
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
@@ -13,6 +11,5 @@ documentation/
 /public/hot
 /public/storage
 /public/uploads/
-.env
-.env
 storage/framework/sessions/
+.env

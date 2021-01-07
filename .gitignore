@@ -11,3 +11,4 @@ documentation/
 /public/hot
 /public/storage
 /public/uploads/
+.env

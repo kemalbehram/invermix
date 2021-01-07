@@ -97,9 +97,9 @@
                     <td>{{$in->status}}</td>
                     <td>
 
-                            {{$in->currency}} {{number_format(round ($ern, 2),2)}}
+{{$in->currency}} {{number_format(round ($ern, 2),2)}}
 
-                    </td>
+</td>
                 </tr>
             @endforeach
 

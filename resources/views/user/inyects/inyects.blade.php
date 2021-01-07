@@ -28,7 +28,7 @@
                                                     <th>{{ __('Hasta') }}</th>
                                                     <th>{{ __('Días transcurridos') }}</th>
                                                     <th>{{ __('Status') }}</th>
-                                                    <th>{{ __('Ganancias') }}</th>
+                                                    <th>{{ __('Acumulado') }}</th>
                                                     <th>{{ __('Propósito') }}</th>
                                                     <th>{{ __('Retirar') }}</th>
                                                 </tr>
@@ -36,35 +36,35 @@
                                             <tbody class="web-table">
                                                 @if(count($actIny) > 0 )
                                                     @foreach($actIny as $in)
-                                                        <?php
+                                                    <?php
 
-                                                            $totalElapse = getDays(date('Y-m-d'), $in->end_date);
-                                                            if($totalElapse == 0)
-                                                            {
-                                                                $lastWD = $in->last_wd;
-                                                                $enddate = ($in->end_date);
-                                                                $Edays = getDays($lastWD, $enddate);
-                                                                $ern  = $Edays*$in->interest*$in->capital;
-                                                                $withdrawable = $ern;
-                                                                $totalDays = getDays($in->date_inyected, $in->end_date);
-                                                                $ended = "yes";
-                                                            }
-                                                            else
-                                                            {
-                                                                $lastWD = $in->last_wd;
-                                                                $enddate = (date('Y-m-d'));
-                                                                $Edays = getDays($lastWD, $enddate);
-                                                                $ern  = $Edays*$in->interest*$in->capital;
-                                                                $withdrawable = 0;
-                                                                if ($Edays >= $in->days_interval)
-                                                                {
-                                                                    $withdrawable = $in->days_interval*$in->interest*$in->capital;
-                                                                }
+$totalElapse = getDays(date('Y-m-d'), $in->end_date);
+if($totalElapse == 0)
+{
+    $lastWD = $in->last_wd;
+    $enddate = ($in->end_date);
+    $Edays = getDays($lastWD, $enddate);
+    $ern  = $Edays*$in->interest*$in->capital;
+    $withdrawable = $ern;
+    $totalDays = getDays($in->date_inyected, $in->end_date);
+    $ended = "yes";
+}
+else
+{
+    $lastWD = $in->last_wd;
+    $enddate = (date('Y-m-d'));
+    $Edays = getDays($lastWD, $enddate);
+    $ern  = $Edays*$in->interest*$in->capital;
+    $withdrawable = 0;
+    if ($Edays >= $in->days_interval)
+    {
+        $withdrawable = $in->days_interval*$in->interest*$in->capital;
+    }
 
-                                                                $totalDays = getDays($in->date_inyected, date('Y-m-d'));
-                                                                $ended = "no";
-                                                            }
-                                                        ?>
+    $totalDays = getDays($in->date_inyected, date('Y-m-d'));
+    $ended = "no";
+}
+?>
                                                         <tr class="">
                                                             <td>{{$in->package}}</td>
                                                             <td>{{($in->currency)}} {{number_format($in->capital),2}}</td>
@@ -73,7 +73,11 @@
                                                             <td>{{date('d/m/Y', strtotime($in->end_date))}}</td>
                                                             <td>{{$totalDays}}</td>
                                                             <td>{{$in->status}}</td>
-                                                            <td>{{$in->currency}} {{number_format($ern),2}} </td>
+                                                            <td>
+
+                                                                    {{$in->currency}} {{number_format(round ($ern, 2),2)}}
+
+                                                            </td>
                                                             <td>
 
 

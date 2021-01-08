@@ -11,18 +11,18 @@
 </head>
 <body>
 	<div align="">
-		<img src="http://{{env('MAIL_SENDER')}}/img/{{$st->site_logo}}" style="height:100px; width:100px;" align="center">
+		<img src="https://app.invermixcapital.com/img/logo.png" style="height:100px; width:100px;" align="center">
 	</div>
-	<h3 align=""> Hi {{$md['username']}}</h3>
+	<h3 align=""> Hola, {{$md['username']}}</h3>
 	<p>
 	Recibiste este correo porque solicitaste restablecer la contraseña de tu cuenta hace un momento. <br>
- Si no fue usted el indicado, comuníquese con el soporte ahora para una acción rápida.<br>
+    Si no fue usted que lo hizo, comuníquese con el soporte de manera inmediata para una acción rápida.<br>
 		<br>
-		<a  href="https://{{env('MAIL_SENDER')}}/reset/password/{{$md['username']}}/{{$md['token']}}">Reset Password</a><br><br>
-		Contact support now: support@diamondhubplus.com.
+		<a  href="https://{{env('MAIL_SENDER')}}/reset/password/{{$md['username']}}/{{$md['token']}}">Restablecer Contraseña</a><br><br>
+		Contactar soporte: app@invermixcapital.com.
 	</p>
 	<p>
-		<i class="fa fa-certificate"></i> Thanks for using {{$st->site_title}}.
+		<i class="fa fa-certificate"></i> Gracias por usar {{$st->site_title}}.
 	</p>
 </body>
 </html>

@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div align="">
-		<img src="http://{{env('MAIL_SENDER')}}/img/{{$st->site_logo}}" style="height:100px; width:100px;" align="center">
+		<img src="https://app.invermixcapital.com/img/logo.png" style="height:100px; width:100px;" align="center">
 	</div>
 	<h3 align=""> Hola, {{$md['username']}}</h3>
 	<p>

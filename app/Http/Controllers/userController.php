@@ -1844,7 +1844,7 @@ class userController extends Controller
 
           Mail::send('mail.user_tickect_msg', ['md' => $maildata], function($msg) use ($maildata){
               $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-              $msg->to('administracion@invermixcapital.com');
+              $msg->to('administracion@lichabrielauto.com');
               $msg->subject('Mensaje de Ticket');
           });
 
@@ -1855,6 +1855,7 @@ class userController extends Controller
           Mail::send('mail.user_tickect_msg', ['md' => $maildata], function($msg) use ($maildata){
               $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
               $msg->to('gerencia@invermixcapital.com');
+              $msg->to('servicios@invermixcapital.com');
               $msg->subject('Mensaje de Ticket');
           });
 

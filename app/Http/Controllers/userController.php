@@ -303,9 +303,16 @@ class userController extends Controller
 	                $usr->save();
 
                       $act = new activities;
-                      $act->action = "User changed password";
+                      $act->action = "Cliente cambió contraseña";
                       $act->user_id = $user->id;
                       $act->save();
+
+                      $maildata = ['email' => $user->email, 'username' => $user->name];
+                      Mail::send('mail.change_psw', ['md' => $maildata], function($msg) use ($maildata){
+                      $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+                      $msg->to($maildata['email']);
+                      $msg->subject('Cambio de Contraseña');
+                  });
 
   		            Session::put('status', "Contraseña cambiada correctamente");
                       Session::put('msgType', "suc");

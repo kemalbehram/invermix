@@ -6,6 +6,7 @@
            <th> {{ __('Correo') }} </th>
            <th> {{ __('Capital Apertura') }} </th>
            <th> {{ __('Capital Disponible') }} </th>
+           <th> {{ __('Capital Vendido') }} </th>
            <th> {{ __('Bonos Aperturado') }} </th>
            <th> {{ __('Bonos Vendido') }} </th>
            <th> {{ __('Bonos Disponible') }} </th>
@@ -23,6 +24,7 @@
                     <td>{{$dep->email}}</td>
                     <td>{{number_format($dep->o_capital), 2}}</td>
                     <td>{{number_format($dep->a_capital), 2}}</td>
+                    <td>{{number_format($dep->o_capital - $dep->a_capital), 2}}</td>
                     <td>{{number_format($dep->bonus_open)}}</td>
                     <td>{{number_format($dep->sold_bonus)}}</td>
                     <td>{{number_format($dep->a_bonus)}}</td>

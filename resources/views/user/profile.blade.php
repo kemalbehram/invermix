@@ -674,7 +674,7 @@
                                                 <input type="password" class="form-control" name="cpwd" placeholder="Confirmar contraseña" required>
                                             </div>
                                             <div class="form-group" align="">
-                                               <button class="collcc btn btn-info">{{ __('Actualizar') }}</button>
+                                               <button class="collcc btn btn-info">{{ __('Actualizar Contraseña') }}</button>
                                             </div>
                                         </form>
                                     </div>

@@ -1594,20 +1594,26 @@ public function admAddnew(Request $req)
 
           $act = new adminLog;
           $act->admin = $adm->email;
-          $act->action = "Admin changed password.";
+          $act->action = "Admin cambió contraseña.";
           $act->save();
+
+
+                  $maildata = ['email' => $ad->email, 'username' => $ad->name];
+                  Mail::send('mail.change_psw', ['md' => $maildata], function($msg) use ($maildata){
+                  $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+                  $msg->to($maildata['email']);
+                  $msg->subject('Cambio de Contraseña');
+              });
 
           Session::put('status', "Exitoso");
           Session::put('msgType', "suc");
           return back();
         }
 
-
-
       }
       catch(\Exception $e)
       {
-        Session::put('status', "¡Error al guardar el mensaje! Inténtalo de nuevo");
+        Session::put('status', "¡Error al actualizar contraseña! Inténtalo de nuevo");
         Session::put('msgType', "err");
         return back();
       }

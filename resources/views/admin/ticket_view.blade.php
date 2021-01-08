@@ -42,9 +42,9 @@
                                                             <td>{{$ticket->category}}</td>
                                                             <td>
                                                                 @if($ticket->status == 0)
-                                                                    {{__('Closed')}}
+                                                                    {{__('Cerrado')}}
                                                                 @elseif($ticket->status == 1)
-                                                                    {{__('Open')}}
+                                                                    {{__('Abierto')}}
                                                                 @endif
                                                             </td>
                                                             <td>

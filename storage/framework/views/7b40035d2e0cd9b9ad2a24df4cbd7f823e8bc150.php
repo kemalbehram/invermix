@@ -3,46 +3,49 @@
 <?php $__env->startSection('content'); ?>
         <div class="main-panel">
             <div class="content">
-                <?php ($breadcome = 'Support Chats'); ?>
+                <?php ($breadcome = 'Chat de Soporte'); ?>
                 <?php echo $__env->make('user.atlantis.main_bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                <div class="page-inner mt--5">                    
+                <div class="page-inner mt--5">
                     <div id="prnt"></div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="card-head-row">
-                                        <div class="card-title col-sm-12"  ><?php echo e(__('Open Ticket')); ?> 
-                                            <span class="float-right"><a data-target="#open_ticket" data-toggle="modal" href="javascript:void(0)" class="btn btn_blue text-white"><i class="fas fa-plus-circle "></i>New Ticket</a></span>
+                                        <div class="card-title col-sm-12"  ><?php echo e(__('Ticket Abierto')); ?>
+
+                                            <span class="float-right"><a data-target="#open_ticket" data-toggle="modal" href="javascript:void(0)" class="btn btn_blue text-white"><i class="fas fa-plus-circle "></i> Nuevo Ticket</a></span>
                                         </div>
                                     </div>
-                                     
+
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive">                                        
+                                    <div class="table-responsive">
                                         <table  class=" display table table-striped table-hover" >
                                             <thead>
-                                                <tr>                                                   
-                                                    <th><?php echo e(__('Ticket ID')); ?></th> 
-                                                    <th><?php echo e(__('Title')); ?></th>
-                                                    <th><?php echo e(__('status')); ?></th>
-                                                    <th><?php echo e(__('Action')); ?></th>                                                   
+                                                <tr>
+                                                    <th><?php echo e(__('Ticket ID')); ?></th>
+                                                    <th><?php echo e(__('Título')); ?></th>
+                                                    <th><?php echo e(__('Categoría')); ?></th>
+                                                    <th><?php echo e(__('Status')); ?></th>
+                                                    <th><?php echo e(__('Acción')); ?></th>
                                                     <!-- <th><?php echo e(__('Status')); ?></th>                                   -->
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                
+
                                                 <?php if(!empty($tickets)): ?>
                                                     <?php $__currentLoopData = $tickets; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ticket): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <tr>
                                                             <td><?php echo e($ticket->ticket_id); ?></td>
                                                             <td><?php echo e($ticket->title); ?></td>
+                                                            <td><?php echo e($ticket->category); ?></td>
                                                             <td>
                                                                 <?php if($ticket->status == 0): ?>
-                                                                    <?php echo e(__('Closed')); ?>
+                                                                    <?php echo e(__('Cerrado')); ?>
 
                                                                 <?php elseif($ticket->status == 1): ?>
-                                                                    <?php echo e(__('Open')); ?>
+                                                                    <?php echo e(__('Abierto')); ?>
 
                                                                 <?php endif; ?>
                                                             </td>
@@ -65,25 +68,25 @@
                                                                         <i class="fas fa-stop-circle"></i>
                                                                     </a>
                                                                 <?php endif; ?>
-                                                                
-                                                            </td>                                                                                 
+
+                                                            </td>
                                                         </tr>
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 <?php else: ?>
-                                                    
+
                                                 <?php endif; ?>
                                             </tbody>
                                         </table>
-                                        
+
                                     </div>
                                     <?php echo e($tickets->links()); ?>
 
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -94,7 +97,7 @@
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Open a new ticket</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Abrir un nuevo ticket</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true" class="text-danger">&times;</span>
                     </button>
@@ -102,31 +105,40 @@
                   <div class="modal-body">
                     <form class="form-horizontal" method="POST" role="form" action="<?php echo e(route('ticket.create')); ?>" >
                         <?php echo csrf_field(); ?>
+                        
+                        <div class="form-group">
+                        <label class="control-label"><?php echo e(__('Categoría')); ?></label>
+                                      <select class="form-control" id="currency" name="category" required>
+                                      <option value="Soporte Técnico" name="category">Soporte Técnico</option>
+                                        <option value="Duda Financiera" name="category">Duda Financiera</option>
+                                        <option value="Idea de Proyecto" name="ccategory">Idea de Proyecto</option>
+                                        </select>
+                       </div>
                         <div class="form-group <?php echo e($errors->has('amount') ? ' has-error' : ''); ?>">
-                            <label class="control-label"><?php echo e(__('Title')); ?></label>                            
+                            <label class="control-label"><?php echo e(__('Título')); ?></label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-pen-alt"></i></span>
                                 </div>
-                                <input type="text" class="form-control" name="title" value="" required autofocus>                    
+                                <input type="text" class="form-control" name="title" value="" required autofocus>
                             </div>
                         </div>
                         <div class="form-group ">
-                            <label class="control-label"><?php echo e(__('Message')); ?></label>                            
-                            <div class="input-group">                               
-                                <textarea name="msg" class="form-control" required></textarea>                                                   
+                            <label class="control-label"><?php echo e(__('Mensaje')); ?></label>
+                            <div class="input-group">
+                                <textarea name="msg" class="form-control" required></textarea>
                             </div>
                         </div>
-                        <div class="form-group">                                                                                                           
-                            <button type="submit" class="btn btn-primary"><?php echo e(__('Submit')); ?></button>  
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary"><?php echo e(__('Enviar')); ?></button>
                         </div>
                     </form>
                   </div>
-                  
+
                 </div>
               </div>
             </div>
 
 <?php $__env->stopSection(); ?>
-            
+
 <?php echo $__env->make('layouts.atlantis.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/MAMP/htdocs/invermix/resources/views/user/ticket.blade.php ENDPATH**/ ?>

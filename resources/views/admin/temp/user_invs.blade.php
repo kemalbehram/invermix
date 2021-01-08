@@ -8,7 +8,7 @@
     }
     else
     {
-        $actInv = App\investment::orderby('id', 'desc')->paginate(50);
+        $actInv = App\investment::orderby('status', 'desc')->paginate(25);
     }
 
 ?>

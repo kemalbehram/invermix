@@ -8,7 +8,7 @@
     }
     else
     {
-        $actIny = App\inyects::where('deleted_at', NULL)->orderby('created_at', 'desc')->paginate(50);
+        $actIny = App\inyects::where('deleted_at', NULL)->orderby('status', 'desc')->paginate(50);
     }
 
 ?>

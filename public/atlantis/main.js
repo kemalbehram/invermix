@@ -4,7 +4,7 @@ var p_min = 0;
 var p_max = 0;
 
 
-function confirm_inv(id, pn, p, di, min, max, wallet)
+function confirm_inv(id, pn, p, di, min, max, mindol, maxdol, wallet)
 {
 	p_min = min;
 	p_max = max;
@@ -14,7 +14,9 @@ function confirm_inv(id, pn, p, di, min, max, wallet)
 	$('#period').text(p);
 	$('#intr').text(Math.fround(di*p*100).toFixed(2));
 	$('#min').text(formatNumber(min));
-	$('#max').text(formatNumber(max));
+    $('#max').text(formatNumber(max));
+    $('#mindol').text(formatNumber(mindol));
+	$('#maxdol').text(formatNumber(maxdol));
 	$('#p_id').val(id);
 
 	$('#popInvest').show();

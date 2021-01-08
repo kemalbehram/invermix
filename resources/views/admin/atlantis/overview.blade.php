@@ -16,6 +16,8 @@
                 $cap = 0;
                 $cap2 = 0;
             ?>
+
+
 						<div id="circles-2"></div>
 						<h6 class="fw-bold mt-3 mb-0">Inversiones</h6>
             <span>Inactiva: {{count($inv->where('status', '=', 'Pendiente'))}}</span>
@@ -49,6 +51,7 @@
  <?php
  $wd = App\investment::where('wd_status', 'Depositado')-> orderby('id', 'desc')->get();
  ?>
+ 
   @foreach($wd as $in)
     @php($wd_bal += $in->w_amt )
   @endforeach
@@ -60,29 +63,78 @@
 				<div class="row py-3 @if($adm->role < 2) {{blur_cnt}}@endif" style="position: relative;">
 					<div class="col-md-6 d-flex flex-column justify-content-around">
 						<div style="border-bottom: 1px solid #CCC;">
-							<h4 class="fw-bold text-uppercase text-success op-8">Inversiones</h4>
-							<h3 class="fw-bold">$ {{number_format($cap)}}</h3>
+
+						<?php
+               			 $invrd = DB::table("invest")
+							->where('currency', '=', 'RD$')
+							->value(DB::raw("SUM(capital)"))
+            			?>
+							<h4 class="fw-bold text-uppercase text-success op-8">Inversiones RD$</h4>
+							<h3 class="fw-bold">${{ number_format($invrd),2}}</h3>
 							<div class="colhd" style="font-size: 10px; margin-top: -10px;">&emsp;</div>
 							<br>
 						</div>
+
 					  <div class="clearfix"><br></div>
-						<div>
 
-							<h4 class="fw-bold text-uppercase text-success op-8">Inyecciones</h4>
-							<h3 class="fw-bold">$ {{number_format($dep)}}</h3>
+					  <div style="border-bottom: 1px solid #CCC;">
+						<?php
+							$deprd = DB::table("inyects")
+							->where('currency', '=', 'RD$')
+							->value(DB::raw("SUM(capital)"))
+         			    ?>
+							<h4 class="fw-bold text-uppercase text-success op-8">Inyecciones RD$</h4>
+							<h3 class="fw-bold">${{ number_format($deprd),2}}</h3>
 							<div class="colhd" style="font-size: 10px; margin-top: -10px;">&emsp;</div>
 							<br>
 						</div>
-					</div>
 
-					<div class="col-md-6">
-						<div style="border-bottom: 1px solid #CCC;">
-							<h4 class="fw-bold text-uppercase text-success op-8">Retiros</h4>
+			
+						<br>
+						<!-- <div>
+							<h4 class="fw-bold text-uppercase text-success op-8">Retiros RD$</h4>
 							<h3 class="fw-bold">$ {{number_format($wd_bal)}}</h3>
 							<div class="colhd" style="font-size: 10px; margin-top: -10px;">&emsp;</div>
 							<br>
-						</div>
+						</div> -->
 					</div>
+
+					<div class="col-md-6">
+					<?php
+               			 $invs = DB::table("invest")
+							->where('currency', '=', 'US$')
+							->value(DB::raw("SUM(capital)"))
+          		      ?>
+						<div style="border-bottom: 1px solid #CCC;">
+						
+							<h4 class="fw-bold text-uppercase text-success op-8">Inversiones USD$</h4>
+							<h3 class="fw-bold">${{ number_format($invs),2}}</h3>
+						
+							<div class="colhd" style="font-size: 10px; margin-top: -10px;">&emsp;</div>
+							<br>
+						</div>
+						<br>
+						<div style="border-bottom: 1px solid #CCC;">
+						<?php
+							$depus = DB::table("inyects")
+							->where('currency', '=', 'US$')
+							->value(DB::raw("SUM(capital)"))
+         			    ?>
+							<h4 class="fw-bold text-uppercase text-success op-8">Inyecciones USD$</h4>
+							<h3 class="fw-bold">${{ number_format($depus),2}}</h3>
+							<div class="colhd" style="font-size: 10px; margin-top: -10px;">&emsp;</div>
+							<br>
+						</div>
+
+						<br>
+						<!-- <div>
+							<h4 class="fw-bold text-uppercase text-success op-8">Retiros USD$</h4>
+							<h3 class="fw-bold">$ {{number_format($wd_bal)}}</h3>
+							<div class="colhd" style="font-size: 10px; margin-top: -10px;">&emsp;</div>
+							<br>
+						</div> -->
+					</div>
+					
 				</div>
 			</div>
 		</div>

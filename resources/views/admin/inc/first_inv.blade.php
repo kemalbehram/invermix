@@ -19,8 +19,12 @@
         <form id="userpackinv" action="{{route('first_inv')}}" method="post">
             <div class="form-group" align="left">
               <div class="pop_form_min_max" align="center">
-                <b>{{ __('Inversión Min.:') }} {{$settings->currency}} <span id="min"></span></b> |
-                <b>{{ __('Inversión Máx.:') }} {{$settings->currency}} <span id="max"></span></b>
+                <b>{{ __('Inversión Min.:') }} {{'RD$'}} <span id="min"></span></b> |
+                <b>{{ __('Inversión Máx.:') }} {{'RD$'}} <span id="max"></span></b>
+                <br>
+                <br>
+                <b>{{ __('Inversión Min.:') }} {{'US$'}} <span id="mindol"></span></b> |
+                <b>{{ __('Inversión Máx.:') }} {{'US$'}} <span id="maxdol"></span></b>
               </div>
               <br>
               <label>{{ __('Colocar Monto a Invertir') }}</label>

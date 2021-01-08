@@ -2739,7 +2739,7 @@ else
             $inv->currency = $req->currency;
             $inv->end_date = $actualDate;
             $inv->last_wd = date("Y-m-d");
-            $inv->status = 'Activa';
+            $inv->status = 'Pendiente';
 
             // $user->wallet -= $capital;
             // $user->save();

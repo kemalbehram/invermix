@@ -12,7 +12,7 @@
           <form id="wd_formssss" action="/user/wdraw/earning" method="post">
               <div class="form-group" align="left">
                   <input type="hidden" class="form-control" name="_token" value="{{csrf_token()}}">
-                  <input id="inv_id" type="hidden" class="form-control" name="p_id" value="">
+                  <input id="id" type="hidden" class="form-control" name="p_id" value="">
                   <input id="ended" type="hidden" class="form-control" name="ended" value="">
               </div>
               <div align="left">

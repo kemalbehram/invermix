@@ -47,7 +47,7 @@
                 $what_day = date("N", $begin);
                 if ($what_day > 5) { // 6 and 7 are weekend days
                    $weekends++;
-                   // echo $what_day;
+                //    echo $what_day;
                 };
                 $begin += 86400;   // +1 day
             };

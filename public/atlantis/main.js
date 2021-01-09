@@ -205,7 +205,7 @@ function wd(p,id, earn, w_able, days, ended)
     $('#pack_type').val(p);
 	$('#earned').text(earn);
 	$('#days').text(days);
-	$('#inv_id').val(id);
+	$('#id').val(id);
 	$('#ended').val(ended);
 	$('#withdrawable_amt').val(w_able);
 	$('#div_withdrawal').show();

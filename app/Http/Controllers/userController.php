@@ -732,8 +732,8 @@ class userController extends Controller
   public function wd_invest(Request $req)
   {
 
-            //  dd($req);
-            //   die();
+           
+
       $user = Auth::User();
 
       if($user->status == 'pending' || $user->status == 0 )
@@ -777,21 +777,30 @@ class userController extends Controller
             return back();
           }
 
+          if($pack->status == 'Pendiente')
+          {
+            Session::put('msgType', "err");
+            Session::put('status', 'Status de la inversión está pendiente, debe esperar ser aprobada para solictar el retiro de sus ganancias.');
+            return back();
+          }
+
           if($req->input('ended') == 'yes')
           {
+
             if($pack->wd_status != 'Solicitado')
             {
                 $user->wallet += $pack->capital;
                 $user->save();
             }
+
             $pack->last_wd = $pack->end_date;
             $pack->wd_status = 'Solicitado';
             $pack->status = 'Retiro Solicitado';
 
           }
+
           else
           {
-
             $dt = strtotime($pack->last_wd);
             $days = $pack->days_interval;
 
@@ -807,8 +816,11 @@ class userController extends Controller
             $pack->last_wd = $actualDate;
           }
 
+        
           $pack->w_amt += $amt;
           $pack->save();
+
+
 
           $usr = User::find($user->id);
           $usr->wallet += $amt;
@@ -819,6 +831,29 @@ class userController extends Controller
           $act->user_id = $user->id;
           $act->save();
 
+          if($pack->status == 'Solicitado'){
+
+          $maildata = ['email' => $user->email, 'username' => $user->username];
+          Mail::send('mail.wd_notification', ['md' => $maildata], function($msg) use ($maildata){
+              $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+              $msg->to($maildata['email']);
+              $msg->subject('Notificación de Retiro');
+          });
+
+          $maildata = ['email' => $user->email, 'username' => $user->username];
+          Mail::send('mail.admin_wd_notification', ['md' => $maildata], function($msg) use ($maildata){
+              $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+              $msg->to(env('SUPPORT_EMAIL'));
+              $msg->subject('Notificación de Retiro');
+          });
+        }else{
+
+          Session::put('status', 'Error enviando correo de notificación del retiro. Retiro se ha solicitado.');
+          Session::put('msgType', "err");
+          return back();
+
+        }
+
           Session::put('status', 'Retiro de inversión solicitada, la cantidad solicitada se depositará en su cuenta.');
           Session::put('msgType', "suc");
           return back();
@@ -826,7 +861,7 @@ class userController extends Controller
         }
         catch(\Exception $e)
         {
-          Session::put('status', 'Error al enviar su retiro');
+          Session::put('status', 'Error enviando retiro.');
           Session::put('msgType', "err");
           return back();
         }
@@ -2951,6 +2986,14 @@ class userController extends Controller
             Session::put('status', 'Fechas de retiro no cumplida/ Monto inválido/ Inversión expirada');
             return back();
         }
+        
+        if($pack->status == 'Pendiente')
+        {
+          Session::put('msgType', "err");
+          Session::put('status', 'Status de la inversión está pendiente, debe esperar ser aprobada para solictar el retiro de sus ganancias.');
+          return back();
+        }
+
           if($req->input('ended') == 'yes')
           {
             if($pack->wd_status != 'Solicitado')
@@ -2993,33 +3036,28 @@ class userController extends Controller
           $act->user_id = $user->id;
           $act->save();
 
-        // $wd = new withdrawal;
-        // $wd->user_id = $user->id;
-        // $wd->usn = $user->username;
-        // $wd->package = $req->input('package_name');
-        // $wd->invest_id = $req->input('inyect_id');
-        // $wd->amount = intval($req->input('amt'));
-        // $wd->account = $user->bank_account;
-        // $wd->w_date = date('Y-m-d');
-        // $wd->currency = $user->currency;
-        // $wd->charges = $charge = intval($req->input('amt'))*env('WD_FEE');
-        // $wd->recieving = intval($req->input('amt'))-$charge;
-        // $wd->save();
+          if($pack->status == 'Solicitado'){
 
+            $maildata = ['email' => $user->email, 'username' => $user->username];
+            Mail::send('mail.wd_notification', ['md' => $maildata], function($msg) use ($maildata){
+                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+                $msg->to($maildata['email']);
+                $msg->subject('Notificación de Retiro');
+            });
+  
+            $maildata = ['email' => $user->email, 'username' => $user->username];
+            Mail::send('mail.admin_wd_notification', ['md' => $maildata], function($msg) use ($maildata){
+                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+                $msg->to(env('SUPPORT_EMAIL'));
+                $msg->subject('Notificación de Retiro');
+            });
+          }else{
+  
+            Session::put('status', 'Error enviando correo de notificación del retiro. Retiro se ha solicitado.');
+            Session::put('msgType', "err");
+            return back();
 
-        // $maildata = ['email' => $user->email, 'username' => $user->username];
-        // Mail::send('mail.wd_notification', ['md' => $maildata], function($msg) use ($maildata){
-        //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-        //     $msg->to($maildata['email']);
-        //     $msg->subject('Withdrawal Notification');
-        // });
-
-        // $maildata = ['email' => $user->email, 'username' => $user->username];
-        // Mail::send('mail.admin_wd_notification', ['md' => $maildata], function($msg) use ($maildata){
-        //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-        //     $msg->to(env('SUPPORT_EMAIL'));
-        //     $msg->subject('Withdrawal Notification');
-        // });
+          }
 
           Session::put('status', 'Retiro solicitado, cuando sea acutalizado será notificado');
           Session::put('msgType', "suc");

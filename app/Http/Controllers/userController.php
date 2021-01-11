@@ -574,19 +574,19 @@ class userController extends Controller
             return back() ;
         }
 
-            // $maildata = ['email' => $user->email, 'username' => $user->username];
-            // Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-            //     $msg->to($maildata['email']);
-            //     $msg->subject('User Investment');
-            // });
+            $maildata = ['email' => $user->email, 'username' => $user->username];
+            Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+                $msg->to($maildata['email']);
+                $msg->subject('Inversión InverBanking');
+            });
 
-            // $maildata = ['email' => $user->email, 'username' => $user->username];
-            // Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-            //     $msg->to(env('SUPPORT_EMAIL'));
-            //     $msg->subject('User Investment');
-            // });
+            $maildata = ['email' => $user->email, 'username' => $user->username];
+            Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+                $msg->to(env('SUPPORT_EMAIL'));
+                $msg->subject('Inversión de Cliente');
+            });
 
 
           }elseif($req->currency == 'US$'){
@@ -609,7 +609,7 @@ class userController extends Controller
               return back();
             }
 
-            if($capital >= $pack->min && $capital <= $pack->max)
+            if($capital >= $pack->mindol && $capital <= $pack->max)
             {
               $inv = new investment;
               $inv->capital = $capital;
@@ -653,25 +653,25 @@ class userController extends Controller
               return back() ;
           }
 
-              // $maildata = ['email' => $user->email, 'username' => $user->username];
-              // Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-              //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-              //     $msg->to($maildata['email']);
-              //     $msg->subject('User Investment');
-              // });
+          $maildata = ['email' => $user->email, 'username' => $user->username];
+          Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+              $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+              $msg->to($maildata['email']);
+              $msg->subject('Inversión InverBanking');
+          });
 
-              // $maildata = ['email' => $user->email, 'username' => $user->username];
-              // Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-              //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-              //     $msg->to(env('SUPPORT_EMAIL'));
-              //     $msg->subject('User Investment');
-              // });
+          $maildata = ['email' => $user->email, 'username' => $user->username];
 
+          Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+              $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+              $msg->to(env('SUPPORT_EMAIL'));
+              $msg->subject('Inversión de Cliente');
+          });
 
             }
           else
           {
-            Session::put('status', "¡Monto invalido! Intenta nuevamente.");
+            Session::put('status', "¡Monto inválido! Intenta nuevamente.");
             Session::put('msgType', "err");
             return back();
           }
@@ -691,6 +691,8 @@ class userController extends Controller
       }
 
   }
+
+
 
   public function description(Request $req){
 
@@ -732,7 +734,7 @@ class userController extends Controller
   public function wd_invest(Request $req)
   {
 
-           
+
 
       $user = Auth::User();
 
@@ -816,7 +818,7 @@ class userController extends Controller
             $pack->last_wd = $actualDate;
           }
 
-        
+
           $pack->w_amt += $amt;
           $pack->save();
 
@@ -2632,19 +2634,19 @@ class userController extends Controller
 
             $inv->save();
 
-                  // $maildata = ['email' => $user->email, 'username' => $user->username];
-            // Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-            //     $msg->to($maildata['email']);
-            //     $msg->subject('User Investment');
-            // });
+                  $maildata = ['email' => $user->email, 'username' => $user->username];
+            Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+                $msg->to($maildata['email']);
+                $msg->subject('Inversión Banking');
+            });
 
-            // $maildata = ['email' => $user->email, 'username' => $user->username];
-            // Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-            //     $msg->to(env('SUPPORT_EMAIL'));
-            //     $msg->subject('User Investment');
-            // });
+            $maildata = ['email' => $user->email, 'username' => $user->username];
+            Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+                $msg->to(env('SUPPORT_EMAIL'));
+                $msg->subject('Inversión Cliente');
+            });
 
             $act = new activities;
             $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." plan";
@@ -2695,19 +2697,19 @@ class userController extends Controller
             $user->save();
             $inv->save();
 
-                // $maildata = ['email' => $user->email, 'username' => $user->username];
-            // Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-            //     $msg->to($maildata['email']);
-            //     $msg->subject('User Investment');
-            // });
+                $maildata = ['email' => $user->email, 'username' => $user->username];
+            Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+                $msg->to($maildata['email']);
+                $msg->subject('Inversión InverBanking');
+            });
 
-            // $maildata = ['email' => $user->email, 'username' => $user->username];
-            // Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-            //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-            //     $msg->to(env('SUPPORT_EMAIL'));
-            //     $msg->subject('User Investment');
-            // });
+            $maildata = ['email' => $user->email, 'username' => $user->username];
+            Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+                $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+                $msg->to(env('SUPPORT_EMAIL'));
+                $msg->subject('Inversión Clientet');
+            });
 
             $act = new activities;
             $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." ";
@@ -2779,19 +2781,19 @@ class userController extends Controller
 
               $inv->save();
 
-                    // $maildata = ['email' => $user->email, 'username' => $user->username];
-              // Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-              //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-              //     $msg->to($maildata['email']);
-              //     $msg->subject('User Investment');
-              // });
+                    $maildata = ['email' => $user->email, 'username' => $user->username];
+              Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+                  $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+                  $msg->to($maildata['email']);
+                  $msg->subject('Inversión InverBanking');
+              });
 
-              // $maildata = ['email' => $user->email, 'username' => $user->username];
-              // Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-              //     $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-              //     $msg->to(env('SUPPORT_EMAIL'));
-              //     $msg->subject('User Investment');
-              // });
+              $maildata = ['email' => $user->email, 'username' => $user->username];
+              Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+                  $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+                  $msg->to(env('SUPPORT_EMAIL'));
+                  $msg->subject('Inversión Cliente');
+              });
 
               $act = new activities;
               $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." plan";
@@ -2842,19 +2844,19 @@ class userController extends Controller
 
               $inv->save();
 
-            //       $maildata = ['email' => $user->email, 'username' => $user->username];
-            //   Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-            //       $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-            //       $msg->to($maildata['email']);
-            //       $msg->subject('User Investment');
-            //   });
+                  $maildata = ['email' => $user->email, 'username' => $user->username];
+              Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+                  $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+                  $msg->to($maildata['email']);
+                  $msg->subject('Inversión InverBankin');
+              });
 
-            //   $maildata = ['email' => $user->email, 'username' => $user->username];
-            //   Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
-            //       $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-            //       $msg->to(env('SUPPORT_EMAIL'));
-            //       $msg->subject('User Investment');
-            //   });
+              $maildata = ['email' => $user->email, 'username' => $user->username];
+              Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
+                  $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
+                  $msg->to(env('SUPPORT_EMAIL'));
+                  $msg->subject('Inversión Cliente');
+              });
 
               $act = new activities;
               $act->action = "Cliente inyectó ".$capital." en ".$pack->package_name." plan";
@@ -2871,7 +2873,7 @@ class userController extends Controller
           {
                 // dd('Este es else');
                 // die();
-            Session::put('status', "¡Monto invalido! Intenta nuevamente.");
+            Session::put('status', "¡Monto inválido! Intenta nuevamente.");
             Session::put('msgType', "err");
             return back();
           }
@@ -2986,7 +2988,7 @@ class userController extends Controller
             Session::put('status', 'Fechas de retiro no cumplida/ Monto inválido/ Inversión expirada');
             return back();
         }
-        
+
         if($pack->status == 'Pendiente')
         {
           Session::put('msgType', "err");
@@ -3044,7 +3046,7 @@ class userController extends Controller
                 $msg->to($maildata['email']);
                 $msg->subject('Notificación de Retiro');
             });
-  
+
             $maildata = ['email' => $user->email, 'username' => $user->username];
             Mail::send('mail.admin_wd_notification', ['md' => $maildata], function($msg) use ($maildata){
                 $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
@@ -3052,7 +3054,7 @@ class userController extends Controller
                 $msg->subject('Notificación de Retiro');
             });
           }else{
-  
+
             Session::put('status', 'Error enviando correo de notificación del retiro. Retiro se ha solicitado.');
             Session::put('msgType', "err");
             return back();

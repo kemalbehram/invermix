@@ -569,10 +569,6 @@ class userController extends Controller
             $act->user_id = $user->id;
             $act->save();
 
-            Session::put('status', "Inversión enviada para su aprobación.");
-            Session::put('msgType', "suc");
-            return back() ;
-        }
 
             $maildata = ['email' => $user->email, 'username' => $user->username];
             Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
@@ -587,6 +583,13 @@ class userController extends Controller
                 $msg->to(env('SUPPORT_EMAIL'));
                 $msg->subject('Inversión de Cliente');
             });
+
+
+            Session::put('status', "Inversión enviada para su aprobación.");
+            Session::put('msgType', "suc");
+            return back() ;
+        }
+
 
 
           }elseif($req->currency == 'US$'){
@@ -648,10 +651,6 @@ class userController extends Controller
               $act->user_id = $user->id;
               $act->save();
 
-              Session::put('status', "Inversión enviada para su aprobación.");
-              Session::put('msgType', "suc");
-              return back() ;
-          }
 
           $maildata = ['email' => $user->email, 'username' => $user->username];
           Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
@@ -661,12 +660,17 @@ class userController extends Controller
           });
 
           $maildata = ['email' => $user->email, 'username' => $user->username];
-
           Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
               $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
               $msg->to(env('SUPPORT_EMAIL'));
               $msg->subject('Inversión de Cliente');
           });
+
+              Session::put('status', "Inversión enviada para su aprobación.");
+              Session::put('msgType', "suc");
+              return back() ;
+          }
+
 
             }
           else

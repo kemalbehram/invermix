@@ -580,7 +580,8 @@ class userController extends Controller
             $maildata = ['email' => $user->email, 'username' => $user->username];
             Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
                 $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-                $msg->to(env('SUPPORT_EMAIL'));
+                $msg->to('gerencia@invermixcapital.com');
+                $msg->to('servicios@invermixcapital.com');
                 $msg->subject('Inversión de Cliente');
             });
 
@@ -662,7 +663,8 @@ class userController extends Controller
           $maildata = ['email' => $user->email, 'username' => $user->username];
           Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
               $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-              $msg->to(env('SUPPORT_EMAIL'));
+              $msg->to('gerencia@invermixcapital.com');
+              $msg->to('servicios@invermixcapital.com');
               $msg->subject('Inversión de Cliente');
           });
 
@@ -837,7 +839,6 @@ class userController extends Controller
           $act->user_id = $user->id;
           $act->save();
 
-          if($pack->status == 'Solicitado'){
 
           $maildata = ['email' => $user->email, 'username' => $user->username];
           Mail::send('mail.wd_notification', ['md' => $maildata], function($msg) use ($maildata){
@@ -849,16 +850,11 @@ class userController extends Controller
           $maildata = ['email' => $user->email, 'username' => $user->username];
           Mail::send('mail.admin_wd_notification', ['md' => $maildata], function($msg) use ($maildata){
               $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-              $msg->to(env('SUPPORT_EMAIL'));
+              $msg->to('gerencia@invermixcapital.com');
+              $msg->to('servicios@invermixcapital.com');
               $msg->subject('Notificación de Retiro');
           });
-        }else{
 
-          Session::put('status', 'Error enviando correo de notificación del retiro. Retiro se ha solicitado.');
-          Session::put('msgType', "err");
-          return back();
-
-        }
 
           Session::put('status', 'Retiro de inversión solicitada, la cantidad solicitada se depositará en su cuenta.');
           Session::put('msgType', "suc");
@@ -2041,6 +2037,9 @@ class userController extends Controller
         Mail::send('mail.user_tickect_msg', ['md' => $maildata], function($msg) use ($maildata){
             $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
             $msg->to(env('SUPPORT_EMAIL'));
+            $msg->to('gerencia@invermixcapital.com');
+            $msg->to('servicios@invermixcapital.com');
+            $msg->to('administracion@lichabrielauto.com');
             $msg->subject('Ticket Message');
         });
 
@@ -2648,7 +2647,8 @@ class userController extends Controller
             $maildata = ['email' => $user->email, 'username' => $user->username];
             Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
                 $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-                $msg->to(env('SUPPORT_EMAIL'));
+                $msg->to('gerencia@invermixcapital.com');
+                $msg->to('servicios@invermixcapital.com');
                 $msg->subject('Inversión Cliente');
             });
 
@@ -2711,8 +2711,9 @@ class userController extends Controller
             $maildata = ['email' => $user->email, 'username' => $user->username];
             Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
                 $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-                $msg->to(env('SUPPORT_EMAIL'));
-                $msg->subject('Inversión Clientet');
+                $msg->to('gerencia@invermixcapital.com');
+                $msg->to('servicios@invermixcapital.com');
+                $msg->subject('Inversión Cliente');
             });
 
             $act = new activities;
@@ -2782,7 +2783,6 @@ class userController extends Controller
 
               $user->wallet -= $capital;
               $user->save();
-
               $inv->save();
 
                     $maildata = ['email' => $user->email, 'username' => $user->username];
@@ -2795,7 +2795,8 @@ class userController extends Controller
               $maildata = ['email' => $user->email, 'username' => $user->username];
               Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
                   $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-                  $msg->to(env('SUPPORT_EMAIL'));
+                  $msg->to('gerencia@invermixcapital.com');
+                  $msg->to('servicios@invermixcapital.com');
                   $msg->subject('Inversión Cliente');
               });
 
@@ -2845,8 +2846,10 @@ class userController extends Controller
 
               $user->wallet -= $capital;
               $user->save();
-
               $inv->save();
+
+              dd('hola');
+              die();
 
                   $maildata = ['email' => $user->email, 'username' => $user->username];
               Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
@@ -2858,7 +2861,9 @@ class userController extends Controller
               $maildata = ['email' => $user->email, 'username' => $user->username];
               Mail::send('mail.admin_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
                   $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-                  $msg->to(env('SUPPORT_EMAIL'));
+                  $msg->to('gerencia@invermixcapital.com');
+                  $msg->to('servicios@invermixcapital.com');
+                  $msg->to('administracion@lichabrielauto.com');
                   $msg->subject('Inversión Cliente');
               });
 
@@ -2875,8 +2880,6 @@ class userController extends Controller
             }
           else
           {
-                // dd('Este es else');
-                // die();
             Session::put('status', "¡Monto inválido! Intenta nuevamente.");
             Session::put('msgType', "err");
             return back();
@@ -3054,7 +3057,8 @@ class userController extends Controller
             $maildata = ['email' => $user->email, 'username' => $user->username];
             Mail::send('mail.admin_wd_notification', ['md' => $maildata], function($msg) use ($maildata){
                 $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));
-                $msg->to(env('SUPPORT_EMAIL'));
+                $msg->to('gerencia@invermixcapital.com');
+                $msg->to('servicios@invermixcapital.com');
                 $msg->subject('Notificación de Retiro');
             });
           }else{

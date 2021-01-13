@@ -2848,9 +2848,6 @@ class userController extends Controller
               $user->save();
               $inv->save();
 
-              dd('hola');
-              die();
-
                   $maildata = ['email' => $user->email, 'username' => $user->username];
               Mail::send('mail.user_inv_notification', ['md' => $maildata], function($msg) use ($maildata){
                   $msg->from(env('MAIL_USERNAME'), env('APP_NAME'));

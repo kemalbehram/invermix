@@ -2574,9 +2574,6 @@ class userController extends Controller
           $invest_id = $req->input('invest_id');
           $invest = investment::find($req->input('invest_id'));
           $pack = packages::find($req->input('packa_id'));
-        //   $currency = currencies::first();
-
-
 
 
           if($invest->currency == 'US$'){
@@ -2599,8 +2596,6 @@ class userController extends Controller
           if($invest->package_id == 5 && $capital  >= 20)
           {
 
-            //   dd('Dolar, Inverflex, mayor que 20');
-            //   die();
 
             $inv = new inyects;
             $inv->capital = $capital;
@@ -2613,21 +2608,20 @@ class userController extends Controller
             $inv->days_interval = $pack->days_interval;
             $inv->i_return = (round($capital*$pack->daily_interest*$pack->period,2));
             $inv->interest = $pack->daily_interest;
-            // $no = 0;
+
             $dt = strtotime(date('Y-m-d'));
             $days = $pack->period;
 
             while ($days > 0)
             {
                 $dt    +=   86400   ;
-                // $actualDate = ;
                 $actualDate = date($invest->end_date, $dt) ;
                 $days--;
             }
 
 
             $inv->package_id = $pack->id;
-            $inv->currency = $this->st->currency;
+            $inv->currency = $invest->currency;
             $inv->end_date =  $actualDate;
             $inv->last_wd = date("Y-m-d");
             $inv->status = 'Pendiente';
@@ -2666,8 +2660,6 @@ class userController extends Controller
             elseif($req->packa_id != 5 && $capital  >= 100)
             {
 
-            // dd('Dolar, Diferente a Inverflex, mayor que 100');
-            // die();
 
             $inv = new inyects;
             $inv->capital = $capital;
@@ -2692,7 +2684,7 @@ class userController extends Controller
 
 
             $inv->package_id = $pack->id;
-            $inv->currency = $this->st->currency;
+            $inv->currency = $invest->currency;
             $inv->end_date =  $actualDate;
             $inv->last_wd = date("Y-m-d");
             $inv->status = 'Pendiente';
@@ -2748,8 +2740,7 @@ class userController extends Controller
 
             if($invest->package_id == 5 && $capital  >= 1000)
             {
-                // dd('Peso dominicano, Inverflex, mayor que 1000');
-                // die();
+
 
               $inv = new inyects;
               $inv->capital = $capital;
@@ -2762,21 +2753,19 @@ class userController extends Controller
               $inv->days_interval = $pack->days_interval;
               $inv->i_return = (round($capital*$pack->daily_interest*$pack->period,2));
               $inv->interest = $pack->daily_interest;
-              // $no = 0;
               $dt = strtotime(date('Y-m-d'));
               $days = $pack->period;
 
               while ($days > 0)
               {
                   $dt    +=   86400   ;
-                  // $actualDate = ;
                   $actualDate = date($invest->end_date, $dt) ;
                   $days--;
               }
 
 
               $inv->package_id = $pack->id;
-              $inv->currency = $this->st->currency;
+              $inv->currency = $invest->currency;
               $inv->end_date =  $actualDate;
               $inv->last_wd = date("Y-m-d");
               $inv->status = 'Pendiente';
@@ -2813,8 +2802,6 @@ class userController extends Controller
           }
               elseif($req->packa_id != 5 && $capital >= 5000)
               {
-                // dd('Peso dominicano, Diferente Inverflex, mayor que 5000');
-                // die();
 
               $inv = new inyects;
               $inv->capital = $capital;
@@ -2839,7 +2826,7 @@ class userController extends Controller
 
 
               $inv->package_id = $pack->id;
-              $inv->currency = $this->st->currency;
+              $inv->currency = $invest->currency;
               $inv->end_date =  $actualDate;
               $inv->last_wd = date("Y-m-d");
               $inv->status = 'Pendiente';

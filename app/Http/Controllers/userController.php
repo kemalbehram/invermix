@@ -2579,14 +2579,14 @@ class userController extends Controller
           if($invest->currency == 'US$'){
             $capital = $req->input('capital');
 
-            if($invest->package_id == 5 && $capital  <= 20)
+            if($invest->package_id == 5 && $capital  < 20)
             {
               Session::put('status', 'El capital de entrada para la inyección es menor que el monto permitido para el plan de inversión '.$invest->package.'.');
               Session::put('msgType', "err");
               return back();
             }
 
-            if($invest->package_id != 5 && $capital  <= 100)
+            if($invest->package_id != 5 && $capital  < 100)
             {
               Session::put('status', 'El capital de entrada para la inyección es menor que el monto permitido para el plan de inversión '.$invest->package.'.');
               Session::put('msgType', "err");
@@ -2724,14 +2724,14 @@ class userController extends Controller
           if($invest->currency = 'RD$'){
             $capital = $req->input('capital');
 
-            if($invest->package_id == 5 && $capital  <= 1000)
+            if($invest->package_id == 5 && $capital  < 1000)
             {
               Session::put('status', 'El capital de entrada para la inyección es menor que el monto permitido para el plan de inversión '.$invest->package.'.');
               Session::put('msgType', "err");
               return back();
             }
 
-            if($invest->package_id != 5 && $capital  <= 5000)
+            if($invest->package_id != 5 && $capital  < 5000)
             {
               Session::put('status', 'El capital de entrada para la inyección es menor que el monto permitido para el plan de inversión '.$invest->package.'.');
               Session::put('msgType', "err");

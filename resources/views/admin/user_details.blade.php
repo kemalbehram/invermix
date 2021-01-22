@@ -502,10 +502,24 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title"> {{ __('Inversiones Usuario') }} </div>
+                                    <div class="card-title"> {{ __('Inversiones Cliente') }} </div>
                                 </div>
                                 <div class="card-body pb-0">
                                     @include('admin.temp.user_inv')
+                                    <br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title"> {{ __('Inyecciones Cliente') }} </div>
+                                </div>
+                                <div class="card-body pb-0">
+                                    @include('admin.temp.user_inj')
                                     <br><br>
                                 </div>
                             </div>

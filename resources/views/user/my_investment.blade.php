@@ -28,7 +28,7 @@
                                                     <th>{{ __('Hasta') }}</th>
                                                     <th>{{ __('Días transcurridos') }}</th>
                                                     <th>{{ __('Status') }}</th>
-                                                    <th>{{ __('Ganancias') }}</th>
+                                                    <th>{{ __('Acumulado') }}</th>
                                                     <th>{{ __('Propósito') }}</th>
                                                     <th>{{ __('Retirar') }}</th>
                                                     <th>{{ __('Inyectar') }}</th>

@@ -1,6 +1,6 @@
 <?php
 
-    $actInv = App\investment::where('user_id', $user->id)->where('deleted_at', NULL)->orderby('id', 'desc')->get();
+    $actInv = App\inyects::where('user_id', $user->id)->where('deleted_at', NULL)->orderby('id', 'desc')->get();
 
     $refs = App\ref::where('username', $user->username)->orderby('id', 'desc')->get();
     $ref_amt = 0;
@@ -104,7 +104,7 @@
                         <td>{{number_format($in->w_amt) ,2}}</td>
                         <td>{{$in->status}}</td>
                         <td>
-                            <a title="" href="javascript:void(0)" onclick="wdnone('{{$in->id}}', '{{$ern}}', '{{$withdrawable}}', '{{$Edays}}', '{{$ended}}')">
+                            <a title="Withdraw" href="javascript:void(0)" onclick="wdnone('{{$in->id}}', '{{$ern}}', '{{$withdrawable}}', '{{$Edays}}', '{{$ended}}')">
                             {{ number_format($ern), 2}}
                             </a>
                         </td>
@@ -223,8 +223,8 @@
                         <div class="row" style="">
                             <br>
                             <div class="col-xs-12" align="center">
-                                <a title="Withdraw" href="javascript:void(0)" class="btn btn-info" onclick="wd('{{$in->id}}', '{{$ern}}', '{{$withdrawable}}', '{{$Edays}}', '{{$ended}}')">
-                                    {{$user->currency}} {{ number_format($ern), 2}}
+                                <a title="" href="javascript:void(0)" class="btn btn-info" onclick="wd('{{$in->id}}', '{{$ern}}', '{{$withdrawable}}', '{{$Edays}}', '{{$ended}}')">
+                                {{ number_format($ern), 2}}
                                 </a>
                             </div>
                         </div>
